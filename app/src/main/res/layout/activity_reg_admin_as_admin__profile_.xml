@@ -13,7 +13,7 @@
         android:layout_height="0dp"
         android:layout_marginStart="8dp"
         android:layout_marginEnd="8dp"
-        android:elevation="2dp"
+        android:elevation="4dp"
         android:src="@drawable/click_picture"
         app:layout_constraintBottom_toTopOf="@+id/guideline71"
         app:layout_constraintEnd_toStartOf="@+id/guideline73"
@@ -67,13 +67,16 @@
                 <androidx.recyclerview.widget.RecyclerView
                     android:id="@+id/admin_Profile_recyclerViewiD"
                     android:layout_width="0dp"
-                    android:layout_height="wrap_content"
-                    android:layout_marginStart="8dp"
-                    android:layout_marginEnd="8dp"
+                    android:layout_height="0dp"
+                    android:layout_marginStart="3dp"
+                    android:layout_marginTop="8dp"
+                    android:layout_marginEnd="3dp"
+                    android:layout_marginBottom="8dp"
                     app:layout_constraintBottom_toBottomOf="parent"
                     app:layout_constraintEnd_toEndOf="parent"
                     app:layout_constraintStart_toStartOf="parent"
-                    app:layout_constraintTop_toTopOf="@+id/guideline80" />
+                    app:layout_constraintTop_toTopOf="@+id/guideline80"
+                    app:layout_constraintVertical_bias="0.52" />
 
                 <androidx.constraintlayout.widget.Guideline
                     android:id="@+id/guideline75"
