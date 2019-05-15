@@ -63,13 +63,13 @@ public class Login_Select_Action_Fragment extends Fragment{
 
     //boom menu test
 
-    private BoomMenuButton boomMenuButton;
-    private Timer timer;
-    private int countHere;
-    private boolean registerUserBoolean;
-    private boolean registerAdminBoolean;
-    private boolean popAdmin_1;
-    private boolean popAdmin_2;
+//    private BoomMenuButton boomMenuButton;
+//    private Timer timer;
+//    private int countHere;
+//    private boolean registerUserBoolean;
+//    private boolean registerAdminBoolean;
+//    private boolean popAdmin_1;
+//    private boolean popAdmin_2;
 
     @Nullable
     @Override
@@ -78,21 +78,21 @@ public class Login_Select_Action_Fragment extends Fragment{
 
         View rootView = inflater.inflate(R.layout.floatingbutton_fragment_select, container,false);
         mContext = container.getContext();
-
-        countHere =0;
-        boomMenuButton = rootView.findViewById(R.id.boomMenuiD);
-        assert  boomMenuButton!=null;
-        boomMenuButton.setButtonEnum(ButtonEnum.TextOutsideCircle);
-        boomMenuButton.setPiecePlaceEnum(PiecePlaceEnum.DOT_5_3);
-        boomMenuButton.setButtonPlaceEnum(ButtonPlaceEnum.SC_5_3);
+//
+//        countHere =0;
+//        boomMenuButton = rootView.findViewById(R.id.boomMenuiD);
+//        assert  boomMenuButton!=null;
+//        boomMenuButton.setButtonEnum(ButtonEnum.TextOutsideCircle);
+//        boomMenuButton.setPiecePlaceEnum(PiecePlaceEnum.DOT_5_3);
+//        boomMenuButton.setButtonPlaceEnum(ButtonPlaceEnum.SC_5_3);
 
         //test boom menu
-
-        registerUserBoolean =false;
-        registerAdminBoolean = false;
-
-        popAdmin_1 =false;
-        popAdmin_2 = false;
+//
+//        registerUserBoolean =false;
+//        registerAdminBoolean = false;
+//
+//        popAdmin_1 =false;
+//        popAdmin_2 = false;
 //
 //
 //
@@ -284,204 +284,204 @@ public class Login_Select_Action_Fragment extends Fragment{
 
         // must be done here , boom menu
 
-        for(int j = 0; j < boomMenuButton.getPiecePlaceEnum().pieceNumber();j++){
-
-            boomMenuButton.addBuilder(BuilderManager.getTextOutsideCircleButtonBuilder(j));
-            final long ss = boomMenuButton.getShowDuration();
-
-            //boomMenuButton.setButtonRadius(60);
-//            int size = boomMenuButton.getButtonRadius();
-            //boomMenuButton.radius
-
-            if(j==4) {
-                boomMenuButton.getBuilder(4).normalColor(Color.YELLOW);
-
-                //boomMenuButton.getBuilder(4).rad
-                //boomMenuButton.getBuilder(4).
-
-            }
-            if(j==2) {
-
-//                GradientDrawable drawable = new GradientDrawable(GradientDrawable.Orientation.BOTTOM_TOP,
-//                        new int[] {0xFF616261,0xFF131313});
-//                drawable.setCornerRadius(0f);
-
-                //int trydraw = getResources().getDrawable(R.drawable.button_default, );
-
-               // int trydraw = getActivity().getResources().getIdentifier("drawable/button_default",null,getActivity().getPackageName());
-
-//                int trydraw = getResId("R.drawable/button_default",R.drawable.button_default);
-
-
-                int trydraw = R.drawable.button_default;
-
-                //boomMenuButton.getBuilder(2).normalColorRes(trydraw);
-                boomMenuButton.getBuilder(2).imagePadding(new Rect(200,200,200,200));
-                boomMenuButton.getBuilder(2).normalColor(trydraw);
-                //boomMenuButton.getBuilder(2).
-                //boomMenuButton.getBuilder(2).normalImageRes(trydraw);
+//        for(int j = 0; j < boomMenuButton.getPiecePlaceEnum().pieceNumber();j++){
 //
-//                Rect rect = new Rect();
-//                rect.bottom=1;
-//                rect.left=1;
-//                rect.right=1;
-//                rect.top=0;
+//            boomMenuButton.addBuilder(BuilderManager.getTextOutsideCircleButtonBuilder(j));
+//            final long ss = boomMenuButton.getShowDuration();
 //
-//                boomMenuButton.getBuilder(4).imagePadding(rect);
+//            //boomMenuButton.setButtonRadius(60);
+////            int size = boomMenuButton.getButtonRadius();
+//            //boomMenuButton.radius
 //
-
-            }
-            boomMenuButton.setAutoBoom(true);
-            boomMenuButton.setShadowEffect(true);
-
-
-
-            //    Toast.makeText(getContext(),"size is: "+String.valueOf(size),Toast.LENGTH_SHORT).show();
-
-
-
-            boomMenuButton.setOnBoomListener(new OnBoomListener() {
-
-
-                @Override
-                public void onClicked(int index, BoomButton boomButton) {
-
-                    if(index==0){ //register admin
-
-                       // boomButton.getLayoutAnimationListener().onAnimationEnd(this);
-
-                        registerAdminBoolean = true;
-
-
-
-                    }
-
-                    if(index==1){ // register user
-
-                        registerUserBoolean=true;
-
-                    }
-
-                    if(index==2){ // MC
-
-
-                        Toast.makeText(getContext(),"duration is: "+String.valueOf(ss),Toast.LENGTH_SHORT).show();
-                    }
-
-
-                    if(index==3){ //log to admin 2
-
-                        popAdmin_2=true;
-
-
-
-
-
-                    }
-
-
-                    if(index==4){ //log to admin 1
-
-
-                    }
-
-
-
-
-                }
-
-                @Override
-                public void onBackgroundClick() {
-
-                    getFragmentManager().popBackStack();
-
-                }
-
-                @Override
-                public void onBoomWillHide() {
-
-                }
-
-                @Override
-                public void onBoomDidHide() {
-
-                    if(registerUserBoolean) {
-
-                        registerUserBoolean=false;
-                        Intent intent = new Intent(getActivity(), RegAdmin_Activity.class);
-                        intent.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK); //creating new task for registering,
-                        //but we dont want user to be able to back.
-                        startActivity(intent);
-                    }
-
-                    if(registerAdminBoolean){
-                        registerAdminBoolean=false;
-
-                        Intent intent2 = new Intent(getActivity(), RegAdmin_AsAdmin_Activity.class);
-                        intent2.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
-                        startActivity(intent2);
-
-
-                    }
-
-                    if(popAdmin_1){
-                        popAdmin_1=false;
-
-                        if(nameHere!=null) {
-                            FingerPrint_LogIn_Final_Activity.timeFragmentBoolean=true;
-                            ((FingerPrint_LogIn_Final_Activity) getActivity()).nameUser = nameHere; //
-                            ((FingerPrint_LogIn_Final_Activity) getActivity()).phoneUser = phoneHere; //
-                            ((FingerPrint_LogIn_Final_Activity) getActivity()).globalAdminNameHere = adminName; //
-                            ((FingerPrint_LogIn_Final_Activity) getActivity()).globalAdminPhoneHere = adminPhone; //
-
-                            Log.i("finalSharePreDataCheck","Login_Select_Fragment 4, before return,name: "
-                                    + nameHere+ ", phone: "+phoneHere+ ", adminName:"
-                                    +adminName+" , adminPhone: "+adminPhone);
-                        }
-
-                        //this is we setup shared prefe
-                        getFragmentManager().popBackStack();
-
-
-
-
-                    }
-
-                    if(popAdmin_2){
-                        popAdmin_2=false;
-
-                        if(nameHere!=null) {
-                            FingerPrint_LogIn_Final_Activity.timeFragmentBoolean=true;
-                            ((FingerPrint_LogIn_Final_Activity) getActivity()).nameUser = nameHere_2; //
-                            ((FingerPrint_LogIn_Final_Activity) getActivity()).phoneUser = phoneHere_2; //
-                            ((FingerPrint_LogIn_Final_Activity) getActivity()).globalAdminNameHere = adminName_2; //
-                            ((FingerPrint_LogIn_Final_Activity) getActivity()).globalAdminPhoneHere = adminPhone_2; //
-
-                            Log.i("finalSharePreDataCheck","Login_Select_Fragment 4, before return,name: "
-                                    + nameHere_2+ ", phone: "+phoneHere_2+ ", adminName:"
-                                    +adminName_2+" , adminPhone: "+adminPhone_2);
-                        }
-
-                        getFragmentManager().popBackStack();
-
-
-                    }
-
-                }
-
-                @Override
-                public void onBoomWillShow() {
-
-                }
-
-                @Override
-                public void onBoomDidShow() {
-
-
-
-                }
-            });
-        }
+//            if(j==4) {
+//                boomMenuButton.getBuilder(4).normalColor(Color.YELLOW);
+//
+//                //boomMenuButton.getBuilder(4).rad
+//                //boomMenuButton.getBuilder(4).
+//
+//            }
+//            if(j==2) {
+//
+////                GradientDrawable drawable = new GradientDrawable(GradientDrawable.Orientation.BOTTOM_TOP,
+////                        new int[] {0xFF616261,0xFF131313});
+////                drawable.setCornerRadius(0f);
+//
+//                //int trydraw = getResources().getDrawable(R.drawable.button_default, );
+//
+//               // int trydraw = getActivity().getResources().getIdentifier("drawable/button_default",null,getActivity().getPackageName());
+//
+////                int trydraw = getResId("R.drawable/button_default",R.drawable.button_default);
+//
+//
+//                int trydraw = R.drawable.button_default;
+//
+//                //boomMenuButton.getBuilder(2).normalColorRes(trydraw);
+//                boomMenuButton.getBuilder(2).imagePadding(new Rect(200,200,200,200));
+//                boomMenuButton.getBuilder(2).normalColor(trydraw);
+//                //boomMenuButton.getBuilder(2).
+//                //boomMenuButton.getBuilder(2).normalImageRes(trydraw);
+////
+////                Rect rect = new Rect();
+////                rect.bottom=1;
+////                rect.left=1;
+////                rect.right=1;
+////                rect.top=0;
+////
+////                boomMenuButton.getBuilder(4).imagePadding(rect);
+////
+//
+//            }
+//            boomMenuButton.setAutoBoom(true);
+//            boomMenuButton.setShadowEffect(true);
+//
+//
+//
+//            //    Toast.makeText(getContext(),"size is: "+String.valueOf(size),Toast.LENGTH_SHORT).show();
+//
+//
+//
+//            boomMenuButton.setOnBoomListener(new OnBoomListener() {
+//
+//
+//                @Override
+//                public void onClicked(int index, BoomButton boomButton) {
+//
+//                    if(index==0){ //register admin
+//
+//                       // boomButton.getLayoutAnimationListener().onAnimationEnd(this);
+//
+//                        registerAdminBoolean = true;
+//
+//
+//
+//                    }
+//
+//                    if(index==1){ // register user
+//
+//                        registerUserBoolean=true;
+//
+//                    }
+//
+//                    if(index==2){ // MC
+//
+//
+//                        Toast.makeText(getContext(),"duration is: "+String.valueOf(ss),Toast.LENGTH_SHORT).show();
+//                    }
+//
+//
+//                    if(index==3){ //log to admin 2
+//
+//                        popAdmin_2=true;
+//
+//
+//
+//
+//
+//                    }
+//
+//
+//                    if(index==4){ //log to admin 1
+//
+//
+//                    }
+//
+//
+//
+//
+//                }
+//
+//                @Override
+//                public void onBackgroundClick() {
+//
+//                    getFragmentManager().popBackStack();
+//
+//                }
+//
+//                @Override
+//                public void onBoomWillHide() {
+//
+//                }
+//
+//                @Override
+//                public void onBoomDidHide() {
+//
+//                    if(registerUserBoolean) {
+//
+//                        registerUserBoolean=false;
+//                        Intent intent = new Intent(getActivity(), RegAdmin_Activity.class);
+//                        intent.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK); //creating new task for registering,
+//                        //but we dont want user to be able to back.
+//                        startActivity(intent);
+//                    }
+//
+//                    if(registerAdminBoolean){
+//                        registerAdminBoolean=false;
+//
+//                        Intent intent2 = new Intent(getActivity(), RegAdmin_AsAdmin_Activity.class);
+//                        intent2.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
+//                        startActivity(intent2);
+//
+//
+//                    }
+//
+//                    if(popAdmin_1){
+//                        popAdmin_1=false;
+//
+//                        if(nameHere!=null) {
+//                            FingerPrint_LogIn_Final_Activity.timeFragmentBoolean=true;
+//                            ((FingerPrint_LogIn_Final_Activity) getActivity()).nameUser = nameHere; //
+//                            ((FingerPrint_LogIn_Final_Activity) getActivity()).phoneUser = phoneHere; //
+//                            ((FingerPrint_LogIn_Final_Activity) getActivity()).globalAdminNameHere = adminName; //
+//                            ((FingerPrint_LogIn_Final_Activity) getActivity()).globalAdminPhoneHere = adminPhone; //
+//
+//                            Log.i("finalSharePreDataCheck","Login_Select_Fragment 4, before return,name: "
+//                                    + nameHere+ ", phone: "+phoneHere+ ", adminName:"
+//                                    +adminName+" , adminPhone: "+adminPhone);
+//                        }
+//
+//                        //this is we setup shared prefe
+//                        getFragmentManager().popBackStack();
+//
+//
+//
+//
+//                    }
+//
+//                    if(popAdmin_2){
+//                        popAdmin_2=false;
+//
+//                        if(nameHere!=null) {
+//                            FingerPrint_LogIn_Final_Activity.timeFragmentBoolean=true;
+//                            ((FingerPrint_LogIn_Final_Activity) getActivity()).nameUser = nameHere_2; //
+//                            ((FingerPrint_LogIn_Final_Activity) getActivity()).phoneUser = phoneHere_2; //
+//                            ((FingerPrint_LogIn_Final_Activity) getActivity()).globalAdminNameHere = adminName_2; //
+//                            ((FingerPrint_LogIn_Final_Activity) getActivity()).globalAdminPhoneHere = adminPhone_2; //
+//
+//                            Log.i("finalSharePreDataCheck","Login_Select_Fragment 4, before return,name: "
+//                                    + nameHere_2+ ", phone: "+phoneHere_2+ ", adminName:"
+//                                    +adminName_2+" , adminPhone: "+adminPhone_2);
+//                        }
+//
+//                        getFragmentManager().popBackStack();
+//
+//
+//                    }
+//
+//                }
+//
+//                @Override
+//                public void onBoomWillShow() {
+//
+//                }
+//
+//                @Override
+//                public void onBoomDidShow() {
+//
+//
+//
+//                }
+//            });
+//        }
 
 
 

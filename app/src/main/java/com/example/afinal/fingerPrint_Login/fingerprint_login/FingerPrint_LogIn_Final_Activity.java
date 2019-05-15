@@ -530,7 +530,7 @@ public class FingerPrint_LogIn_Final_Activity extends AppCompatActivity implemen
         checkLocationProcess = false;
 
         //phoneAdminConstraint=null;
-        backColor.setAlpha(0.05f);
+        backColor.setAlpha(0.9f);
 
         getSupportFragmentManager().beginTransaction()
                 .replace(R.id.frameID, fragment)
