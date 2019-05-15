@@ -269,17 +269,17 @@ public class Login_Select_Action_Fragment extends Fragment implements View.OnCli
 
         ///
 //
-        if(!adminName.equals("")|| adminName!=null){
-
-            textViewAdmin_1.setText(" Admin 1 :"+adminName);
-
-        }
-
-        if(!adminName_2.equals("")|| adminName_2!=null){
-
-            textViewAdmin_2.setText("Admin 2 :"+adminName_2);
-
-        }
+//        if(!adminName.equals("")|| adminName!=null){
+//
+//            textViewAdmin_1.setText(" Admin 1 :"+adminName);
+//
+//        }
+//
+//        if(!adminName_2.equals("")|| adminName_2!=null){
+//
+//            textViewAdmin_2.setText("Admin 2 :"+adminName_2);
+//
+//        }
 
         floatButton_Admin_1.setOnClickListener(this);
         floatButton_Admin_2.setOnClickListener(this);

@@ -48,7 +48,7 @@ public class RegAdmin_Activity extends AppCompatActivity implements View.OnClick
 
 
 
-        textViewMessage.setText("please enter admin name, phone");
+//        textViewMessage.setText("please enter admin name, phone");
 
         presenter = new RegAdmin_Presenter(this);
         presenter.addObserver(this);

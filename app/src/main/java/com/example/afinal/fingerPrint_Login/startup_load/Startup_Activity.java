@@ -42,8 +42,8 @@ public class Startup_Activity extends AppCompatActivity implements Observer {
 
         presenter = new Presenter_Startup();
 
-        animationDrawable.setEnterFadeDuration(1200);
-        animationDrawable.setExitFadeDuration(2500);
+        animationDrawable.setEnterFadeDuration(800);
+        animationDrawable.setExitFadeDuration(1500);
         animationDrawable.start();
 
 
@@ -56,24 +56,19 @@ public class Startup_Activity extends AppCompatActivity implements Observer {
             public void run() {
                 countHere++;
 
-                if(countHere==2){
+                if(countHere==1){
 
                            hTextView.animateText("\"Hello..\"");
 
                 }
-                if(countHere==4){
+                if(countHere==3){
 
                            // hTextView.setTextSize(30);
                           hTextView.animateText("\"Welcome..\"");
 
                 }
-                if(countHere==6){
 
-                         hTextView.animateText("\"Loggin in Now..\"");
-
-                }
-
-                if(countHere==9){
+                if(countHere==5){
                     timer.cancel();
 
                     ActivityOptions activityOptions = ActivityOptions.makeCustomAnimation(Startup_Activity.this,R.anim.fadein,R.anim.fadeout);
