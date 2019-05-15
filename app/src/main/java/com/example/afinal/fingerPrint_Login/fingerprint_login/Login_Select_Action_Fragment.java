@@ -41,7 +41,7 @@ import java.lang.reflect.Field;
 import java.util.Timer;
 import java.util.TimerTask;
 
-public class Login_Select_Action_Fragment extends Fragment{
+public class Login_Select_Action_Fragment extends Fragment implements View.OnClickListener {
 
     private Context mContext;
 
@@ -96,17 +96,17 @@ public class Login_Select_Action_Fragment extends Fragment{
 //
 //
 //
-//        floatButton_Admin_1 = rootView.findViewById(R.id.select_fragment_FloatButton_admin1id);
-//        floatButton_Admin_2 = rootView.findViewById(R.id.select_fragment_FloatButton_admin2);
-//        floatButton_Reg_User = rootView.findViewById(R.id.select_fragment_FloatButton_RegisterUseriD);
-//        floatButton_Reg_Admin = rootView.findViewById(R.id.select_fragment_FloatButton_RegisterAdminiD);
-//        floatButton_Note_MC = rootView.findViewById(R.id.select_fragment_FloatButton_addNoteMCiD);
-//        floatButton_Back = rootView.findViewById(R.id.select_fragment_FloatButton_backiD);
-//
-//        textView_Note = rootView.findViewById(R.id.select_fragment_textView_addNote_1id);
-//        textViewAdmin_1 = rootView.findViewById(R.id.select_fragment_textView_admin1id);
-//        textViewAdmin_2 = rootView.findViewById(R.id.select_fragment_textView_admin2id);
-//        textView_RegUser = rootView.findViewById(R.id.select_fragment_textView_regUser_1id);
+        floatButton_Admin_1 = rootView.findViewById(R.id.final_fb_admin1_id);
+        floatButton_Admin_2 = rootView.findViewById(R.id.final_fb_admin2);
+        floatButton_Reg_User = rootView.findViewById(R.id.final_fb_register_id);
+        //floatButton_Reg_Admin = rootView.findViewById(R.id.select_fragment_FloatButton_RegisterAdminiD);
+        floatButton_Note_MC = rootView.findViewById(R.id.final_fb_leave_id);
+        floatButton_Back = rootView.findViewById(R.id.final_fb_backbutton_id);
+
+        textView_Note = rootView.findViewById(R.id.final_textView_fb_leave_id);
+        textViewAdmin_1 = rootView.findViewById(R.id.final_textView_fb_admin1_id);
+        textViewAdmin_2 = rootView.findViewById(R.id.final_textView_fb_admin2_id);
+        textView_RegUser = rootView.findViewById(R.id.final_textView_fb_register_id);
 //        textView_RegAdmin = rootView.findViewById(R.id.select_fragment_textView_regAdmin_1id);
 
         //we pull from shared preferences here once
@@ -269,18 +269,24 @@ public class Login_Select_Action_Fragment extends Fragment{
 
         ///
 //
-//        textView_RegAdmin.setText("Register As Admin");
-//        textView_RegUser.setText("Register As User");
-//        textViewAdmin_1.setText("Log in to Admin 1 :"+adminName);
-//        textViewAdmin_2.setText("Log in to Admin 2 :"+adminName_2);
-//        textView_Note.setText("MC or Outstation?");
+        if(!adminName.equals("")|| adminName!=null){
 
-//        floatButton_Admin_1.setOnClickListener(this);
-//        floatButton_Admin_2.setOnClickListener(this);
-//        floatButton_Reg_User.setOnClickListener(this);
+            textViewAdmin_1.setText(" Admin 1 :"+adminName);
+
+        }
+
+        if(!adminName_2.equals("")|| adminName_2!=null){
+
+            textViewAdmin_2.setText("Admin 2 :"+adminName_2);
+
+        }
+
+        floatButton_Admin_1.setOnClickListener(this);
+        floatButton_Admin_2.setOnClickListener(this);
+        floatButton_Reg_User.setOnClickListener(this);
 //        floatButton_Reg_Admin.setOnClickListener(this);
-//        floatButton_Back.setOnClickListener(this);
-//        floatButton_Note_MC.setOnClickListener(this);
+        floatButton_Back.setOnClickListener(this);
+        floatButton_Note_MC.setOnClickListener(this);
 
         // must be done here , boom menu
 
@@ -520,70 +526,72 @@ public class Login_Select_Action_Fragment extends Fragment{
 
 
     }
-//
-//    @Override
-//    public void onClick(View v) {
-//
-//        switch (v.getId()){
-//
-//            case R.id.select_fragment_FloatButton_backiD:
-//
-//                getFragmentManager().popBackStack();
-//
-//                break;
-//
-//            case R.id.select_fragment_FloatButton_admin1id:
-//
-//                //to disable register user, save data to shared preferences,
-//                //then pull data, if data exist, dont allow for register, show toast
-//                String test = nameHere;
-//                if(nameHere!=null) {
-//                    FingerPrint_LogIn_Final_Activity.timeFragmentBoolean=true;
-//                    ((FingerPrint_LogIn_Final_Activity) getActivity()).nameUser = nameHere; //
-//                    ((FingerPrint_LogIn_Final_Activity) getActivity()).phoneUser = phoneHere; //
-//                    ((FingerPrint_LogIn_Final_Activity) getActivity()).globalAdminNameHere = adminName; //
-//                    ((FingerPrint_LogIn_Final_Activity) getActivity()).globalAdminPhoneHere = adminPhone; //
-//
-//                    Log.i("finalSharePreDataCheck","Login_Select_Fragment 4, before return,name: "
-//                            + nameHere+ ", phone: "+phoneHere+ ", adminName:"
-//                            +adminName+" , adminPhone: "+adminPhone);
-//                }
-//
-//                //this is we setup shared prefe
-//                getFragmentManager().popBackStack();
-//
-//                break;
-//            case R.id.select_fragment_FloatButton_admin2:
-//                if(nameHere!=null) {
-//                    FingerPrint_LogIn_Final_Activity.timeFragmentBoolean=true;
-//                    ((FingerPrint_LogIn_Final_Activity) getActivity()).nameUser = nameHere_2; //
-//                    ((FingerPrint_LogIn_Final_Activity) getActivity()).phoneUser = phoneHere_2; //
-//                    ((FingerPrint_LogIn_Final_Activity) getActivity()).globalAdminNameHere = adminName_2; //
-//                    ((FingerPrint_LogIn_Final_Activity) getActivity()).globalAdminPhoneHere = adminPhone_2; //
-//
-//                    Log.i("finalSharePreDataCheck","Login_Select_Fragment 4, before return,name: "
-//                            + nameHere_2+ ", phone: "+phoneHere_2+ ", adminName:"
-//                            +adminName_2+" , adminPhone: "+adminPhone_2);
-//                }
-//
-//                getFragmentManager().popBackStack();
-//
-//
-//
-//                break;
-//
-//            case R.id.select_fragment_FloatButton_RegisterUseriD:
-//
-//                Intent intent = new Intent(getActivity(), RegAdmin_Activity.class);
-//
-//                intent.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK); //creating new task for registering,
-//                //but we dont want user to be able to back.
-//                startActivity(intent);
-//
-//
-//
-//
-//                break;
+
+
+
+    @Override
+    public void onClick(View v) {
+
+        switch (v.getId()){
+
+            case R.id.final_fb_backbutton_id:
+
+                getFragmentManager().popBackStack();
+
+                break;
+
+            case R.id.final_fb_admin1_id:
+
+                //to disable register user, save data to shared preferences,
+                //then pull data, if data exist, dont allow for register, show toast
+                String test = nameHere;
+                if(nameHere!=null) {
+                    FingerPrint_LogIn_Final_Activity.timeFragmentBoolean=true;
+                    ((FingerPrint_LogIn_Final_Activity) getActivity()).nameUser = nameHere; //
+                    ((FingerPrint_LogIn_Final_Activity) getActivity()).phoneUser = phoneHere; //
+                    ((FingerPrint_LogIn_Final_Activity) getActivity()).globalAdminNameHere = adminName; //
+                    ((FingerPrint_LogIn_Final_Activity) getActivity()).globalAdminPhoneHere = adminPhone; //
+
+                    Log.i("finalSharePreDataCheck","Login_Select_Fragment 4, before return,name: "
+                            + nameHere+ ", phone: "+phoneHere+ ", adminName:"
+                            +adminName+" , adminPhone: "+adminPhone);
+                }
+
+                //this is we setup shared prefe
+                getFragmentManager().popBackStack();
+
+                break;
+            case R.id.final_fb_admin2:
+                if(nameHere!=null) {
+                    FingerPrint_LogIn_Final_Activity.timeFragmentBoolean=true;
+                    ((FingerPrint_LogIn_Final_Activity) getActivity()).nameUser = nameHere_2; //
+                    ((FingerPrint_LogIn_Final_Activity) getActivity()).phoneUser = phoneHere_2; //
+                    ((FingerPrint_LogIn_Final_Activity) getActivity()).globalAdminNameHere = adminName_2; //
+                    ((FingerPrint_LogIn_Final_Activity) getActivity()).globalAdminPhoneHere = adminPhone_2; //
+
+                    Log.i("finalSharePreDataCheck","Login_Select_Fragment 4, before return,name: "
+                            + nameHere_2+ ", phone: "+phoneHere_2+ ", adminName:"
+                            +adminName_2+" , adminPhone: "+adminPhone_2);
+                }
+
+                getFragmentManager().popBackStack();
+
+
+
+                break;
+
+            case R.id.final_fb_register_id:
+
+                Intent intent = new Intent(getActivity(), RegAdmin_Activity.class);
+
+                intent.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK); //creating new task for registering,
+                //but we dont want user to be able to back.
+                startActivity(intent);
+
+
+
+
+                break;
 //
 //            case R.id.select_fragment_FloatButton_RegisterAdminiD:
 //
@@ -594,24 +602,21 @@ public class Login_Select_Action_Fragment extends Fragment{
 //
 //
 //                break;
-//
-//            case R.id.select_fragment_FloatButton_addNoteMCiD:
-//
-//
-//
-//
-//
-//                break;
-//
-//
-//
-//
-//
-//        }
-//
-//
-//    }
-//
+
+            case R.id.final_fb_leave_id:
+
+
+                break;
+
+
+
+
+
+        }
+
+
+    }
+
 
 
 

@@ -9,20 +9,20 @@
 
 
     <TextView
-        android:id="@+id/textView16"
+        android:id="@+id/final_textView_fb_admin2_id"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginEnd="24dp"
         android:background="#5CFFFFFF"
         android:text="  Admin 2  "
         android:textColor="@color/material_white"
-        app:layout_constraintBottom_toBottomOf="@+id/floatingActionButton4"
-        app:layout_constraintEnd_toStartOf="@+id/floatingActionButton4"
-        app:layout_constraintTop_toTopOf="@+id/floatingActionButton4"
+        app:layout_constraintBottom_toBottomOf="@+id/final_fb_admin2"
+        app:layout_constraintEnd_toStartOf="@+id/final_fb_admin2"
+        app:layout_constraintTop_toTopOf="@+id/final_fb_admin2"
         app:layout_constraintVertical_bias="0.764" />
 
     <com.google.android.material.floatingactionbutton.FloatingActionButton
-        android:id="@+id/floatingActionButton2"
+        android:id="@+id/final_fb_backbutton_id"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginEnd="8dp"
@@ -36,96 +36,101 @@
         app:layout_constraintEnd_toEndOf="parent" />
 
     <com.google.android.material.floatingactionbutton.FloatingActionButton
-        android:id="@+id/floatingActionButton3"
+        android:id="@+id/final_fb_admin1_id"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginBottom="16dp"
         android:clickable="true"
-        android:src="@drawable/ic_admin_1_icon"
+        android:src="@drawable/admin_1_image"
         app:backgroundTint="@color/material_white"
 
         app:fabCustomSize="38dp"
-        app:layout_constraintBottom_toTopOf="@+id/floatingActionButton2"
-        app:layout_constraintEnd_toEndOf="@+id/floatingActionButton2"
-        app:layout_constraintStart_toStartOf="@+id/floatingActionButton2"
+        app:layout_constraintBottom_toTopOf="@+id/final_fb_backbutton_id"
+        app:layout_constraintEnd_toEndOf="@+id/final_fb_backbutton_id"
+        app:layout_constraintStart_toStartOf="@+id/final_fb_backbutton_id"
         app:maxImageSize="25dp" />
 
     <com.google.android.material.floatingactionbutton.FloatingActionButton
-        android:id="@+id/floatingActionButton4"
+        android:id="@+id/final_fb_admin2"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginBottom="16dp"
         android:clickable="true"
-        android:src="@drawable/ic_admin_2_icon"
+        android:src="@drawable/admin_2_image"
         app:backgroundTint="@color/material_white"
 
         app:fabCustomSize="38dp"
-        app:layout_constraintBottom_toTopOf="@+id/floatingActionButton3"
-        app:layout_constraintEnd_toEndOf="@+id/floatingActionButton3"
-        app:layout_constraintStart_toStartOf="@+id/floatingActionButton3"
+        app:layout_constraintBottom_toTopOf="@+id/final_fb_admin1_id"
+        app:layout_constraintEnd_toEndOf="@+id/final_fb_admin1_id"
+        app:layout_constraintStart_toStartOf="@+id/final_fb_admin1_id"
         app:maxImageSize="25dp" />
 
     <com.google.android.material.floatingactionbutton.FloatingActionButton
-        android:id="@+id/floatingActionButton5"
+        android:id="@+id/final_fb_leave_id"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginBottom="16dp"
         android:clickable="true"
+        android:src="@drawable/leave_icon_image"
         app:backgroundTint="@color/material_white"
-        app:fabCustomSize="38dp"
 
-        app:layout_constraintBottom_toTopOf="@+id/floatingActionButton4"
-        app:layout_constraintEnd_toEndOf="@+id/floatingActionButton4"
-        app:layout_constraintStart_toStartOf="@+id/floatingActionButton4" />
+
+        app:fabCustomSize="38dp"
+        app:layout_constraintBottom_toTopOf="@+id/final_fb_admin2"
+        app:layout_constraintEnd_toEndOf="@+id/final_fb_admin2"
+        app:layout_constraintStart_toStartOf="@+id/final_fb_admin2"
+        app:maxImageSize="31dp" />
 
     <com.google.android.material.floatingactionbutton.FloatingActionButton
-        android:id="@+id/floatingActionButton6"
+        android:id="@+id/final_fb_register_id"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginBottom="16dp"
         android:clickable="true"
+        android:src="@drawable/mc_icon_image"
         app:backgroundTint="@color/material_white"
-        app:fabCustomSize="38dp"
 
-        app:layout_constraintBottom_toTopOf="@+id/floatingActionButton5"
-        app:layout_constraintEnd_toEndOf="@+id/floatingActionButton5"
-        app:layout_constraintStart_toStartOf="@+id/floatingActionButton5" />
+        app:fabCustomSize="38dp"
+        app:layout_constraintBottom_toTopOf="@+id/final_fb_leave_id"
+        app:layout_constraintEnd_toEndOf="@+id/final_fb_leave_id"
+        app:layout_constraintStart_toStartOf="@+id/final_fb_leave_id"
+        app:maxImageSize="31dp" />
 
     <TextView
-        android:id="@+id/textView15"
+        android:id="@+id/final_textView_fb_admin1_id"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginEnd="24dp"
         android:background="#5CFFFFFF"
         android:text="  Admin 1  "
         android:textColor="@color/material_white"
-        app:layout_constraintBottom_toBottomOf="@+id/floatingActionButton3"
-        app:layout_constraintEnd_toStartOf="@+id/floatingActionButton3"
-        app:layout_constraintTop_toTopOf="@+id/floatingActionButton3" />
+        app:layout_constraintBottom_toBottomOf="@+id/final_fb_admin1_id"
+        app:layout_constraintEnd_toStartOf="@+id/final_fb_admin1_id"
+        app:layout_constraintTop_toTopOf="@+id/final_fb_admin1_id" />
 
     <TextView
-        android:id="@+id/textView17"
+        android:id="@+id/final_textView_fb_leave_id"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginEnd="24dp"
         android:background="#5CFFFFFF"
         android:text="  Mc / Leave  "
         android:textColor="@color/material_white"
-        app:layout_constraintBottom_toBottomOf="@+id/floatingActionButton5"
-        app:layout_constraintEnd_toStartOf="@+id/floatingActionButton5"
-        app:layout_constraintTop_toTopOf="@+id/floatingActionButton5" />
+        app:layout_constraintBottom_toBottomOf="@+id/final_fb_leave_id"
+        app:layout_constraintEnd_toStartOf="@+id/final_fb_leave_id"
+        app:layout_constraintTop_toTopOf="@+id/final_fb_leave_id" />
 
     <TextView
-        android:id="@+id/textView18"
+        android:id="@+id/final_textView_fb_register_id"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginEnd="24dp"
         android:background="#5CFFFFFF"
         android:text="  Register  "
         android:textColor="@color/material_white"
-        app:layout_constraintBottom_toBottomOf="@+id/floatingActionButton6"
-        app:layout_constraintEnd_toStartOf="@+id/floatingActionButton6"
-        app:layout_constraintTop_toTopOf="@+id/floatingActionButton6" />
+        app:layout_constraintBottom_toBottomOf="@+id/final_fb_register_id"
+        app:layout_constraintEnd_toStartOf="@+id/final_fb_register_id"
+        app:layout_constraintTop_toTopOf="@+id/final_fb_register_id" />
 
 
 </androidx.constraintlayout.widget.ConstraintLayout>
