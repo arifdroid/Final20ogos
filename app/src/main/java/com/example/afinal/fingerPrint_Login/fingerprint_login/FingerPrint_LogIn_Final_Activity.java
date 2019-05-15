@@ -26,6 +26,7 @@ import android.net.wifi.WifiInfo;
 import android.net.wifi.WifiManager;
 import android.os.Build;
 import android.os.Bundle;
+import android.os.Handler;
 import android.text.Editable;
 import android.text.TextWatcher;
 import android.util.Log;
@@ -39,9 +40,12 @@ import com.example.afinal.R;
 import com.google.firebase.firestore.CollectionReference;
 import com.google.firebase.firestore.DocumentReference;
 import com.google.firebase.firestore.FirebaseFirestore;
+import com.yy.mobile.rollingtextview.RollingTextView;
 
 import java.lang.reflect.InvocationTargetException;
 import java.lang.reflect.Method;
+import java.text.DateFormat;
+import java.text.SimpleDateFormat;
 import java.util.Date;
 import java.util.Map;
 import java.util.Observable;
@@ -321,7 +325,9 @@ public class FingerPrint_LogIn_Final_Activity extends AppCompatActivity implemen
             return true;
         }
     };
-
+    private Handler handler = new Handler();
+    private String seconds_fromPhone = "";
+    private String timeFromPhone = "";
 
 
     @Override
@@ -357,6 +363,30 @@ public class FingerPrint_LogIn_Final_Activity extends AppCompatActivity implemen
         constraintLayoutMorningIcon = findViewById(R.id.final_morning_constraint_ID);
         constraintLayoutLocationIcon = findViewById(R.id.final_constraint_location_id);
         constraintLayoutWifiIcon = findViewById(R.id.final_constraint_wifi_id);
+
+        //rolling text view
+
+        @SuppressLint("SimpleDateFormat") final DateFormat format = new SimpleDateFormat("HH:mm:ss");
+
+        Log.i("checkSecond :", "time: "+timeFromPhone);
+
+
+        Log.i("checkSecond :", "second: "+seconds_fromPhone);
+
+        final RollingTextView timeView = findViewById(R.id.rolling_second_textView_ID);
+        timeView.setAnimationDuration(300);
+        timeView.setLetterSpacingExtra(10);
+        handler.post(new Runnable() {
+            @Override
+            public void run() {
+                timeFromPhone = format.format(new Date());
+
+                seconds_fromPhone = timeFromPhone.substring(6,8);
+
+                timeView.setText(seconds_fromPhone);
+                handler.postDelayed(this, 1000L);
+            }
+        });
 
 
         //
