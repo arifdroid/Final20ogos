@@ -409,11 +409,11 @@ public class RegAdmin_asAdmin_Profile_Activity extends AppCompatActivity impleme
 
         Log.i("checkkLocation", "6");
 
-        adminDetailsList.add(new AdminDetail("please connect to your wifi network", "drawable/ic_wifi_black_24dp"));
-        adminDetailsList.add(new AdminDetail("please connect to your wifi network", "drawable/ic_wifi_lock_black_24dp"));
-        adminDetailsList.add(new AdminDetail("click here to set morning time","drawable/ic_timer_black_24dp"));
+        adminDetailsList.add(new AdminDetail("please connect to your wifi network", "drawable/wifi_list_icon"));
+        adminDetailsList.add(new AdminDetail("please connect to your wifi network", "drawable/router_list"));
+        adminDetailsList.add(new AdminDetail("click here to set morning time","drawable/ic_am_list_icon_2nd"));
 
-        adminDetailsList.add(new AdminDetail("click here to set evening time","drawable/ic_timer_black_24dp"));
+        adminDetailsList.add(new AdminDetail("click here to set evening time","drawable/ic_pm_list_icon"));
         initRecycler();
 
 
@@ -511,7 +511,7 @@ public class RegAdmin_asAdmin_Profile_Activity extends AppCompatActivity impleme
                             if(streetName!=null || streetName.equals("")) {
 
                                 if(adminDetailsList.size()<=4) {
-                                    adminDetailsList.add(new AdminDetail(streetName, "drawable/ic_location_on_black_24dp"));
+                                    adminDetailsList.add(new AdminDetail(streetName, "drawable/location_list"));
                                     recyclerView_Admin_Profile_Adapter.notifyDataSetChanged();
                                     // recyclerView.setAdapter(recyclerView_Admin_Profile_Adapter);
                                     recyclerView_Admin_Profile_Adapter.setPassResult_checkBox_interface(new PassResult_CheckBox_Interface() {

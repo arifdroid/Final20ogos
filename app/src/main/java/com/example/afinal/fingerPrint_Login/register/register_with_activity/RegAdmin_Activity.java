@@ -11,6 +11,7 @@ import android.widget.Toast;
 
 import com.example.afinal.R;
 import com.example.afinal.fingerPrint_Login.fingerprint_login.FingerPrint_LogIn_Final_Activity;
+import com.example.afinal.fingerPrint_Login.register.register_as_admin_setupProfile.RegAdmin_asAdmin_Profile_Activity;
 import com.example.afinal.fingerPrint_Login.register.register_user_activity.RegUser_Activity;
 
 import java.util.Observable;
@@ -33,6 +34,7 @@ public class RegAdmin_Activity extends AppCompatActivity implements View.OnClick
     private Timer timer;
     private String statusnow;
     private int count;
+    private Button movenextbutton;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -43,6 +45,24 @@ public class RegAdmin_Activity extends AppCompatActivity implements View.OnClick
         editTextPhone = findViewById(R.id.regAdmin_EditText_AdminPhoneID);
         textViewMessage = findViewById(R.id.regAdmin_TextView_ID);
         logInButton = findViewById(R.id.regAdmin_Button_ID);
+
+
+
+        //15 May for testing layout
+
+        movenextbutton = findViewById(R.id.regAdmin_button_user_id);
+
+        movenextbutton.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+
+                Intent intent = new Intent(RegAdmin_Activity.this, RegAdmin_asAdmin_Profile_Activity.class);
+                startActivity(intent);
+
+
+            }
+        });
+
 
         checkValid=false;
 

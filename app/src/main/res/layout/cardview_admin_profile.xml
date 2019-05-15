@@ -5,12 +5,16 @@
     android:id="@+id/admin_Profile_cardViewiD"
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
-    android:layout_margin="5dp">
+    android:layout_margin="5dp"
+    app:cardBackgroundColor="#00000000"
+    app:cardElevation="0dp"
+    app:cardMaxElevation="0dp">
 
 
     <androidx.constraintlayout.widget.ConstraintLayout
         android:layout_width="match_parent"
-        android:layout_height="wrap_content">
+        android:layout_height="wrap_content"
+        android:padding="0dp">
 
 
         <androidx.constraintlayout.widget.Guideline
@@ -18,14 +22,14 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:orientation="vertical"
-            app:layout_constraintGuide_begin="109dp" />
+            app:layout_constraintGuide_percent="0.12" />
 
         <androidx.constraintlayout.widget.Guideline
             android:id="@+id/guideline5"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:orientation="vertical"
-            app:layout_constraintGuide_begin="317dp" />
+            app:layout_constraintGuide_percent="0.87" />
 
         <TextView
             android:id="@+id/admin_Profile_CardView_textViewiD"
@@ -36,6 +40,8 @@
             android:layout_marginEnd="8dp"
             android:layout_marginBottom="8dp"
             android:text="TextView"
+            android:textColor="@color/material_white_blue"
+            android:textSize="12sp"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toStartOf="@+id/guideline5"
             app:layout_constraintStart_toStartOf="@+id/guideline4"
@@ -43,23 +49,26 @@
 
         <CheckBox
             android:id="@+id/admin_Profile_CardView_checkBox"
+            style="@style/Widget.AppCompat.CompoundButton.CheckBox"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginStart="8dp"
             android:layout_marginTop="8dp"
             android:layout_marginEnd="8dp"
             android:layout_marginBottom="8dp"
+            android:textColor="@color/material_white_blue"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintStart_toStartOf="@+id/guideline5"
-            app:layout_constraintTop_toTopOf="parent"
 
-            />
+            app:layout_constraintStart_toStartOf="@+id/guideline5"
+            app:layout_constraintTop_toTopOf="parent" />
 
         <ImageView
             android:id="@+id/admin_Profile_CardView_imageViewid"
-            android:layout_width="84dp"
-            android:layout_height="54dp"
+            android:layout_width="0dp"
+            android:layout_height="0dp"
+            android:background="#00000000"
+            android:padding="1dp"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toStartOf="@+id/guideline4"
             app:layout_constraintStart_toStartOf="parent"
