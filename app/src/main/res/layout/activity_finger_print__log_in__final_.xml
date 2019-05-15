@@ -483,7 +483,7 @@
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:orientation="horizontal"
-                        app:layout_constraintGuide_percent="0.28" />
+                        app:layout_constraintGuide_percent="0.23" />
 
                     <androidx.constraintlayout.widget.Guideline
                         android:id="@+id/guideline21"
@@ -504,13 +504,14 @@
                         android:layout_width="0dp"
                         android:layout_height="0dp"
                         android:layout_marginStart="8dp"
+                        android:layout_marginTop="8dp"
                         android:layout_marginEnd="8dp"
                         android:layout_marginBottom="8dp"
+
                         android:autoSizeTextType="uniform"
-
                         android:text="Robert Downey Jr"
-                        android:textAlignment="center"
 
+                        android:textAlignment="center"
                         android:textColor="@color/material_white"
                         app:layout_constraintBottom_toTopOf="@+id/guideline22"
                         app:layout_constraintEnd_toStartOf="@+id/guideline24"
@@ -522,7 +523,7 @@
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:orientation="vertical"
-                        app:layout_constraintGuide_percent="0.1" />
+                        app:layout_constraintGuide_percent="0.06" />
 
                     <androidx.constraintlayout.widget.Guideline
                         android:id="@+id/guideline24"
@@ -536,9 +537,7 @@
                         android:layout_width="0dp"
                         android:layout_height="0dp"
                         android:layout_marginStart="8dp"
-                        android:layout_marginTop="8dp"
                         android:layout_marginEnd="8dp"
-                        android:layout_marginBottom="8dp"
                         android:autoSizeTextType="uniform"
                         android:text="status"
 
@@ -562,6 +561,100 @@
                         android:layout_height="wrap_content"
                         android:orientation="vertical"
                         app:layout_constraintGuide_percent="0.84" />
+
+                    <androidx.constraintlayout.widget.Guideline
+                        android:id="@+id/guideline18"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:orientation="horizontal"
+                        app:layout_constraintGuide_percent="0.3" />
+
+                    <androidx.constraintlayout.widget.Guideline
+                        android:id="@+id/guideline27"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:orientation="horizontal"
+                        app:layout_constraintGuide_percent="0.6" />
+
+                    <androidx.constraintlayout.widget.Guideline
+                        android:id="@+id/guideline28"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:orientation="vertical"
+                        app:layout_constraintGuide_percent="0.41" />
+
+                    <ImageView
+                        android:id="@+id/imageView"
+                        android:layout_width="0dp"
+                        android:layout_height="0dp"
+                        android:paddingTop="6dp"
+                        app:layout_constraintBottom_toTopOf="@+id/guideline27"
+                        app:layout_constraintEnd_toStartOf="@+id/guideline28"
+                        app:layout_constraintStart_toStartOf="@+id/guideline23"
+                        app:layout_constraintTop_toTopOf="@+id/guideline18"
+                        app:srcCompat="@drawable/fingerprint_icon" />
+
+                    <androidx.constraintlayout.widget.Guideline
+                        android:id="@+id/guideline29"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:orientation="vertical"
+                        app:layout_constraintGuide_percent="0.5" />
+
+                    <TextView
+                        android:id="@+id/textView"
+                        android:layout_width="0dp"
+                        android:layout_height="0dp"
+                        android:layout_marginTop="8dp"
+                        android:layout_marginBottom="8dp"
+                        android:autoSizeTextType="uniform"
+                        android:textColor="@color/material_white"
+                        android:text="10:10"
+                        android:textAlignment="center"
+                        app:layout_constraintBottom_toTopOf="@+id/guideline31"
+                        app:layout_constraintEnd_toStartOf="@+id/guideline24"
+                        app:layout_constraintStart_toStartOf="@+id/guideline29"
+                        app:layout_constraintTop_toTopOf="@+id/guideline30"
+                        app:layout_constraintVertical_bias="0.50" />
+
+                    <androidx.constraintlayout.widget.Guideline
+                        android:id="@+id/guideline30"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:orientation="horizontal"
+                        app:layout_constraintGuide_percent="0.34" />
+
+                    <androidx.constraintlayout.widget.Guideline
+                        android:id="@+id/guideline31"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:orientation="horizontal"
+                        app:layout_constraintGuide_percent="0.6" />
+
+                    <TextView
+                        android:id="@+id/textView8"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="02 April"
+                        android:textColor="@color/material_white"
+                        app:layout_constraintBottom_toTopOf="@+id/guideline32"
+                        app:layout_constraintEnd_toStartOf="@+id/guideline26"
+                        app:layout_constraintStart_toStartOf="@+id/guideline33"
+                        app:layout_constraintTop_toTopOf="@+id/guideline18" />
+
+                    <androidx.constraintlayout.widget.Guideline
+                        android:id="@+id/guideline32"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:orientation="horizontal"
+                        app:layout_constraintGuide_percent="0.39261746" />
+
+                    <androidx.constraintlayout.widget.Guideline
+                        android:id="@+id/guideline33"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:orientation="vertical"
+                        app:layout_constraintGuide_percent="0.56666666" />
 
                 </androidx.constraintlayout.widget.ConstraintLayout>
 
