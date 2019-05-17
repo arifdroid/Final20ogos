@@ -2,126 +2,186 @@
 <androidx.cardview.widget.CardView xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/cardView"
+    android:background=""
     android:layout_width="match_parent"
-    android:layout_height="match_parent">
+    app:cardBackgroundColor="#5CFFFFFF"
+    android:layout_height="wrap_content">
 
     <androidx.constraintlayout.widget.ConstraintLayout
         android:id="@+id/constraintHereid"
         android:layout_width="match_parent"
-        android:layout_height="match_parent">
+        android:layout_height="160dp">
 
-        <de.hdodenhof.circleimageview.CircleImageView
-            android:id="@+id/cardview_timestamp_frag_circleImageViewiD"
-            android:layout_width="80dp"
-            android:layout_height="80dp"
-            android:layout_marginStart="8dp"
-            android:layout_marginTop="8dp"
-            android:layout_marginEnd="8dp"
-            android:layout_marginBottom="8dp"
-            app:layout_constraintBottom_toBottomOf="parent"
-            app:layout_constraintEnd_toStartOf="@+id/guideline8"
-            app:layout_constraintHorizontal_bias="0.533"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toTopOf="parent"
-            app:layout_constraintVertical_bias="0.328" />
-
-
-        <TextView
-            android:id="@+id/cardview_timestamp_frag_textViewName"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_marginTop="8dp"
-            android:layout_marginBottom="8dp"
-            android:text="nama"
-            android:textSize="20sp"
-            app:layout_constraintBottom_toBottomOf="parent"
-            app:layout_constraintEnd_toEndOf="@+id/cardview_timestamp_frag_textViewStatus"
-            app:layout_constraintStart_toStartOf="@+id/cardview_timestamp_frag_textViewStatus"
-            app:layout_constraintTop_toTopOf="parent"
-            app:layout_constraintVertical_bias="0.17" />
-
-        <TextView
-            android:id="@+id/cardview_timestamp_frag_textViewDate"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_marginStart="8dp"
-            android:layout_marginTop="8dp"
-            android:layout_marginEnd="11dp"
-            android:text="   Date    "
-            app:layout_constraintEnd_toStartOf="@+id/cardview_timestamp_frag_textViewStatus"
-            app:layout_constraintHorizontal_bias="0.5"
-            app:layout_constraintStart_toEndOf="@+id/cardview_timestamp_frag_circleImageViewiD"
-            app:layout_constraintStart_toStartOf="@+id/guideline8"
-            app:layout_constraintTop_toBottomOf="@+id/cardview_timestamp_frag_textViewName" />
-
-        <TextView
-            android:id="@+id/cardview_timestamp_frag_textViewDate_Input"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_marginTop="8dp"
-            android:text="21 Feb"
-            app:layout_constraintEnd_toEndOf="@+id/cardview_timestamp_frag_textViewDate"
-            app:layout_constraintStart_toStartOf="@+id/cardview_timestamp_frag_textViewDate"
-            app:layout_constraintTop_toBottomOf="@+id/cardview_timestamp_frag_textViewDate" />
-
-        <TextView
-            android:id="@+id/cardview_timestamp_frag_textViewStatus_Input"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_marginTop="8dp"
-            android:text="On Time"
-            app:layout_constraintEnd_toEndOf="@+id/cardview_timestamp_frag_textViewStatus"
-            app:layout_constraintStart_toStartOf="@+id/cardview_timestamp_frag_textViewStatus"
-            app:layout_constraintTop_toBottomOf="@+id/cardview_timestamp_frag_textViewStatus" />
-
-        <TextView
-            android:id="@+id/cardview_timestamp_frag_textViewTime_Input"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_marginTop="8dp"
-            android:text="8.00AM"
-            app:layout_constraintEnd_toEndOf="@+id/cardview_timestamp_frag_textViewTime"
-            app:layout_constraintStart_toStartOf="@+id/cardview_timestamp_frag_textViewTime"
-            app:layout_constraintTop_toBottomOf="@+id/cardview_timestamp_frag_textViewTime" />
-
-        <TextView
-            android:id="@+id/cardview_timestamp_frag_textViewStatus"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_marginTop="8dp"
-            android:layout_marginEnd="8dp"
-            android:text="      Status      "
-            app:layout_constraintEnd_toStartOf="@+id/cardview_timestamp_frag_textViewTime"
-            app:layout_constraintHorizontal_bias="0.5"
-            app:layout_constraintStart_toEndOf="@+id/cardview_timestamp_frag_textViewDate"
-            app:layout_constraintTop_toBottomOf="@+id/cardview_timestamp_frag_textViewName" />
-
-        <TextView
-            android:id="@+id/cardview_timestamp_frag_textViewTime"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_marginTop="8dp"
-            android:layout_marginEnd="8dp"
-            android:text="  Time   "
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintEnd_toStartOf="@+id/guideline9"
-            app:layout_constraintHorizontal_bias="0.5"
-            app:layout_constraintStart_toEndOf="@+id/cardview_timestamp_frag_textViewStatus"
-            app:layout_constraintTop_toBottomOf="@+id/cardview_timestamp_frag_textViewName" />
 
         <androidx.constraintlayout.widget.Guideline
             android:id="@+id/guideline8"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:orientation="vertical"
-            app:layout_constraintGuide_percent="0.27" />
+            app:layout_constraintGuide_percent="0.29" />
 
         <androidx.constraintlayout.widget.Guideline
             android:id="@+id/guideline9"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:orientation="vertical"
-            app:layout_constraintGuide_percent="0.83" />
+            app:layout_constraintGuide_percent="0.86" />
+
+        <androidx.constraintlayout.widget.ConstraintLayout
+            android:id="@+id/constraintLayout2"
+            android:layout_width="0dp"
+            android:layout_height="0dp"
+            android:background="@drawable/gradient_pink_orange"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toStartOf="@+id/guideline8"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent">
+
+            <de.hdodenhof.circleimageview.CircleImageView
+                android:id="@+id/cardview_timestamp_frag_circleImageViewiD"
+                android:layout_width="0dp"
+                android:layout_height="0dp"
+                android:layout_marginTop="8dp"
+                android:layout_marginBottom="8dp"
+                android:src="@drawable/rob"
+                app:layout_constraintBottom_toTopOf="@+id/guideline109"
+                app:layout_constraintEnd_toStartOf="@+id/guideline112"
+                app:layout_constraintStart_toStartOf="@+id/guideline111"
+                app:layout_constraintTop_toTopOf="@+id/guideline113" />
+
+            <TextView
+                android:id="@+id/cardview_timestamp_frag_textViewName"
+                android:layout_width="0dp"
+                android:layout_height="0dp"
+                android:text="TextView"
+                android:textAlignment="center"
+                android:textColor="@color/material_white"
+                app:autoSizeTextType="uniform"
+                app:layout_constraintBottom_toTopOf="@+id/guideline110"
+                app:layout_constraintEnd_toStartOf="@+id/guideline112"
+                app:layout_constraintStart_toStartOf="@+id/guideline111"
+                app:layout_constraintTop_toTopOf="@+id/guideline109" />
+
+            <androidx.constraintlayout.widget.Guideline
+                android:id="@+id/guideline109"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:orientation="horizontal"
+                app:layout_constraintGuide_percent="0.6875" />
+
+            <androidx.constraintlayout.widget.Guideline
+                android:id="@+id/guideline110"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:orientation="horizontal"
+                app:layout_constraintGuide_percent="0.82" />
+
+            <androidx.constraintlayout.widget.Guideline
+                android:id="@+id/guideline111"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:orientation="vertical"
+                app:layout_constraintGuide_percent="0.084033616" />
+
+            <androidx.constraintlayout.widget.Guideline
+                android:id="@+id/guideline112"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:orientation="vertical"
+                app:layout_constraintGuide_percent="0.92" />
+
+            <androidx.constraintlayout.widget.Guideline
+                android:id="@+id/guideline113"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:orientation="horizontal"
+                app:layout_constraintGuide_percent="0.0625" />
+        </androidx.constraintlayout.widget.ConstraintLayout>
+
+        <androidx.constraintlayout.widget.ConstraintLayout
+            android:layout_width="0dp"
+            android:layout_height="0dp"
+            android:layout_marginStart="8dp"
+            android:layout_marginTop="8dp"
+            android:layout_marginEnd="8dp"
+            android:layout_marginBottom="8dp"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toStartOf="@+id/guideline9"
+            app:layout_constraintHorizontal_bias="0.0"
+            app:layout_constraintStart_toEndOf="@+id/constraintLayout2"
+            app:layout_constraintTop_toTopOf="parent"
+            app:layout_constraintVertical_bias="0.0">
+
+            <TextView
+                android:id="@+id/cardview_timestamp_frag_textViewDate_Input"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="21 Feb"
+                android:shadowColor="@color/material_black_grey"
+                android:shadowDx="2"
+                android:shadowDy="2"
+                android:shadowRadius="50"
+                tools:layout_editor_absoluteX="16dp"
+                tools:layout_editor_absoluteY="89dp" />
+
+            <TextView
+                android:id="@+id/cardview_timestamp_frag_textViewStatus_Input"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="On Time"
+                tools:layout_editor_absoluteX="67dp"
+                tools:layout_editor_absoluteY="89dp" />
+
+            <TextView
+                android:id="@+id/cardview_timestamp_frag_textViewTime_Input"
+                android:layout_width="0dp"
+                android:layout_height="0dp"
+                android:layout_marginStart="8dp"
+                android:layout_marginTop="8dp"
+                android:layout_marginEnd="8dp"
+                android:layout_marginBottom="8dp"
+                android:text="8.00"
+                android:shadowColor="@color/material_black_grey"
+                android:shadowDx="2"
+                android:shadowDy="2"
+                android:shadowRadius="50"
+                android:textAlignment="center"
+                android:textColor="@color/material_white"
+                app:autoSizeTextType="uniform"
+                app:layout_constraintBottom_toTopOf="@+id/guideline115"
+                app:layout_constraintEnd_toStartOf="@+id/guideline117"
+                app:layout_constraintStart_toStartOf="@+id/guideline116"
+                app:layout_constraintTop_toTopOf="@+id/guideline114" />
+
+            <androidx.constraintlayout.widget.Guideline
+                android:id="@+id/guideline114"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:orientation="horizontal"
+                app:layout_constraintGuide_percent="0.18" />
+
+            <androidx.constraintlayout.widget.Guideline
+                android:id="@+id/guideline115"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:orientation="horizontal"
+                app:layout_constraintGuide_percent="0.5" />
+
+            <androidx.constraintlayout.widget.Guideline
+                android:id="@+id/guideline116"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:orientation="vertical"
+                app:layout_constraintGuide_percent="0.23853211" />
+
+            <androidx.constraintlayout.widget.Guideline
+                android:id="@+id/guideline117"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:orientation="vertical"
+                app:layout_constraintGuide_percent="0.77" />
+        </androidx.constraintlayout.widget.ConstraintLayout>
 
     </androidx.constraintlayout.widget.ConstraintLayout>
 
