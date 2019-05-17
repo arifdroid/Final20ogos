@@ -42,7 +42,7 @@
             android:autoText="false"
             android:contextClickable="false"
             android:freezesText="false"
-            android:maxLines="3"
+            android:maxLines="2"
             android:text="TextView"
             android:textAlignment="center"
             android:textColor="@color/material_white_blue"
