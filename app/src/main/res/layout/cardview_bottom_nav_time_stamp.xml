@@ -11,7 +11,7 @@
     <androidx.constraintlayout.widget.ConstraintLayout
         android:id="@+id/constraintHereid"
         android:layout_width="match_parent"
-        android:layout_height="160dp">
+        android:layout_height="165dp">
 
 
         <androidx.constraintlayout.widget.Guideline
@@ -101,86 +101,207 @@
 
         <androidx.constraintlayout.widget.ConstraintLayout
             android:layout_width="0dp"
-            android:layout_height="0dp"
+            android:layout_height="match_parent"
             android:layout_marginStart="8dp"
             android:layout_marginTop="8dp"
             android:layout_marginEnd="8dp"
             android:layout_marginBottom="8dp"
             app:layout_constraintBottom_toBottomOf="parent"
-            app:layout_constraintEnd_toStartOf="@+id/guideline9"
+            app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintHorizontal_bias="0.0"
             app:layout_constraintStart_toEndOf="@+id/constraintLayout2"
             app:layout_constraintTop_toTopOf="parent"
             app:layout_constraintVertical_bias="0.0">
 
-            <TextView
-                android:id="@+id/cardview_timestamp_frag_textViewDate_Input"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:text="21 Feb"
-                android:shadowColor="@color/material_black_grey"
-                android:shadowDx="2"
-                android:shadowDy="2"
-                android:shadowRadius="50"
-                tools:layout_editor_absoluteX="16dp"
-                tools:layout_editor_absoluteY="89dp" />
-
-            <TextView
-                android:id="@+id/cardview_timestamp_frag_textViewStatus_Input"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:text="On Time"
-                tools:layout_editor_absoluteX="67dp"
-                tools:layout_editor_absoluteY="89dp" />
-
-            <TextView
-                android:id="@+id/cardview_timestamp_frag_textViewTime_Input"
-                android:layout_width="0dp"
-                android:layout_height="0dp"
-                android:layout_marginStart="8dp"
-                android:layout_marginTop="8dp"
-                android:layout_marginEnd="8dp"
-                android:layout_marginBottom="8dp"
-                android:text="8.00"
-                android:shadowColor="@color/material_black_grey"
-                android:shadowDx="2"
-                android:shadowDy="2"
-                android:shadowRadius="50"
-                android:textAlignment="center"
-                android:textColor="@color/material_white"
-                app:autoSizeTextType="uniform"
-                app:layout_constraintBottom_toTopOf="@+id/guideline115"
-                app:layout_constraintEnd_toStartOf="@+id/guideline117"
-                app:layout_constraintStart_toStartOf="@+id/guideline116"
-                app:layout_constraintTop_toTopOf="@+id/guideline114" />
-
             <androidx.constraintlayout.widget.Guideline
                 android:id="@+id/guideline114"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:orientation="horizontal"
-                app:layout_constraintGuide_percent="0.18" />
+                android:orientation="vertical"
+                app:layout_constraintGuide_percent="0.75" />
 
             <androidx.constraintlayout.widget.Guideline
                 android:id="@+id/guideline115"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:orientation="horizontal"
-                app:layout_constraintGuide_percent="0.5" />
+                android:orientation="vertical"
+                app:layout_constraintGuide_percent="0.10" />
 
             <androidx.constraintlayout.widget.Guideline
                 android:id="@+id/guideline116"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:orientation="vertical"
-                app:layout_constraintGuide_percent="0.23853211" />
+                app:layout_constraintGuide_percent="0.27" />
 
             <androidx.constraintlayout.widget.Guideline
                 android:id="@+id/guideline117"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
+                android:orientation="horizontal"
+                app:layout_constraintGuide_percent="0.11" />
+
+            <androidx.constraintlayout.widget.Guideline
+                android:id="@+id/guideline118"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:orientation="horizontal"
+                app:layout_constraintGuide_percent="0.53" />
+
+            <TextView
+                android:id="@+id/textView18"
+                android:layout_width="0dp"
+                android:layout_height="0dp"
+                android:layout_marginTop="4dp"
+                android:maxLines="1"
+                android:text="10:10"
+                android:textAlignment="center"
+                android:textColor="#585858"
+
+                app:autoSizeTextType="uniform"
+                app:layout_constraintBottom_toTopOf="@+id/guideline121"
+                app:layout_constraintEnd_toStartOf="@+id/guideline114"
+                app:layout_constraintStart_toStartOf="@+id/guideline116"
+                app:layout_constraintTop_toTopOf="@+id/guideline117" />
+
+            <TextView
+                android:id="@+id/textView19"
+                android:layout_width="0dp"
+                android:layout_height="0dp"
+                android:maxLines="1"
+                android:text="02"
+                android:textAlignment="center"
+                android:textColor="#219FD6"
+                app:autoSizeTextType="uniform"
+                app:layout_constraintBottom_toTopOf="@+id/guideline120"
+                app:layout_constraintEnd_toStartOf="@+id/guideline116"
+                app:layout_constraintStart_toStartOf="@+id/guideline115"
+                app:layout_constraintTop_toTopOf="@+id/guideline119" />
+
+            <androidx.constraintlayout.widget.Guideline
+                android:id="@+id/guideline119"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:orientation="horizontal"
+                app:layout_constraintGuide_percent="0.19" />
+
+            <androidx.constraintlayout.widget.Guideline
+                android:id="@+id/guideline120"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:orientation="horizontal"
+                app:layout_constraintGuide_percent="0.42" />
+
+            <TextView
+                android:id="@+id/textView21"
+                android:layout_width="0dp"
+                android:layout_height="0dp"
+                android:maxLines="1"
+                android:text="April"
+                android:textAlignment="center"
+                android:textColor="#1D61E8"
+                app:autoSizeTextType="uniform"
+                app:layout_constraintBottom_toTopOf="@+id/guideline118"
+                app:layout_constraintEnd_toStartOf="@+id/guideline116"
+                app:layout_constraintStart_toStartOf="@+id/guideline115"
+                app:layout_constraintTop_toTopOf="@+id/guideline120" />
+
+            <androidx.constraintlayout.widget.Guideline
+                android:id="@+id/guideline121"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:orientation="horizontal"
+                app:layout_constraintGuide_percent="0.58" />
+
+            <androidx.constraintlayout.widget.Guideline
+                android:id="@+id/guideline122"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
                 android:orientation="vertical"
-                app:layout_constraintGuide_percent="0.77" />
+                app:layout_constraintGuide_percent="0.84" />
+
+            <androidx.constraintlayout.widget.Guideline
+                android:id="@+id/guideline123"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:orientation="horizontal"
+                app:layout_constraintGuide_percent="0.29" />
+
+            <TextView
+                android:id="@+id/textView22"
+                android:layout_width="0dp"
+                android:layout_height="0dp"
+                android:layout_marginBottom="0dp"
+                android:text="AM"
+
+                android:textAlignment="center"
+                android:textColor="#585858"
+
+                app:autoSizeTextType="uniform"
+                app:layout_constraintBottom_toTopOf="@+id/guideline123"
+                app:layout_constraintEnd_toStartOf="@+id/guideline122"
+                app:layout_constraintStart_toStartOf="@+id/guideline114"
+                app:layout_constraintTop_toTopOf="@+id/guideline119" />
+
+            <androidx.constraintlayout.widget.Guideline
+                android:id="@+id/guideline124"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:orientation="horizontal"
+                app:layout_constraintGuide_percent="0.58" />
+
+            <androidx.constraintlayout.widget.Guideline
+                android:id="@+id/guideline127"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:orientation="horizontal"
+                app:layout_constraintGuide_percent="0.78" />
+
+            <androidx.constraintlayout.widget.Guideline
+                android:id="@+id/guideline126"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:orientation="vertical"
+                app:layout_constraintGuide_percent="0.75" />
+
+            <androidx.constraintlayout.widget.Guideline
+                android:id="@+id/guideline125"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:orientation="vertical"
+                app:layout_constraintGuide_percent="0.21" />
+
+            <androidx.constraintlayout.widget.ConstraintLayout
+                android:layout_width="0dp"
+                android:layout_height="0dp"
+                android:background="@drawable/main_blue_gradient"
+
+
+                app:layout_constraintBottom_toTopOf="@+id/guideline127"
+                app:layout_constraintEnd_toStartOf="@+id/guideline126"
+                app:layout_constraintStart_toStartOf="@+id/guideline125"
+                app:layout_constraintTop_toTopOf="@+id/guideline121">
+
+                <TextView
+                    android:id="@+id/textView23"
+                    android:layout_width="0dp"
+                    android:layout_height="0dp"
+                    android:layout_marginStart="2dp"
+                    android:layout_marginTop="2dp"
+                    android:layout_marginEnd="2dp"
+                    android:layout_marginBottom="2dp"
+                    android:text="ON TIME"
+                    android:textAlignment="center"
+                    android:textColor="@color/material_white_blue"
+                    android:textStyle="bold"
+
+                    app:autoSizeTextType="uniform"
+                    app:layout_constraintBottom_toBottomOf="parent"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toTopOf="parent" />
+            </androidx.constraintlayout.widget.ConstraintLayout>
+
         </androidx.constraintlayout.widget.ConstraintLayout>
 
     </androidx.constraintlayout.widget.ConstraintLayout>

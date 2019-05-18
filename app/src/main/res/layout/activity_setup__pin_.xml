@@ -4,73 +4,70 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    android:background="@drawable/main_bg"
     tools:context=".fingerPrint_Login.register.setup_pin_code.Setup_Pin_Activity">
-
-    <de.hdodenhof.circleimageview.CircleImageView
-        android:id="@+id/regUser_pinCode_circleImageViewiD"
-        android:layout_width="100dp"
-        android:layout_height="100dp"
-        android:layout_marginStart="8dp"
-        android:layout_marginEnd="8dp"
-        android:layout_marginBottom="8dp"
-        app:layout_constraintBottom_toTopOf="@+id/regUser_pinCode_textView_NameID"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent" />
 
     <EditText
         android:id="@+id/regUser_editNumber_2_iD"
-        android:layout_width="52dp"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="8dp"
-        android:layout_marginEnd="4dp"
+        android:layout_width="60dp"
+        android:layout_height="60dp"
+        android:layout_marginTop="32dp"
+        android:layout_marginEnd="12dp"
+        android:background="@drawable/ic_pin_ring"
         android:ems="10"
         android:hint="1"
         android:inputType="numberDecimal"
         android:textAlignment="center"
+        android:textColorHint="@color/material_white_blue"
         app:layout_constraintEnd_toStartOf="@+id/guideline10"
-        app:layout_constraintTop_toBottomOf="@+id/regUser_pinCode_textView_PhoneID" />
+        app:layout_constraintTop_toTopOf="@+id/guideline129" />
 
     <EditText
         android:id="@+id/regUser_editNumber_1_iD"
-        android:layout_width="52dp"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="8dp"
-        android:layout_marginEnd="8dp"
+        android:layout_width="60dp"
+        android:layout_height="60dp"
+        android:layout_marginTop="32dp"
+        android:background="@drawable/ic_pin_ring"
         android:ems="10"
         android:hint="1"
         android:inputType="numberDecimal"
         android:textAlignment="center"
+        android:textColorHint="@color/material_white_blue"
         app:layout_constraintEnd_toStartOf="@+id/regUser_editNumber_2_iD"
-        app:layout_constraintTop_toBottomOf="@+id/regUser_pinCode_textView_PhoneID" />
+        app:layout_constraintTop_toTopOf="@+id/guideline129" />
 
     <EditText
         android:id="@+id/regUser_editNumber_4_iD"
-        android:layout_width="52dp"
-        android:layout_height="wrap_content"
+        android:layout_width="60dp"
+        android:layout_height="60dp"
         android:layout_marginStart="8dp"
-        android:layout_marginTop="8dp"
+        android:layout_marginTop="32dp"
+        android:background="@drawable/ic_pin_ring"
         android:ems="10"
         android:hint="1"
         android:inputType="numberDecimal"
         android:textAlignment="center"
+        android:textColorHint="@color/material_white_blue"
         app:layout_constraintStart_toEndOf="@+id/regUser_editNumber_3_iD"
-        app:layout_constraintTop_toBottomOf="@+id/regUser_pinCode_textView_PhoneID" />
+        app:layout_constraintTop_toTopOf="@+id/guideline129" />
 
     <EditText
         android:id="@+id/regUser_editNumber_3_iD"
-        android:layout_width="52dp"
-        android:layout_height="wrap_content"
+        android:layout_width="60dp"
+        android:layout_height="60dp"
         android:layout_marginStart="4dp"
-        android:layout_marginTop="8dp"
+        android:layout_marginTop="32dp"
         android:layout_marginEnd="8dp"
+        android:background="@drawable/ic_pin_ring"
         android:ems="10"
         android:hint="1"
         android:inputType="numberDecimal"
         android:textAlignment="center"
+        android:textColorHint="@color/material_white_blue"
         app:layout_constraintEnd_toStartOf="@+id/regUser_editNumber_4_iD"
         app:layout_constraintHorizontal_bias="0.0"
         app:layout_constraintStart_toStartOf="@+id/guideline10"
-        app:layout_constraintTop_toBottomOf="@+id/regUser_pinCode_textView_PhoneID" />
+        app:layout_constraintTop_toTopOf="@+id/guideline129" />
 
     <androidx.constraintlayout.widget.Guideline
         android:id="@+id/guideline10"
@@ -84,26 +81,30 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginStart="8dp"
-        android:layout_marginTop="8dp"
+        android:layout_marginTop="32dp"
         android:layout_marginEnd="8dp"
-        android:text="TextView"
+        android:text="pease setup 4 pin code now."
+        android:textColor="@color/material_white_blue"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/regUser_editNumber_2_iD" />
 
     <Button
         android:id="@+id/regUser_pinCode_buttoniD"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginStart="8dp"
-        android:layout_marginTop="8dp"
-        android:layout_marginEnd="8dp"
+        android:layout_width="0dp"
+        android:layout_height="0dp"
+        android:layout_marginTop="3dp"
+        android:layout_marginBottom="3dp"
+        android:background="@drawable/gradient_blue_button"
         android:text="Set Code"
-        app:layout_constraintEnd_toEndOf="@+id/regUser_editNumber_4_iD"
-        app:layout_constraintStart_toStartOf="@+id/regUser_editNumber_1_iD"
-        app:layout_constraintTop_toBottomOf="@+id/regUser_pinCode_textViewiD" />
+        android:textColor="@color/material_white_blue"
+        app:layout_constraintBottom_toTopOf="@+id/guideline133"
+        app:layout_constraintEnd_toStartOf="@+id/guideline135"
+        app:layout_constraintHorizontal_bias="0.496"
+        app:layout_constraintStart_toStartOf="@+id/guideline134"
+        app:layout_constraintTop_toTopOf="@+id/guideline132" />
 
-    <TextView
+    <com.hanks.htextview.evaporate.EvaporateTextView
         android:id="@+id/regUser_pinCode_textView_PhoneID"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
@@ -111,22 +112,68 @@
         android:layout_marginTop="8dp"
         android:layout_marginEnd="8dp"
         android:layout_marginBottom="8dp"
-        android:text="TextView"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.32999998" />
+        android:text="pin code"
+        android:textColor="@color/material_white_blue"
+        android:textSize="50sp"
+        app:layout_constraintBottom_toTopOf="@+id/guideline129"
+        app:layout_constraintEnd_toStartOf="@+id/guideline131"
+        app:layout_constraintStart_toStartOf="@+id/guideline130"
+        app:layout_constraintTop_toTopOf="@+id/guideline128" />
 
-    <TextView
-        android:id="@+id/regUser_pinCode_textView_NameID"
+    <androidx.constraintlayout.widget.Guideline
+        android:id="@+id/guideline128"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginStart="8dp"
-        android:layout_marginEnd="8dp"
-        android:layout_marginBottom="8dp"
-        android:text="TextView"
-        app:layout_constraintBottom_toTopOf="@+id/regUser_pinCode_textView_PhoneID"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent" />
+        android:orientation="horizontal"
+        app:layout_constraintGuide_percent="0.23" />
+
+    <androidx.constraintlayout.widget.Guideline
+        android:id="@+id/guideline129"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal"
+        app:layout_constraintGuide_percent="0.33" />
+
+    <androidx.constraintlayout.widget.Guideline
+        android:id="@+id/guideline130"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:orientation="vertical"
+        app:layout_constraintGuide_percent="0.17518248" />
+
+    <androidx.constraintlayout.widget.Guideline
+        android:id="@+id/guideline131"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:orientation="vertical"
+        app:layout_constraintGuide_percent="0.82481754" />
+
+    <androidx.constraintlayout.widget.Guideline
+        android:id="@+id/guideline132"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal"
+        app:layout_constraintGuide_percent="0.6" />
+
+    <androidx.constraintlayout.widget.Guideline
+        android:id="@+id/guideline133"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal"
+        app:layout_constraintGuide_percent="0.66" />
+
+    <androidx.constraintlayout.widget.Guideline
+        android:id="@+id/guideline134"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:orientation="vertical"
+        app:layout_constraintGuide_percent="0.38" />
+
+    <androidx.constraintlayout.widget.Guideline
+        android:id="@+id/guideline135"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:orientation="vertical"
+        app:layout_constraintGuide_percent="0.62" />
+
 </androidx.constraintlayout.widget.ConstraintLayout>

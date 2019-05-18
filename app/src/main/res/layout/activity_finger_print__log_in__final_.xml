@@ -521,6 +521,11 @@
 
                         android:textAlignment="center"
                         android:textColor="@color/material_white"
+
+                        android:shadowColor="#000"
+                        android:shadowRadius="5"
+                        android:shadowDy="-5"
+
                         app:layout_constraintBottom_toTopOf="@+id/guideline22"
                         app:layout_constraintEnd_toStartOf="@+id/guideline24"
                         app:layout_constraintStart_toStartOf="@+id/guideline23"
@@ -718,7 +723,7 @@
                     <androidx.constraintlayout.widget.ConstraintLayout
                         android:layout_width="0dp"
                         android:layout_height="0dp"
-                        android:background="@color/material_white"
+                        android:background="@drawable/gradient_waiting"
                         app:layout_constraintBottom_toTopOf="@+id/guideline36"
                         app:layout_constraintEnd_toStartOf="@+id/guideline26"
                         app:layout_constraintStart_toStartOf="@+id/guideline25"

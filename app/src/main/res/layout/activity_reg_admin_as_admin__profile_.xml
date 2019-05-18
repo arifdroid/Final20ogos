@@ -28,12 +28,20 @@
         android:layout_height="wrap_content"
         android:layout_marginEnd="9dp"
         android:layout_marginBottom="15dp"
-        android:src="@drawable/ic_plus_only_final"
+        android:src="@drawable/ic_moving_4th_verse"
         app:backgroundTint="#FFFFFF"
+
+
+
+
+
         app:fabCustomSize="50dp"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
-        app:maxImageSize="25dp" />
+        app:maxImageSize="30dp"
+
+        app:layout_anchorGravity="left"
+         />
 
     <androidx.cardview.widget.CardView
         android:id="@+id/cardView3"
@@ -181,7 +189,8 @@
                 <androidx.constraintlayout.widget.ConstraintLayout
                     android:layout_width="0dp"
                     android:layout_height="0dp"
-                    android:background="@drawable/admin_details_new_v2"
+                    android:layout_margin="2dp"
+                    android:background="@drawable/gradient_pink_title"
                     app:layout_constraintBottom_toTopOf="@+id/guideline83"
                     app:layout_constraintEnd_toStartOf="@+id/guideline82"
                     app:layout_constraintStart_toStartOf="@+id/guideline81"
