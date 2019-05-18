@@ -151,6 +151,7 @@ public class RecyclerView_Admin_Profile_Adapter extends RecyclerView.Adapter<Rec
 
 
                     DialogFragment dialogFragment2 = new TimePickerFragment(jj);
+                    //dialogFragment2.setStyle();
                     //((TimePickerFragment) dialogFragment).setLabel(k);
                     dialogFragment2.show(((AppCompatActivity)mContext).getSupportFragmentManager(),"Time Picker");
 
