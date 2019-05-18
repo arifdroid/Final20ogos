@@ -10,20 +10,23 @@ import android.widget.TextView;
 import android.widget.Toast;
 
 import com.example.afinal.R;
-import com.example.afinal.fingerPrint_Login.fingerprint_login.FingerPrint_LogIn_Final_Activity;
-import com.example.afinal.fingerPrint_Login.register.register_as_admin_setupProfile.RegAdmin_asAdmin_Profile_Activity;
 import com.example.afinal.fingerPrint_Login.register.register_user_activity.RegUser_Activity;
 
 import java.util.Observable;
 import java.util.Observer;
 import java.util.Timer;
-import java.util.TimerTask;
 
 public class RegAdmin_Activity extends AppCompatActivity implements View.OnClickListener, RegAdminViewInterface, Observer {
 
+    //18 may, some functionality change, page can serve
+    // to register both admin, and user.
+    //originally, this is for user. so.
+
     private TextView textViewMessage;
-    private EditText editTextName, editTextPhone;
-    private Button logInButton;
+    private EditText user_editTextName, user_editTextPhone;
+
+    //18 may updated.
+    private Button register_as_user;
 
     private RegAdmin_Presenter presenter;
 
@@ -36,32 +39,49 @@ public class RegAdmin_Activity extends AppCompatActivity implements View.OnClick
     private int count;
     private Button movenextbutton;
 
+    //18 may updated
+
+    private Button register_as_admin;
+    private String globalUserName;
+    private String globalUserPhone;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_reg_admin_);
 
-        editTextName = findViewById(R.id.regAdmin_EditText_AdminNameID);
-        editTextPhone = findViewById(R.id.regAdmin_EditText_AdminPhoneID);
+        user_editTextName = findViewById(R.id.regFinal_EditText_UserName_iD);
+        user_editTextPhone = findViewById(R.id.regFinal_EditText_User_Phone_iD);
         textViewMessage = findViewById(R.id.regAdmin_TextView_ID);
-        logInButton = findViewById(R.id.regAdmin_Button_ID);
+
+        //18 may update
+        //, problem user, will enter their name first.
+        register_as_user = findViewById(R.id.regAdmin_button_user_id); //this want to register as admin, so can proceed to next activity.
+
+
+        //this can move forward if input valid. go next activity
+        register_as_admin = findViewById(R.id.regAdmin_button_admin_id);
+
+        //
+
+
 
 
 
         //15 May for testing layout
 
-        movenextbutton = findViewById(R.id.regAdmin_button_user_id);
-
-        movenextbutton.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-
-                Intent intent = new Intent(RegAdmin_Activity.this, RegAdmin_asAdmin_Profile_Activity.class);
-                startActivity(intent);
-
-
-            }
-        });
+//        movenextbutton = findViewById(R.id.regAdmin_button_user_id);
+//
+//        movenextbutton.setOnClickListener(new View.OnClickListener() {
+//            @Override
+//            public void onClick(View v) {
+//
+//                Intent intent = new Intent(RegAdmin_Activity.this, RegAdmin_asAdmin_Profile_Activity.class);
+//                startActivity(intent);
+//
+//
+//            }
+//        });
 
 
         checkValid=false;
@@ -75,7 +95,7 @@ public class RegAdmin_Activity extends AppCompatActivity implements View.OnClick
 
 
 
-        logInButton.setOnClickListener(this);
+        register_as_user.setOnClickListener(this);
 
 
     }
@@ -89,28 +109,46 @@ public class RegAdmin_Activity extends AppCompatActivity implements View.OnClick
     @Override
     public void onClick(View v) {
 
+
+
+
+
+
         statusnow = "wait..";
         textViewMessage.setText(statusnow);
-        String adminName = editTextName.getText().toString();
-        String adminPhone = editTextPhone.getText().toString();
+        String userName = user_editTextName.getText().toString();
+        String userPhone = user_editTextPhone.getText().toString();
 
-        checkValid = presenter.checkInputValid(adminName,adminPhone);
+        checkValid = presenter.checkInputValid(userName,userPhone);
 
         if(checkValid){ //here we call
 
-            globalAdminName = adminName;
-            globalAdminPhone =adminPhone;
-          boolean finalStatus = presenter.checkFromFirebaseSimulation(adminName,adminPhone);
+            //updated 18 may
 
-            if(finalStatus){
-                //success
 
-               result(true);
+            globalUserName= userName;       //this will be used in next activity.
+            globalUserPhone = userPhone;
 
-            }else {
+//
 
-                result(false);
-            }
+            //set animation
+            user_editTextName.
+
+            //this will be done, after received new input.
+
+//            globalAdminName = userName;
+//            globalAdminPhone =userPhone;
+//          boolean finalStatus = presenter.checkFromFirebaseSimulation(userName,userPhone);
+//
+//            if(finalStatus){
+//                //success
+//
+//               result(true);
+//
+//            }else {
+//
+//                result(false);
+//            }
 
 
         }else {

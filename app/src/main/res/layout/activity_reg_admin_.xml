@@ -21,44 +21,51 @@
         app:layout_constraintStart_toStartOf="@+id/guideline43" />
 
     <EditText
-        android:id="@+id/regAdmin_EditText_AdminNameID"
+        android:id="@+id/regFinal_EditText_UserName_iD"
         android:layout_width="0dp"
         android:layout_height="0dp"
 
         android:background="@drawable/edittext_box"
         android:ems="10"
-        android:hint="admin name"
+        android:hint="your name"
         android:inputType="textPersonName"
         android:textAlignment="center"
         android:textColorHint="@color/material_white_blue"
+        android:visibility="gone"
         app:layout_constraintBottom_toTopOf="@+id/guideline42"
         app:layout_constraintEnd_toStartOf="@+id/guideline44"
         app:layout_constraintStart_toStartOf="@+id/guideline43"
         app:layout_constraintTop_toTopOf="@+id/guideline41"
-        app:layout_constraintVertical_bias="0.007" />
+        app:layout_constraintVertical_bias="0.007"
+        tools:visibility="gone" />
 
     <EditText
-        android:id="@+id/regAdmin_EditText_AdminPhoneID"
+        android:id="@+id/regFinal_EditText_User_Phone_iD"
         android:layout_width="0dp"
         android:layout_height="0dp"
 
         android:background="@drawable/edittext_box"
         android:ems="10"
-        android:hint="admin phone"
+        android:hint="your phone number"
         android:inputType="phone"
         android:textAlignment="center"
         android:textColorHint="@color/material_white_blue"
+        android:visibility="gone"
         app:layout_constraintBottom_toTopOf="@+id/guideline46"
         app:layout_constraintEnd_toStartOf="@+id/guideline44"
+        app:layout_constraintHorizontal_bias="1.0"
         app:layout_constraintStart_toStartOf="@+id/guideline43"
-        app:layout_constraintTop_toTopOf="@+id/guideline45" />
+        app:layout_constraintTop_toTopOf="@+id/guideline45"
+        app:layout_constraintVertical_bias="0.0" />
 
     <Button
-        android:id="@+id/regAdmin_Button_ID"
+        android:id="@+id/regAdmin_Check_ID"
         android:layout_width="0dp"
         android:layout_height="0dp"
 
-        android:background="@drawable/button_log"
+        android:layout_marginTop="3dp"
+        android:layout_marginBottom="3dp"
+        android:background="@drawable/gradient_blue_button"
         android:text="register"
         android:textColor="@color/material_white_blue"
         android:textSize="12sp"
@@ -68,7 +75,7 @@
         app:layout_constraintHorizontal_bias="0.498"
         app:layout_constraintStart_toStartOf="@+id/guideline49"
         app:layout_constraintTop_toTopOf="@+id/guideline47"
-        tools:visibility="gone" />
+        tools:visibility="visible" />
 
     <androidx.constraintlayout.widget.Guideline
         android:id="@+id/guideline41"
@@ -211,7 +218,8 @@
         app:layout_constraintBottom_toTopOf="@+id/guideline48"
         app:layout_constraintEnd_toStartOf="@+id/guideline53"
         app:layout_constraintStart_toStartOf="@+id/guideline55"
-        app:layout_constraintTop_toTopOf="@+id/guideline47" />
+        app:layout_constraintTop_toTopOf="@+id/guideline47"
+        tools:visibility="gone" />
 
     <androidx.constraintlayout.widget.Guideline
         android:id="@+id/guideline56"
@@ -233,6 +241,37 @@
         app:layout_constraintBottom_toTopOf="@+id/guideline48"
         app:layout_constraintEnd_toStartOf="@+id/guideline56"
         app:layout_constraintStart_toStartOf="@+id/guideline54"
-        app:layout_constraintTop_toTopOf="@+id/guideline47" />
+        app:layout_constraintTop_toTopOf="@+id/guideline47"
+        tools:visibility="gone" />
+
+    <EditText
+        android:id="@+id/regFinal_EditText_Admin_Name_iD"
+        android:layout_width="0dp"
+        android:layout_height="0dp"
+        android:background="@drawable/edittext_box"
+        android:ems="10"
+        android:hint="admin name"
+        android:inputType="textPersonName"
+        android:textAlignment="center"
+        android:textColorHint="#92F3FDFF"
+        app:layout_constraintBottom_toTopOf="@+id/guideline42"
+        app:layout_constraintEnd_toStartOf="@+id/guideline44"
+        app:layout_constraintStart_toStartOf="@+id/guideline43"
+        app:layout_constraintTop_toTopOf="@+id/guideline41" />
+
+    <EditText
+        android:id="@+id/regFinal_EditText_Admin_Phone_iD"
+        android:layout_width="0dp"
+        android:layout_height="0dp"
+        android:background="@drawable/edittext_box"
+        android:ems="10"
+        android:hint="admin phone number"
+        android:inputType="phone"
+        android:textAlignment="center"
+        android:textColorHint="#92F3FDFF"
+        app:layout_constraintBottom_toTopOf="@+id/guideline46"
+        app:layout_constraintEnd_toStartOf="@+id/guideline44"
+        app:layout_constraintStart_toStartOf="@+id/guideline43"
+        app:layout_constraintTop_toTopOf="@+id/guideline45" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>
