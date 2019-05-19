@@ -26,7 +26,7 @@ public class RegAdmin_Activity extends AppCompatActivity implements View.OnClick
     private EditText user_editTextName, user_editTextPhone;
 
     //18 may updated.
-    private Button register_as_user;
+    private Button register_as_user_button;
 
     private RegAdmin_Presenter presenter;
 
@@ -41,9 +41,12 @@ public class RegAdmin_Activity extends AppCompatActivity implements View.OnClick
 
     //18 may updated
 
-    private Button register_as_admin;
+    private Button register_as_admin_button;
     private String globalUserName;
     private String globalUserPhone;
+    private EditText admin_editTextName;
+    private EditText admin_editTextPhone;
+    private Button check_admin_database_for_user_registering_button;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -54,15 +57,23 @@ public class RegAdmin_Activity extends AppCompatActivity implements View.OnClick
         user_editTextPhone = findViewById(R.id.regFinal_EditText_User_Phone_iD);
         textViewMessage = findViewById(R.id.regAdmin_TextView_ID);
 
+
+        admin_editTextName = findViewById(R.id.regFinal_EditText_Admin_Name_iD);
+        admin_editTextPhone = findViewById(R.id.regFinal_EditText_Admin_Phone_iD);
+
+
+
         //18 may update
         //, problem user, will enter their name first.
-        register_as_user = findViewById(R.id.regAdmin_button_user_id); //this want to register as admin, so can proceed to next activity.
+        register_as_user_button = findViewById(R.id.regAdmin_button_user_id); //this want to register as admin, so can proceed to next activity.
 
 
         //this can move forward if input valid. go next activity
-        register_as_admin = findViewById(R.id.regAdmin_button_admin_id);
+        register_as_admin_button = findViewById(R.id.regAdmin_button_admin_id);
 
-        //
+        //button for checking only, one button
+
+        check_admin_database_for_user_registering_button = findViewById(R.id.regAdmin_Check_ID);
 
 
 
@@ -95,7 +106,7 @@ public class RegAdmin_Activity extends AppCompatActivity implements View.OnClick
 
 
 
-        register_as_user.setOnClickListener(this);
+        register_as_user_button.setOnClickListener(this);
 
 
     }
@@ -111,30 +122,48 @@ public class RegAdmin_Activity extends AppCompatActivity implements View.OnClick
 
 
 
+        switch (v.getId()){
+
+            case R.id.regAdmin_button_user_id:
 
 
+                statusnow = "wait..";
+                textViewMessage.setText(statusnow);
+                String userName = user_editTextName.getText().toString();
+                String userPhone = user_editTextPhone.getText().toString();
 
-        statusnow = "wait..";
-        textViewMessage.setText(statusnow);
-        String userName = user_editTextName.getText().toString();
-        String userPhone = user_editTextPhone.getText().toString();
+                checkValid = presenter.checkInputValid(userName,userPhone);
 
-        checkValid = presenter.checkInputValid(userName,userPhone);
+                if(checkValid){ //here we call
 
-        if(checkValid){ //here we call
-
-            //updated 18 may
+                    //updated 18 may
 
 
-            globalUserName= userName;       //this will be used in next activity.
-            globalUserPhone = userPhone;
+                    globalUserName= userName;       //this will be used in next activity.
+                    globalUserPhone = userPhone;
 
 //
 
-            //set animation
-            user_editTextName.
+                    //set animation
+                    user_editTextName.setVisibility(View.GONE);
+                    user_editTextPhone.setVisibility(View.GONE);
 
-            //this will be done, after received new input.
+                    admin_editTextName.setVisibility(View.VISIBLE);
+                    admin_editTextPhone.setVisibility(View.VISIBLE);
+
+
+
+                    //then animate button. to change.
+                    register_as_admin_button.setVisibility(View.GONE);
+                    register_as_user_button.setVisibility(View.GONE);
+
+                    check_admin_database_for_user_registering_button.setVisibility(View.VISIBLE);
+
+
+
+
+
+                    //this will be done, after received new input.
 
 //            globalAdminName = userName;
 //            globalAdminPhone =userPhone;
@@ -151,10 +180,60 @@ public class RegAdmin_Activity extends AppCompatActivity implements View.OnClick
 //            }
 
 
-        }else {
+                }else {
 
-           return;
+                    return;
+                }
+
+
+                break;
+
+            case R.id.regAdmin_Check_ID:
+
+                String adminName = user_editTextName.getText().toString();
+                String adminPhone = user_editTextPhone.getText().toString();
+
+                checkValid = presenter.checkInputValid(adminName,adminPhone);
+
+                if(checkValid){ //here we call
+
+                    //updated 18 may
+
+                    //this will be done, after received new input.
+
+            globalAdminName = adminName;
+            globalAdminPhone =adminPhone;
+          boolean finalStatus = presenter.checkFromFirebaseSimulation(adminName,adminPhone);
+//
+            if(finalStatus){
+                //success
+
+               result(true);
+
+            }else {
+
+                result(false);
+            }
+
+
+                }else {
+
+                    return;
+                }
+
+
+
+
+
+
+
+
+                break;
+
+
         }
+
+
 
 
     }
@@ -213,6 +292,11 @@ public class RegAdmin_Activity extends AppCompatActivity implements View.OnClick
 
             intent.putExtra("admin_name", globalAdminName); //this just pass intent.
             intent.putExtra("admin_phone", globalAdminPhone);
+            //18 May , put extra intent.
+
+            intent.putExtra("user_here_name", globalUserName);
+            intent.putExtra("user_here_phone", globalUserPhone);
+
 
             startActivity(intent);
 

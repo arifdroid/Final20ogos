@@ -66,7 +66,7 @@
         android:layout_marginTop="3dp"
         android:layout_marginBottom="3dp"
         android:background="@drawable/gradient_blue_button"
-        android:text="register"
+        android:text="@string/google_api_key"
         android:textColor="@color/material_white_blue"
         android:textSize="12sp"
         android:visibility="gone"
