@@ -1,16 +1,28 @@
 <?xml version="1.0" encoding="utf-8"?>
 
 
+<ScrollView
 
-
-
-<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
-    android:layout_width="match_parent"
+
     android:layout_height="match_parent"
+    android:layout_width="match_parent"
+    tools:context=".fingerPrint_Login.register.register_with_activity.RegAdmin_Activity"
+
+    android:fillViewport="true"
+
+    >
+
+
+
+<androidx.constraintlayout.widget.ConstraintLayout
+
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
     android:background="@drawable/main_bg"
-    tools:context=".fingerPrint_Login.register.register_with_activity.RegAdmin_Activity">
+    >
 
 
     <com.hanks.htextview.evaporate.EvaporateTextView
@@ -279,4 +291,21 @@
         app:layout_constraintStart_toStartOf="@+id/guideline43"
         app:layout_constraintTop_toTopOf="@+id/guideline45" />
 
+    <TextView
+        android:id="@+id/reg_admin_textview_mock_scroll_id"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="8dp"
+        android:layout_marginTop="188dp"
+        android:layout_marginEnd="8dp"
+        android:text="TextView"
+        android:textColor="#00FFFFFF"
+        app:layout_constraintEnd_toStartOf="@+id/guideline44"
+        app:layout_constraintHorizontal_bias="0.497"
+        app:layout_constraintStart_toStartOf="@+id/guideline43"
+        app:layout_constraintTop_toBottomOf="@+id/regAdmin_TextView_ID" />
+
 </androidx.constraintlayout.widget.ConstraintLayout>
+
+
+</ScrollView>

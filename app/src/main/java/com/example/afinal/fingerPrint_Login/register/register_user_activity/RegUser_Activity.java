@@ -7,7 +7,6 @@ import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.appcompat.app.AppCompatActivity;
 import de.hdodenhof.circleimageview.CircleImageView;
-import pub.devrel.easypermissions.EasyPermissions;
 
 import android.content.SharedPreferences;
 import android.net.Uri;
@@ -21,15 +20,11 @@ import android.widget.Toast;
 
 import com.example.afinal.R;
 import com.example.afinal.fingerPrint_Login.fingerprint_login.FingerPrint_LogIn_Final_Activity;
-import com.example.afinal.fingerPrint_Login.fingerprint_login.Login_Select_Action_Fragment;
 import com.example.afinal.fingerPrint_Login.register.register_with_activity.RegAdmin_Activity;
 import com.example.afinal.fingerPrint_Login.register.setup_pin_code.Setup_Pin_Activity;
 import com.google.android.gms.tasks.OnCanceledListener;
 import com.google.android.gms.tasks.OnCompleteListener;
-import com.google.android.gms.tasks.OnFailureListener;
-import com.google.android.gms.tasks.OnSuccessListener;
 import com.google.android.gms.tasks.Task;
-import com.google.firebase.FirebaseApp;
 import com.google.firebase.FirebaseException;
 import com.google.firebase.auth.AuthResult;
 import com.google.firebase.auth.FirebaseAuth;
@@ -38,12 +33,10 @@ import com.google.firebase.auth.PhoneAuthCredential;
 import com.google.firebase.auth.PhoneAuthProvider;
 import com.google.firebase.firestore.CollectionReference;
 import com.google.firebase.firestore.DocumentReference;
-import com.google.firebase.firestore.DocumentSnapshot;
 import com.google.firebase.firestore.EventListener;
 import com.google.firebase.firestore.FirebaseFirestore;
 import com.google.firebase.firestore.FirebaseFirestoreException;
 import com.google.firebase.firestore.Query;
-import com.google.firebase.firestore.QueryDocumentSnapshot;
 import com.google.firebase.firestore.QuerySnapshot;
 import com.google.firebase.storage.FirebaseStorage;
 import com.google.firebase.storage.StorageReference;
@@ -55,7 +48,6 @@ import java.util.Map;
 import java.util.Observable;
 import java.util.Observer;
 import java.util.Timer;
-import java.util.TimerTask;
 import java.util.concurrent.TimeUnit;
 
 public class RegUser_Activity extends AppCompatActivity implements View.OnClickListener, RegUserView_Interface, Observer {
@@ -121,7 +113,7 @@ public class RegUser_Activity extends AppCompatActivity implements View.OnClickL
 
 
 
-        circleImageView = findViewById(R.id.regUser_circlerImageView);
+        circleImageView = findViewById(R.id.reg_User_circlerImageView);
 
         circleImageView.setOnClickListener(new View.OnClickListener() {
             @Override

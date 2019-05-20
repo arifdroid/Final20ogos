@@ -1,11 +1,27 @@
 <?xml version="1.0" encoding="utf-8"?>
-<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+
+
+
+<ScrollView
+
+    xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
-    android:layout_width="match_parent"
+
     android:layout_height="match_parent"
+    android:layout_width="match_parent"
+    tools:context=".fingerPrint_Login.register.register_user_activity.RegUser_Activity"
+
+    android:fillViewport="true"
+
+    >
+
+
+<androidx.constraintlayout.widget.ConstraintLayout
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
     android:background="@drawable/main_bg"
-    tools:context=".fingerPrint_Login.register.register_user_activity.RegUser_Activity">
+    >
 
     <androidx.constraintlayout.widget.ConstraintLayout
         android:layout_width="match_parent"
@@ -46,7 +62,7 @@
             app:layout_constraintGuide_percent="0.86" />
 
         <com.hanks.htextview.evaporate.EvaporateTextView
-            android:id="@+id/textView33"
+            android:id="@+id/reg_User_EvaporateText_Code_ID"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginStart="8dp"
@@ -60,7 +76,8 @@
             app:layout_constraintBottom_toTopOf="@+id/guideline163"
             app:layout_constraintEnd_toStartOf="@+id/guideline165"
             app:layout_constraintStart_toStartOf="@+id/guideline164"
-            app:layout_constraintTop_toTopOf="@+id/guideline150" />
+            app:layout_constraintTop_toTopOf="@+id/guideline150"
+            tools:visibility="visible" />
 
         <androidx.constraintlayout.widget.Guideline
             android:id="@+id/guideline166"
@@ -74,7 +91,7 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:orientation="horizontal"
-            app:layout_constraintGuide_percent="0.44" />
+            app:layout_constraintGuide_percent="0.43" />
 
         <androidx.constraintlayout.widget.Guideline
             android:id="@+id/guideline168"
@@ -91,7 +108,7 @@
             app:layout_constraintGuide_percent="0.62" />
 
         <EditText
-            android:id="@+id/editText2"
+            android:id="@+id/reg_User_editText_ring3_id"
             android:layout_width="0dp"
             android:layout_height="0dp"
             android:background="@drawable/ic_pin_ring"
@@ -100,7 +117,8 @@
             app:layout_constraintBottom_toTopOf="@+id/guideline167"
             app:layout_constraintEnd_toStartOf="@+id/guideline170"
             app:layout_constraintStart_toStartOf="@+id/guideline168"
-            app:layout_constraintTop_toTopOf="@+id/guideline166" />
+            app:layout_constraintTop_toTopOf="@+id/guideline166"
+            tools:visibility="visible" />
 
         <androidx.constraintlayout.widget.Guideline
             android:id="@+id/guideline170"
@@ -117,16 +135,17 @@
             app:layout_constraintGuide_percent="0.24" />
 
         <EditText
-            android:id="@+id/editText"
+            android:id="@+id/reg_User_editText_ring2_id"
             android:layout_width="0dp"
             android:layout_height="0dp"
             android:background="@drawable/ic_pin_ring"
             android:ems="10"
             android:inputType="number"
             app:layout_constraintBottom_toTopOf="@+id/guideline167"
-            app:layout_constraintEnd_toStartOf="@+id/editText2"
+            app:layout_constraintEnd_toStartOf="@+id/reg_User_editText_ring3_id"
             app:layout_constraintStart_toStartOf="@+id/guideline171"
-            app:layout_constraintTop_toTopOf="@+id/guideline166" />
+            app:layout_constraintTop_toTopOf="@+id/guideline166"
+            tools:visibility="visible" />
 
         <androidx.constraintlayout.widget.Guideline
             android:id="@+id/guideline172"
@@ -136,16 +155,17 @@
             app:layout_constraintGuide_percent="0.11" />
 
         <EditText
-            android:id="@+id/editText3"
+            android:id="@+id/reg_User_editText_ring1_id"
             android:layout_width="0dp"
             android:layout_height="0dp"
             android:background="@drawable/ic_pin_ring"
             android:ems="10"
             android:inputType="number"
             app:layout_constraintBottom_toTopOf="@+id/guideline167"
-            app:layout_constraintEnd_toStartOf="@+id/editText"
+            app:layout_constraintEnd_toStartOf="@+id/reg_User_editText_ring2_id"
             app:layout_constraintStart_toStartOf="@+id/guideline172"
-            app:layout_constraintTop_toTopOf="@+id/guideline166" />
+            app:layout_constraintTop_toTopOf="@+id/guideline166"
+            tools:visibility="visible" />
 
         <androidx.constraintlayout.widget.Guideline
             android:id="@+id/guideline173"
@@ -155,16 +175,18 @@
             app:layout_constraintGuide_percent="0.63" />
 
         <EditText
-            android:id="@+id/editText4"
+            android:id="@+id/reg_User_editText_ring4_id"
             android:layout_width="0dp"
             android:layout_height="0dp"
+            android:layout_marginEnd="0dp"
             android:background="@drawable/ic_pin_ring"
             android:ems="10"
             android:inputType="number"
             app:layout_constraintBottom_toTopOf="@+id/guideline167"
             app:layout_constraintEnd_toStartOf="@+id/guideline173"
             app:layout_constraintStart_toStartOf="@+id/guideline170"
-            app:layout_constraintTop_toTopOf="@+id/guideline166" />
+            app:layout_constraintTop_toTopOf="@+id/guideline166"
+            tools:visibility="visible" />
 
         <androidx.constraintlayout.widget.Guideline
             android:id="@+id/guideline174"
@@ -174,16 +196,18 @@
             app:layout_constraintGuide_percent="0.76" />
 
         <EditText
-            android:id="@+id/editText5"
+            android:id="@+id/reg_User_editText_ring5_id"
             android:layout_width="0dp"
             android:layout_height="0dp"
+            android:layout_marginStart="0dp"
             android:background="@drawable/ic_pin_ring"
             android:ems="10"
             android:inputType="number"
             app:layout_constraintBottom_toTopOf="@+id/guideline167"
             app:layout_constraintEnd_toStartOf="@+id/guideline174"
-            app:layout_constraintStart_toEndOf="@+id/editText4"
-            app:layout_constraintTop_toTopOf="@+id/guideline166" />
+            app:layout_constraintStart_toStartOf="@+id/guideline173"
+            app:layout_constraintTop_toTopOf="@+id/guideline166"
+            tools:visibility="visible" />
 
         <androidx.constraintlayout.widget.Guideline
             android:id="@+id/guideline175"
@@ -193,16 +217,18 @@
             app:layout_constraintGuide_percent="0.89" />
 
         <EditText
-            android:id="@+id/editText6"
+            android:id="@+id/reg_User_editText_ring6_id"
             android:layout_width="0dp"
             android:layout_height="0dp"
+            android:layout_marginStart="0dp"
             android:background="@drawable/ic_pin_ring"
             android:ems="10"
             android:inputType="number"
             app:layout_constraintBottom_toTopOf="@+id/guideline167"
             app:layout_constraintEnd_toStartOf="@+id/guideline175"
-            app:layout_constraintStart_toEndOf="@+id/editText5"
-            app:layout_constraintTop_toTopOf="@+id/guideline166" />
+            app:layout_constraintStart_toStartOf="@+id/guideline174"
+            app:layout_constraintTop_toTopOf="@+id/guideline166"
+            tools:visibility="visible" />
 
         <androidx.constraintlayout.widget.Guideline
             android:id="@+id/guideline176"
@@ -219,7 +245,7 @@
             app:layout_constraintGuide_percent="0.5203125" />
 
         <TextView
-            android:id="@+id/textView34"
+            android:id="@+id/reg_User_6pin_code_id"
             android:layout_width="0dp"
             android:layout_height="0dp"
             android:layout_marginStart="8dp"
@@ -234,11 +260,12 @@
             app:layout_constraintBottom_toTopOf="@+id/guideline177"
             app:layout_constraintEnd_toStartOf="@+id/guideline165"
             app:layout_constraintStart_toStartOf="@+id/guideline164"
-            app:layout_constraintTop_toTopOf="@+id/guideline176" />
+            app:layout_constraintTop_toTopOf="@+id/guideline176"
+            tools:visibility="visible" />
     </androidx.constraintlayout.widget.ConstraintLayout>
 
     <de.hdodenhof.circleimageview.CircleImageView
-        android:id="@+id/regUser_circlerImageView"
+        android:id="@+id/reg_User_circlerImageView"
         android:layout_width="0dp"
         android:layout_height="0dp"
         android:layout_marginStart="8dp"
@@ -301,6 +328,7 @@
         app:layout_constraintGuide_percent="0.06" />
 
     <androidx.cardview.widget.CardView
+        android:id="@+id/regUser_CardView_id"
         android:layout_width="0dp"
         android:layout_height="0dp"
         android:layout_marginStart="45dp"
@@ -403,6 +431,14 @@
                 app:layout_constraintGuide_percent="0.59" />
 
             <androidx.constraintlayout.widget.Guideline
+                android:id="@+id/guideline3"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:orientation="horizontal"
+                app:layout_constraintGuide_percent="0.68" />
+
+
+            <androidx.constraintlayout.widget.Guideline
                 android:id="@+id/guideline159"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
@@ -424,7 +460,7 @@
                 app:layout_constraintGuide_percent="0.24814814" />
 
             <ImageView
-                android:id="@+id/imageView2"
+                android:id="@+id/reg_User_imageView_name_icon_id"
                 android:layout_width="0dp"
                 android:layout_height="0dp"
                 app:layout_constraintBottom_toTopOf="@+id/guideline156"
@@ -434,7 +470,7 @@
                 app:srcCompat="@drawable/ic_admin_name_icon_only" />
 
             <TextView
-                android:id="@+id/textView29"
+                android:id="@+id/reg_User_textView_name_id"
                 android:layout_width="0dp"
                 android:layout_height="0dp"
                 android:layout_marginStart="8dp"
@@ -459,7 +495,7 @@
                 app:layout_constraintGuide_percent="0.9" />
 
             <ImageView
-                android:id="@+id/imageView3"
+                android:id="@+id/reg_User_imageView_phone_icon_id"
                 android:layout_width="0dp"
                 android:layout_height="0dp"
                 android:layout_marginStart="1dp"
@@ -467,11 +503,11 @@
                 app:layout_constraintBottom_toTopOf="@+id/guideline157"
                 app:layout_constraintEnd_toStartOf="@+id/guideline161"
                 app:layout_constraintStart_toStartOf="@+id/guideline160"
-                app:layout_constraintTop_toBottomOf="@+id/imageView2"
+                app:layout_constraintTop_toBottomOf="@+id/reg_User_imageView_name_icon_id"
                 tools:srcCompat="@drawable/ic_admin_phone_icon_only" />
 
             <ImageView
-                android:id="@+id/imageView4"
+                android:id="@+id/reg_User_imageView_nameAdmin_icon_id"
                 android:layout_width="0dp"
                 android:layout_height="0dp"
                 app:layout_constraintBottom_toTopOf="@+id/guideline158"
@@ -493,7 +529,7 @@
                 app:srcCompat="@drawable/ic_admin_phone_icon_only" />
 
             <TextView
-                android:id="@+id/textView30"
+                android:id="@+id/reg_User_textView_phone_id"
                 android:layout_width="0dp"
                 android:layout_height="0dp"
                 android:layout_marginStart="8dp"
@@ -509,7 +545,7 @@
                 app:layout_constraintTop_toTopOf="@+id/guideline156" />
 
             <TextView
-                android:id="@+id/textView31"
+                android:id="@+id/reg_User_textView_nameAdmin_id"
                 android:layout_width="0dp"
                 android:layout_height="0dp"
                 android:layout_marginStart="8dp"
@@ -538,11 +574,37 @@
                 app:layout_constraintEnd_toStartOf="@+id/guideline162"
                 app:layout_constraintStart_toStartOf="@+id/guideline161"
                 app:layout_constraintTop_toTopOf="@+id/guideline158" />
+
+            <ImageView
+                android:id="@+id/reg_User_imageView_phoneAdmin_icon_id"
+                android:layout_width="0dp"
+                android:layout_height="0dp"
+                app:layout_constraintBottom_toTopOf="@+id/guideline3"
+                app:layout_constraintEnd_toStartOf="@+id/guideline161"
+                app:layout_constraintStart_toStartOf="@+id/guideline160"
+                app:layout_constraintTop_toBottomOf="@+id/reg_User_imageView_nameAdmin_icon_id"
+                tools:srcCompat="@drawable/ic_admin_phone_icon_only" />
+
+            <TextView
+                android:id="@+id/textView33"
+                android:layout_width="0dp"
+                android:layout_height="0dp"
+                android:layout_marginStart="8dp"
+                android:layout_marginTop="8dp"
+                android:layout_marginBottom="16dp"
+
+                android:text="Admin  Phone : +6018 111111"
+                android:textColor="@color/material_white_blue"
+                app:autoSizeTextType="uniform"
+                app:layout_constraintBottom_toTopOf="@+id/guideline3"
+                app:layout_constraintEnd_toStartOf="@+id/guideline162"
+                app:layout_constraintStart_toEndOf="@+id/reg_User_imageView_phoneAdmin_icon_id"
+                app:layout_constraintTop_toTopOf="@+id/guideline158" />
         </androidx.constraintlayout.widget.ConstraintLayout>
     </androidx.cardview.widget.CardView>
 
     <com.google.android.material.floatingactionbutton.FloatingActionButton
-        android:id="@+id/floatingActionButton4"
+        android:id="@+id/reg_Admin_asAdmin_floatingActionButton_Next_id"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginEnd="10dp"
@@ -556,3 +618,5 @@
         app:maxImageSize="30dp" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>
+
+</ScrollView>
