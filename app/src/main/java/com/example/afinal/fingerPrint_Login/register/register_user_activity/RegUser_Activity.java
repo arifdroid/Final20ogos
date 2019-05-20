@@ -1,11 +1,14 @@
 package com.example.afinal.fingerPrint_Login.register.register_user_activity;
 
 import android.app.Activity;
+import android.app.MediaRouteButton;
 import android.content.Context;
 import android.content.Intent;
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.cardview.widget.CardView;
+
 import de.hdodenhof.circleimageview.CircleImageView;
 
 import android.content.SharedPreferences;
@@ -25,6 +28,7 @@ import com.example.afinal.fingerPrint_Login.register.setup_pin_code.Setup_Pin_Ac
 import com.google.android.gms.tasks.OnCanceledListener;
 import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.Task;
+import com.google.android.material.floatingactionbutton.FloatingActionButton;
 import com.google.firebase.FirebaseException;
 import com.google.firebase.auth.AuthResult;
 import com.google.firebase.auth.FirebaseAuth;
@@ -41,6 +45,9 @@ import com.google.firebase.firestore.QuerySnapshot;
 import com.google.firebase.storage.FirebaseStorage;
 import com.google.firebase.storage.StorageReference;
 import com.google.firebase.storage.UploadTask;
+import com.hanks.htextview.evaporate.EvaporateTextView;
+
+import org.w3c.dom.Text;
 
 import java.io.File;
 import java.util.HashMap;
@@ -55,9 +62,9 @@ public class RegUser_Activity extends AppCompatActivity implements View.OnClickL
     private static final int READ_REQUEST_CODE = 42;
     private Button buttonLogin, buttonGetCode;
 
-    private EditText editTextName, editTextPhone, editTextCode;
+//    private EditText editTextName, editTextPhone, editTextCode;
 
-    private TextView textViewMessage;
+    //private TextView textViewMessage;
 
     private RegUser_Presenter presenter;
 
@@ -94,6 +101,22 @@ public class RegUser_Activity extends AppCompatActivity implements View.OnClickL
     private int count_adminGlobal;
     private boolean imageSetup;
 
+    //20 May 2019
+
+    private CardView cardView_user_detail;
+
+    private TextView textView_userName, textView_userPhone, textView_adminName, textView_adminPhone;
+
+    private FloatingActionButton fButton_Next;
+
+    private EvaporateTextView evaporateTextView;
+
+    private EditText editText_ring1 , editText_ring2, editText_ring3, editText_ring4, editText_ring5, editText_ring6;
+
+    private TextView textView6pin;
+    private FloatingActionButton fButton_Next2;
+
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -101,15 +124,51 @@ public class RegUser_Activity extends AppCompatActivity implements View.OnClickL
 
         imageSetup =false;
 
-        buttonGetCode = findViewById(R.id.regUser_Button_GetCodeID);
-        buttonLogin = findViewById(R.id.regUser_Button_LogInID);
+ //       buttonGetCode = findViewById(R.id.regUser_Button_GetCodeID);
+        //buttonLogin = findViewById(R.id.regUser_Button_LogInID);
 
-        editTextName = findViewById(R.id.regUser_editText_NameID);
-        editTextPhone = findViewById(R.id.regUser_editText_PhoneID);
-        editTextCode = findViewById(R.id.regUser_editText_CodeID);
+        //20 may update
+//
+//        editTextName = findViewById(R.id.regUser_editText_NameID);
+//        editTextPhone = findViewById(R.id.regUser_editText_PhoneID);
+//        editTextCode = findViewById(R.id.regUser_editText_CodeID);
 
-        textViewMessage = findViewById(R.id.regUser_textViewID);
-        textViewMessage.setText("enter your name and phone");
+        textView_userName = findViewById(R.id.reg_User_textView_name_id);
+        textView_userPhone = findViewById(R.id.reg_User_textView_phone_id);
+        textView_adminName = findViewById(R.id.reg_User_textView_nameAdmin_id);
+        textView_adminPhone = findViewById(R.id.reg_User_textView_adminPhone_id);
+
+        fButton_Next = findViewById(R.id.reg_User_floatingActionButton_Next_id);
+        fButton_Next2 = findViewById(R.id.reg_User_floatingActionButton_Next2_id);
+
+        evaporateTextView = findViewById(R.id.reg_User_EvaporateText_Code_ID);
+
+        editText_ring1 = findViewById(R.id.reg_User_editText_ring1_id);
+        editText_ring2 = findViewById(R.id.reg_User_editText_ring2_id);
+        editText_ring3 = findViewById(R.id.reg_User_editText_ring3_id);
+        editText_ring4 = findViewById(R.id.reg_User_editText_ring4_id);
+        editText_ring5 = findViewById(R.id.reg_User_editText_ring5_id);
+        editText_ring6 = findViewById(R.id.reg_User_editText_ring6_id);
+
+        textView6pin = findViewById(R.id.reg_User_TextView_6pin_code_id);
+
+        //
+
+        fButton_Next.setOnClickListener(this);
+
+        fButton_Next2.setOnClickListener(this);
+
+
+
+
+
+        ////
+
+       // textViewMessage = findViewById(R.id.regUser_textViewID);
+
+       // textViewMessage.setText("enter your name and phone");
+
+        cardView_user_detail = findViewById(R.id.regUser_CardView_id);
 
 
 
@@ -149,9 +208,23 @@ public class RegUser_Activity extends AppCompatActivity implements View.OnClickL
             @Override
             public void onVerificationCompleted(PhoneAuthCredential phoneAuthCredential) {
 
-                textViewMessage.setText("got credential");
+              //  textViewMessage.setText("got credential");
 
                 Log.i("checkUserReg Flow: ", "[Activity] , 2 , verification completed");
+
+                //change view visible to user.
+                cardView_user_detail.setVisibility(View.GONE);
+                circleImageView.setVisibility(View.GONE);
+
+                evaporateTextView.setVisibility(View.VISIBLE);
+                editText_ring1.setVisibility(View.VISIBLE);
+                editText_ring2.setVisibility(View.VISIBLE);
+                editText_ring3.setVisibility(View.VISIBLE);
+                editText_ring4.setVisibility(View.VISIBLE);
+                editText_ring5.setVisibility(View.VISIBLE);
+                editText_ring6.setVisibility(View.VISIBLE);
+
+                textView6pin.setVisibility(View.VISIBLE);
 
                 verifyCredential(phoneAuthCredential);
 
@@ -160,7 +233,7 @@ public class RegUser_Activity extends AppCompatActivity implements View.OnClickL
 
             @Override
             public void onVerificationFailed(FirebaseException e) {
-                textViewMessage.setText("verification failed");
+             //   textViewMessage.setText("verification failed");
                 Log.i("checkUserReg Flow: ", "[Activity] , 3 , verification failed ");
             }
 
@@ -213,7 +286,7 @@ public class RegUser_Activity extends AppCompatActivity implements View.OnClickL
 
 
         statusnow= "wait..";
-        textViewMessage.setText(statusnow);
+      //  textViewMessage.setText(statusnow);
 
         Log.i("checkUserReg Flow: ", "[Activity] , 5 , getting credential process");
 
@@ -223,7 +296,7 @@ public class RegUser_Activity extends AppCompatActivity implements View.OnClickL
 
                 if(task.isSuccessful()){
 
-                    textViewMessage.setText("credential verified, wait..");
+                //    textViewMessage.setText("credential verified, wait..");
 
                     //then check with firebase.
                     Log.i("checkUserReg Flow: ", "[Activity] , 6 , task successfull");
@@ -301,7 +374,7 @@ public class RegUser_Activity extends AppCompatActivity implements View.OnClickL
 
 
         Toast.makeText(this,"please try register again", Toast.LENGTH_SHORT).show();
-        textViewMessage.setText("press back, and try again");
+      //  textViewMessage.setText("press back, and try again");
         //onStart();
 
         Intent intent = new Intent(RegUser_Activity.this, RegAdmin_Activity.class);
@@ -350,40 +423,50 @@ public class RegUser_Activity extends AppCompatActivity implements View.OnClickL
 
         Log.i("checkk UserReg: ", "tt 1");
 
-        String name = editTextName.getText().toString();
-        String phone = editTextPhone.getText().toString();
-        String code =editTextCode.getText().toString();
+//        String name = textView_userName.getText().toString();
+//        String phone = textView_userPhone.getText().toString();
+//
+//
 
 
 
-        inputValid = presenter.checkInputValid(name,phone);
-        inputValid_2 = presenter.checkInputValid(name,phone,code);
+       // inputValid = presenter.checkInputValid(name,phone);
+       // inputValid_2 = presenter.checkInputValid(name,phone,code);
 
-        Log.i("checkk UserReg: ", "tt 2 " + name);
-        if(inputValid|| inputValid_2) {
-            Log.i("checkk UserReg: ", "tt 3");
-            userName = name;
-            userPhone = phone;
+//        Log.i("checkk UserReg: ", "tt 2 " + name);
+//            Log.i("checkk UserReg: ", "tt 3");
+//            userName = name;
+//            userPhone = phone;
 
             if(imageSetup){
 
             switch (v.getId()) {
 
-                case R.id.regUser_Button_GetCodeID:
+                //case R.id.regUser_Button_GetCodeID:
+
+                case R.id.reg_User_floatingActionButton_Next_id:
+
+                    String name = textView_userName.getText().toString();
+                    String phone = textView_userPhone.getText().toString();
+
+                    userName = name;
+                    userPhone = phone;
+
+
 
                     //we can create boolean check, if user is maxed here.
 
                     if (checkNumberOfAdminRegisteredTo()) {
 
 
-                        textViewMessage.setText("getting code..");
+                      //  textViewMessage.setText("getting code..");
 
                         Log.i("checkk UserReg: ", "tt 4");
 
                         //presenter.phonecallBack();
                         getCallBack(phone);
 
-                    } else {
+                    } else { //means this user is fully registered. , max of 2 users.
 
                         Intent intentHereGoBack_MaxAlready = new Intent(RegUser_Activity.this, FingerPrint_LogIn_Final_Activity.class);
                         startActivity(intentHereGoBack_MaxAlready);
@@ -392,7 +475,17 @@ public class RegUser_Activity extends AppCompatActivity implements View.OnClickL
 
                     break;
 
-                case R.id.regUser_Button_LogInID:
+                case R.id.reg_User_floatingActionButton_Next2_id: //this is after code, maybe no need to push t
+
+                    String number_1 = editText_ring1.getText().toString();
+                    String number_2 = editText_ring2.getText().toString();
+                    String number_3 = editText_ring3.getText().toString();
+                    String number_4 = editText_ring4.getText().toString();
+                    String number_5 = editText_ring5.getText().toString();
+                    String number_6 = editText_ring6.getText().toString();
+
+                    String code = number_1+number_2+number_3+number_4+number_5+number_6;
+
 
                     Log.i("checkk UserReg: ", "tt 5");
 
@@ -407,17 +500,9 @@ public class RegUser_Activity extends AppCompatActivity implements View.OnClickL
 
         }else {
 
-                textViewMessage.setText("please click picture, and set profile picture");
+               // textViewMessage.setText("please click picture, and set profile picture");
             }
-        }
 
-        if(!inputValid){
-            //handle input false
-            textViewMessage.setText("please enter name and phone");
-        }else if(!inputValid_2){
-
-            textViewMessage.setText("please enter code");
-        }
 
 
     }
@@ -517,7 +602,7 @@ public class RegUser_Activity extends AppCompatActivity implements View.OnClickL
             userprofile_data.put("image",documentReference.toString());
             //userprofile_data.put("");
 
-            textViewMessage.setText("success.. setting up account");
+         //   textViewMessage.setText("success.. setting up account");
 
             //documentReference
 
@@ -735,7 +820,7 @@ public class RegUser_Activity extends AppCompatActivity implements View.OnClickL
 
             //this will be called, if false return from check document,
             //document existed
-            textViewMessage.setText("registration failed");
+         //   textViewMessage.setText("registration failed");
             logOutNow();
         }
 
