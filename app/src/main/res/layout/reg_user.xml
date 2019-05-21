@@ -109,16 +109,15 @@
 
         <EditText
             android:id="@+id/reg_User_editText_ring3_id"
-            android:layout_width="0dp"
-            android:layout_height="0dp"
+            android:layout_width="55dp"
+            android:layout_height="55dp"
             android:background="@drawable/ic_pin_ring"
             android:ems="10"
             android:inputType="number"
             app:layout_constraintBottom_toTopOf="@+id/guideline167"
             app:layout_constraintEnd_toStartOf="@+id/guideline170"
-            app:layout_constraintStart_toStartOf="@+id/guideline168"
             app:layout_constraintTop_toTopOf="@+id/guideline166"
-            tools:visibility="gone" />
+            tools:visibility="visible" />
 
         <androidx.constraintlayout.widget.Guideline
             android:id="@+id/guideline170"
@@ -136,16 +135,15 @@
 
         <EditText
             android:id="@+id/reg_User_editText_ring2_id"
-            android:layout_width="0dp"
-            android:layout_height="0dp"
+            android:layout_width="55dp"
+            android:layout_height="55dp"
             android:background="@drawable/ic_pin_ring"
             android:ems="10"
             android:inputType="number"
             app:layout_constraintBottom_toTopOf="@+id/guideline167"
             app:layout_constraintEnd_toStartOf="@+id/reg_User_editText_ring3_id"
-            app:layout_constraintStart_toStartOf="@+id/guideline171"
             app:layout_constraintTop_toTopOf="@+id/guideline166"
-            tools:visibility="gone" />
+            tools:visibility="visible" />
 
         <androidx.constraintlayout.widget.Guideline
             android:id="@+id/guideline172"
@@ -156,16 +154,15 @@
 
         <EditText
             android:id="@+id/reg_User_editText_ring1_id"
-            android:layout_width="0dp"
-            android:layout_height="0dp"
+            android:layout_width="55dp"
+            android:layout_height="55dp"
             android:background="@drawable/ic_pin_ring"
             android:ems="10"
             android:inputType="number"
             app:layout_constraintBottom_toTopOf="@+id/guideline167"
             app:layout_constraintEnd_toStartOf="@+id/reg_User_editText_ring2_id"
-            app:layout_constraintStart_toStartOf="@+id/guideline172"
             app:layout_constraintTop_toTopOf="@+id/guideline166"
-            tools:visibility="gone" />
+            tools:visibility="visible" />
 
         <androidx.constraintlayout.widget.Guideline
             android:id="@+id/guideline173"
@@ -176,16 +173,15 @@
 
         <EditText
             android:id="@+id/reg_User_editText_ring4_id"
-            android:layout_width="0dp"
-            android:layout_height="0dp"
+            android:layout_width="55dp"
+            android:layout_height="55dp"
             android:background="@drawable/ic_pin_ring"
             android:ems="10"
             android:inputType="number"
             app:layout_constraintBottom_toTopOf="@+id/guideline167"
-            app:layout_constraintEnd_toStartOf="@+id/guideline173"
             app:layout_constraintStart_toStartOf="@+id/guideline170"
             app:layout_constraintTop_toTopOf="@+id/guideline166"
-            tools:visibility="gone" />
+            tools:visibility="visible" />
 
         <androidx.constraintlayout.widget.Guideline
             android:id="@+id/guideline174"
@@ -196,16 +192,15 @@
 
         <EditText
             android:id="@+id/reg_User_editText_ring5_id"
-            android:layout_width="0dp"
-            android:layout_height="0dp"
+            android:layout_width="55dp"
+            android:layout_height="55dp"
             android:background="@drawable/ic_pin_ring"
             android:ems="10"
             android:inputType="number"
             app:layout_constraintBottom_toTopOf="@+id/guideline167"
-            app:layout_constraintEnd_toStartOf="@+id/guideline174"
             app:layout_constraintStart_toStartOf="@+id/guideline173"
             app:layout_constraintTop_toTopOf="@+id/guideline166"
-            tools:visibility="gone" />
+            tools:visibility="visible" />
 
         <androidx.constraintlayout.widget.Guideline
             android:id="@+id/guideline175"
@@ -216,16 +211,15 @@
 
         <EditText
             android:id="@+id/reg_User_editText_ring6_id"
-            android:layout_width="0dp"
-            android:layout_height="0dp"
+            android:layout_width="55dp"
+            android:layout_height="55dp"
             android:background="@drawable/ic_pin_ring"
             android:ems="10"
             android:inputType="number"
             app:layout_constraintBottom_toTopOf="@+id/guideline167"
-            app:layout_constraintEnd_toStartOf="@+id/guideline175"
             app:layout_constraintStart_toStartOf="@+id/guideline174"
             app:layout_constraintTop_toTopOf="@+id/guideline166"
-            tools:visibility="gone" />
+            tools:visibility="visible" />
 
         <androidx.constraintlayout.widget.Guideline
             android:id="@+id/guideline176"

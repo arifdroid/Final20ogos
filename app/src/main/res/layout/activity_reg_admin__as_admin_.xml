@@ -77,7 +77,7 @@
             app:layout_constraintEnd_toStartOf="@+id/guideline165"
             app:layout_constraintStart_toStartOf="@+id/guideline164"
             app:layout_constraintTop_toTopOf="@+id/guideline150"
-            tools:visibility="visible" />
+            tools:visibility="gone" />
 
         <androidx.constraintlayout.widget.Guideline
             android:id="@+id/guideline166"
@@ -109,16 +109,15 @@
 
         <EditText
             android:id="@+id/reg_Admin_asAdmin_editText_ring3_id"
-            android:layout_width="0dp"
-            android:layout_height="0dp"
+            android:layout_width="55dp"
+            android:layout_height="55dp"
             android:background="@drawable/ic_pin_ring"
             android:ems="10"
             android:inputType="number"
             app:layout_constraintBottom_toTopOf="@+id/guideline167"
             app:layout_constraintEnd_toStartOf="@+id/guideline170"
-            app:layout_constraintStart_toStartOf="@+id/guideline168"
             app:layout_constraintTop_toTopOf="@+id/guideline166"
-            tools:visibility="visible" />
+            tools:visibility="gone" />
 
         <androidx.constraintlayout.widget.Guideline
             android:id="@+id/guideline170"
@@ -136,16 +135,15 @@
 
         <EditText
             android:id="@+id/reg_Admin_asAdmin_editText_ring2_id"
-            android:layout_width="0dp"
-            android:layout_height="0dp"
+            android:layout_width="55dp"
+            android:layout_height="55dp"
             android:background="@drawable/ic_pin_ring"
             android:ems="10"
             android:inputType="number"
             app:layout_constraintBottom_toTopOf="@+id/guideline167"
             app:layout_constraintEnd_toStartOf="@+id/reg_Admin_asAdmin_editText_ring3_id"
-            app:layout_constraintStart_toStartOf="@+id/guideline171"
             app:layout_constraintTop_toTopOf="@+id/guideline166"
-            tools:visibility="visible" />
+            tools:visibility="gone" />
 
         <androidx.constraintlayout.widget.Guideline
             android:id="@+id/guideline172"
@@ -156,16 +154,15 @@
 
         <EditText
             android:id="@+id/reg_Admin_asAdmin_editText_ring1_id"
-            android:layout_width="0dp"
-            android:layout_height="0dp"
+            android:layout_width="55dp"
+            android:layout_height="55dp"
             android:background="@drawable/ic_pin_ring"
             android:ems="10"
             android:inputType="number"
             app:layout_constraintBottom_toTopOf="@+id/guideline167"
             app:layout_constraintEnd_toStartOf="@+id/reg_Admin_asAdmin_editText_ring2_id"
-            app:layout_constraintStart_toStartOf="@+id/guideline172"
             app:layout_constraintTop_toTopOf="@+id/guideline166"
-            tools:visibility="visible" />
+            tools:visibility="gone" />
 
         <androidx.constraintlayout.widget.Guideline
             android:id="@+id/guideline173"
@@ -176,16 +173,15 @@
 
         <EditText
             android:id="@+id/reg_Admin_asAdmin_editText_ring4_id"
-            android:layout_width="0dp"
-            android:layout_height="0dp"
+            android:layout_width="55dp"
+            android:layout_height="55dp"
             android:background="@drawable/ic_pin_ring"
             android:ems="10"
             android:inputType="number"
             app:layout_constraintBottom_toTopOf="@+id/guideline167"
-            app:layout_constraintEnd_toStartOf="@+id/guideline173"
             app:layout_constraintStart_toStartOf="@+id/guideline170"
             app:layout_constraintTop_toTopOf="@+id/guideline166"
-            tools:visibility="visible" />
+            tools:visibility="gone" />
 
         <androidx.constraintlayout.widget.Guideline
             android:id="@+id/guideline174"
@@ -196,16 +192,15 @@
 
         <EditText
             android:id="@+id/reg_Admin_asAdmin_editText_ring5_id"
-            android:layout_width="0dp"
-            android:layout_height="0dp"
+            android:layout_width="55dp"
+            android:layout_height="55dp"
             android:background="@drawable/ic_pin_ring"
             android:ems="10"
             android:inputType="number"
             app:layout_constraintBottom_toTopOf="@+id/guideline167"
-            app:layout_constraintEnd_toStartOf="@+id/guideline174"
             app:layout_constraintStart_toEndOf="@+id/reg_Admin_asAdmin_editText_ring4_id"
             app:layout_constraintTop_toTopOf="@+id/guideline166"
-            tools:visibility="visible" />
+            tools:visibility="gone" />
 
         <androidx.constraintlayout.widget.Guideline
             android:id="@+id/guideline175"
@@ -216,16 +211,15 @@
 
         <EditText
             android:id="@+id/reg_Admin_asAdmin_editText_ring6_id"
-            android:layout_width="0dp"
-            android:layout_height="0dp"
+            android:layout_width="55dp"
+            android:layout_height="55dp"
             android:background="@drawable/ic_pin_ring"
             android:ems="10"
             android:inputType="number"
             app:layout_constraintBottom_toTopOf="@+id/guideline167"
-            app:layout_constraintEnd_toStartOf="@+id/guideline175"
             app:layout_constraintStart_toEndOf="@+id/reg_Admin_asAdmin_editText_ring5_id"
             app:layout_constraintTop_toTopOf="@+id/guideline166"
-            tools:visibility="visible" />
+            tools:visibility="gone" />
 
         <androidx.constraintlayout.widget.Guideline
             android:id="@+id/guideline176"
@@ -248,7 +242,7 @@
             android:layout_marginStart="8dp"
             android:layout_marginEnd="8dp"
             android:text="6 pin will be sent"
-            android:textAlignment="center" 
+            android:textAlignment="center"
 
 
             android:textColor="@color/material_white_blue"
@@ -258,7 +252,24 @@
             app:layout_constraintEnd_toStartOf="@+id/guideline165"
             app:layout_constraintStart_toStartOf="@+id/guideline164"
             app:layout_constraintTop_toTopOf="@+id/guideline176"
-            tools:visibility="visible" />
+            tools:visibility="gone" />
+
+        <com.google.android.material.floatingactionbutton.FloatingActionButton
+            android:id="@+id/reg_Admin_asAdmin_floatingActionButton_Next2_id"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="8dp"
+            android:layout_marginTop="24dp"
+            android:layout_marginEnd="8dp"
+            android:clickable="true"
+            app:backgroundTint="@color/material_white"
+            app:fabCustomSize="50dp"
+            app:layout_constraintEnd_toStartOf="@+id/guideline165"
+            app:layout_constraintStart_toStartOf="@+id/guideline164"
+            app:layout_constraintTop_toTopOf="@+id/guideline177"
+            app:maxImageSize="30dp"
+            app:srcCompat="@drawable/ic_moving_4th_verse"
+            tools:visibility="gone" />
     </androidx.constraintlayout.widget.ConstraintLayout>
 
     <de.hdodenhof.circleimageview.CircleImageView
@@ -273,7 +284,7 @@
         app:layout_constraintEnd_toStartOf="@+id/guideline148"
         app:layout_constraintStart_toStartOf="@+id/guideline147"
         app:layout_constraintTop_toTopOf="@+id/guideline149"
-        tools:visibility="gone" />
+        tools:visibility="visible" />
 
     <androidx.constraintlayout.widget.Guideline
         android:id="@+id/guideline2"
@@ -336,7 +347,7 @@
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="@+id/guideline144"
-        tools:visibility="gone">
+        tools:visibility="visible">
 
         <androidx.constraintlayout.widget.ConstraintLayout
             android:layout_width="match_parent"
@@ -386,11 +397,9 @@
                     android:id="@+id/textView28"
                     android:layout_width="0dp"
                     android:layout_height="0dp"
-                    android:layout_marginStart="8dp"
                     android:layout_marginTop="8dp"
-                    android:layout_marginEnd="8dp"
-                    android:layout_marginBottom="3dp"
-                    android:text="User Detail"
+                    android:layout_marginBottom="8dp"
+                    android:text="Admin Detail"
                     android:textAlignment="center"
                     android:textColor="@color/material_white_blue"
                     app:layout_constraintBottom_toBottomOf="parent"

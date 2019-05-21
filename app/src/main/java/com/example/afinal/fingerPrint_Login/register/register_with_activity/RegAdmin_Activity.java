@@ -10,7 +10,9 @@ import android.widget.TextView;
 import android.widget.Toast;
 
 import com.example.afinal.R;
+import com.example.afinal.fingerPrint_Login.register.register_as_admin.register_as_admin_regAdmin.RegAdmin_AsAdmin_Activity;
 import com.example.afinal.fingerPrint_Login.register.register_user_activity.RegUser_Activity;
+import com.hanks.htextview.evaporate.EvaporateTextView;
 
 import java.util.Observable;
 import java.util.Observer;
@@ -48,6 +50,13 @@ public class RegAdmin_Activity extends AppCompatActivity implements View.OnClick
     private EditText admin_editTextPhone;
     private Button check_admin_database_for_user_registering_button;
 
+    //20 may update
+
+    private EvaporateTextView evaporateTextView;
+    private TextView textViewMessage_LogIn;
+    private Button button_yes;
+    private Button button_no;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -55,7 +64,9 @@ public class RegAdmin_Activity extends AppCompatActivity implements View.OnClick
 
         user_editTextName = findViewById(R.id.regFinal_EditText_UserName_iD);
         user_editTextPhone = findViewById(R.id.regFinal_EditText_User_Phone_iD);
+
         textViewMessage = findViewById(R.id.regAdmin_TextView_ID);
+        textViewMessage_LogIn = findViewById(R.id.reg_admin_textView_login_id);
 
 
         admin_editTextName = findViewById(R.id.regFinal_EditText_Admin_Name_iD);
@@ -75,8 +86,66 @@ public class RegAdmin_Activity extends AppCompatActivity implements View.OnClick
 
         check_admin_database_for_user_registering_button = findViewById(R.id.regAdmin_Check_ID);
 
+        button_yes = findViewById(R.id.reg_admin_button_yes_id);
+        button_no = findViewById(R.id.reg_admin_button_no_id);
+
+        button_yes.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+
+                Intent intent = new Intent(RegAdmin_Activity.this, RegAdmin_AsAdmin_Activity.class);
+
+                intent.putExtra("admin_name", globalAdminName); //this just pass intent.
+                intent.putExtra("admin_phone", globalAdminPhone);
+                //18 May , put extra intent.
+
+                intent.putExtra("user_here_name", globalUserName);
+                intent.putExtra("user_here_phone", globalUserPhone);
 
 
+                startActivity(intent);
+
+            }
+        });
+
+        button_no.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+
+                globalAdminName = "";
+                globalAdminPhone = "";
+                globalUserName="";
+                globalUserPhone="";
+
+                //set animation
+                user_editTextName.setVisibility(View.VISIBLE);
+                user_editTextPhone.setVisibility(View.VISIBLE);
+
+//                    admin_editTextName.setVisibility(View.VISIBLE);
+//                    admin_editTextPhone.setVisibility(View.VISIBLE);
+
+
+
+                //then animate button. to change.
+                register_as_admin_button.setVisibility(View.VISIBLE);
+                register_as_user_button.setVisibility(View.VISIBLE);
+
+
+                button_no.setVisibility(View.GONE);
+            }
+        });
+
+
+        //20 May
+
+        evaporateTextView = findViewById(R.id.reg_admin_evaporate_registring_id);
+
+        textViewMessage_LogIn.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+
+            }
+        });
 
 
         //15 May for testing layout
@@ -107,6 +176,7 @@ public class RegAdmin_Activity extends AppCompatActivity implements View.OnClick
 
 
         register_as_user_button.setOnClickListener(this);
+        register_as_admin_button.setOnClickListener(this);
 
 
     }
@@ -123,6 +193,77 @@ public class RegAdmin_Activity extends AppCompatActivity implements View.OnClick
 
 
         switch (v.getId()){
+
+
+            case R.id.regAdmin_button_admin_id:
+
+                statusnow = "wait..";
+                textViewMessage.setText(statusnow);
+                String userNameIsAdmin = user_editTextName.getText().toString();
+                String userPhoneIsAdmin = user_editTextPhone.getText().toString();
+
+                checkValid = presenter.checkInputValid(userNameIsAdmin,userPhoneIsAdmin);
+//
+                if(checkValid){ //here we call
+
+                    //updated 18 may
+
+
+                    globalUserName= userNameIsAdmin;       //this will be used in next activity.
+                    globalUserPhone = userPhoneIsAdmin;
+                                                            //since this person will become admin
+                    globalAdminName=userNameIsAdmin;
+                    globalAdminPhone = userPhoneIsAdmin;
+
+//
+
+                    //set animation
+                    user_editTextName.setVisibility(View.GONE);
+                    user_editTextPhone.setVisibility(View.GONE);
+
+//                    admin_editTextName.setVisibility(View.VISIBLE);
+//                    admin_editTextPhone.setVisibility(View.VISIBLE);
+
+
+
+                    //then animate button. to change.
+                    register_as_admin_button.setVisibility(View.GONE);
+                    register_as_user_button.setVisibility(View.GONE);
+
+//                    check_admin_database_for_user_registering_button.setVisibility(View.VISIBLE);
+
+
+                    button_yes.setVisibility(View.VISIBLE);
+                    button_no.setVisibility(View.VISIBLE);
+
+
+                    //this will be done, after received new input.
+
+//            globalAdminName = userName;
+//            globalAdminPhone =userPhone;
+//          boolean finalStatus = presenter.checkFromFirebaseSimulation(userName,userPhone);
+//
+//            if(finalStatus){
+//                //success
+//
+//               result(true);
+//
+//            }else {
+//
+//                result(false);
+//            }
+
+
+                }else {
+
+                    return;
+                }
+
+
+                break;
+
+
+
 
             case R.id.regAdmin_button_user_id:
 
