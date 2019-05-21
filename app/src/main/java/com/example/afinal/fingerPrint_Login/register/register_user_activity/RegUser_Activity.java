@@ -1,5 +1,6 @@
 package com.example.afinal.fingerPrint_Login.register.register_user_activity;
 
+import android.annotation.SuppressLint;
 import android.app.Activity;
 import android.app.MediaRouteButton;
 import android.content.Context;
@@ -194,7 +195,18 @@ public class RegUser_Activity extends AppCompatActivity implements View.OnClickL
         adminName = intent.getStringExtra("admin_name"); //pulling data
         adminPhone = intent.getStringExtra("admin_phone");
 
+        userName = intent.getStringExtra("user_here_name");
+        userPhone = intent.getStringExtra("user_here_phone");
+
+
         Toast.makeText(this, "admin number: "+adminPhone + ", admin name: "+adminName,Toast.LENGTH_SHORT).show();
+
+
+        textView_userName.setText(userName);
+        textView_userPhone.setText(userPhone);
+        textView_adminPhone.setText(adminPhone);
+        textView_adminName.setText(adminName);
+
 
         inputValid=false;
 
@@ -205,6 +217,7 @@ public class RegUser_Activity extends AppCompatActivity implements View.OnClickL
 
 
         mCallBack = new PhoneAuthProvider.OnVerificationStateChangedCallbacks() {
+            @SuppressLint("RestrictedApi")
             @Override
             public void onVerificationCompleted(PhoneAuthCredential phoneAuthCredential) {
 
@@ -216,6 +229,9 @@ public class RegUser_Activity extends AppCompatActivity implements View.OnClickL
                 cardView_user_detail.setVisibility(View.GONE);
                 circleImageView.setVisibility(View.GONE);
 
+                fButton_Next.setVisibility(View.GONE);
+
+
                 evaporateTextView.setVisibility(View.VISIBLE);
                 editText_ring1.setVisibility(View.VISIBLE);
                 editText_ring2.setVisibility(View.VISIBLE);
@@ -224,6 +240,7 @@ public class RegUser_Activity extends AppCompatActivity implements View.OnClickL
                 editText_ring5.setVisibility(View.VISIBLE);
                 editText_ring6.setVisibility(View.VISIBLE);
 
+                fButton_Next2.setVisibility(View.VISIBLE);
                 textView6pin.setVisibility(View.VISIBLE);
 
                 verifyCredential(phoneAuthCredential);
@@ -445,12 +462,12 @@ public class RegUser_Activity extends AppCompatActivity implements View.OnClickL
                 //case R.id.regUser_Button_GetCodeID:
 
                 case R.id.reg_User_floatingActionButton_Next_id:
-
-                    String name = textView_userName.getText().toString();
-                    String phone = textView_userPhone.getText().toString();
-
-                    userName = name;
-                    userPhone = phone;
+//
+//                    String name = textView_userName.getText().toString();
+//                    String phone = textView_userPhone.getText().toString();
+//
+//                    userName = name;
+//                    userPhone = phone;
 
 
 
@@ -464,7 +481,7 @@ public class RegUser_Activity extends AppCompatActivity implements View.OnClickL
                         Log.i("checkk UserReg: ", "tt 4");
 
                         //presenter.phonecallBack();
-                        getCallBack(phone);
+                        getCallBack(userPhone);
 
                     } else { //means this user is fully registered. , max of 2 users.
 
