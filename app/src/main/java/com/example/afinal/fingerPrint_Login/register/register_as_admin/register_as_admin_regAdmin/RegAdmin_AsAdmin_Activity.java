@@ -1,14 +1,19 @@
 package com.example.afinal.fingerPrint_Login.register.register_as_admin.register_as_admin_regAdmin;
 
 import android.animation.ObjectAnimator;
+import android.annotation.SuppressLint;
+import android.app.Activity;
 import android.content.Context;
 import android.content.Intent;
 
 import androidx.annotation.NonNull;
+import androidx.annotation.Nullable;
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.cardview.widget.CardView;
 import androidx.constraintlayout.widget.ConstraintLayout;
 
 import android.content.SharedPreferences;
+import android.net.Uri;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.View;
@@ -26,6 +31,7 @@ import com.example.afinal.fingerPrint_Login.register.register_user_activity.RegU
 import com.google.android.gms.tasks.OnCanceledListener;
 import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.Task;
+import com.google.android.material.floatingactionbutton.FloatingActionButton;
 import com.google.firebase.FirebaseException;
 import com.google.firebase.auth.AuthResult;
 import com.google.firebase.auth.FirebaseAuth;
@@ -36,6 +42,7 @@ import com.google.firebase.firestore.DocumentReference;
 import com.google.firebase.firestore.FirebaseFirestore;
 import com.google.firebase.firestore.Query;
 import com.google.firebase.firestore.QuerySnapshot;
+import com.hanks.htextview.evaporate.EvaporateTextView;
 
 import java.io.File;
 import java.util.HashMap;
@@ -47,12 +54,14 @@ import java.util.Timer;
 import java.util.TimerTask;
 import java.util.concurrent.TimeUnit;
 
+import de.hdodenhof.circleimageview.CircleImageView;
+
 public class RegAdmin_AsAdmin_Activity extends AppCompatActivity implements Observer {
 
-    private EditText editTextName, editTextPhone, editTextCode;
-    private Button buttonLogin, buttonGetCode;
+    //private EditText editTextName, editTextPhone, editTextCode;
+    //private Button buttonLogin, buttonGetCode;
 
-    private ConstraintLayout constraintLayout;
+   // private ConstraintLayout constraintLayout;
 
     private TextView textViewMessage;
     private Timer timer;
@@ -75,7 +84,24 @@ public class RegAdmin_AsAdmin_Activity extends AppCompatActivity implements Obse
     private Button buttonTestHere;
     private String admin_Label;
 
+
     // we try pull if there is any data in shared preferences
+
+
+    //20 may
+    private TextView textViewName, textViewPhone, textViewMessageCode;
+    private FloatingActionButton buttonGetCode_next;
+    private CardView cardView_regAsAdmin;
+    private CircleImageView circleImageView_regAsAdmin;
+    private FloatingActionButton buttonGetCode_next2;
+    private EvaporateTextView evaporate_textView;
+    private EditText editTextCode_1,editTextCode_2, editTextCode_3, editTextCode_4, editTextCode_5, editTextCode_6;
+
+
+    //static final for image
+
+    private static final int READ_REQUEST_CODE = 42;
+    private boolean imageSetupTrue;
 
 
     @Override
@@ -86,40 +112,85 @@ public class RegAdmin_AsAdmin_Activity extends AppCompatActivity implements Obse
         copyadminCreated=0;
         countForAnimateButton=0;
         credenttial=null;
-        editTextName = findViewById(R.id.regAdmin_asAdmin_editText_NameiD);
-        editTextPhone = findViewById(R.id.regAdmin_asAdmin_editTextPhone);
-        editTextCode = findViewById(R.id.regAdmin_asAdmin_editText_CodeiD);
-        constraintLayout = findViewById(R.id.regAdmin_constraint);
+        textViewName = findViewById(R.id.reg_Admin_asAdmin_textView_name_id);
+        textViewPhone= findViewById(R.id.reg_Admin_asAdmin_textView_phone_id);
 
-        buttonTestHere = findViewById(R.id.buttonaksdkasjklda);
+        Intent intent = getIntent();
+
+        userName = intent.getStringExtra("adminName_asAdmin");
+        userPhone = intent.getStringExtra("adminPhone_asAdmin");
+
+        textViewName.setText(userName);
+        textViewPhone.setText(userPhone);
+
+        editTextCode_1 = findViewById(R.id.reg_Admin_asAdmin_editText_ring1_id);
+        editTextCode_2 = findViewById(R.id.reg_Admin_asAdmin_editText_ring1_id);
+        editTextCode_3 = findViewById(R.id.reg_Admin_asAdmin_editText_ring1_id);
+        editTextCode_5 = findViewById(R.id.reg_Admin_asAdmin_editText_ring1_id);
+        editTextCode_6 = findViewById(R.id.reg_Admin_asAdmin_editText_ring1_id);
+
+
+
+       // editTextCode = findViewById(R.id.regAdmin_asAdmin_editText_CodeiD);
+        //constraintLayout = findViewById(R.id.regAdmin_constraint);
+
+       // buttonTestHere = findViewById(R.id.buttonaksdkasjklda);
 
         allowCreateAdmin=false;
 
-        buttonGetCode = findViewById(R.id.regAdmin_asAdmin_button_getCodeiD);
-        buttonLogin = findViewById(R.id.regAdmin_asAdmin_buttonLoginiD);
+        //get code change to next button
 
-        textViewMessage = findViewById(R.id.regAdmin_asAdmin_textViewMessageiD);
+        buttonGetCode_next = findViewById(R.id.reg_Admin_asAdmin_floatingActionButton_Next_id);
+
+        buttonGetCode_next2 = findViewById(R.id.reg_Admin_asAdmin_floatingActionButton_Next2_id);
+
+        textViewMessageCode = findViewById(R.id.reg_Admin_asAdmin_6pin_code_id);
+
+        evaporate_textView = findViewById(R.id.reg_Admin_asAdmin_EvaporateText_Code_ID);
+
+       // buttonLogin = findViewById(R.id.regAdmin_asAdmin_buttonLoginiD);
+
+
+        cardView_regAsAdmin = findViewById(R.id.reg_Admin_asAdmin_cardView_id);
+        circleImageView_regAsAdmin = findViewById(R.id.reg_Admin_asAdmin_circlerImageView);
+
+        //setting up image
+        circleImageView_regAsAdmin.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+
+                Intent intent = new Intent(Intent.ACTION_OPEN_DOCUMENT);
+                intent.addCategory(Intent.CATEGORY_OPENABLE);
+                intent.setType("image/*");
+
+                startActivityForResult(intent,READ_REQUEST_CODE);
+
+            }
+        });
+
+
+        //textViewMessage = findViewById(R.id.regAdmin_asAdmin_textViewMessageiD);
 
         presenter = new Presenter_RegAdmin_AsAdmin_Activity(this);
 
         presenter.addObserver(this);
 
 
-
-        buttonTestHere.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-
-                String userName = editTextName.getText().toString();
-                String userPhone = editTextPhone.getText().toString();
-
-                Intent intent = new Intent(RegAdmin_AsAdmin_Activity.this,RegAdmin_asAdmin_Profile_Activity.class);
-                intent.putExtra("adminName_asAdmin",userName);
-                intent.putExtra("adminPhone_asAdmin",userPhone);
-
-                startActivity(intent);
-            }
-        });
+//
+//        buttonTestHere.setOnClickListener(new View.OnClickListener() {
+//            @Override
+//            public void onClick(View view) {
+//
+//                String userName = editTextName.getText().toString();
+//                String userPhone = editTextPhone.getText().toString();
+//
+//                Intent intent = new Intent(RegAdmin_AsAdmin_Activity.this,RegAdmin_asAdmin_Profile_Activity.class);
+//                intent.putExtra("adminName_asAdmin",userName);
+//                intent.putExtra("adminPhone_asAdmin",userPhone);
+//
+//                startActivity(intent);
+//            }
+//        });
 
 
         //testing animation view
@@ -129,46 +200,67 @@ public class RegAdmin_AsAdmin_Activity extends AppCompatActivity implements Obse
         count=0;
 
 
-        buttonLogin.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
+//        buttonLogin.setOnClickListener(new View.OnClickListener() {
+//            @Override
+//            public void onClick(View view) {
+//
+//                codeUserAdminEnter = editTextCode.getText().toString();
+//                if(checkInput(codeUserAdminEnter)){
+//
+//                    //send method verify
+//
+//                    checkCredential(codeUserAdminEnter,codeFromFirebase);
+//
+//                }else {
+//
+//
+//
+//                }
+//
+//            }
+//        });
 
-                codeUserAdminEnter = editTextCode.getText().toString();
-                if(checkInput(codeUserAdminEnter)){
-
-                    //send method verify
-
-                    checkCredential(codeUserAdminEnter,codeFromFirebase);
-
-                }else {
-
-
-
-                }
-
-            }
-        });
-
-        buttonGetCode.setOnClickListener(new View.OnClickListener() {
+        buttonGetCode_next.setOnClickListener(new View.OnClickListener() {
+            @SuppressLint("RestrictedApi")
             @Override
             public void onClick(View view) {
                 if(checkNumberOfAdminRegisteredTo()) {
-                    userName = editTextName.getText().toString();
-                    userPhone = editTextPhone.getText().toString();
+//                    userName = textViewName.getText().toString();
+//                    userPhone = textViewPhone.getText().toString();
 
-                    textViewMessage.setText("check input..");
-                    if (checkInput(userName, userPhone)) {
-                        //if input true
-                        textViewMessage.setText("getting phone verification..");
+//                    textViewMessage.setText("check input..");
+//                    if (checkInput(userName, userPhone)) {
+//                        //if input true
+                  //      textViewMessage.setText("getting phone verification..");
 
-                        getCallBack(userPhone);
+                    cardView_regAsAdmin.setVisibility(View.GONE);
+                    circleImageView_regAsAdmin.setVisibility(View.GONE);
 
-                    } else {
-
-                        //if input faulty
+                    buttonGetCode_next.setVisibility(View.GONE);
 
 
-                    }
+                    buttonGetCode_next2.setVisibility(View.VISIBLE);
+
+                    textViewMessageCode.setVisibility(View.VISIBLE);
+
+                    evaporate_textView.setVisibility(View.VISIBLE);
+
+                    editTextCode_1.setVisibility(View.VISIBLE);
+                    editTextCode_2.setVisibility(View.VISIBLE);
+                    editTextCode_3.setVisibility(View.VISIBLE);
+                    editTextCode_4.setVisibility(View.VISIBLE);
+                    editTextCode_5.setVisibility(View.VISIBLE);
+                    editTextCode_6.setVisibility(View.VISIBLE);
+
+
+                    getCallBack(userPhone);
+
+//                    } else {
+//
+//                        //if input faulty
+//
+//
+//                    }
 
 
                 }else { //if FALSE,
@@ -182,11 +274,20 @@ public class RegAdmin_AsAdmin_Activity extends AppCompatActivity implements Obse
             }
         });
 
-        buttonLogin.setOnClickListener(new View.OnClickListener() {
+        buttonGetCode_next2.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
 
-                String codeEntered = editTextCode.getText().toString();
+                if (imageSetupTrue) {
+
+                String code1 = editTextCode_1.getText().toString();
+                String code2 = editTextCode_2.getText().toString();
+                String code3 = editTextCode_3.getText().toString();
+                String code4 = editTextCode_4.getText().toString();
+                String code5 = editTextCode_5.getText().toString();
+                String code6 = editTextCode_6.getText().toString();
+
+                String codeEntered = code1+code2+code3+code4+code5+code6;
 
             if(checkInput(codeEntered)){
 
@@ -196,6 +297,13 @@ public class RegAdmin_AsAdmin_Activity extends AppCompatActivity implements Obse
 
                 Toast.makeText(RegAdmin_AsAdmin_Activity.this,"please enter code received",Toast.LENGTH_SHORT).show();
             }
+            }
+
+                else {
+
+                    Toast.makeText(RegAdmin_AsAdmin_Activity.this, "please set image", Toast.LENGTH_SHORT).show();
+
+                }
             }
         });
 
@@ -209,74 +317,79 @@ public class RegAdmin_AsAdmin_Activity extends AppCompatActivity implements Obse
 
                 //checkPhoneCredential(phoneAuthCredential);
 
-                textViewMessage.setText("phone verified, try automatically...");
+                //textViewMessage.setText("phone verified, try automatically...");
 
 
-                timer.scheduleAtFixedRate(new TimerTask() {
-                    @Override
-                    public void run() {
-                        countForAnimateButton++;
-                        //here after got code, we animate button, to visible and move
-                        //after 1 second, after 3 secound
-
-                        if(countForAnimateButton==10 && copyadminCreated!=2){
-                            runOnUiThread(new Runnable() {
-                                @Override
-                                public void run() {
-                                    editTextCode.setHint("please enter code here");
-                                }
-                            });
-
-
-                        }
-
-                        if(countForAnimateButton==1){
-
-                            runOnUiThread(new Runnable() {
-                                @Override
-                                public void run() {
-
-                                    // https://www.youtube.com/watch?v=IECLEh98HnE
-                                    // https://stackoverflow.com/questions/30535304/android-pop-in-animation
-                                    // https://stackoverflow.com/questions/9448732/shaking-wobble-view-animation-in-android
+                checkPhoneCredential(phoneAuthCredential);
 
 
 
-                                    ObjectAnimator animator = ObjectAnimator.ofFloat(buttonGetCode,"translationY",-70f);
-                                    buttonGetCode.animate()
-                                            .alpha(0f)
-                                            .setDuration(200)
-                                            .setListener(null);
-                                    animator.setDuration(200);
-                                    animator.start();
-
-
-                                    Animation fadeIn = AnimationUtils.loadAnimation(RegAdmin_AsAdmin_Activity.this,R.anim.fadein);
-                                    buttonLogin.startAnimation(fadeIn);
-
-
-                                    ObjectAnimator moveUpGroup = ObjectAnimator.ofFloat(constraintLayout,"translationY",-180f);
-                                    moveUpGroup.setDuration(200);
-                                    moveUpGroup.start();
-                                    editTextCode.startAnimation(fadeIn);
-                                    //editTextCode.setText("try to log in automatically..");
-                                    editTextCode.setHint("auto registering attempt..");
-
-                                    checkPhoneCredential(phoneAuthCredential);
-//                                buttonLogin.animate()
-//                                        .alpha(1f)
-//                                        .setDuration(400)
-//                                        .setListener(null);
-
-
-
-                                }
-                            });
-
-                        }
-
-                    }
-                },500,1000);
+//
+//                timer.scheduleAtFixedRate(new TimerTask() {
+//                    @Override
+//                    public void run() {
+//                        countForAnimateButton++;
+//                        //here after got code, we animate button, to visible and move
+//                        //after 1 second, after 3 secound
+//
+//                        if(countForAnimateButton==10 && copyadminCreated!=2){
+//                            runOnUiThread(new Runnable() {
+//                                @Override
+//                                public void run() {
+//                                    editTextCode.setHint("please enter code here");
+//                                }
+//                            });
+//
+//
+//                        }
+//
+//                        if(countForAnimateButton==1){
+//
+//                            runOnUiThread(new Runnable() {
+//                                @Override
+//                                public void run() {
+//
+//                                    // https://www.youtube.com/watch?v=IECLEh98HnE
+//                                    // https://stackoverflow.com/questions/30535304/android-pop-in-animation
+//                                    // https://stackoverflow.com/questions/9448732/shaking-wobble-view-animation-in-android
+//
+//
+//
+//                                    ObjectAnimator animator = ObjectAnimator.ofFloat(buttonGetCode,"translationY",-70f);
+//                                    buttonGetCode.animate()
+//                                            .alpha(0f)
+//                                            .setDuration(200)
+//                                            .setListener(null);
+//                                    animator.setDuration(200);
+//                                    animator.start();
+//
+//
+//                                    Animation fadeIn = AnimationUtils.loadAnimation(RegAdmin_AsAdmin_Activity.this,R.anim.fadein);
+//                                    buttonLogin.startAnimation(fadeIn);
+//
+//
+//                                    ObjectAnimator moveUpGroup = ObjectAnimator.ofFloat(constraintLayout,"translationY",-180f);
+//                                    moveUpGroup.setDuration(200);
+//                                    moveUpGroup.start();
+//                                    editTextCode.startAnimation(fadeIn);
+//                                    //editTextCode.setText("try to log in automatically..");
+//                                    editTextCode.setHint("auto registering attempt..");
+//
+//                                    checkPhoneCredential(phoneAuthCredential);
+////                                buttonLogin.animate()
+////                                        .alpha(1f)
+////                                        .setDuration(400)
+////                                        .setListener(null);
+//
+//
+//
+//                                }
+//                            });
+//
+//                        }
+//
+//                    }
+//                },500,1000);
 
             }
 
@@ -306,6 +419,37 @@ public class RegAdmin_AsAdmin_Activity extends AppCompatActivity implements Obse
         //must be done at first phase.
 
 
+
+    }
+
+    //for image loader.
+
+    @Override
+    protected void onActivityResult(int requestCode, int resultCode, @Nullable Intent data) {
+        super.onActivityResult(requestCode, resultCode, data);
+
+        if(requestCode == READ_REQUEST_CODE && resultCode == Activity.RESULT_OK){
+
+            Uri uri = null;
+
+            if(data!=null){
+
+                uri = data.getData();
+
+                showImage(uri);
+
+                imageSetupTrue=true;
+
+            }
+        }
+
+    }
+
+    private void showImage(Uri uri) {
+
+        circleImageView_regAsAdmin.setImageURI(uri);
+
+        Toast.makeText(RegAdmin_AsAdmin_Activity.this,"image setup", Toast.LENGTH_SHORT).show();
 
     }
 

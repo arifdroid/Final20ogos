@@ -219,7 +219,7 @@ public class RegAdmin_asAdmin_Profile_Activity extends AppCompatActivity impleme
 
                     if (morningBooleanSet && eveningBooleanSet) {
 
-                    if (imageSetupTrue) {
+ //                   if (imageSetupTrue) {
 
                         for (AdminDetail adminDetail : returnAdminDetailList) {
 
@@ -317,10 +317,10 @@ public class RegAdmin_asAdmin_Profile_Activity extends AppCompatActivity impleme
 
                         }
 
-                    } else { //please setup image
-
-                        Toast.makeText(RegAdmin_asAdmin_Profile_Activity.this, "please set image", Toast.LENGTH_SHORT).show();
-                    }
+//                    } else { //please setup image
+//
+//                        Toast.makeText(RegAdmin_asAdmin_Profile_Activity.this, "please set image", Toast.LENGTH_SHORT).show();
+//                    }
                 } else { //set morning and evening time
 
                     Toast.makeText(RegAdmin_asAdmin_Profile_Activity.this, "please set both morning check in and evening check out", Toast.LENGTH_SHORT).show();
