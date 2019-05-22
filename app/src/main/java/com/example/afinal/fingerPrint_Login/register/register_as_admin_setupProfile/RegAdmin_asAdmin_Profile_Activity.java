@@ -176,19 +176,19 @@ public class RegAdmin_asAdmin_Profile_Activity extends AppCompatActivity impleme
 
         storageReference = FirebaseStorage.getInstance().getReference();
 
-        //setting up image
-        circleImageView.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-
-                Intent intent = new Intent(Intent.ACTION_OPEN_DOCUMENT);
-                intent.addCategory(Intent.CATEGORY_OPENABLE);
-                intent.setType("image/*");
-
-                startActivityForResult(intent,READ_REQUEST_CODE);
-
-            }
-        });
+//        //setting up image
+//        circleImageView.setOnClickListener(new View.OnClickListener() {
+//            @Override
+//            public void onClick(View v) {
+//
+//                Intent intent = new Intent(Intent.ACTION_OPEN_DOCUMENT);
+//                intent.addCategory(Intent.CATEGORY_OPENABLE);
+//                intent.setType("image/*");
+//
+//                startActivityForResult(intent,READ_REQUEST_CODE);
+//
+//            }
+//        });
 
 //        //setting up wifi if not initially setup.
 //        presenter.getWifiNow(wifiManager);
@@ -306,6 +306,10 @@ public class RegAdmin_asAdmin_Profile_Activity extends AppCompatActivity impleme
 
 
                                 Intent intent = new Intent(RegAdmin_asAdmin_Profile_Activity.this, Add_User_Activity.class);
+
+                                intent.putExtra("adminName_asAdmin",user_name_asAdmin);
+                                intent.putExtra("adminPhone_asAdmin",user_phone_asAdmin);
+
                                 startActivity(intent);
 
 
@@ -362,36 +366,36 @@ public class RegAdmin_asAdmin_Profile_Activity extends AppCompatActivity impleme
         presenter.deleteObserver(this);
     }
 
-    //for image loader.
-
-    @Override
-    protected void onActivityResult(int requestCode, int resultCode, @Nullable Intent data) {
-        super.onActivityResult(requestCode, resultCode, data);
-
-        if(requestCode == READ_REQUEST_CODE && resultCode == Activity.RESULT_OK){
-
-            Uri uri = null;
-
-            if(data!=null){
-
-                uri = data.getData();
-
-                showImage(uri);
-
-                imageSetupTrue=true;
-
-            }
-        }
-
-    }
-
-    private void showImage(Uri uri) {
-
-        circleImageView.setImageURI(uri);
-
-        Toast.makeText(RegAdmin_asAdmin_Profile_Activity.this,"image setup", Toast.LENGTH_SHORT).show();
-
-    }
+//    //for image loader.
+//
+//    @Override
+//    protected void onActivityResult(int requestCode, int resultCode, @Nullable Intent data) {
+//        super.onActivityResult(requestCode, resultCode, data);
+//
+//        if(requestCode == READ_REQUEST_CODE && resultCode == Activity.RESULT_OK){
+//
+//            Uri uri = null;
+//
+//            if(data!=null){
+//
+//                uri = data.getData();
+//
+//                showImage(uri);
+//
+//                imageSetupTrue=true;
+//
+//            }
+//        }
+//
+//    }
+//
+//    private void showImage(Uri uri) {
+//
+//        circleImageView.setImageURI(uri);
+//
+//        Toast.makeText(RegAdmin_asAdmin_Profile_Activity.this,"image setup", Toast.LENGTH_SHORT).show();
+//
+//    }
 //
     @Override
     public void onRequestPermissionsResult(int requestCode, @NonNull String[] permissions, @NonNull int[] grantResults) {

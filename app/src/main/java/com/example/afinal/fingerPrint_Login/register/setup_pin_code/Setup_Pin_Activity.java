@@ -42,11 +42,11 @@ import javax.annotation.Nullable;
 public class Setup_Pin_Activity extends AppCompatActivity {
 
     private EditText editText1, editText2, editText3, editText4;
-    private TextView textView, textViewName,textViewPhone;
+    private TextView textView;
 
     private Button button;
 
-    private CircleImageView circleImageView;
+   // private CircleImageView circleImageView;
 
     private DocumentReference documentReference;
     private StorageReference storageReference;
@@ -82,10 +82,10 @@ public class Setup_Pin_Activity extends AppCompatActivity {
 
 
         textView = findViewById(R.id.regUser_pinCode_textViewiD);
-        textViewName = findViewById(R.id.regUser_pinCode_textView_NameID);
-        textViewPhone = findViewById(R.id.regUser_pinCode_textView_PhoneID);
+//        textViewName = findViewById(R.id.regUser_pinCode_textView_NameID);
+//        textViewPhone = findViewById(R.id.regUser_pinCode_textView_PhoneID);
 
-        circleImageView = findViewById(R.id.regUser_pinCode_circleImageViewiD);
+       // circleImageView = findViewById(R.id.regUser_pinCode_circleImageViewiD);
 
         textView.setText("enter 4 pin password you prefer");
 
@@ -117,8 +117,8 @@ public class Setup_Pin_Activity extends AppCompatActivity {
         storageReference = FirebaseStorage.getInstance().getReference().child(""+adminName+adminPhone+"doc").child(""+nameHere+phoneHere+"image");
         //FirebaseStorage.getInstance().getReference("" + adminName + adminPhone+"doc").child("" + userPhone + userName +"image")
 
-        textViewName.setText(nameHere);
-        textViewPhone.setText(phoneHere);
+//        textViewName.setText(nameHere);
+//        textViewPhone.setText(phoneHere);
 
         timer = new Timer();
         timer2 = new Timer();

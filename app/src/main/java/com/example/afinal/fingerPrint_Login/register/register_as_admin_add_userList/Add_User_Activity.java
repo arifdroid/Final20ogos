@@ -20,9 +20,15 @@ import android.widget.Toast;
 
 import com.example.afinal.R;
 import com.example.afinal.fingerPrint_Login.register.register_as_admin.register_as_admin_regAdmin.RegAdmin_AsAdmin_Activity;
+import com.example.afinal.fingerPrint_Login.register.setup_pin_code.Setup_Pin_Activity;
 import com.google.android.material.floatingactionbutton.FloatingActionButton;
+import com.google.firebase.firestore.DocumentReference;
+import com.google.firebase.firestore.FirebaseFirestore;
 
 import java.util.ArrayList;
+import java.util.Arrays;
+import java.util.HashMap;
+import java.util.Map;
 import java.util.Timer;
 import java.util.TimerTask;
 
@@ -39,18 +45,37 @@ public class Add_User_Activity extends AppCompatActivity implements View.OnClick
     private RecyclerViewAdapter_UserList recyclerViewAdapter_UserList;
     private Timer timer;
     private FloatingActionButton buttonNext;
+    private String user_name_asAdmin;
+    private String user_phone_asAdmin;
+    private Map<String, Object> addUserMap;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_add__user_);
 
-        buttonNext = findViewById(R.id.add_User_FloatButtonFinalizeID);
-        floatingActionButton = findViewById(R.id.add_User_FloatButtoniD);
+        buttonNext = findViewById(R.id.add_User_FloatButtoniD);
+        //floatingActionButton = findViewById(R.id.add_User_FloatButtoniD);
         recyclerView = findViewById(R.id.add_User_RecycleriD);
+
+        // 21 May
+        addUserMap = new HashMap<>();
+
+
+
+
+
+        Intent intent = getIntent();
+
+        user_name_asAdmin = intent.getStringExtra("adminName_asAdmin");
+        user_phone_asAdmin = intent.getStringExtra("adminPhone_asAdmin");
+
+
 
         initRecycler();
 
+
+        recyclerView.setOnClickListener(this);
         floatingActionButton.setOnClickListener(this);
 
         timer = new Timer();
@@ -109,11 +134,48 @@ public class Add_User_Activity extends AppCompatActivity implements View.OnClick
     @Override
     public void onClick(View v) {
 
-        Log.i("checkAddingUser, ","4 button click ");
-        Intent intent = new Intent(Intent.ACTION_GET_CONTENT);
-        intent.setType(ContactsContract.CommonDataKinds.Phone.CONTENT_ITEM_TYPE);
-        startActivityForResult(intent,1);
+        switch (v.getId()) {
 
+            case R.id.add_User_FloatButtoniD:
+
+                //save to online database
+
+                DocumentReference documentReference = FirebaseFirestore.getInstance().collection("all_admins_collections")
+                        .document(user_name_asAdmin+user_phone_asAdmin+"collection");
+
+
+
+
+
+                //documentReference.set(addUserMap)
+
+                //documentReference.set()
+
+                addUserMap.put("employee_this_admin", Arrays.asList(userList));
+
+                documentReference.set(addUserMap);
+
+                //this is we set the array
+
+
+
+                Intent intentSaved = new Intent(Add_User_Activity.this, Setup_Pin_Activity.class);
+                startActivity(intentSaved);
+
+            break;
+
+            case R.id.add_User_RecycleriD:
+
+
+
+                Log.i("checkAddingUser, ", "4 button click ");
+                Intent intent = new Intent(Intent.ACTION_GET_CONTENT);
+                intent.setType(ContactsContract.CommonDataKinds.Phone.CONTENT_ITEM_TYPE);
+                startActivityForResult(intent, 1);
+
+            break;
+
+        }
 
     }
 
@@ -147,6 +209,14 @@ public class Add_User_Activity extends AppCompatActivity implements View.OnClick
                         Log.i("checkAddingUser, ","7 request code");
 
                         userList.add(new UserFromAdmin(name,number));
+
+                        //21May
+                      //  addUserMap.put("employee_this_admin",userList.get(userList.size()).getPhone()); // need to check
+
+
+
+
+
 
                         recyclerViewAdapter_UserList.notifyDataSetChanged();
                         Log.i("checkAddingUser, ","8 before setadpater again");

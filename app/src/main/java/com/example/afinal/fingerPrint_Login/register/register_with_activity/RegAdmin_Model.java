@@ -56,9 +56,9 @@ public class RegAdmin_Model extends Observable implements RegAdminModel_Interfac
 
         final String name = name1;
 
-        final CollectionReference collectionReference = FirebaseFirestore.getInstance().collection("admins_offices");
+        final CollectionReference collectionReference = FirebaseFirestore.getInstance().collection("all_admins_collections");
 
-        Query query_admin = collectionReference.whereEqualTo("admin_phone",phone);
+        Query query_admin = collectionReference.whereEqualTo("phone",phone);
 
         query_admin.get().addOnCompleteListener(new OnCompleteListener<QuerySnapshot>() {
             @Override
@@ -80,10 +80,10 @@ public class RegAdmin_Model extends Observable implements RegAdminModel_Interfac
 
                             for(Map.Entry<String,Object> remap: map.entrySet()){
 
-                                if(remap.getKey().equals("admin_name")){
+                                if(remap.getKey().equals("name")){
 
                                     nameAdminCheck= remap.getValue().toString();
-                                }if(remap.getKey().equals("admin_phone")){
+                                }if(remap.getKey().equals("phone")){
                                     phoneAdminCheck = remap.getValue().toString();
                                 }
 

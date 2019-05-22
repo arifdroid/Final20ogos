@@ -9,8 +9,8 @@
 
     <EditText
         android:id="@+id/regUser_editNumber_2_iD"
-        android:layout_width="0dp"
-        android:layout_height="0dp"
+        android:layout_width="60dp"
+        android:layout_height="60dp"
         android:background="@drawable/ic_pin_ring"
         android:ems="10"
         android:hint="1"
@@ -24,8 +24,8 @@
 
     <EditText
         android:id="@+id/regUser_editNumber_1_iD"
-        android:layout_width="0dp"
-        android:layout_height="0dp"
+        android:layout_width="60dp"
+        android:layout_height="60dp"
         android:background="@drawable/ic_pin_ring"
         android:ems="10"
         android:hint="1"

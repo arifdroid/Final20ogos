@@ -664,6 +664,12 @@ public class RegAdmin_AsAdmin_Activity extends AppCompatActivity implements Obse
 
                 //here we create, since it is not exist yet.
 
+
+                //here we update the data in admins_offices data.
+
+
+
+
                 SharedPreferences prefs_Main_Pool = this.getSharedPreferences("com.example.finalV8_punchCard.MAIN_POOL", Context.MODE_PRIVATE);
 
                 SharedPreferences.Editor editor_Main_Pool = prefs_Main_Pool.edit();
