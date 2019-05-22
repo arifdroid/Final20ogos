@@ -160,6 +160,10 @@ public class Add_User_Activity extends AppCompatActivity implements View.OnClick
 
 
                 Intent intentSaved = new Intent(Add_User_Activity.this, Setup_Pin_Activity.class);
+
+                intentSaved.putExtra("sentAdminName", user_name_asAdmin);
+                intentSaved.putExtra("sentAdminPhone", user_phone_asAdmin);
+
                 startActivity(intentSaved);
 
             break;

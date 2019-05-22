@@ -104,6 +104,13 @@ public class Setup_Pin_Activity extends AppCompatActivity {
             adminName = intent.getStringExtra("sentAdminName");
             adminPhone = intent.getStringExtra("sentAdminPhone");
 
+            if(adminName.equals("")|| adminName==null){
+
+                adminName = nameHere; //we assume this is from admin page, register as admin, so admin and user has same detail.
+                adminPhone=phoneHere;
+
+            }
+
         Log.i("finalSharePreDataCheck","Setup_Pin_Activity 2,name: "+ nameHere+ ", phone: "+phoneHere+ ", adminName:"
                 +adminName+" , adminPhone: "+adminPhone);
 
