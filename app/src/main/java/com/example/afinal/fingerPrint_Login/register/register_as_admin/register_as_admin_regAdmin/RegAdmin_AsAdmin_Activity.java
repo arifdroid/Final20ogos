@@ -3,6 +3,7 @@ package com.example.afinal.fingerPrint_Login.register.register_as_admin.register
 import android.animation.ObjectAnimator;
 import android.annotation.SuppressLint;
 import android.app.Activity;
+import android.content.ContentResolver;
 import android.content.Context;
 import android.content.Intent;
 
@@ -19,6 +20,7 @@ import android.util.Log;
 import android.view.View;
 import android.view.animation.Animation;
 import android.view.animation.AnimationUtils;
+import android.webkit.MimeTypeMap;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.TextView;
@@ -42,6 +44,9 @@ import com.google.firebase.firestore.DocumentReference;
 import com.google.firebase.firestore.FirebaseFirestore;
 import com.google.firebase.firestore.Query;
 import com.google.firebase.firestore.QuerySnapshot;
+import com.google.firebase.firestore.SetOptions;
+import com.google.firebase.storage.FirebaseStorage;
+import com.google.firebase.storage.StorageReference;
 import com.hanks.htextview.evaporate.EvaporateTextView;
 
 import java.io.File;
@@ -104,6 +109,10 @@ public class RegAdmin_AsAdmin_Activity extends AppCompatActivity implements Obse
     private boolean imageSetupTrue;
 
 
+    private StorageReference storageReference;
+    private Uri uriImage;
+
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -112,6 +121,9 @@ public class RegAdmin_AsAdmin_Activity extends AppCompatActivity implements Obse
         copyadminCreated=0;
         countForAnimateButton=0;
         credenttial=null;
+
+        storageReference = FirebaseStorage.getInstance().getReference("uploads");
+
 
         textViewName = findViewById(R.id.reg_Admin_asAdmin_textView_name_id);
         textViewPhone= findViewById(R.id.reg_Admin_asAdmin_textView_phone_id);
@@ -446,13 +458,13 @@ public class RegAdmin_AsAdmin_Activity extends AppCompatActivity implements Obse
 
         if(requestCode == READ_REQUEST_CODE && resultCode == Activity.RESULT_OK){
 
-            Uri uri = null;
+             uriImage = null;
 
             if(data!=null){
 
-                uri = data.getData();
+                uriImage = data.getData();
 
-                showImage(uri);
+                showImage(uriImage);
 
                 imageSetupTrue=true;
 
@@ -712,6 +724,12 @@ public class RegAdmin_AsAdmin_Activity extends AppCompatActivity implements Obse
             timer.cancel();
             Toast.makeText(this, "successfully registered", Toast.LENGTH_SHORT).show();
 
+            //storage reference upload here.
+
+            //uploadFile(uri);
+
+            uploadFile();
+
             Intent intent = new Intent(RegAdmin_AsAdmin_Activity.this,RegAdmin_asAdmin_Profile_Activity.class);
             intent.putExtra("adminName_asAdmin",userName);
             intent.putExtra("adminPhone_asAdmin",userPhone);
@@ -764,6 +782,46 @@ public class RegAdmin_AsAdmin_Activity extends AppCompatActivity implements Obse
     }
 
 
+
+    }
+
+
+    // 22 may
+
+    //upload image
+
+    private String getFileExtentsion(Uri uri){
+
+        ContentResolver cr = getContentResolver();
+
+        MimeTypeMap mime = MimeTypeMap.getSingleton();
+
+        return mime.getExtensionFromMimeType(cr.getType(uri));
+
+    }
+
+    private void uploadFile(){
+
+        if(uriImage!=null){
+
+
+            // uploads.adminnamephone.jpg etc.
+            StorageReference this_image_ref = storageReference.child("admin"+userName+userPhone+"."+getFileExtentsion(uriImage));
+
+
+            DocumentReference reference = FirebaseFirestore.getInstance()
+                    .collection("all_admins_collections")
+                    .document(userName+userPhone+"collection");
+
+            Map<String, Object> imm = new HashMap<>();
+
+            imm.put("image",this_image_ref);
+
+            reference.set(imm, SetOptions.merge());
+
+
+
+        }
 
     }
 }

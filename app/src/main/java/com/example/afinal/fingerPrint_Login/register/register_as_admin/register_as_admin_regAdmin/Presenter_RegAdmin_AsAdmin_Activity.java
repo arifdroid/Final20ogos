@@ -14,6 +14,8 @@ import com.google.firebase.firestore.DocumentReference;
 import com.google.firebase.firestore.FirebaseFirestore;
 import com.google.firebase.firestore.Query;
 import com.google.firebase.firestore.QuerySnapshot;
+import com.google.firebase.storage.FirebaseStorage;
+import com.google.firebase.storage.StorageReference;
 
 import java.util.HashMap;
 import java.util.Map;
@@ -22,6 +24,10 @@ import java.util.Observable;
 import androidx.annotation.NonNull;
 
 public class Presenter_RegAdmin_AsAdmin_Activity extends Observable {
+
+    //22 may
+
+
 
     private String nameUser_admin;
     private String phoneUser_admin;
@@ -34,8 +40,10 @@ public class Presenter_RegAdmin_AsAdmin_Activity extends Observable {
     public Presenter_RegAdmin_AsAdmin_Activity(Context context){
         this.mContext= context;
         allowCreateAdmin=0;
-        return;
 
+
+
+        return;
     }
 
 

@@ -174,7 +174,7 @@ public class RegAdmin_asAdmin_Profile_Activity extends AppCompatActivity impleme
 
         //firebase reference
 
-        storageReference = FirebaseStorage.getInstance().getReference();
+        //storageReference = FirebaseStorage.getInstance().getReference("uploads");
 
 //        //setting up image
 //        circleImageView.setOnClickListener(new View.OnClickListener() {
