@@ -174,6 +174,25 @@ public class FingerPrint_LogIn_Final_Activity extends AppCompatActivity implemen
     //bottom navigation listener
 
 
+//    private Integer lastCheckId(int resourceIDLastChecked){
+//
+//
+//
+//        if(resourceIDLastChecked!=0){
+//
+//            return resourceIDLastChecked;
+//        }
+//
+//        else {
+//            return 0;
+//        }
+//    }
+
+
+    //22 may
+    private int lastCheckId;
+
+
     private BottomNavigationView.OnNavigationItemSelectedListener mOnNavigationItemSelectedListener
             = new BottomNavigationView.OnNavigationItemSelectedListener() {
 
@@ -183,27 +202,42 @@ public class FingerPrint_LogIn_Final_Activity extends AppCompatActivity implemen
 
                 case R.id.nav_wifi:
 
+                    if(lastCheckId==R.id.nav_admin) {
 
+                        imageViewAdminIcon.setVisibility(View.INVISIBLE);
+                        cardViewAdminIcon.setVisibility(View.INVISIBLE);
+                        barAdmin.setVisibility(View.INVISIBLE);
+                    }
 
-                    imageViewAdminIcon.setVisibility(View.INVISIBLE);
-                    cardViewAdminIcon.setVisibility(View.INVISIBLE);
-                    barAdmin.setVisibility(View.INVISIBLE);
+                    if(lastCheckId==R.id.nav_evening) {
 
-                    imageViewEveningIcon.setVisibility(View.INVISIBLE);
-                    cardViewEveningIcon.setVisibility(View.INVISIBLE);
-                    barEvening.setVisibility(View.INVISIBLE);
+                        imageViewEveningIcon.setVisibility(View.INVISIBLE);
+                        cardViewEveningIcon.setVisibility(View.INVISIBLE);
+                        barEvening.setVisibility(View.INVISIBLE);
+                    }
 
-                    imageViewMorningIcon.setVisibility(View.INVISIBLE);
-                    constraintLayoutMorningIcon.setVisibility(View.INVISIBLE);
-                    barMorning.setVisibility(View.INVISIBLE);
-
-                    imageViewLocationIcon.setVisibility(View.INVISIBLE);
-                    constraintLayoutLocationIcon.setVisibility(View.INVISIBLE);
-                    barLocation.setVisibility(View.INVISIBLE);
+                    if(lastCheckId==R.id.nav_morning) {
+                        imageViewMorningIcon.setVisibility(View.INVISIBLE);
+                        constraintLayoutMorningIcon.setVisibility(View.INVISIBLE);
+                        barMorning.setVisibility(View.INVISIBLE);
+                    }
+                    if(lastCheckId==R.id.nav_location) {
+                        imageViewLocationIcon.setVisibility(View.INVISIBLE);
+                        constraintLayoutLocationIcon.setVisibility(View.INVISIBLE);
+                        barLocation.setVisibility(View.INVISIBLE);
+                    }
+//
+//                    if(lastCheckId==R.id.nav_wifi){
+//                        imageViewWifiIcon.setVisibility(View.INVISIBLE);
+//                        constraintLayoutWifiIcon.setVisibility(View.INVISIBLE);
+//                        barWifi.setVisibility(View.INVISIBLE);
+//                    }
 
                     imageViewWifiIcon.setVisibility(View.VISIBLE);
                     constraintLayoutWifiIcon.setVisibility(View.VISIBLE);
                     barWifi.setVisibility(View.VISIBLE);
+
+                    lastCheckId = R.id.nav_wifi ;
 
 
 
@@ -214,25 +248,40 @@ public class FingerPrint_LogIn_Final_Activity extends AppCompatActivity implemen
                 case R.id.nav_location:
 
 
-                    imageViewAdminIcon.setVisibility(View.INVISIBLE);
-                    cardViewAdminIcon.setVisibility(View.INVISIBLE);
-                    barAdmin.setVisibility(View.INVISIBLE);
 
-                    imageViewEveningIcon.setVisibility(View.INVISIBLE);
-                    cardViewEveningIcon.setVisibility(View.INVISIBLE);
-                    barEvening.setVisibility(View.INVISIBLE);
+                    if(lastCheckId==R.id.nav_admin) {
 
-                    imageViewMorningIcon.setVisibility(View.INVISIBLE);
-                    constraintLayoutMorningIcon.setVisibility(View.INVISIBLE);
-                    barMorning.setVisibility(View.INVISIBLE);
+                        imageViewAdminIcon.setVisibility(View.INVISIBLE);
+                        cardViewAdminIcon.setVisibility(View.INVISIBLE);
+                        barAdmin.setVisibility(View.INVISIBLE);
+                    }
 
+                    if(lastCheckId==R.id.nav_evening) {
+
+                        imageViewEveningIcon.setVisibility(View.INVISIBLE);
+                        cardViewEveningIcon.setVisibility(View.INVISIBLE);
+                        barEvening.setVisibility(View.INVISIBLE);
+                    }
+
+                    if(lastCheckId==R.id.nav_morning) {
+                        imageViewMorningIcon.setVisibility(View.INVISIBLE);
+                        constraintLayoutMorningIcon.setVisibility(View.INVISIBLE);
+                        barMorning.setVisibility(View.INVISIBLE);
+                    }
+
+                    if(lastCheckId==R.id.nav_wifi) {
+                        imageViewWifiIcon.setVisibility(View.INVISIBLE);
+                        constraintLayoutWifiIcon.setVisibility(View.INVISIBLE);
+                        barWifi.setVisibility(View.INVISIBLE);
+                    }
+
+//
                     imageViewLocationIcon.setVisibility(View.VISIBLE);
                     constraintLayoutLocationIcon.setVisibility(View.VISIBLE);
                     barLocation.setVisibility(View.VISIBLE);
 
-                    imageViewWifiIcon.setVisibility(View.INVISIBLE);
-                    constraintLayoutWifiIcon.setVisibility(View.INVISIBLE);
-                    barWifi.setVisibility(View.INVISIBLE);
+                    lastCheckId=R.id.nav_location;
+
 
 
 
@@ -244,26 +293,39 @@ public class FingerPrint_LogIn_Final_Activity extends AppCompatActivity implemen
                 case R.id.nav_morning:
 
 
-                    imageViewAdminIcon.setVisibility(View.INVISIBLE);
-                    cardViewAdminIcon.setVisibility(View.INVISIBLE);
-                    barAdmin.setVisibility(View.INVISIBLE);
 
-                    imageViewEveningIcon.setVisibility(View.INVISIBLE);
-                    cardViewEveningIcon.setVisibility(View.INVISIBLE);
-                    barEvening.setVisibility(View.INVISIBLE);
+                    if(lastCheckId==R.id.nav_admin) {
+
+                        imageViewAdminIcon.setVisibility(View.INVISIBLE);
+                        cardViewAdminIcon.setVisibility(View.INVISIBLE);
+                        barAdmin.setVisibility(View.INVISIBLE);
+                    }
+
+                    if(lastCheckId==R.id.nav_evening) {
+
+                        imageViewEveningIcon.setVisibility(View.INVISIBLE);
+                        cardViewEveningIcon.setVisibility(View.INVISIBLE);
+                        barEvening.setVisibility(View.INVISIBLE);
+                    }
+
+                    if(lastCheckId==R.id.nav_location) {
+                        imageViewLocationIcon.setVisibility(View.INVISIBLE);
+                        constraintLayoutLocationIcon.setVisibility(View.INVISIBLE);
+                        barLocation.setVisibility(View.INVISIBLE);
+
+                    }
+
+                    if(lastCheckId==R.id.nav_wifi) {
+                        imageViewWifiIcon.setVisibility(View.INVISIBLE);
+                        constraintLayoutWifiIcon.setVisibility(View.INVISIBLE);
+                        barWifi.setVisibility(View.INVISIBLE);
+                    }
 
                     imageViewMorningIcon.setVisibility(View.VISIBLE);
                     constraintLayoutMorningIcon.setVisibility(View.VISIBLE);
                     barMorning.setVisibility(View.VISIBLE);
 
-                    imageViewLocationIcon.setVisibility(View.INVISIBLE);
-                    constraintLayoutLocationIcon.setVisibility(View.INVISIBLE);
-                    barLocation.setVisibility(View.INVISIBLE);
-
-                    imageViewWifiIcon.setVisibility(View.INVISIBLE);
-                    constraintLayoutWifiIcon.setVisibility(View.INVISIBLE);
-                    barWifi.setVisibility(View.INVISIBLE);
-
+                    lastCheckId=R.id.nav_morning;
 
 
                     break;
@@ -321,6 +383,7 @@ public class FingerPrint_LogIn_Final_Activity extends AppCompatActivity implemen
                     break;
 
 
+
             }
             return true;
         }
@@ -328,6 +391,7 @@ public class FingerPrint_LogIn_Final_Activity extends AppCompatActivity implemen
     private Handler handler = new Handler();
     private String seconds_fromPhone = "";
     private String timeFromPhone = "";
+
 
 
     @Override

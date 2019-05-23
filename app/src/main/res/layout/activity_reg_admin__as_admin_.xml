@@ -114,6 +114,8 @@
             android:layout_height="55dp"
             android:background="@drawable/ic_pin_ring"
             android:ems="10"
+            android:textAlignment="center"
+            android:autoSizeTextType="uniform"
             android:inputType="number"
             android:visibility="gone"
             app:layout_constraintBottom_toTopOf="@+id/guideline167"
@@ -480,11 +482,13 @@
                 android:id="@+id/reg_Admin_asAdmin_imageView_name_icon_id"
                 android:layout_width="0dp"
                 android:layout_height="0dp"
+                android:visibility="visible"
                 app:layout_constraintBottom_toTopOf="@+id/guideline156"
                 app:layout_constraintEnd_toStartOf="@+id/guideline161"
                 app:layout_constraintStart_toStartOf="@+id/guideline160"
                 app:layout_constraintTop_toTopOf="@+id/guideline155"
-                app:srcCompat="@drawable/ic_admin_name_icon_only" />
+                app:srcCompat="@drawable/ic_admin_name_icon_only"
+                tools:visibility="visible" />
 
             <TextView
                 android:id="@+id/reg_Admin_asAdmin_textView_name_id"
@@ -498,11 +502,13 @@
                 android:text="Name: Arif Zamri"
                 android:textColor="@color/material_white_blue"
 
+                android:visibility="visible"
                 app:autoSizeTextType="uniform"
                 app:layout_constraintBottom_toTopOf="@+id/guideline156"
                 app:layout_constraintEnd_toStartOf="@+id/guideline162"
                 app:layout_constraintStart_toStartOf="@+id/guideline161"
-                app:layout_constraintTop_toTopOf="@+id/guideline155" />
+                app:layout_constraintTop_toTopOf="@+id/guideline155"
+                tools:visibility="visible" />
 
             <androidx.constraintlayout.widget.Guideline
                 android:id="@+id/guideline162"
@@ -517,11 +523,14 @@
                 android:layout_height="0dp"
                 android:layout_marginStart="1dp"
                 android:layout_marginEnd="1dp"
+                android:visibility="visible"
                 app:layout_constraintBottom_toTopOf="@+id/guideline157"
                 app:layout_constraintEnd_toStartOf="@+id/guideline161"
                 app:layout_constraintStart_toStartOf="@+id/guideline160"
                 app:layout_constraintTop_toBottomOf="@+id/reg_Admin_asAdmin_imageView_name_icon_id"
-                tools:srcCompat="@drawable/ic_admin_phone_icon_only" />
+                app:srcCompat="@drawable/ic_admin_phone_icon_only"
+                tools:srcCompat="@drawable/ic_admin_phone_icon_only"
+                tools:visibility="visible" />
 
             <ImageView
                 android:id="@+id/imageView5"
@@ -545,11 +554,13 @@
                 android:text="Phone: +6018 4670568"
 
                 android:textColor="@color/material_white_blue"
+                android:visibility="visible"
                 app:autoSizeTextType="uniform"
                 app:layout_constraintBottom_toTopOf="@+id/guideline157"
                 app:layout_constraintEnd_toStartOf="@+id/guideline162"
                 app:layout_constraintStart_toStartOf="@+id/guideline161"
-                app:layout_constraintTop_toTopOf="@+id/guideline156" />
+                app:layout_constraintTop_toTopOf="@+id/guideline156"
+                tools:visibility="visible" />
 
             <TextView
                 android:id="@+id/textView32"

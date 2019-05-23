@@ -3,6 +3,7 @@ package com.example.afinal.fingerPrint_Login.register.register_with_activity;
 import android.content.Intent;
 import androidx.appcompat.app.AppCompatActivity;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
@@ -23,6 +24,8 @@ public class RegAdmin_Activity extends AppCompatActivity implements View.OnClick
     //18 may, some functionality change, page can serve
     // to register both admin, and user.
     //originally, this is for user. so.
+
+
 
     private TextView textViewMessage;
     private EditText user_editTextName, user_editTextPhone;
@@ -86,6 +89,8 @@ public class RegAdmin_Activity extends AppCompatActivity implements View.OnClick
 
 
 
+        Log.i("22MayTest, ","1 ");
+
         //18 may update
         //, problem user, will enter their name first.
         register_as_user_button = findViewById(R.id.regAdmin_button_user_id); //this want to register as admin, so can proceed to next activity.
@@ -111,12 +116,12 @@ public class RegAdmin_Activity extends AppCompatActivity implements View.OnClick
 
                 Intent intent = new Intent(RegAdmin_Activity.this, RegAdmin_AsAdmin_Activity.class);
 
-                intent.putExtra("admin_name", globalAdminName); //this just pass intent.
-                intent.putExtra("admin_phone", globalAdminPhone);
+//                intent.putExtra("adminName_asAdmin", globalAdminName); //this just pass intent.
+//                intent.putExtra("adminPhone_asAdmin", globalAdminPhone);
                 //18 May , put extra intent.
 
-                intent.putExtra("user_here_name", globalUserName);
-                intent.putExtra("user_here_phone", globalUserPhone);
+                intent.putExtra("adminName_asAdmin", globalUserName);
+                intent.putExtra("adminPhone_asAdmin", globalUserPhone);
 
 
                 startActivity(intent);
@@ -133,6 +138,20 @@ public class RegAdmin_Activity extends AppCompatActivity implements View.OnClick
                 globalUserName="";
                 globalUserPhone="";
 
+                //clear view
+
+                button_yes.setVisibility(View.GONE);
+                button_no.setVisibility(View.GONE);
+                textViewSureAsAdmin.setText(View.GONE);
+
+
+
+             //   evaporateTextView.setVisibility(View.VISIBLE);
+                textViewMessage.setVisibility(View.VISIBLE);
+                textViewMessage_LogIn.setText(View.VISIBLE);
+
+
+
                 //set animation
                 user_editTextName.setVisibility(View.VISIBLE);
                 user_editTextPhone.setVisibility(View.VISIBLE);
@@ -147,7 +166,7 @@ public class RegAdmin_Activity extends AppCompatActivity implements View.OnClick
                 register_as_user_button.setVisibility(View.VISIBLE);
 
 
-                button_no.setVisibility(View.GONE);
+               // button_no.setVisibility(View.INVISIBLE);
             }
         });
 
@@ -213,8 +232,12 @@ public class RegAdmin_Activity extends AppCompatActivity implements View.OnClick
 
             case R.id.regAdmin_button_admin_id:
 
-                statusnow = "wait..";
-                textViewMessage.setText(statusnow);
+                Log.i("22MayTest, ","2 ");
+//
+//                statusnow = "wait..";
+//                textViewMessage.setText(statusnow);
+
+                textViewMessage.setVisibility(View.INVISIBLE);
 
                 textViewMessage_LogIn.setVisibility(View.INVISIBLE);
 
@@ -223,14 +246,19 @@ public class RegAdmin_Activity extends AppCompatActivity implements View.OnClick
                 String userNameIsAdmin = user_editTextName.getText().toString();
                 String userPhoneIsAdmin = user_editTextPhone.getText().toString();
 
+                Log.i("22MayTest, ","3 name user: "+userNameIsAdmin + " phone user: "+userPhoneIsAdmin);
+
                 checkValid = presenter.checkInputValid(userNameIsAdmin,userPhoneIsAdmin);
 //
                 if(checkValid){ //here we call
 
                     //updated 18 may
 
+                    Log.i("22MayTest ","4 , check is valid");
+
                     userPhoneIsAdmin = RegAdmin_Presenter.phoneFinal; //finalise number
 
+                    Log.i("22MayTest ","5 , normalized num "+ userNameIsAdmin);
 
                     globalUserName= userNameIsAdmin;       //this will be used in next activity.
                     globalUserPhone = userPhoneIsAdmin;
@@ -279,6 +307,9 @@ public class RegAdmin_Activity extends AppCompatActivity implements View.OnClick
 
 
                 }else {
+
+                    Log.i("22MayTest ","999 , not valid "+userPhoneIsAdmin);
+
 
                     return;
                 }

@@ -121,6 +121,8 @@ public class RegAdmin_AsAdmin_Activity extends AppCompatActivity implements Obse
         userName = intent.getStringExtra("adminName_asAdmin");
         userPhone = intent.getStringExtra("adminPhone_asAdmin");
 
+        Log.i("22may_as_admin"," name:"+userName + ", phone:"+userPhone);
+
         textViewName.setText(userName);
         textViewPhone.setText(userPhone);
 
@@ -227,35 +229,37 @@ public class RegAdmin_AsAdmin_Activity extends AppCompatActivity implements Obse
             @Override
             public void onClick(View view) {
                 if(checkNumberOfAdminRegisteredTo()) {
+
+                    if(imageSetupTrue) {
 //                    userName = textViewName.getText().toString();
 //                    userPhone = textViewPhone.getText().toString();
 
 //                    textViewMessage.setText("check input..");
 //                    if (checkInput(userName, userPhone)) {
 //                        //if input true
-                  //      textViewMessage.setText("getting phone verification..");
+                        //      textViewMessage.setText("getting phone verification..");
 
-                    cardView_regAsAdmin.setVisibility(View.GONE);
-                    circleImageView_regAsAdmin.setVisibility(View.GONE);
+                        cardView_regAsAdmin.setVisibility(View.GONE);
+                        circleImageView_regAsAdmin.setVisibility(View.GONE);
 
-                    buttonGetCode_next.setVisibility(View.GONE);
-
-
-                    buttonGetCode_next2.setVisibility(View.VISIBLE);
-
-                    textViewMessageCode.setVisibility(View.VISIBLE);
-
-                    evaporate_textView.setVisibility(View.VISIBLE);
-
-                    editTextCode_1.setVisibility(View.VISIBLE);
-                    editTextCode_2.setVisibility(View.VISIBLE);
-                    editTextCode_3.setVisibility(View.VISIBLE);
-                    editTextCode_4.setVisibility(View.VISIBLE);
-                    editTextCode_5.setVisibility(View.VISIBLE);
-                    editTextCode_6.setVisibility(View.VISIBLE);
+                        buttonGetCode_next.setVisibility(View.GONE);
 
 
-                    getCallBack(userPhone);
+                        buttonGetCode_next2.setVisibility(View.VISIBLE);
+
+                        textViewMessageCode.setVisibility(View.VISIBLE);
+
+                        evaporate_textView.setVisibility(View.VISIBLE);
+
+                        editTextCode_1.setVisibility(View.VISIBLE);
+                        editTextCode_2.setVisibility(View.VISIBLE);
+                        editTextCode_3.setVisibility(View.VISIBLE);
+                        editTextCode_4.setVisibility(View.VISIBLE);
+                        editTextCode_5.setVisibility(View.VISIBLE);
+                        editTextCode_6.setVisibility(View.VISIBLE);
+
+
+                        getCallBack(userPhone);
 
 //                    } else {
 //
@@ -263,6 +267,10 @@ public class RegAdmin_AsAdmin_Activity extends AppCompatActivity implements Obse
 //
 //
 //                    }
+
+                    }else {
+                        Toast.makeText(RegAdmin_AsAdmin_Activity.this, "please set image", Toast.LENGTH_SHORT).show();
+                    }
 
 
                 }else { //if FALSE,
@@ -280,7 +288,7 @@ public class RegAdmin_AsAdmin_Activity extends AppCompatActivity implements Obse
             @Override
             public void onClick(View v) {
 
-                if (imageSetupTrue) {
+
 
                 String code1 = editTextCode_1.getText().toString();
                 String code2 = editTextCode_2.getText().toString();
@@ -299,13 +307,7 @@ public class RegAdmin_AsAdmin_Activity extends AppCompatActivity implements Obse
 
                 Toast.makeText(RegAdmin_AsAdmin_Activity.this,"please enter code received",Toast.LENGTH_SHORT).show();
             }
-            }
 
-                else {
-
-                    Toast.makeText(RegAdmin_AsAdmin_Activity.this, "please set image", Toast.LENGTH_SHORT).show();
-
-                }
             }
         });
 
@@ -321,6 +323,7 @@ public class RegAdmin_AsAdmin_Activity extends AppCompatActivity implements Obse
 
                 //textViewMessage.setText("phone verified, try automatically...");
 
+                textViewMessageCode.setText("checking in credential, please wait..");
 
                 checkPhoneCredential(phoneAuthCredential);
 
@@ -399,7 +402,9 @@ public class RegAdmin_AsAdmin_Activity extends AppCompatActivity implements Obse
             public void onVerificationFailed(FirebaseException e) {
 
                 Toast.makeText(RegAdmin_AsAdmin_Activity.this,"verification fail: ",Toast.LENGTH_LONG).show();
-                Log.i("fail to verify","1 : "+e.getMessage());
+                Log.i("failtoverify","1 : "+e.getMessage());
+                textViewMessageCode.setText("fail verify");
+
 
             }
 
@@ -407,6 +412,8 @@ public class RegAdmin_AsAdmin_Activity extends AppCompatActivity implements Obse
             public void onCodeSent(String s, PhoneAuthProvider.ForceResendingToken forceResendingToken) {
                 super.onCodeSent(s, forceResendingToken);
 
+                Log.i("checkCode", codeFromFirebase);
+                textViewMessageCode.setText("checking in credential, please wait.. "+codeFromFirebase);
                 codeFromFirebase=s;
 
             }
@@ -533,8 +540,13 @@ public class RegAdmin_AsAdmin_Activity extends AppCompatActivity implements Obse
 
     private void checkPhoneCredential(PhoneAuthCredential phoneAuthCredential) {
         if(userName!=null&&userPhone!=null) {
+
+            textViewMessageCode.setText("33, credential process , name: "+userName+", phone: "+userPhone);
+
             presenter.checkCredentialWithUpdates(phoneAuthCredential, userName, userPhone);
         }
+
+        textViewMessageCode.setText("33, credential process FAILED");
 
 
     }

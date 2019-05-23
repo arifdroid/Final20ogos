@@ -1,5 +1,7 @@
 package com.example.afinal.fingerPrint_Login.register.register_with_activity;
 
+import android.util.Log;
+
 import java.util.Objects;
 import java.util.Observable;
 import java.util.Observer;
@@ -30,12 +32,15 @@ class RegAdmin_Presenter extends Observable implements  RegAdminPresenter_Interf
 
     @Override
     public boolean checkInputValid(String name, String phone) {
+
+        Log.i("22 May, ","00 , checkInputValid ");
+
         modelReturn = false;
         if((name!=null&& phone!=null)||(name!="" && phone!="")){
 
             String checkPhoneinput = phone;
 
-            Character first = Objects.requireNonNull(checkPhoneinput).charAt(0);
+            Character first = phone.charAt(0);
 
 
             //22 may
@@ -46,30 +51,36 @@ class RegAdmin_Presenter extends Observable implements  RegAdminPresenter_Interf
              phone = phone.replace("-","");
 
 
-            if(!first.equals("+")){
+            if(first!= '+'){
 
                 //something wrong with input. either return false or add plus +6
 
-                if(first.equals("6")){
+                if(first=='6'){
 
                     phone = "+"+phone; //notice we only change data here, not globally
 
                     phoneFinal = phone;
 
+                    Log.i("22 May, ","11 , checkInputValid, phone" +phone);
+
                     return true;
 
 
-                }else if(first.equals("0")){
+                }else if(first=='0'){
 
                     phone = "+6"+ phone;
 
                     phoneFinal = phone;
 
+                    Log.i("22MayTest, ","22 , checkInputValid, phone" +phone);
+
                     return true;
 
 
-                }else {
+                }else{
 
+
+                    Log.i("22MayTest, ","33 , checkInputValid, phone" +phone);
                     return false;
                 }
 
@@ -77,12 +88,16 @@ class RegAdmin_Presenter extends Observable implements  RegAdminPresenter_Interf
 
             }else { //assume number start with plus
 
+                Log.i("22MayTest, ","44 , checkInputValid, phone" +phone);
                 phoneFinal = phone;
                 return true;
 
             }
+        }else {
+
+            Log.i("22MayTest, ","55 , checkInputValid, phone" +phone);
+            return false;
         }
-        return false;
     }
 
     //this is admin name and phone.

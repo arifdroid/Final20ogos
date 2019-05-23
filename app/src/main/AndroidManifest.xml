@@ -17,7 +17,7 @@
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
-        <activity android:name=".fingerPrint_Login.fingerprint_login.FingerPrint_LogIn_Final_Activity"></activity>
+        <activity android:name=".fingerPrint_Login.startup_load.Startup_Activity"></activity>
         <activity android:name=".fingerPrint_Login.register.setup_pin_code.Setup_Pin_Activity" />
         <activity android:name=".fingerPrint_Login.register.register_as_admin_add_userList.Add_User_Activity" />
         <activity
@@ -38,7 +38,7 @@
             />
         <activity android:name=".fingerPrint_Login.test_mvp.Test_Activity" />
         <activity
-            android:name=".fingerPrint_Login.startup_load.Startup_Activity"
+            android:name=".fingerPrint_Login.fingerprint_login.FingerPrint_LogIn_Final_Activity"
             android:launchMode="singleTask">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
