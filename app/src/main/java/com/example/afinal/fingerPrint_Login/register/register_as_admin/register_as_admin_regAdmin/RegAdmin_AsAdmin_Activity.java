@@ -314,6 +314,10 @@ public class RegAdmin_AsAdmin_Activity extends AppCompatActivity implements Obse
         //phone auth call back
 
         mCallBack = new PhoneAuthProvider.OnVerificationStateChangedCallbacks() {
+
+
+
+
             @Override
             public void onVerificationCompleted(final PhoneAuthCredential phoneAuthCredential) {
 
@@ -324,6 +328,9 @@ public class RegAdmin_AsAdmin_Activity extends AppCompatActivity implements Obse
                 //textViewMessage.setText("phone verified, try automatically...");
 
                 textViewMessageCode.setText("checking in credential, please wait..");
+
+                Log.i("checkCredential,"," 1 , phone"+userPhone);
+
 
                 checkPhoneCredential(phoneAuthCredential);
 
@@ -411,10 +418,10 @@ public class RegAdmin_AsAdmin_Activity extends AppCompatActivity implements Obse
             @Override
             public void onCodeSent(String s, PhoneAuthProvider.ForceResendingToken forceResendingToken) {
                 super.onCodeSent(s, forceResendingToken);
+                codeFromFirebase=s;
 
                 Log.i("checkCode", codeFromFirebase);
                 textViewMessageCode.setText("checking in credential, please wait.. "+codeFromFirebase);
-                codeFromFirebase=s;
 
             }
         };
@@ -539,6 +546,9 @@ public class RegAdmin_AsAdmin_Activity extends AppCompatActivity implements Obse
     }
 
     private void checkPhoneCredential(PhoneAuthCredential phoneAuthCredential) {
+
+        Log.i("checkCredential,"," 2 , phone"+userPhone);
+
         if(userName!=null&&userPhone!=null) {
 
             textViewMessageCode.setText("33, credential process , name: "+userName+", phone: "+userPhone);
