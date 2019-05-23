@@ -250,7 +250,7 @@
                 app:layout_constraintBottom_toBottomOf="@+id/constraintLayout14"
                 app:layout_constraintEnd_toStartOf="@+id/constraintLayout15"
                 app:srcCompat="@drawable/admin_icon_white"
-                tools:visibility="gone" />
+                tools:visibility="invisible" />
 
             <androidx.cardview.widget.CardView
                 android:id="@+id/final_cardView_admin_ID"
@@ -566,7 +566,7 @@
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:orientation="vertical"
-                        app:layout_constraintGuide_percent="0.16" />
+                        app:layout_constraintGuide_percent="0.13" />
 
                     <androidx.constraintlayout.widget.Guideline
                         android:id="@+id/guideline26"
