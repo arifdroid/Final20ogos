@@ -3,7 +3,6 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:id="@+id/cardView"
-    android:background=""
     android:layout_width="match_parent"
     app:cardBackgroundColor="#5CFFFFFF"
     android:layout_height="wrap_content">
@@ -149,7 +148,7 @@
                 app:layout_constraintGuide_percent="0.53" />
 
             <TextView
-                android:id="@+id/textView18"
+                android:id="@+id/cardview_timestamp_frag_textViewTime"
                 android:layout_width="0dp"
                 android:layout_height="0dp"
                 android:layout_marginTop="4dp"
@@ -165,7 +164,7 @@
                 app:layout_constraintTop_toTopOf="@+id/guideline117" />
 
             <TextView
-                android:id="@+id/textView19"
+                android:id="@+id/cardview_timestamp_frag_textViewDate_Input"
                 android:layout_width="0dp"
                 android:layout_height="0dp"
                 android:maxLines="1"
@@ -193,7 +192,7 @@
                 app:layout_constraintGuide_percent="0.42" />
 
             <TextView
-                android:id="@+id/textView21"
+                android:id="@+id/cardview_timestamp_frag_textViewDateMonth_Input"
                 android:layout_width="0dp"
                 android:layout_height="0dp"
                 android:maxLines="1"
@@ -283,7 +282,7 @@
                 app:layout_constraintTop_toTopOf="@+id/guideline121">
 
                 <TextView
-                    android:id="@+id/textView23"
+                    android:id="@+id/cardview_timestamp_frag_textViewStatus_Input"
                     android:layout_width="0dp"
                     android:layout_height="0dp"
                     android:layout_marginStart="2dp"

@@ -111,13 +111,14 @@
             android:id="@+id/reg_User_editText_ring3_id"
             android:layout_width="55dp"
             android:layout_height="55dp"
+            
             android:background="@drawable/ic_pin_ring"
             android:ems="10"
             android:inputType="number"
             app:layout_constraintBottom_toTopOf="@+id/guideline167"
             app:layout_constraintEnd_toStartOf="@+id/guideline170"
             app:layout_constraintTop_toTopOf="@+id/guideline166"
-            tools:visibility="visible" />
+            tools:visibility="gone" />
 
         <androidx.constraintlayout.widget.Guideline
             android:id="@+id/guideline170"
@@ -143,7 +144,7 @@
             app:layout_constraintBottom_toTopOf="@+id/guideline167"
             app:layout_constraintEnd_toStartOf="@+id/reg_User_editText_ring3_id"
             app:layout_constraintTop_toTopOf="@+id/guideline166"
-            tools:visibility="visible" />
+            tools:visibility="gone" />
 
         <androidx.constraintlayout.widget.Guideline
             android:id="@+id/guideline172"
@@ -162,7 +163,7 @@
             app:layout_constraintBottom_toTopOf="@+id/guideline167"
             app:layout_constraintEnd_toStartOf="@+id/reg_User_editText_ring2_id"
             app:layout_constraintTop_toTopOf="@+id/guideline166"
-            tools:visibility="visible" />
+            tools:visibility="gone" />
 
         <androidx.constraintlayout.widget.Guideline
             android:id="@+id/guideline173"
@@ -181,7 +182,7 @@
             app:layout_constraintBottom_toTopOf="@+id/guideline167"
             app:layout_constraintStart_toStartOf="@+id/guideline170"
             app:layout_constraintTop_toTopOf="@+id/guideline166"
-            tools:visibility="visible" />
+            tools:visibility="gone" />
 
         <androidx.constraintlayout.widget.Guideline
             android:id="@+id/guideline174"
@@ -200,7 +201,7 @@
             app:layout_constraintBottom_toTopOf="@+id/guideline167"
             app:layout_constraintStart_toStartOf="@+id/guideline173"
             app:layout_constraintTop_toTopOf="@+id/guideline166"
-            tools:visibility="visible" />
+            tools:visibility="gone" />
 
         <androidx.constraintlayout.widget.Guideline
             android:id="@+id/guideline175"
@@ -219,7 +220,7 @@
             app:layout_constraintBottom_toTopOf="@+id/guideline167"
             app:layout_constraintStart_toStartOf="@+id/guideline174"
             app:layout_constraintTop_toTopOf="@+id/guideline166"
-            tools:visibility="visible" />
+            tools:visibility="gone" />
 
         <androidx.constraintlayout.widget.Guideline
             android:id="@+id/guideline176"
@@ -285,7 +286,7 @@
         app:layout_constraintEnd_toStartOf="@+id/guideline148"
         app:layout_constraintStart_toStartOf="@+id/guideline147"
         app:layout_constraintTop_toTopOf="@+id/guideline149"
-        tools:visibility="gone" />
+        tools:visibility="visible" />
 
     <androidx.constraintlayout.widget.Guideline
         android:id="@+id/guideline2"
@@ -348,7 +349,7 @@
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="@+id/guideline144"
-        tools:visibility="gone">
+        tools:visibility="visible">
 
         <androidx.constraintlayout.widget.ConstraintLayout
             android:layout_width="match_parent"
@@ -488,7 +489,7 @@
 
                 android:lines="2"
                 android:maxLines="2"
-                android:text="User Name: Arif Zamri"
+                android:text="User: Arif Zamri"
                 android:textColor="@color/material_white_blue"
                 app:autoSizeTextType="uniform"
                 app:layout_constraintBottom_toTopOf="@+id/guideline156"
@@ -545,7 +546,7 @@
 
                 android:layout_marginTop="8dp"
                 android:layout_marginBottom="16dp"
-                android:text="User Phone: +6018 4670568"
+                android:text="User: +6018 4670568"
                 android:textColor="@color/material_white_blue"
                 app:autoSizeTextType="uniform"
                 app:layout_constraintBottom_toTopOf="@+id/guideline157"
@@ -586,7 +587,7 @@
                 android:layout_marginStart="3dp"
                 android:layout_marginTop="8dp"
                 android:layout_marginBottom="16dp"
-                android:text="Admin  Phone : +6018 111111"
+                android:text="Admin : +6018 111111"
                 android:textColor="@color/material_white_blue"
                 app:autoSizeTextType="uniform"
                 app:layout_constraintBottom_toTopOf="@+id/guideline3"

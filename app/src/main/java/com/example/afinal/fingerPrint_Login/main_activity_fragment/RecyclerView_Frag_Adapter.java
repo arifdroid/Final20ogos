@@ -47,7 +47,13 @@ public class RecyclerView_Frag_Adapter extends RecyclerView.Adapter<RecyclerView
 //        holder.textViewStatus.setText("Status");
 //        holder.textViewDate.setText("Date");
 
-        holder.textViewDate_input.setText(hereList.get(position).getDate());
+        String date_date = hereList.get(position).getDate().substring(0,2);
+        String date_month = hereList.get(position).getDate().substring(3,6);
+
+
+        holder.textViewDate_month_input.setText(date_month);
+
+        holder.textViewDate_input.setText(date_date);
         holder.textViewStatus_input.setText(hereList.get(position).getStatus());
         holder.textViewTime_input.setText(hereList.get(position).getTime());
 
@@ -61,8 +67,8 @@ public class RecyclerView_Frag_Adapter extends RecyclerView.Adapter<RecyclerView
 
     public class InsideHolde extends RecyclerView.ViewHolder {
 
-        public TextView textViewName, textViewDate,textViewDate_input, textViewStatus,textViewStatus_input,
-                        textViewTime, textViewTime_input;
+        public TextView textViewName, textViewDate_month_input,textViewDate_input, textViewStatus,textViewStatus_input,
+                         textViewTime_input;
 
         public CircleImageView circleImageView;
 
@@ -70,12 +76,16 @@ public class RecyclerView_Frag_Adapter extends RecyclerView.Adapter<RecyclerView
             super(itemView);
 
             textViewName = itemView.findViewById(R.id.cardview_timestamp_frag_textViewName);
-            textViewDate = itemView.findViewById(R.id.cardview_timestamp_frag_textViewDate);
+            textViewDate_month_input = itemView.findViewById(R.id.cardview_timestamp_frag_textViewDate_Input);
             textViewDate_input = itemView.findViewById(R.id.cardview_timestamp_frag_textViewDate_Input);
-            textViewStatus = itemView.findViewById(R.id.cardview_timestamp_frag_textViewStatus);
+           // textViewStatus = itemView.findViewById(R.id.cardview_timestamp_frag_textViewStatus);
             textViewStatus_input = itemView.findViewById(R.id.cardview_timestamp_frag_textViewStatus_Input);
-            textViewTime = itemView.findViewById(R.id.cardview_timestamp_frag_textViewTime);
-            textViewTime_input = itemView.findViewById(R.id.cardview_timestamp_frag_textViewTime_Input);
+
+            textViewTime_input = itemView.findViewById(R.id.cardview_timestamp_frag_textViewTime);
+
+            circleImageView = itemView.findViewById(R.id.cardview_timestamp_frag_circleImageViewiD);
+
+
 
         }
     }

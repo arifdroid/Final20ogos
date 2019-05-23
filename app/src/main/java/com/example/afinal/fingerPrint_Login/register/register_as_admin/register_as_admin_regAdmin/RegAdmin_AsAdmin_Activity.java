@@ -112,6 +112,7 @@ public class RegAdmin_AsAdmin_Activity extends AppCompatActivity implements Obse
         copyadminCreated=0;
         countForAnimateButton=0;
         credenttial=null;
+
         textViewName = findViewById(R.id.reg_Admin_asAdmin_textView_name_id);
         textViewPhone= findViewById(R.id.reg_Admin_asAdmin_textView_phone_id);
 
@@ -124,10 +125,11 @@ public class RegAdmin_AsAdmin_Activity extends AppCompatActivity implements Obse
         textViewPhone.setText(userPhone);
 
         editTextCode_1 = findViewById(R.id.reg_Admin_asAdmin_editText_ring1_id);
-        editTextCode_2 = findViewById(R.id.reg_Admin_asAdmin_editText_ring1_id);
-        editTextCode_3 = findViewById(R.id.reg_Admin_asAdmin_editText_ring1_id);
-        editTextCode_5 = findViewById(R.id.reg_Admin_asAdmin_editText_ring1_id);
-        editTextCode_6 = findViewById(R.id.reg_Admin_asAdmin_editText_ring1_id);
+        editTextCode_2 = findViewById(R.id.reg_Admin_asAdmin_editText_ring2_id);
+        editTextCode_3 = findViewById(R.id.reg_Admin_asAdmin_editText_ring3_id);
+        editTextCode_4 = findViewById(R.id.reg_Admin_asAdmin_editText_ring4_id);
+        editTextCode_5 = findViewById(R.id.reg_Admin_asAdmin_editText_ring5_id);
+        editTextCode_6 = findViewById(R.id.reg_Admin_asAdmin_editText_ring6_id);
 
 
 

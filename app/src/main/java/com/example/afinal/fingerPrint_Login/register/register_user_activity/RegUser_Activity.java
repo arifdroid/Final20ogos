@@ -15,6 +15,8 @@ import de.hdodenhof.circleimageview.CircleImageView;
 import android.content.SharedPreferences;
 import android.net.Uri;
 import android.os.Bundle;
+import android.text.Editable;
+import android.text.TextWatcher;
 import android.util.Log;
 import android.view.View;
 import android.widget.Button;
@@ -139,7 +141,11 @@ public class RegUser_Activity extends AppCompatActivity implements View.OnClickL
         textView_adminName = findViewById(R.id.reg_User_textView_nameAdmin_id);
         textView_adminPhone = findViewById(R.id.reg_User_textView_adminPhone_id);
 
+        //first page
         fButton_Next = findViewById(R.id.reg_User_floatingActionButton_Next_id);
+
+
+        //2nd page
         fButton_Next2 = findViewById(R.id.reg_User_floatingActionButton_Next2_id);
 
         evaporateTextView = findViewById(R.id.reg_User_EvaporateText_Code_ID);
@@ -196,7 +202,7 @@ public class RegUser_Activity extends AppCompatActivity implements View.OnClickL
         adminPhone = intent.getStringExtra("admin_phone");
 
         userName = intent.getStringExtra("user_here_name");
-        userPhone = intent.getStringExtra("user_here_phone");
+        userPhone = intent.getStringExtra("user_here_phone"); //this data should be formatted,
 
 
         Toast.makeText(this, "admin number: "+adminPhone + ", admin name: "+adminName,Toast.LENGTH_SHORT).show();
@@ -321,10 +327,10 @@ public class RegUser_Activity extends AppCompatActivity implements View.OnClickL
                     final FirebaseUser user = FirebaseAuth.getInstance().getCurrentUser();
 
                     //get the reference to admin collection,
-                    final CollectionReference cR_ifRegistered = FirebaseFirestore.getInstance().collection("admins_offices");
+                    final CollectionReference cR_ifRegistered = FirebaseFirestore.getInstance().collection("all_admins_collections");
 
                     //check array of field "employee_this_admin", if contain UserCheckIn phone number
-                    Query query_ifRegistered = cR_ifRegistered.whereArrayContains("employee_this_admin",user.getPhoneNumber());
+                    Query query_ifRegistered = cR_ifRegistered.whereArrayContains("employee_this_admin",userPhone);
 
                     query_ifRegistered.get().addOnCompleteListener(new OnCompleteListener<QuerySnapshot>() {
                         @Override
@@ -336,7 +342,7 @@ public class RegUser_Activity extends AppCompatActivity implements View.OnClickL
 
                                 int documentSnapshotSize = task.getResult().getDocuments().size();
 
-                                if (documentSnapshotSize == 1) {
+                                if (documentSnapshotSize == 1) { //if size is one, user is registered by one admin.
 
                                     //then here we can log in
 
@@ -483,7 +489,7 @@ public class RegUser_Activity extends AppCompatActivity implements View.OnClickL
                         //presenter.phonecallBack();
                         getCallBack(userPhone);
 
-                    } else { //means this user is fully registered. , max of 2 users.
+                    } else { //means this user is fully registered. , max of 2 users. , we user and we admin, we 2 users of two different admin
 
                         Intent intentHereGoBack_MaxAlready = new Intent(RegUser_Activity.this, FingerPrint_LogIn_Final_Activity.class);
                         startActivity(intentHereGoBack_MaxAlready);
@@ -495,6 +501,9 @@ public class RegUser_Activity extends AppCompatActivity implements View.OnClickL
                 case R.id.reg_User_floatingActionButton_Next2_id: //this is after code, maybe no need to push t
 
                     String number_1 = editText_ring1.getText().toString();
+
+
+
                     String number_2 = editText_ring2.getText().toString();
                     String number_3 = editText_ring3.getText().toString();
                     String number_4 = editText_ring4.getText().toString();

@@ -216,6 +216,8 @@ public class RegAdmin_Activity extends AppCompatActivity implements View.OnClick
                 statusnow = "wait..";
                 textViewMessage.setText(statusnow);
 
+                textViewMessage_LogIn.setVisibility(View.INVISIBLE);
+
                 //fetch and save user name and phone.
 
                 String userNameIsAdmin = user_editTextName.getText().toString();
@@ -288,6 +290,8 @@ public class RegAdmin_Activity extends AppCompatActivity implements View.OnClick
 
 
             case R.id.regAdmin_button_user_id:
+
+                textViewMessage_LogIn.setVisibility(View.INVISIBLE);
 
 
                 statusnow = "wait..";
