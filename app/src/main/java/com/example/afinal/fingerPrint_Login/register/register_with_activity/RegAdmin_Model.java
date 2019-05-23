@@ -13,7 +13,11 @@ import com.google.firebase.firestore.QueryDocumentSnapshot;
 import com.google.firebase.firestore.QuerySnapshot;
 
 import java.util.Map;
+import java.util.Objects;
 import java.util.Observable;
+
+
+//22 May, nothing updated, just checking flow.
 
 public class RegAdmin_Model extends Observable implements RegAdminModel_Interface{
 
@@ -51,6 +55,8 @@ public class RegAdmin_Model extends Observable implements RegAdminModel_Interfac
 
     }
 
+
+    //this is admin name and phone.
     @Override
     public boolean getFromFirebase(String name1, final String phone) {
 
@@ -68,9 +74,9 @@ public class RegAdmin_Model extends Observable implements RegAdminModel_Interfac
 
                     QuerySnapshot querySnapshot =task.getResult();
 
-                    int size = querySnapshot.size();
+                  //  int size = querySnapshot.size();
 
-                    if(querySnapshot.size()==1){
+                    if(Objects.requireNonNull(querySnapshot).size()==1){ //this means admin is registered, so user can register to this admin.
 
                         for(QueryDocumentSnapshot documentSnapshot:querySnapshot){
 
@@ -78,7 +84,7 @@ public class RegAdmin_Model extends Observable implements RegAdminModel_Interfac
 
                             map= documentSnapshot.getData();
 
-                            for(Map.Entry<String,Object> remap: map.entrySet()){
+                            for(Map.Entry<String,Object> remap: map.entrySet()){  //here we try to pull admin name, and phone to check
 
                                 if(remap.getKey().equals("name")){
 
@@ -115,6 +121,8 @@ public class RegAdmin_Model extends Observable implements RegAdminModel_Interfac
                     }else {
 
 
+                        //here means either name or phone number for admin is wrong.
+
                         setNewSussesfulFecthData(false);
 
 
@@ -137,6 +145,7 @@ public class RegAdmin_Model extends Observable implements RegAdminModel_Interfac
             public void onCanceled() {
 
                 // noticeString="failed";
+                setNewSussesfulFecthData(false);
 
 
 
@@ -153,9 +162,9 @@ public class RegAdmin_Model extends Observable implements RegAdminModel_Interfac
 
 
 
-        if(returned==true){
+        if(returned){
 
-            returnSimulation = returned;
+            returnSimulation = true;
             setChanged();
             notifyObservers();
 
@@ -168,7 +177,6 @@ public class RegAdmin_Model extends Observable implements RegAdminModel_Interfac
             //return;
         }
 
-        return;
     }
 
 

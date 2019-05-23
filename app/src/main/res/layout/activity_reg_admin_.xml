@@ -54,7 +54,7 @@
             app:layout_constraintStart_toStartOf="@+id/guideline43"
             app:layout_constraintTop_toTopOf="@+id/guideline41"
             app:layout_constraintVertical_bias="0.007"
-            tools:visibility="gone" />
+            tools:visibility="visible" />
 
         <EditText
             android:id="@+id/regFinal_EditText_User_Phone_iD"
@@ -74,7 +74,7 @@
             app:layout_constraintStart_toStartOf="@+id/guideline43"
             app:layout_constraintTop_toTopOf="@+id/guideline45"
             app:layout_constraintVertical_bias="0.0"
-            tools:visibility="gone" />
+            tools:visibility="visible" />
 
         <Button
             android:id="@+id/regAdmin_Check_ID"
@@ -183,7 +183,8 @@
             app:layout_constraintEnd_toStartOf="@+id/guideline44"
             app:layout_constraintHorizontal_bias="0.37"
             app:layout_constraintStart_toStartOf="@+id/guideline43"
-            app:layout_constraintTop_toTopOf="@+id/guideline52" />
+            app:layout_constraintTop_toTopOf="@+id/guideline52"
+            tools:visibility="visible" />
 
         <androidx.constraintlayout.widget.Guideline
             android:id="@+id/guideline52"
@@ -201,7 +202,7 @@
             android:textColor="@color/material_our_blue"
             app:layout_constraintStart_toEndOf="@+id/regAdmin_TextView_ID"
             app:layout_constraintTop_toTopOf="@+id/guideline52"
-            tools:visibility="gone" />
+            tools:visibility="visible" />
 
         <androidx.constraintlayout.widget.Guideline
             android:id="@+id/guideline53"
@@ -238,7 +239,7 @@
             app:layout_constraintEnd_toStartOf="@+id/guideline53"
             app:layout_constraintStart_toStartOf="@+id/guideline55"
             app:layout_constraintTop_toTopOf="@+id/guideline47"
-            tools:visibility="gone" />
+            tools:visibility="visible" />
 
         <androidx.constraintlayout.widget.Guideline
             android:id="@+id/guideline56"
@@ -261,7 +262,7 @@
             app:layout_constraintEnd_toStartOf="@+id/guideline56"
             app:layout_constraintStart_toStartOf="@+id/guideline54"
             app:layout_constraintTop_toTopOf="@+id/guideline47"
-            tools:visibility="gone" />
+            tools:visibility="visible" />
 
         <EditText
             android:id="@+id/regFinal_EditText_Admin_Name_iD"
@@ -327,7 +328,8 @@
             app:layout_constraintBottom_toTopOf="@+id/guideline42"
             app:layout_constraintEnd_toStartOf="@+id/guideline44"
             app:layout_constraintStart_toStartOf="@+id/guideline43"
-            app:layout_constraintTop_toTopOf="@+id/guideline41" />
+            app:layout_constraintTop_toTopOf="@+id/guideline41"
+            tools:visibility="gone" />
 
         <androidx.constraintlayout.widget.Guideline
             android:id="@+id/guideline61"
@@ -340,8 +342,8 @@
             android:id="@+id/reg_admin_button_yes_id"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_marginTop="3dp"
-            android:layout_marginBottom="3dp"
+            android:layout_marginTop="4dp"
+            android:layout_marginBottom="4dp"
             android:background="@drawable/gradient_blue_button"
             android:text="yes"
             android:textColor="@color/material_white_blue"
@@ -349,14 +351,15 @@
             app:layout_constraintBottom_toTopOf="@+id/guideline61"
             app:layout_constraintEnd_toStartOf="@+id/guideline53"
             app:layout_constraintStart_toStartOf="@+id/guideline55"
-            app:layout_constraintTop_toTopOf="@+id/guideline45" />
+            app:layout_constraintTop_toTopOf="@+id/guideline45"
+            tools:visibility="gone" />
 
         <Button
             android:id="@+id/reg_admin_button_no_id"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_marginTop="3dp"
-            android:layout_marginBottom="3dp"
+            android:layout_marginTop="4dp"
+            android:layout_marginBottom="4dp"
             android:background="@drawable/gradient_blue_button"
             android:text="no"
             android:textColor="@color/material_white_blue"
@@ -364,7 +367,36 @@
             app:layout_constraintBottom_toTopOf="@+id/guideline61"
             app:layout_constraintEnd_toStartOf="@+id/guideline56"
             app:layout_constraintStart_toStartOf="@+id/guideline54"
-            app:layout_constraintTop_toTopOf="@+id/guideline45" />
+            app:layout_constraintTop_toTopOf="@+id/guideline45"
+            tools:visibility="gone" />
+
+        <androidx.constraintlayout.widget.Guideline
+            android:id="@+id/guideline63"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal"
+            app:layout_constraintGuide_percent="0.5" />
+
+        <androidx.constraintlayout.widget.Guideline
+            android:id="@+id/guideline64"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal"
+            app:layout_constraintGuide_percent="0.54" />
+
+        <TextView
+            android:id="@+id/textView29"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="8dp"
+            android:layout_marginTop="8dp"
+            android:layout_marginEnd="8dp"
+            android:layout_marginBottom="8dp"
+            android:text="TextView"
+            app:layout_constraintBottom_toTopOf="@+id/guideline64"
+            app:layout_constraintEnd_toStartOf="@+id/guideline44"
+            app:layout_constraintStart_toStartOf="@+id/guideline43"
+            app:layout_constraintTop_toTopOf="@+id/guideline63" />
 
     </androidx.constraintlayout.widget.ConstraintLayout>
 

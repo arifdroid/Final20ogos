@@ -3,12 +3,18 @@ package com.example.afinal.fingerPrint_Login.register.register_with_activity;
 import java.util.Observable;
 import java.util.Observer;
 
+
+
+//22 may notice on update() method, we dont request get method from model,
+//instead, we access variable directly.
+
 class RegAdmin_Presenter extends Observable implements  RegAdminPresenter_Interface, Observer {
 
     private RegAdminViewInterface view;
     private RegAdmin_Model model;
 
     private boolean modelReturn;
+
 
     public RegAdmin_Presenter(RegAdminViewInterface regAdminViewInterface) {
 
@@ -30,6 +36,8 @@ class RegAdmin_Presenter extends Observable implements  RegAdminPresenter_Interf
         }
         return false;
     }
+
+    //this is admin name and phone.
 
     @Override
     public boolean checkFromFirebaseSimulation(String name, String phone) {
@@ -66,13 +74,14 @@ class RegAdmin_Presenter extends Observable implements  RegAdminPresenter_Interf
 
         if(o instanceof  RegAdmin_Model){
 
+
             boolean checkHere = ((RegAdmin_Model) o).returnSimulation();
 
             if(checkHere){ //if now we are getting result back.
 
                 //need to notify change to modelReturn
 
-                modelReturn = checkHere;
+                modelReturn = true;
 
                 setChanged();
                 notifyObservers();

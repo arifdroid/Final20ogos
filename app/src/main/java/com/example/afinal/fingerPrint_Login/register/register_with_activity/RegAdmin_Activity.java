@@ -57,6 +57,18 @@ public class RegAdmin_Activity extends AppCompatActivity implements View.OnClick
     private Button button_yes;
     private Button button_no;
 
+    //the purpose for this reg_admin, check whether
+    // user want to register as another user, or as admin.
+
+    // if select as user, proceed with current flow
+
+    //if want to select as admin, move to next activity, as admin flow.
+
+    //22 may
+
+    private TextView textViewSureAsAdmin;
+
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -88,6 +100,10 @@ public class RegAdmin_Activity extends AppCompatActivity implements View.OnClick
 
         button_yes = findViewById(R.id.reg_admin_button_yes_id);
         button_no = findViewById(R.id.reg_admin_button_no_id);
+
+
+        textViewSureAsAdmin = findViewById(R.id.reg_admin_textView_sure_as_admin_id);
+
 
         button_yes.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -199,6 +215,9 @@ public class RegAdmin_Activity extends AppCompatActivity implements View.OnClick
 
                 statusnow = "wait..";
                 textViewMessage.setText(statusnow);
+
+                //fetch and save user name and phone.
+
                 String userNameIsAdmin = user_editTextName.getText().toString();
                 String userPhoneIsAdmin = user_editTextPhone.getText().toString();
 
@@ -232,6 +251,7 @@ public class RegAdmin_Activity extends AppCompatActivity implements View.OnClick
 
 //                    check_admin_database_for_user_registering_button.setVisibility(View.VISIBLE);
 
+                    textViewSureAsAdmin.setVisibility(View.VISIBLE);
 
                     button_yes.setVisibility(View.VISIBLE);
                     button_no.setVisibility(View.VISIBLE);
@@ -270,6 +290,9 @@ public class RegAdmin_Activity extends AppCompatActivity implements View.OnClick
 
                 statusnow = "wait..";
                 textViewMessage.setText(statusnow);
+
+                //fetch and save user name and phone
+
                 String userName = user_editTextName.getText().toString();
                 String userPhone = user_editTextPhone.getText().toString();
 
@@ -331,8 +354,10 @@ public class RegAdmin_Activity extends AppCompatActivity implements View.OnClick
 
             case R.id.regAdmin_Check_ID:
 
-                String adminName = user_editTextName.getText().toString();
-                String adminPhone = user_editTextPhone.getText().toString();
+                //here we want to get admin name and phone from user input.
+
+                String adminName = admin_editTextName.getText().toString();
+                String adminPhone = admin_editTextPhone.getText().toString();
 
                 checkValid = presenter.checkInputValid(adminName,adminPhone);
 
@@ -342,10 +367,13 @@ public class RegAdmin_Activity extends AppCompatActivity implements View.OnClick
 
                     //this will be done, after received new input.
 
-            globalAdminName = adminName;
-            globalAdminPhone =adminPhone;
-          boolean finalStatus = presenter.checkFromFirebaseSimulation(adminName,adminPhone);
+                    globalAdminName = adminName;
+                    globalAdminPhone =adminPhone;
+                    boolean finalStatus = presenter.checkFromFirebaseSimulation(adminName,adminPhone);
 //
+
+            // 22 May, this variable will be updated, after model finish checking with database.
+
             if(finalStatus){
                 //success
 
@@ -397,7 +425,7 @@ public class RegAdmin_Activity extends AppCompatActivity implements View.OnClick
 
             boolean checkHere = ((RegAdmin_Presenter) o).checkFinalFromFirebase(); //maybe because we never return false.
 
-            if(checkHere==true){
+            if(checkHere){
 
 
 
@@ -428,6 +456,8 @@ public class RegAdmin_Activity extends AppCompatActivity implements View.OnClick
         if(check){
 
             Toast.makeText(this,"success log in",Toast.LENGTH_LONG).show();
+
+            // passing intent move to next activity if successful
 
             Intent intent = new Intent(RegAdmin_Activity.this, RegUser_Activity.class);
 
