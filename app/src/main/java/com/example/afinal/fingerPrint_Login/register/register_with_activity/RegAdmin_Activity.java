@@ -227,6 +227,8 @@ public class RegAdmin_Activity extends AppCompatActivity implements View.OnClick
 
                     //updated 18 may
 
+                    userPhoneIsAdmin = RegAdmin_Presenter.phoneFinal; //finalise number
+
 
                     globalUserName= userNameIsAdmin;       //this will be used in next activity.
                     globalUserPhone = userPhoneIsAdmin;
@@ -302,6 +304,7 @@ public class RegAdmin_Activity extends AppCompatActivity implements View.OnClick
 
                     //updated 18 may
 
+                    userPhone = RegAdmin_Presenter.phoneFinal;
 
                     globalUserName= userName;       //this will be used in next activity.
                     globalUserPhone = userPhone;
@@ -366,6 +369,8 @@ public class RegAdmin_Activity extends AppCompatActivity implements View.OnClick
                     //updated 18 may
 
                     //this will be done, after received new input.
+
+                    adminPhone = RegAdmin_Presenter.phoneFinal;
 
                     globalAdminName = adminName;
                     globalAdminPhone =adminPhone;
@@ -460,6 +465,10 @@ public class RegAdmin_Activity extends AppCompatActivity implements View.OnClick
             // passing intent move to next activity if successful
 
             Intent intent = new Intent(RegAdmin_Activity.this, RegUser_Activity.class);
+
+
+
+
 
             intent.putExtra("admin_name", globalAdminName); //this just pass intent.
             intent.putExtra("admin_phone", globalAdminPhone);

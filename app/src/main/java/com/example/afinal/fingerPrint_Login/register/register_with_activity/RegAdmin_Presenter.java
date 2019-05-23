@@ -1,5 +1,6 @@
 package com.example.afinal.fingerPrint_Login.register.register_with_activity;
 
+import java.util.Objects;
 import java.util.Observable;
 import java.util.Observer;
 
@@ -14,6 +15,7 @@ class RegAdmin_Presenter extends Observable implements  RegAdminPresenter_Interf
     private RegAdmin_Model model;
 
     private boolean modelReturn;
+    public static String phoneFinal;
 
 
     public RegAdmin_Presenter(RegAdminViewInterface regAdminViewInterface) {
@@ -31,8 +33,54 @@ class RegAdmin_Presenter extends Observable implements  RegAdminPresenter_Interf
         modelReturn = false;
         if((name!=null&& phone!=null)||(name!="" && phone!="")){
 
+            String checkPhoneinput = phone;
 
-            return true;
+            Character first = Objects.requireNonNull(checkPhoneinput).charAt(0);
+
+
+            //22 may
+            //dash also need to change. //we need to static variable can be accessed once from calling main.
+            //call only once.
+
+
+             phone = phone.replace("-","");
+
+
+            if(!first.equals("+")){
+
+                //something wrong with input. either return false or add plus +6
+
+                if(first.equals("6")){
+
+                    phone = "+"+phone; //notice we only change data here, not globally
+
+                    phoneFinal = phone;
+
+                    return true;
+
+
+                }else if(first.equals("0")){
+
+                    phone = "+6"+ phone;
+
+                    phoneFinal = phone;
+
+                    return true;
+
+
+                }else {
+
+                    return false;
+                }
+
+
+
+            }else { //assume number start with plus
+
+                phoneFinal = phone;
+                return true;
+
+            }
         }
         return false;
     }
