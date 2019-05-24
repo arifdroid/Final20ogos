@@ -281,6 +281,16 @@
             app:maxImageSize="30dp"
             app:srcCompat="@drawable/ic_moving_4th_verse"
             tools:visibility="gone" />
+
+        <Button
+            android:id="@+id/reg_admin_asAdmin_buttonTest"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginEnd="60dp"
+            android:layout_marginBottom="16dp"
+            android:text="Button"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toStartOf="@+id/guideline165" />
     </androidx.constraintlayout.widget.ConstraintLayout>
 
     <de.hdodenhof.circleimageview.CircleImageView

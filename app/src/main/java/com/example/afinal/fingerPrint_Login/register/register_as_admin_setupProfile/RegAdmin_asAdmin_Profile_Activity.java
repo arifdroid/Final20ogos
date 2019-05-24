@@ -40,6 +40,7 @@ import com.google.firebase.firestore.DocumentReference;
 import com.google.firebase.firestore.FirebaseFirestore;
 import com.google.firebase.storage.FirebaseStorage;
 import com.google.firebase.storage.StorageReference;
+import com.squareup.picasso.Picasso;
 
 import java.io.IOException;
 import java.util.ArrayList;
@@ -142,6 +143,17 @@ public class RegAdmin_asAdmin_Profile_Activity extends AppCompatActivity impleme
 
         user_name_asAdmin = intent.getStringExtra("adminName_asAdmin");
         user_phone_asAdmin = intent.getStringExtra("adminPhone_asAdmin");
+
+        //storageReference = (intent.getStringExtra("image_ref_asAdmin"));
+
+
+        //23 may check
+
+        storageReference = FirebaseStorage.getInstance().getReference().child("uploads").child("picture"+ user_name_asAdmin+user_phone_asAdmin);
+
+        //
+
+
         adminDetailsList = new ArrayList<>();
 
         count++;
@@ -348,6 +360,10 @@ public class RegAdmin_asAdmin_Profile_Activity extends AppCompatActivity impleme
 
         //wifi listener
 
+      //  storageReference.get
+
+
+        Picasso.with(this).load(String.valueOf(storageReference)).into(circleImageView);
 
         Intent intentWifi = new Intent();
 
@@ -357,6 +373,8 @@ public class RegAdmin_asAdmin_Profile_Activity extends AppCompatActivity impleme
         // https://www.journaldev.com/10356/android-broadcastreceiver-example-tutorial
 
         // https://stackoverflow.com/questions/5888502/how-to-detect-when-wifi-connection-has-been-established-in-android
+
+
 
     }
 
@@ -396,6 +414,8 @@ public class RegAdmin_asAdmin_Profile_Activity extends AppCompatActivity impleme
 //        Toast.makeText(RegAdmin_asAdmin_Profile_Activity.this,"image setup", Toast.LENGTH_SHORT).show();
 //
 //    }
+
+
 //
     @Override
     public void onRequestPermissionsResult(int requestCode, @NonNull String[] permissions, @NonNull int[] grantResults) {

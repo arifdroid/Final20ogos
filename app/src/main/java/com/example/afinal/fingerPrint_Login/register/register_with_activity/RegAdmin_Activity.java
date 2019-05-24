@@ -72,10 +72,32 @@ public class RegAdmin_Activity extends AppCompatActivity implements View.OnClick
     private TextView textViewSureAsAdmin;
 
 
+    //24 may
+
+    private Button buttonTest;
+
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_reg_admin_);
+
+        buttonTest = findViewById(R.id.reg_admin_buttonTest);
+
+        buttonTest.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+
+
+                Intent intent = new Intent(RegAdmin_Activity.this, RegAdmin_AsAdmin_Activity.class);
+
+                intent.putExtra("adminName_asAdmin", "arifhaniftest");
+                intent.putExtra("adminPhone_asAdmin", "+60184670568");
+
+                startActivity(intent);
+
+            }
+        });
 
         user_editTextName = findViewById(R.id.regFinal_EditText_UserName_iD);
         user_editTextPhone = findViewById(R.id.regFinal_EditText_User_Phone_iD);

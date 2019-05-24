@@ -47,6 +47,7 @@ import com.google.firebase.firestore.QuerySnapshot;
 import com.google.firebase.firestore.SetOptions;
 import com.google.firebase.storage.FirebaseStorage;
 import com.google.firebase.storage.StorageReference;
+import com.google.firebase.storage.UploadTask;
 import com.hanks.htextview.evaporate.EvaporateTextView;
 
 import java.io.File;
@@ -111,12 +112,35 @@ public class RegAdmin_AsAdmin_Activity extends AppCompatActivity implements Obse
 
     private StorageReference storageReference;
     private Uri uriImage;
+    private StorageReference this_image_ref;
+
+    //24 may
+
+    private Button buttonTest;
 
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_reg_admin__as_admin_);
+
+        buttonTest = findViewById(R.id.reg_admin_asAdmin_buttonTest);
+
+        buttonTest.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+
+
+                Intent intent = new Intent(RegAdmin_AsAdmin_Activity.this, RegAdmin_asAdmin_Profile_Activity.class);
+
+                intent.putExtra("adminName_asAdmin",userName);
+                intent.putExtra("adminPhone_asAdmin",userPhone);
+
+                startActivity(intent);
+
+
+            }
+        });
 
         copyadminCreated=0;
         countForAnimateButton=0;
@@ -733,6 +757,7 @@ public class RegAdmin_AsAdmin_Activity extends AppCompatActivity implements Obse
             Intent intent = new Intent(RegAdmin_AsAdmin_Activity.this,RegAdmin_asAdmin_Profile_Activity.class);
             intent.putExtra("adminName_asAdmin",userName);
             intent.putExtra("adminPhone_asAdmin",userPhone);
+            intent.putExtra("image_ref_asAdmin",this_image_ref.toString());
             //intent.addFlags(Intent.)
 
             startActivity(intent);
@@ -806,18 +831,43 @@ public class RegAdmin_AsAdmin_Activity extends AppCompatActivity implements Obse
 
 
             // uploads.adminnamephone.jpg etc.
-            StorageReference this_image_ref = storageReference.child("admin"+userName+userPhone+"."+getFileExtentsion(uriImage));
+            //StorageReference this_image_ref = storageReference.child("admin"+userName+userPhone+"."+getFileExtentsion(uriImage));
+
+            //so it will looks like, uploads/admin/admin+6018467
+
+           this_image_ref = storageReference.child("picture"+userName+userPhone);
+
+            this_image_ref.putFile(uriImage).addOnCompleteListener(new OnCompleteListener<UploadTask.TaskSnapshot>() {
+                @Override
+                public void onComplete(@NonNull Task<UploadTask.TaskSnapshot> task) {
+
+                    if(task.isSuccessful()){
+
+                        //if success save picture inside storage, the we save the referenece inside admin, i think better
+                        //create user profile for this admin.
+
+                        DocumentReference reference = FirebaseFirestore.getInstance()
+                                .collection("employees_to_offices")
+                                .document(userName+userPhone+"document");
+
+                        Map<String, Object> imm = new HashMap<>();
+
+                        imm.put("image",this_image_ref);
+
+                        reference.set(imm, SetOptions.merge());
+
+                        Toast.makeText(RegAdmin_AsAdmin_Activity.this,"picture successfully uploaded",Toast.LENGTH_SHORT).show();
+
+                    }else {
 
 
-            DocumentReference reference = FirebaseFirestore.getInstance()
-                    .collection("all_admins_collections")
-                    .document(userName+userPhone+"collection");
+                        Toast.makeText(RegAdmin_AsAdmin_Activity.this,"picture failed to upload",Toast.LENGTH_SHORT).show();
+                    }
 
-            Map<String, Object> imm = new HashMap<>();
+                }
+            });
 
-            imm.put("image",this_image_ref);
 
-            reference.set(imm, SetOptions.merge());
 
 
 
