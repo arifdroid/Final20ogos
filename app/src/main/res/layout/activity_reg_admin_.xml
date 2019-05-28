@@ -406,11 +406,11 @@
             app:layout_constraintTop_toTopOf="@+id/guideline63" />
 
         <Button
-            android:id="@+id/reg_admin_buttonTest"
+            android:id="@+id/why_button_test_id"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginStart="8dp"
-            android:layout_marginTop="60dp"
+            android:layout_marginTop="44dp"
             android:layout_marginEnd="8dp"
             android:text="Button"
             app:layout_constraintEnd_toEndOf="parent"

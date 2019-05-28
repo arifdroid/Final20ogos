@@ -3,43 +3,28 @@ package com.example.afinal.fingerPrint_Login.fingerprint_login;
 import android.content.Context;
 import android.content.Intent;
 import android.content.SharedPreferences;
-import android.content.res.Resources;
-import android.graphics.Color;
-import android.graphics.Rect;
-import android.graphics.drawable.Drawable;
-import android.graphics.drawable.GradientDrawable;
 import android.os.Bundle;
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
+
+import com.example.afinal.fingerPrint_Login.TestActivity;
+import com.example.afinal.fingerPrint_Login.register.register_as_admin.register_as_admin_regAdmin.RegAdmin_AsAdmin_Activity;
 import com.google.android.material.floatingactionbutton.FloatingActionButton;
 
-import androidx.core.content.ContextCompat;
-import androidx.core.content.res.ResourcesCompat;
 import androidx.fragment.app.Fragment;
 
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.view.animation.Animation;
 import android.widget.TextView;
 import android.widget.Toast;
 
 import com.example.afinal.R;
-import com.example.afinal.fingerPrint_Login.register.register_as_admin.register_as_admin_regAdmin.RegAdmin_AsAdmin_Activity;
 import com.example.afinal.fingerPrint_Login.register.register_with_activity.RegAdmin_Activity;
-import com.nightonke.boommenu.BoomButtons.BoomButton;
-import com.nightonke.boommenu.BoomButtons.ButtonPlaceEnum;
-import com.nightonke.boommenu.BoomMenuButton;
-import com.nightonke.boommenu.ButtonEnum;
-import com.nightonke.boommenu.OnBoomListener;
-import com.nightonke.boommenu.Piece.PiecePlaceEnum;
-import com.nightonke.boommenu.Util;
 
 import java.io.File;
 import java.lang.reflect.Field;
-import java.util.Timer;
-import java.util.TimerTask;
 
 public class Login_Select_Action_Fragment extends Fragment implements View.OnClickListener {
 
@@ -60,6 +45,10 @@ public class Login_Select_Action_Fragment extends Fragment implements View.OnCli
     private String adminName_2;
     private String adminPhone_2;
 
+    //25 may memory leak
+
+    private boolean nameHere_boolean;
+
 
     //boom menu test
 
@@ -78,6 +67,8 @@ public class Login_Select_Action_Fragment extends Fragment implements View.OnCli
 
         View rootView = inflater.inflate(R.layout.floatingbutton_fragment_select, container,false);
         mContext = container.getContext();
+
+        nameHere_boolean = false;
 //
 //        countHere =0;
 //        boomMenuButton = rootView.findViewById(R.id.boomMenuiD);
@@ -96,7 +87,7 @@ public class Login_Select_Action_Fragment extends Fragment implements View.OnCli
 //
 //
 //
-        floatButton_Admin_1 = rootView.findViewById(R.id.final_fb_admin1_id);
+//        floatButton_Admin_1 = rootView.findViewById(R.id.finall_fb_one_id);
         floatButton_Admin_2 = rootView.findViewById(R.id.final_fb_admin2);
         floatButton_Reg_User = rootView.findViewById(R.id.final_fb_register_id);
         //floatButton_Reg_Admin = rootView.findViewById(R.id.select_fragment_FloatButton_RegisterAdminiD);
@@ -161,6 +152,8 @@ public class Login_Select_Action_Fragment extends Fragment implements View.OnCli
                             SharedPreferences sharedPrefs_1 = getActivity().getSharedPreferences("com.example.finalV8_punchCard."+sharedPrefsCheck, Context.MODE_PRIVATE);
                             //will be read sharedprefs of "com.example.finalV8_punchCard.+60184670568"
 
+                            nameHere_boolean= true;
+
                             nameHere = sharedPrefs_1.getString("final_User_Name","");
                             phoneHere = sharedPrefs_1.getString("final_User_Phone","");
                             adminName = sharedPrefs_1.getString("final_Admin_Name","");
@@ -199,6 +192,8 @@ public class Login_Select_Action_Fragment extends Fragment implements View.OnCli
 
                             SharedPreferences sharedPrefs_1 = getActivity().getSharedPreferences("com.example.finalV8_punchCard."+sharedPrefsCheck_Admin_1, Context.MODE_PRIVATE);
                             //will be read sharedprefs of "com.example.finalV8_punchCard.+60184670568"
+
+                            nameHere_boolean= true;
 
                             nameHere = sharedPrefs_1.getString("final_User_Name","");
                             phoneHere = sharedPrefs_1.getString("final_User_Phone","");
@@ -281,7 +276,7 @@ public class Login_Select_Action_Fragment extends Fragment implements View.OnCli
 //
 //        }
 
-        floatButton_Admin_1.setOnClickListener(this);
+      //  floatButton_Admin_1.setOnClickListener(this);
         floatButton_Admin_2.setOnClickListener(this);
         floatButton_Reg_User.setOnClickListener(this);
 //        floatButton_Reg_Admin.setOnClickListener(this);
@@ -536,46 +531,59 @@ public class Login_Select_Action_Fragment extends Fragment implements View.OnCli
 
             case R.id.final_fb_backbutton_id:
 
+
+
                 getFragmentManager().popBackStack();
 
                 break;
 
-            case R.id.final_fb_admin1_id:
+            case R.id.finall_fb_one_id:
 
                 //to disable register user, save data to shared preferences,
                 //then pull data, if data exist, dont allow for register, show toast
-                String test = nameHere;
-                if(nameHere!=null) {
-                    FingerPrint_LogIn_Final_Activity.timeFragmentBoolean=true;
-                    ((FingerPrint_LogIn_Final_Activity) getActivity()).nameUser = nameHere; //
-                    ((FingerPrint_LogIn_Final_Activity) getActivity()).phoneUser = phoneHere; //
-                    ((FingerPrint_LogIn_Final_Activity) getActivity()).globalAdminNameHere = adminName; //
-                    ((FingerPrint_LogIn_Final_Activity) getActivity()).globalAdminPhoneHere = adminPhone; //
-
-                    Log.i("finalSharePreDataCheck","Login_Select_Fragment 4, before return,name: "
-                            + nameHere+ ", phone: "+phoneHere+ ", adminName:"
-                            +adminName+" , adminPhone: "+adminPhone);
-                }
-
-                //this is we setup shared prefe
-                getFragmentManager().popBackStack();
+//                String test = nameHere;
+//                if(nameHere_boolean) {
+//                    FingerPrint_LogIn_Final_Activity.timeFragmentBoolean=true;
+//
+//                    ((FingerPrint_LogIn_Final_Activity) getActivity()).nameUser = nameHere; //
+//                    ((FingerPrint_LogIn_Final_Activity) getActivity()).phoneUser = phoneHere; //
+//                    ((FingerPrint_LogIn_Final_Activity) getActivity()).globalAdminNameHere = adminName; //
+//                    ((FingerPrint_LogIn_Final_Activity) getActivity()).globalAdminPhoneHere = adminPhone; //
+//
+//                    Log.i("finalSharePreDataCheck","Login_Select_Fragment 4, before return,name: "
+//                            + nameHere+ ", phone: "+phoneHere+ ", adminName:"
+//                            +adminName+" , adminPhone: "+adminPhone);
+//                }
+//
+//                //25 May
+//
+//                if(nameHere_boolean){
+//
+//
+//
+//
+//
+//                }
+//
+//                //this is we setup shared prefe
+//                getFragmentManager().popBackStack();
 
                 break;
             case R.id.final_fb_admin2:
-                if(nameHere!=null) {
-                    FingerPrint_LogIn_Final_Activity.timeFragmentBoolean=true;
-                    ((FingerPrint_LogIn_Final_Activity) getActivity()).nameUser = nameHere_2; //
-                    ((FingerPrint_LogIn_Final_Activity) getActivity()).phoneUser = phoneHere_2; //
-                    ((FingerPrint_LogIn_Final_Activity) getActivity()).globalAdminNameHere = adminName_2; //
-                    ((FingerPrint_LogIn_Final_Activity) getActivity()).globalAdminPhoneHere = adminPhone_2; //
-
-                    Log.i("finalSharePreDataCheck","Login_Select_Fragment 4, before return,name: "
-                            + nameHere_2+ ", phone: "+phoneHere_2+ ", adminName:"
-                            +adminName_2+" , adminPhone: "+adminPhone_2);
-                }
-
-                getFragmentManager().popBackStack();
-
+//                if(nameHere_boolean) {
+//                    FingerPrint_LogIn_Final_Activity.timeFragmentBoolean=true;
+//                    ((FingerPrint_LogIn_Final_Activity) getActivity()).nameUser = nameHere_2; //
+//                    ((FingerPrint_LogIn_Final_Activity) getActivity()).phoneUser = phoneHere_2; //
+//                    ((FingerPrint_LogIn_Final_Activity) getActivity()).globalAdminNameHere = adminName_2; //
+//                    ((FingerPrint_LogIn_Final_Activity) getActivity()).globalAdminPhoneHere = adminPhone_2; //
+//
+//                    Log.i("finalSharePreDataCheck","Login_Select_Fragment 4, before return,name: "
+//                            + nameHere_2+ ", phone: "+phoneHere_2+ ", adminName:"
+//                            +adminName_2+" , adminPhone: "+adminPhone_2);
+//                }
+//
+//                getFragmentManager().popBackStack();
+//
 
 
                 break;
@@ -605,6 +613,12 @@ public class Login_Select_Action_Fragment extends Fragment implements View.OnCli
 
             case R.id.final_fb_leave_id:
 
+
+                Intent intent1 = new Intent(getActivity(), RegAdmin_AsAdmin_Activity.class);
+
+                intent1.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
+
+                startActivity(intent1);
 
                 break;
 

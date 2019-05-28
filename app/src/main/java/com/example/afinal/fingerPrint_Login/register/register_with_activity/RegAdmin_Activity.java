@@ -11,6 +11,7 @@ import android.widget.TextView;
 import android.widget.Toast;
 
 import com.example.afinal.R;
+import com.example.afinal.fingerPrint_Login.TestActivity;
 import com.example.afinal.fingerPrint_Login.register.register_as_admin.register_as_admin_regAdmin.RegAdmin_AsAdmin_Activity;
 import com.example.afinal.fingerPrint_Login.register.register_user_activity.RegUser_Activity;
 import com.hanks.htextview.evaporate.EvaporateTextView;
@@ -76,28 +77,37 @@ public class RegAdmin_Activity extends AppCompatActivity implements View.OnClick
 
     private Button buttonTest;
 
+    //27 may
+    private Button why_buttonTest;
+
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_reg_admin_);
 
-        buttonTest = findViewById(R.id.reg_admin_buttonTest);
+        //buttonTest = findViewById(R.id.reg_admin_buttonTest);
 
-        buttonTest.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
+        why_buttonTest = findViewById(R.id.why_button_test_id);
 
+        why_buttonTest.setOnClickListener(this);
 
-                Intent intent = new Intent(RegAdmin_Activity.this, RegAdmin_AsAdmin_Activity.class);
+        //buttonTest.setOnClickListener(this);
 
-                intent.putExtra("adminName_asAdmin", "arifhaniftest");
-                intent.putExtra("adminPhone_asAdmin", "+60184670568");
-
-                startActivity(intent);
-
-            }
-        });
+//        buttonTest.setOnClickListener(new View.OnClickListener() {
+//            @Override
+//            public void onClick(View v) {
+//
+//
+//                Intent intent = new Intent(RegAdmin_Activity.this, RegAdmin_AsAdmin_Activity.class);
+//
+//                intent.putExtra("adminName_asAdmin_2", "arifhaniftest");
+//                intent.putExtra("adminPhone_asAdmin_2", "+60184670568");
+//
+//                startActivity(intent);
+//
+//            }
+//        });
 
         user_editTextName = findViewById(R.id.regFinal_EditText_UserName_iD);
         user_editTextPhone = findViewById(R.id.regFinal_EditText_User_Phone_iD);
@@ -240,8 +250,15 @@ public class RegAdmin_Activity extends AppCompatActivity implements View.OnClick
 
     @Override
     protected void onDestroy() {
-        super.onDestroy();
+
         presenter.deleteObserver(this);
+
+        super.onDestroy();
+
+    //    presenter.deleteObserver(this);
+
+
+        Log.i("checkDestroy", "reg_admin");
     }
 
     @Override
@@ -250,6 +267,30 @@ public class RegAdmin_Activity extends AppCompatActivity implements View.OnClick
 
 
         switch (v.getId()){
+
+            case R.id.why_button_test_id:
+
+                // maybe presenter not destroyed. since activity is not destroyed, it is put in stack only.
+                //28 may test.
+
+                presenter.deleteObserver(this);
+
+                //
+
+                Log.i("checkFlowDestroy", "1 reg_admin");
+
+                Intent intent = new Intent(RegAdmin_Activity.this, RegAdmin_AsAdmin_Activity.class);
+
+                intent.putExtra("adminName_asAdmin_2", "arifhaniftest");
+                intent.putExtra("adminPhone_asAdmin_2", "+60184670568");
+
+                intent.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
+
+                startActivity(intent);
+
+
+
+                break;
 
 
             case R.id.regAdmin_button_admin_id:

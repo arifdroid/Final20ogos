@@ -23,12 +23,15 @@
     android:background="@drawable/main_bg"
     >
 
+
+
     <androidx.constraintlayout.widget.ConstraintLayout
+        android:id="@+id/constraintLayout3"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.0"
+        app:layout_constraintHorizontal_bias="1.0"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
         app:layout_constraintVertical_bias="1.0">
@@ -112,11 +115,11 @@
             android:id="@+id/reg_Admin_asAdmin_editText_ring3_id"
             android:layout_width="55dp"
             android:layout_height="55dp"
+            android:autoSizeTextType="uniform"
             android:background="@drawable/ic_pin_ring"
             android:ems="10"
-            android:textAlignment="center"
-            android:autoSizeTextType="uniform"
             android:inputType="number"
+            android:textAlignment="center"
             android:visibility="gone"
             app:layout_constraintBottom_toTopOf="@+id/guideline167"
             app:layout_constraintEnd_toStartOf="@+id/guideline170"
@@ -282,16 +285,18 @@
             app:srcCompat="@drawable/ic_moving_4th_verse"
             tools:visibility="gone" />
 
-        <Button
-            android:id="@+id/reg_admin_asAdmin_buttonTest"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_marginEnd="60dp"
-            android:layout_marginBottom="16dp"
-            android:text="Button"
-            app:layout_constraintBottom_toBottomOf="parent"
-            app:layout_constraintEnd_toStartOf="@+id/guideline165" />
     </androidx.constraintlayout.widget.ConstraintLayout>
+
+    <Button
+        android:id="@+id/buttontest28mayid"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="80dp"
+        android:layout_marginBottom="16dp"
+        android:text="Button"
+        android:visibility="visible"
+        app:layout_constraintBottom_toBottomOf="@+id/constraintLayout3"
+        app:layout_constraintStart_toStartOf="@+id/constraintLayout3" />
 
     <de.hdodenhof.circleimageview.CircleImageView
         android:id="@+id/reg_Admin_asAdmin_circlerImageView"

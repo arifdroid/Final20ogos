@@ -363,7 +363,7 @@ public class RegAdmin_asAdmin_Profile_Activity extends AppCompatActivity impleme
       //  storageReference.get
 
 
-        Picasso.with(this).load(String.valueOf(storageReference)).into(circleImageView);
+        //Picasso.with(this).load(String.valueOf(storageReference)).into(circleImageView);
 
         Intent intentWifi = new Intent();
 

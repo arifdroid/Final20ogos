@@ -588,13 +588,20 @@ public class FingerPrint_LogIn_Final_Activity extends AppCompatActivity implemen
     @Override
     public void onClick(View v) {
 
+
+        presenter.removeLocationNow();
+        presenter.deleteObserver(this);
         //reset back status
         // nameUser="";
-        nameUser = null;
-        checkLocationProcess = false;
+            nameUser = null;
+            checkLocationProcess = false;
 
         //phoneAdminConstraint=null;
-        backColor.setAlpha(0.9f);
+      // backColor.setAlpha(0.9f);
+
+        //25 may
+
+
 
         getSupportFragmentManager().beginTransaction()
                 .replace(R.id.frameID, fragment)
@@ -606,6 +613,7 @@ public class FingerPrint_LogIn_Final_Activity extends AppCompatActivity implemen
 
     @Override
     public void update(Observable o, Object arg) {
+
 
         counterFlowHere++;
         Log.i("checkUpdateFinal", "1");
@@ -1169,11 +1177,17 @@ public class FingerPrint_LogIn_Final_Activity extends AppCompatActivity implemen
 
     }
 
+
+
     @Override
     protected void onDestroy() {
+
+        presenter.removeLocationNow();
+        presenter.deleteObserver(this);
+
+
         super.onDestroy();
 
-        presenter.deleteObserver(this);
     }
 
     //probably unnecessary

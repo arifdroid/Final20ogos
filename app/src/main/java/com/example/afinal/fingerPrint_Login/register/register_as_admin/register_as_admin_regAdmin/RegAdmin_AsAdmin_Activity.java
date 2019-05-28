@@ -62,7 +62,7 @@ import java.util.concurrent.TimeUnit;
 
 import de.hdodenhof.circleimageview.CircleImageView;
 
-public class RegAdmin_AsAdmin_Activity extends AppCompatActivity implements Observer {
+public class RegAdmin_AsAdmin_Activity extends AppCompatActivity implements Observer, View.OnClickListener {
 
     //private EditText editTextName, editTextPhone, editTextCode;
     //private Button buttonLogin, buttonGetCode;
@@ -118,29 +118,39 @@ public class RegAdmin_AsAdmin_Activity extends AppCompatActivity implements Obse
 
     private Button buttonTest;
 
+    //28 may
+    private Button button28may;
+
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_reg_admin__as_admin_);
 
-        buttonTest = findViewById(R.id.reg_admin_asAdmin_buttonTest);
+        Log.i("checkFlowDestroy", "2 reg_admin");
+//
+        //buttonTest = findViewById(R.id.reg_admin_asAdmin_buttonTest);
 
-        buttonTest.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
+        button28may = findViewById(R.id.buttontest28mayid);
 
+        //buttonTest.setOnClickListener(this);
 
-                Intent intent = new Intent(RegAdmin_AsAdmin_Activity.this, RegAdmin_asAdmin_Profile_Activity.class);
-
-                intent.putExtra("adminName_asAdmin",userName);
-                intent.putExtra("adminPhone_asAdmin",userPhone);
-
-                startActivity(intent);
-
-
-            }
-        });
+//
+//        buttonTest.setOnClickListener(new View.OnClickListener() {
+//            @Override
+//            public void onClick(View v) {
+//
+////
+////                Intent intent = new Intent(RegAdmin_AsAdmin_Activity.this, RegAdmin_asAdmin_Profile_Activity.class);
+////
+////                intent.putExtra("adminName_asAdmin",userName);
+////                intent.putExtra("adminPhone_asAdmin",userPhone);
+////
+////                startActivity(intent);
+//
+//
+//            }
+//        });
 
         copyadminCreated=0;
         countForAnimateButton=0;
@@ -154,8 +164,8 @@ public class RegAdmin_AsAdmin_Activity extends AppCompatActivity implements Obse
 
         Intent intent = getIntent();
 
-        userName = intent.getStringExtra("adminName_asAdmin");
-        userPhone = intent.getStringExtra("adminPhone_asAdmin");
+        userName = intent.getStringExtra("adminName_asAdmin_2");
+        userPhone = intent.getStringExtra("adminPhone_asAdmin_2");
 
         Log.i("22may_as_admin"," name:"+userName + ", phone:"+userPhone);
 
@@ -320,6 +330,8 @@ public class RegAdmin_AsAdmin_Activity extends AppCompatActivity implements Obse
             }
         });
 
+
+
         buttonGetCode_next2.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -346,6 +358,12 @@ public class RegAdmin_AsAdmin_Activity extends AppCompatActivity implements Obse
 
             }
         });
+
+
+        //28 may
+
+         button28may.setOnClickListener(this);
+
 
         //phone auth call back
 
@@ -471,6 +489,15 @@ public class RegAdmin_AsAdmin_Activity extends AppCompatActivity implements Obse
         //must be done at first phase.
 
 
+
+//        buttonTest.setOnClickListener(new View.OnClickListener() {
+//            @Override
+//            public void onClick(View v) {
+//
+//                Log.i("checktest ","asda");
+//
+//            }
+//        });
 
     }
 
@@ -599,8 +626,15 @@ public class RegAdmin_AsAdmin_Activity extends AppCompatActivity implements Obse
 
     @Override
     protected void onDestroy() {
-        super.onDestroy();
+
+
+        Log.i("checkFlowDestroy", "3 reg_admin");
+
         presenter.deleteObserver(this);
+
+        super.onDestroy();
+
+        Log.i("checkFlowDestroy", "4 reg_admin");
     }
 
     private void getCallBack(String userPhone) {
@@ -752,7 +786,9 @@ public class RegAdmin_AsAdmin_Activity extends AppCompatActivity implements Obse
 
             //uploadFile(uri);
 
-            uploadFile();
+            //28 may
+
+            uploadFile(); //this might not finished in time.
 
             Intent intent = new Intent(RegAdmin_AsAdmin_Activity.this,RegAdmin_asAdmin_Profile_Activity.class);
             intent.putExtra("adminName_asAdmin",userName);
@@ -872,6 +908,33 @@ public class RegAdmin_AsAdmin_Activity extends AppCompatActivity implements Obse
 
 
         }
+
+    }
+
+    @Override
+    public void onClick(View v) {
+
+        switch (v.getId()){
+
+            case R.id.buttontest28mayid:
+
+                uploadFile();
+
+                Intent intent = new Intent(RegAdmin_AsAdmin_Activity.this,RegAdmin_asAdmin_Profile_Activity.class);
+                intent.putExtra("adminName_asAdmin",userName);
+                intent.putExtra("adminPhone_asAdmin",userPhone);
+                intent.putExtra("image_ref_asAdmin",this_image_ref.toString());
+
+                startActivity(intent);
+
+
+                Log.i("checkClickWhy", "1");
+
+
+                break;
+        }
+
+
 
     }
 }
