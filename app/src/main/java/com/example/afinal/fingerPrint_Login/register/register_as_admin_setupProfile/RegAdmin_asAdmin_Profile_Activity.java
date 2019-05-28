@@ -1,10 +1,8 @@
 package com.example.afinal.fingerPrint_Login.register.register_as_admin_setupProfile;
 
-import android.app.Activity;
 import android.app.TimePickerDialog;
 import android.content.Context;
 import android.content.Intent;
-import android.content.IntentFilter;
 import android.content.SharedPreferences;
 import android.location.Geocoder;
 import android.location.LocationListener;
@@ -14,19 +12,21 @@ import android.net.wifi.WifiInfo;
 import android.net.wifi.WifiManager;
 
 import androidx.annotation.NonNull;
-import androidx.annotation.Nullable;
 
+
+import com.bumptech.glide.Glide;
 import com.example.afinal.fingerPrint_Login.PassResult;
 import com.example.afinal.fingerPrint_Login.register.PassResultMap;
 import com.example.afinal.fingerPrint_Login.register.TimePickerFragment;
 import com.example.afinal.fingerPrint_Login.register.WifiReceiver;
 import com.example.afinal.fingerPrint_Login.register.register_as_admin_add_userList.Add_User_Activity;
+import com.google.android.gms.tasks.OnCompleteListener;
+import com.google.android.gms.tasks.Task;
 import com.google.android.material.floatingactionbutton.FloatingActionButton;
 
 import androidx.appcompat.app.AppCompatActivity;
 import android.os.Bundle;
 
-import androidx.fragment.app.DialogFragment;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 import android.util.Log;
@@ -50,10 +50,11 @@ import java.util.Map;
 import java.util.Observable;
 import java.util.Observer;
 import java.util.Timer;
-import java.util.TimerTask;
 
 import de.hdodenhof.circleimageview.CircleImageView;
 import pub.devrel.easypermissions.EasyPermissions;
+
+
 
 public class RegAdmin_asAdmin_Profile_Activity extends AppCompatActivity implements Observer, TimePickerDialog.OnTimeSetListener {
 
@@ -63,6 +64,8 @@ public class RegAdmin_asAdmin_Profile_Activity extends AppCompatActivity impleme
     private PassResult passResult;
     private boolean eveningBooleanSet;
     private boolean morningBooleanSet;
+    private boolean imagetest;
+    private Uri urihere;
 
     public void setPassResult(PassResult passResult){
         this.passResult = passResult;
@@ -134,6 +137,8 @@ public class RegAdmin_asAdmin_Profile_Activity extends AppCompatActivity impleme
         morningBooleanSet =false;
         eveningBooleanSet =false;
 
+        imagetest = false;
+
         wifiReceiver = new WifiReceiver();
 
         Intent intent = getIntent();
@@ -144,12 +149,18 @@ public class RegAdmin_asAdmin_Profile_Activity extends AppCompatActivity impleme
         user_name_asAdmin = intent.getStringExtra("adminName_asAdmin");
         user_phone_asAdmin = intent.getStringExtra("adminPhone_asAdmin");
 
+        Log.i("downloadimagehere,", "name :"+user_name_asAdmin+ " , phone :"+user_phone_asAdmin);
+
         //storageReference = (intent.getStringExtra("image_ref_asAdmin"));
 
 
         //23 may check
 
         storageReference = FirebaseStorage.getInstance().getReference().child("uploads").child("picture"+ user_name_asAdmin+user_phone_asAdmin);
+
+
+
+        //storageReference.getDownloadUrl().getResult()
 
         //
 
@@ -363,7 +374,13 @@ public class RegAdmin_asAdmin_Profile_Activity extends AppCompatActivity impleme
       //  storageReference.get
 
 
-        //Picasso.with(this).load(String.valueOf(storageReference)).into(circleImageView);
+//        Picasso.with(this).load(storageReference.getDownloadUrl().getResult()).into(circleImageView);
+//
+//        Glide.with(this)
+//                .load(storageReference)
+//                .into(circleImageView);
+
+
 
         Intent intentWifi = new Intent();
 
@@ -375,8 +392,34 @@ public class RegAdmin_asAdmin_Profile_Activity extends AppCompatActivity impleme
         // https://stackoverflow.com/questions/5888502/how-to-detect-when-wifi-connection-has-been-established-in-android
 
 
+        storageReference.getDownloadUrl().addOnCompleteListener(new OnCompleteListener<Uri>() {
+            @Override
+            public void onComplete(@NonNull Task<Uri> task) {
+
+                if(task.isSuccessful()){
+
+                    urihere = task.getResult();
+
+                    runOnUiThread(new Runnable() {
+                        @Override
+                        public void run() {
+
+                            Picasso.with(RegAdmin_asAdmin_Profile_Activity.this).load(urihere).into(circleImageView);
+                        }
+                    });
+
+                }
+
+            }
+        });
+
 
     }
+
+
+
+
+
 
     @Override
     protected void onDestroy() {
@@ -494,6 +537,16 @@ public class RegAdmin_asAdmin_Profile_Activity extends AppCompatActivity impleme
     public void update(Observable observable, Object o) {
 
         Log.i("checkFlowData ", "1");
+
+//        if(storageReference.getDownloadUrl().isComplete()){
+//            if(!imagetest){
+//
+//                Picasso.with(this).load(storageReference.getDownloadUrl().getResult()).into(circleImageView);
+//
+//                imagetest=true;
+//            }
+//
+//        }
 
         if(observable instanceof Presenter_RegAdmin_asAdmin_Profile_Activity){
             Log.i("checkFlowData ", "2");

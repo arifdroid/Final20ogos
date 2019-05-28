@@ -923,7 +923,7 @@ public class RegAdmin_AsAdmin_Activity extends AppCompatActivity implements Obse
                 Intent intent = new Intent(RegAdmin_AsAdmin_Activity.this,RegAdmin_asAdmin_Profile_Activity.class);
                 intent.putExtra("adminName_asAdmin",userName);
                 intent.putExtra("adminPhone_asAdmin",userPhone);
-                intent.putExtra("image_ref_asAdmin",this_image_ref.toString());
+                //intent.putExtra("image_ref_asAdmin",this_image_ref.toString());
 
                 startActivity(intent);
 
