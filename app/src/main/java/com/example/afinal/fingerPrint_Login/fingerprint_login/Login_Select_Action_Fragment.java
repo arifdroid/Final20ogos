@@ -9,6 +9,7 @@ import androidx.annotation.Nullable;
 
 import com.example.afinal.fingerPrint_Login.TestActivity;
 import com.example.afinal.fingerPrint_Login.register.register_as_admin.register_as_admin_regAdmin.RegAdmin_AsAdmin_Activity;
+import com.example.afinal.fingerPrint_Login.register.register_as_admin_add_userList.Add_User_Activity;
 import com.example.afinal.fingerPrint_Login.register.register_as_admin_setupProfile.RegAdmin_asAdmin_Profile_Activity;
 import com.google.android.material.floatingactionbutton.FloatingActionButton;
 
@@ -615,7 +616,7 @@ public class Login_Select_Action_Fragment extends Fragment implements View.OnCli
             case R.id.final_fb_leave_id:
 
 
-                Intent intent1 = new Intent(getActivity(), RegAdmin_asAdmin_Profile_Activity.class);
+                Intent intent1 = new Intent(getActivity(), Add_User_Activity.class);
 
                 intent1.putExtra("adminName_asAdmin","arifhaniftest");
 

@@ -49,14 +49,22 @@ public class Add_User_Activity extends AppCompatActivity implements View.OnClick
     private String user_phone_asAdmin;
     private Map<String, Object> addUserMap;
 
+    //28 may
+
+    private FloatingActionButton buttonAdd;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_add__user_);
 
+        buttonAdd = findViewById(R.id.add_user_buttoniD);
+
         buttonNext = findViewById(R.id.add_User_FloatButtoniD);
         //floatingActionButton = findViewById(R.id.add_User_FloatButtoniD);
         recyclerView = findViewById(R.id.add_User_RecycleriD);
+
+        buttonAdd.setOnClickListener(this);
 
         // 21 May
         addUserMap = new HashMap<>();
@@ -75,8 +83,8 @@ public class Add_User_Activity extends AppCompatActivity implements View.OnClick
         initRecycler();
 
 
-        recyclerView.setOnClickListener(this);
-        floatingActionButton.setOnClickListener(this);
+       // recyclerView.setOnClickListener(this);
+        buttonNext.setOnClickListener(this);
 
         timer = new Timer();
 
@@ -89,8 +97,8 @@ public class Add_User_Activity extends AppCompatActivity implements View.OnClick
                     public void run() {
 
 
-                        ObjectAnimator animator = ObjectAnimator.ofFloat(buttonNext,"translationY",-180f);
-                        buttonNext.animate()
+                        ObjectAnimator animator = ObjectAnimator.ofFloat(buttonAdd,"translationY",-150f);
+                        buttonAdd.animate()
                                 .alpha(1f)
                                 .setDuration(200)
                                 .setListener(null);
@@ -99,7 +107,7 @@ public class Add_User_Activity extends AppCompatActivity implements View.OnClick
 
 
                         Animation fadeIn = AnimationUtils.loadAnimation(Add_User_Activity.this,R.anim.fadein);
-                        buttonNext.startAnimation(fadeIn);
+                        buttonAdd.startAnimation(fadeIn);
 
 
                         timer.cancel();
@@ -121,8 +129,11 @@ public class Add_User_Activity extends AppCompatActivity implements View.OnClick
     recyclerView.setLayoutManager(new LinearLayoutManager(this));
     userList = new ArrayList<>();
 
+    //userList.add(new UserFromAdmin("click here to add",""));
 
     Log.i("checkAddingUser, ","1 ");
+
+
 
     recyclerViewAdapter_UserList = new RecyclerViewAdapter_UserList(this, userList);
 
@@ -168,7 +179,7 @@ public class Add_User_Activity extends AppCompatActivity implements View.OnClick
 
             break;
 
-            case R.id.add_User_RecycleriD:
+            case R.id.add_user_buttoniD:
 
 
 

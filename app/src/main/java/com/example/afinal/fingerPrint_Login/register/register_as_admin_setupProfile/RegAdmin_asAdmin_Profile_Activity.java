@@ -31,6 +31,7 @@ import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 import android.util.Log;
 import android.view.View;
+import android.widget.Button;
 import android.widget.TextView;
 import android.widget.TimePicker;
 import android.widget.Toast;
@@ -129,6 +130,10 @@ public class RegAdmin_asAdmin_Profile_Activity extends AppCompatActivity impleme
     public static String hour;
     public static String minute;
 
+    //28 may button test
+
+    private Button testButton;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -136,6 +141,23 @@ public class RegAdmin_asAdmin_Profile_Activity extends AppCompatActivity impleme
 
         morningBooleanSet =false;
         eveningBooleanSet =false;
+
+        testButton = findViewById(R.id.buttontest_atProfile_id);
+
+        testButton.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+
+                Intent intent = new Intent(RegAdmin_asAdmin_Profile_Activity.this, Add_User_Activity.class);
+
+                intent.putExtra("adminName_asAdmin",user_name_asAdmin);
+                intent.putExtra("adminPhone_asAdmin",user_phone_asAdmin);
+
+                startActivity(intent);
+
+
+            }
+        });
 
         imagetest = false;
 

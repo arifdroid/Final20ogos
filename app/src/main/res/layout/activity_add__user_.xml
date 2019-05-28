@@ -38,9 +38,7 @@
         <androidx.cardview.widget.CardView
             android:layout_width="0dp"
             android:layout_height="0dp"
-            android:layout_marginStart="8dp"
             android:layout_marginTop="8dp"
-            android:layout_marginEnd="8dp"
             android:layout_marginBottom="8dp"
             app:cardBackgroundColor="#5CFFFFFF"
             app:cardCornerRadius="10dp"
@@ -80,21 +78,21 @@
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:orientation="horizontal"
-                    app:layout_constraintGuide_percent="0.08" />
+                    app:layout_constraintGuide_percent="0.1" />
 
                 <androidx.constraintlayout.widget.Guideline
                     android:id="@+id/guideline95"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:orientation="horizontal"
-                    app:layout_constraintGuide_percent="0.09" />
+                    app:layout_constraintGuide_percent="0.11" />
 
                 <androidx.constraintlayout.widget.Guideline
                     android:id="@+id/guideline96"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:orientation="horizontal"
-                    app:layout_constraintGuide_percent="0.13" />
+                    app:layout_constraintGuide_percent="0.15" />
 
                 <androidx.constraintlayout.widget.Guideline
                     android:id="@+id/guideline97"
@@ -108,18 +106,18 @@
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:orientation="vertical"
-                    app:layout_constraintGuide_percent="0.9" />
+                    app:layout_constraintGuide_percent="0.97" />
 
                 <TextView
                     android:id="@+id/textView9"
                     android:layout_width="0dp"
                     android:layout_height="0dp"
 
-                    app:autoSizeTextType="uniform"
                     android:text="Robert Downey Jr"
-
                     android:textAlignment="center"
+
                     android:textColor="@color/material_white"
+                    app:autoSizeTextType="uniform"
                     app:layout_constraintBottom_toTopOf="@+id/guideline94"
                     app:layout_constraintEnd_toStartOf="@+id/guideline98"
                     app:layout_constraintStart_toStartOf="@+id/guideline97"
@@ -137,17 +135,17 @@
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:orientation="vertical"
-                    app:layout_constraintGuide_percent="0.84" />
+                    app:layout_constraintGuide_percent="0.9" />
 
                 <TextView
                     android:id="@+id/textView16"
                     android:layout_width="0dp"
                     android:layout_height="0dp"
-                    android:text="+6018 4670568"
+                    android:maxLines="1"
 
+                    android:text="+6018 4670568"
                     android:textAlignment="center"
                     android:textColor="@color/material_white"
-                    android:maxLines="1"
                     app:autoSizeTextType="uniform"
                     app:layout_constraintBottom_toTopOf="@+id/guideline96"
                     app:layout_constraintEnd_toStartOf="@+id/guideline100"
@@ -241,7 +239,7 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:orientation="horizontal"
-            app:layout_constraintGuide_percent="0.16" />
+            app:layout_constraintGuide_percent="0.08" />
 
         <androidx.constraintlayout.widget.Guideline
             android:id="@+id/guideline86"
@@ -255,14 +253,14 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:orientation="vertical"
-            app:layout_constraintGuide_percent="0.14" />
+            app:layout_constraintGuide_percent="0.1" />
 
         <androidx.constraintlayout.widget.Guideline
             android:id="@+id/guideline88"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:orientation="vertical"
-            app:layout_constraintGuide_percent="0.86" />
+            app:layout_constraintGuide_percent="0.9" />
 
         <androidx.constraintlayout.widget.Guideline
             android:id="@+id/guideline89"
@@ -276,21 +274,36 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:orientation="vertical"
-            app:layout_constraintGuide_percent="0.41" />
+            app:layout_constraintGuide_percent="0.43" />
 
         <androidx.constraintlayout.widget.Guideline
             android:id="@+id/guideline91"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:orientation="horizontal"
-            app:layout_constraintGuide_percent="0.3" />
+            app:layout_constraintGuide_percent="0.25" />
 
         <androidx.constraintlayout.widget.Guideline
             android:id="@+id/guideline92"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:orientation="horizontal"
-            app:layout_constraintGuide_percent="0.14" />
+            app:layout_constraintGuide_percent="0.05" />
+
+        <com.google.android.material.floatingactionbutton.FloatingActionButton
+            android:id="@+id/add_user_buttoniD"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:clickable="true"
+            android:visibility="invisible"
+            app:backgroundTint="#FFFFFF"
+            app:fabCustomSize="45dp"
+            app:layout_constraintBottom_toBottomOf="@+id/add_User_FloatButtoniD"
+            app:layout_constraintEnd_toEndOf="@+id/add_User_FloatButtoniD"
+            app:layout_constraintStart_toStartOf="@+id/add_User_FloatButtoniD"
+            app:maxImageSize="20dp"
+            app:srcCompat="@drawable/ic_plus_only_final"
+            tools:visibility="invisible" />
 
     </androidx.constraintlayout.widget.ConstraintLayout>
 
