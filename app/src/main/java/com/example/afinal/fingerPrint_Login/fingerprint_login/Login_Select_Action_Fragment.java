@@ -11,6 +11,7 @@ import com.example.afinal.fingerPrint_Login.TestActivity;
 import com.example.afinal.fingerPrint_Login.register.register_as_admin.register_as_admin_regAdmin.RegAdmin_AsAdmin_Activity;
 import com.example.afinal.fingerPrint_Login.register.register_as_admin_add_userList.Add_User_Activity;
 import com.example.afinal.fingerPrint_Login.register.register_as_admin_setupProfile.RegAdmin_asAdmin_Profile_Activity;
+import com.example.afinal.fingerPrint_Login.register.setup_pin_code.Setup_Pin_Activity;
 import com.google.android.material.floatingactionbutton.FloatingActionButton;
 
 import androidx.fragment.app.Fragment;
@@ -616,11 +617,17 @@ public class Login_Select_Action_Fragment extends Fragment implements View.OnCli
             case R.id.final_fb_leave_id:
 
 
-                Intent intent1 = new Intent(getActivity(), Add_User_Activity.class);
+                Intent intent1 = new Intent(getActivity(), Setup_Pin_Activity.class);
 
-                intent1.putExtra("adminName_asAdmin","arifhaniftest");
+                intent1.putExtra("sentAdminName","arifhaniftest");
 
-                intent1.putExtra("adminPhone_asAdmin","+60184670568");
+                intent1.putExtra("sentAdminPhone","+60184670568");
+//
+//                intentSaved.putExtra("sentAdminName", user_name_asAdmin);
+//                intentSaved.putExtra("sentAdminPhone", user_phone_asAdmin);
+                intent1.putExtra("checkadminOrUser","admin");
+
+//                startActivity(intentSaved);
 
 
                 intent1.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK);

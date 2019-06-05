@@ -1,5 +1,6 @@
 package com.example.afinal.fingerPrint_Login.register.register_as_admin_add_userList;
 
+import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.recyclerview.widget.LinearLayoutManager;
@@ -21,6 +22,8 @@ import android.widget.Toast;
 import com.example.afinal.R;
 import com.example.afinal.fingerPrint_Login.register.register_as_admin.register_as_admin_regAdmin.RegAdmin_AsAdmin_Activity;
 import com.example.afinal.fingerPrint_Login.register.setup_pin_code.Setup_Pin_Activity;
+import com.google.android.gms.tasks.OnCompleteListener;
+import com.google.android.gms.tasks.Task;
 import com.google.android.material.floatingactionbutton.FloatingActionButton;
 import com.google.firebase.firestore.DocumentReference;
 import com.google.firebase.firestore.FirebaseFirestore;
@@ -164,18 +167,39 @@ public class Add_User_Activity extends AppCompatActivity implements View.OnClick
 
                 addUserMap.put("employee_this_admin", Arrays.asList(userList));
 
-                documentReference.set(addUserMap);
+                documentReference.set(addUserMap).addOnCompleteListener(new OnCompleteListener<Void>() {
+                    @Override
+                    public void onComplete(@NonNull Task<Void> task) {
+
+                        if(task.isSuccessful()){
+
+                            runOnUiThread(new Runnable() {
+                                @Override
+                                public void run() {
+
+                                    Intent intentSaved = new Intent(Add_User_Activity.this, Setup_Pin_Activity.class);
+
+                                    intentSaved.putExtra("sentAdminName", user_name_asAdmin);
+                                    intentSaved.putExtra("sentAdminPhone", user_phone_asAdmin);
+                                    intentSaved.putExtra("checkadminOrUser","admin");
+
+                                    startActivity(intentSaved);
+
+                                }
+                            });
+
+                        }else {
+
+                            Toast.makeText(Add_User_Activity.this,"users contact not added, size user list: "+ userList.size()  , Toast.LENGTH_SHORT).show();
+                        }
+                    }
+                });
 
                 //this is we set the array
 
 
 
-                Intent intentSaved = new Intent(Add_User_Activity.this, Setup_Pin_Activity.class);
 
-                intentSaved.putExtra("sentAdminName", user_name_asAdmin);
-                intentSaved.putExtra("sentAdminPhone", user_phone_asAdmin);
-
-                startActivity(intentSaved);
 
             break;
 

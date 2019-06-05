@@ -64,6 +64,7 @@ public class Setup_Pin_Activity extends AppCompatActivity {
     private String phoneHere;
     private String adminName;
     private String adminPhone;
+    private String checkAdmin;
 
 
     @Override
@@ -99,11 +100,25 @@ public class Setup_Pin_Activity extends AppCompatActivity {
       //  String ref = prefs.getString("final_pth_user","");
 
             final Intent intent = getIntent();
-            nameHere = intent.getStringExtra("sentUserName");
-            phoneHere= intent.getStringExtra("sentUserPhone");
-            adminName = intent.getStringExtra("sentAdminName");
-            adminPhone = intent.getStringExtra("sentAdminPhone");
 
+            checkAdmin = intent.getStringExtra("checkadminOrUser");
+
+            if(checkAdmin.equals("admin")){
+
+                nameHere = intent.getStringExtra("sentAdminName");
+                phoneHere= intent.getStringExtra("sentAdminPhone");
+
+                adminName = nameHere;
+                adminPhone = phoneHere;
+
+
+            }else {
+
+                nameHere = intent.getStringExtra("sentUserName");
+                phoneHere = intent.getStringExtra("sentUserPhone");
+                adminName = intent.getStringExtra("sentAdminName");
+                adminPhone = intent.getStringExtra("sentAdminPhone");
+            }
             if(adminName.equals("")|| adminName==null){
 
                 adminName = nameHere; //we assume this is from admin page, register as admin, so admin and user has same detail.
