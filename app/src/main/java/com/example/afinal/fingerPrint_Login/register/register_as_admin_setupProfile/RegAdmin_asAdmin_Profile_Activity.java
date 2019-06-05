@@ -681,9 +681,30 @@ public class RegAdmin_asAdmin_Profile_Activity extends AppCompatActivity impleme
                             @Override
                             public void run() {
 
+                                //this being written despite the fact data is empty.
 
-                                adminDetailsList.get(0).setTextShow(wifiSSIDHere);
-                                recyclerView_Admin_Profile_Adapter.notifyDataSetChanged();
+//                                if(wifiSSIDHere!=null|| !wifiSSIDHere.equals("")) {
+//                                    adminDetailsList.get(0).setTextShow(wifiSSIDHere);
+//
+//                                    recyclerView_Admin_Profile_Adapter.notifyDataSetChanged();
+//                                }
+
+                                if(wifiSSIDHere!=null) {
+                                    adminDetailsList.get(0).setTextShow(wifiSSIDHere);
+
+                                    recyclerView_Admin_Profile_Adapter.notifyDataSetChanged();
+                                }
+
+
+                                if(wifiSSIDHere.endsWith("ssid>")) {
+                                    adminDetailsList.get(0).setTextShow("please connect to admin wifi");
+
+                                    recyclerView_Admin_Profile_Adapter.notifyDataSetChanged();
+                                }
+
+
+                               // adminDetailsList.get(0).setTextShow(wifiSSIDHere);
+
                             }
                         });
                     }
@@ -696,8 +717,18 @@ public class RegAdmin_asAdmin_Profile_Activity extends AppCompatActivity impleme
                             public void run() {
 
 
-                                adminDetailsList.get(1).setTextShow(wifiBSSIDHere);
-                                recyclerView_Admin_Profile_Adapter.notifyDataSetChanged();
+//
+//                                if(wifiBSSIDHere!=null|| !wifiBSSIDHere.equals("")) {
+//                                    adminDetailsList.get(1).setTextShow(wifiBSSIDHere);
+//                                }
+
+                                if(wifiBSSIDHere!=null) {
+                                    adminDetailsList.get(1).setTextShow(wifiBSSIDHere);
+                                    recyclerView_Admin_Profile_Adapter.notifyDataSetChanged();
+                                }
+
+//                                adminDetailsList.get(1).setTextShow(wifiBSSIDHere);
+//                                recyclerView_Admin_Profile_Adapter.notifyDataSetChanged();
                             }
                         });
                     }
