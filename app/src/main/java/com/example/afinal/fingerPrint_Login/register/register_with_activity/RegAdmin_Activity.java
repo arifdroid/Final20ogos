@@ -281,7 +281,7 @@ public class RegAdmin_Activity extends AppCompatActivity implements View.OnClick
 
                 Intent intent = new Intent(RegAdmin_Activity.this, RegAdmin_AsAdmin_Activity.class);
 
-                intent.putExtra("adminName_asAdmin_2", "arifhaniftest");
+                intent.putExtra("adminName_asAdmin_2", "arifzamri");
                 intent.putExtra("adminPhone_asAdmin_2", "+60184670568");
 
                 intent.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK);

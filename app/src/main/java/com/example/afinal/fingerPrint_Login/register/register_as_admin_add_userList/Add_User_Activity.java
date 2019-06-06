@@ -27,6 +27,7 @@ import com.google.android.gms.tasks.Task;
 import com.google.android.material.floatingactionbutton.FloatingActionButton;
 import com.google.firebase.firestore.DocumentReference;
 import com.google.firebase.firestore.FirebaseFirestore;
+import com.google.firebase.firestore.SetOptions;
 
 import java.util.ArrayList;
 import java.util.Arrays;
@@ -42,6 +43,10 @@ public class Add_User_Activity extends AppCompatActivity implements View.OnClick
     private RecyclerView recyclerView;
 
     private ArrayList<UserFromAdmin> userList;
+
+    // 6 june add,
+
+    private ArrayList<String> userListNumberOnly;
 
     //private ArrayList<UserFromAdmin> u
 
@@ -60,6 +65,8 @@ public class Add_User_Activity extends AppCompatActivity implements View.OnClick
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_add__user_);
+
+        userListNumberOnly = new ArrayList<>();
 
         buttonAdd = findViewById(R.id.add_user_buttoniD);
 
@@ -81,6 +88,7 @@ public class Add_User_Activity extends AppCompatActivity implements View.OnClick
         user_name_asAdmin = intent.getStringExtra("adminName_asAdmin");
         user_phone_asAdmin = intent.getStringExtra("adminPhone_asAdmin");
 
+        Log.i("checkADDtak", "0, name:"+user_name_asAdmin+" , number:"+user_phone_asAdmin);
 
 
         initRecycler();
@@ -154,28 +162,47 @@ public class Add_User_Activity extends AppCompatActivity implements View.OnClick
 
                 //save to online database
 
+                Log.i("checkADDtak", "1, name:"+user_name_asAdmin+" , number:"+user_phone_asAdmin);
+
+                Toast.makeText(Add_User_Activity.this,"check ADD", Toast.LENGTH_SHORT).show();
+
                 DocumentReference documentReference = FirebaseFirestore.getInstance().collection("all_admins_collections")
                         .document(user_name_asAdmin+user_phone_asAdmin+"collection");
 
 
-
-
+//
+//                Intent intentSaved = new Intent(Add_User_Activity.this, Setup_Pin_Activity.class);
+//
+//                                    intentSaved.putExtra("sentAdminName", user_name_asAdmin);
+//                                    intentSaved.putExtra("sentAdminPhone", user_phone_asAdmin);
+//                                    intentSaved.putExtra("checkadminOrUser","admin");
+//
+//                                    startActivity(intentSaved);
 
                 //documentReference.set(addUserMap)
 
                 //documentReference.set()
 
-                addUserMap.put("employee_this_admin", Arrays.asList(userList));
+                //addUserMap.put("makan", "dah makan");
 
-                documentReference.set(addUserMap).addOnCompleteListener(new OnCompleteListener<Void>() {
+               // Arrays s = userListNumberOnly.toArray().;
+
+                String[] item = userListNumberOnly.toArray(new String[userListNumberOnly.size()]);
+
+                addUserMap.put("employee_this_admin", Arrays.asList(item));
+//
+                documentReference.set(addUserMap, SetOptions.merge()).addOnCompleteListener(new OnCompleteListener<Void>() {
                     @Override
                     public void onComplete(@NonNull Task<Void> task) {
-
+                        Log.i("checkADDtak", "2");
                         if(task.isSuccessful()){
 
-                            runOnUiThread(new Runnable() {
-                                @Override
-                                public void run() {
+
+
+                                    Log.i("checkADDtak", "3");
+
+                            Toast.makeText(Add_User_Activity.this,"users array added SUCCESS "+ userList.size()  , Toast.LENGTH_SHORT).show();
+
 
                                     Intent intentSaved = new Intent(Add_User_Activity.this, Setup_Pin_Activity.class);
 
@@ -185,8 +212,7 @@ public class Add_User_Activity extends AppCompatActivity implements View.OnClick
 
                                     startActivity(intentSaved);
 
-                                }
-                            });
+
 
                         }else {
 
@@ -248,6 +274,10 @@ public class Add_User_Activity extends AppCompatActivity implements View.OnClick
                         Log.i("checkAddingUser, ","7 request code");
 
                         userList.add(new UserFromAdmin(name,number));
+
+                        userListNumberOnly.add(number);
+
+                        Log.i("checkADDtak ", ""+userListNumberOnly.size());
 
                         //21May
                       //  addUserMap.put("employee_this_admin",userList.get(userList.size()).getPhone()); // need to check
