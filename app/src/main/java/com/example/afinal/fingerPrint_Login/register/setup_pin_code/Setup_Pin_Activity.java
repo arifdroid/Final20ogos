@@ -9,6 +9,8 @@ import android.content.Intent;
 import android.content.SharedPreferences;
 import android.net.Uri;
 import android.os.Bundle;
+import android.text.Editable;
+import android.text.TextWatcher;
 import android.util.Log;
 import android.view.View;
 import android.widget.Button;
@@ -201,6 +203,81 @@ public class Setup_Pin_Activity extends AppCompatActivity {
             }
         });
 
+        //7 june , automatic edittext move
+
+
+        editText1.requestFocus();
+
+        editText1.addTextChangedListener(new TextWatcher() {
+            @Override
+            public void beforeTextChanged(CharSequence s, int start, int count, int after) {
+
+            }
+
+            @Override
+            public void onTextChanged(CharSequence s, int start, int before, int count) {
+
+                if(editText1.getText().toString().trim().length()==1){
+                    editText1.clearFocus();
+                    editText2.requestFocus();
+
+                }
+            }
+
+            @Override
+            public void afterTextChanged(Editable s) {
+
+
+
+            }
+        });
+
+        editText2.addTextChangedListener(new TextWatcher() {
+            @Override
+            public void beforeTextChanged(CharSequence s, int start, int count, int after) {
+
+            }
+
+            @Override
+            public void onTextChanged(CharSequence s, int start, int before, int count) {
+
+                if(editText2.getText().toString().trim().length()==1){
+                    editText2.clearFocus();
+                    editText3.requestFocus();
+                }
+            }
+
+            @Override
+            public void afterTextChanged(Editable s) {
+
+
+
+            }
+        });
+
+        editText3.addTextChangedListener(new TextWatcher() {
+            @Override
+            public void beforeTextChanged(CharSequence s, int start, int count, int after) {
+
+            }
+
+            @Override
+            public void onTextChanged(CharSequence s, int start, int before, int count) {
+
+                if(editText2.getText().toString().trim().length()==1){
+                    editText2.clearFocus();
+                    editText4.requestFocus();
+                }
+
+            }
+
+            @Override
+            public void afterTextChanged(Editable s) {
+
+
+
+            }
+        });
 
 
 
