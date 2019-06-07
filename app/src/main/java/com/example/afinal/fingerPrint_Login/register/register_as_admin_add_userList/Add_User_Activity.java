@@ -267,39 +267,198 @@ public class Add_User_Activity extends AppCompatActivity implements View.OnClick
                     String number = cursor.getString(cursor.getColumnIndexOrThrow(ContactsContract.CommonDataKinds.Phone.NUMBER));
                     String name = cursor.getString(cursor.getColumnIndexOrThrow(ContactsContract.CommonDataKinds.Phone.DISPLAY_NAME_PRIMARY));
 
-                    Log.i("checkAddingUser, ","6 request code, name:" + name+" , phone:"+number);
+                    if(name.length()>=12){
 
-                    if(!number.equals("")||number!=null) {
-
-                        Log.i("checkAddingUser, ","7 request code");
-
-                        userList.add(new UserFromAdmin(name,number));
-
-                        userListNumberOnly.add(number);
-
-                        Log.i("checkADDtak ", ""+userListNumberOnly.size());
-
-                        //21May
-                      //  addUserMap.put("employee_this_admin",userList.get(userList.size()).getPhone()); // need to check
-
-
-
-
-
-
-                        recyclerViewAdapter_UserList.notifyDataSetChanged();
-                        Log.i("checkAddingUser, ","8 before setadpater again");
-
-
-                       // recyclerView.setAdapter(recyclerViewAdapter_UserList);
-
-                        Log.i("checkAddingUser, ","9 before setadpater again");
-
+                        name = name.substring(0,11);
                     }
+
+//                    if(number.contains(" ")){
+//
+//                        number = number.replace(" ","");
+//                    }
+//
+//                    if(number.contains("-")){
+//                        number = number.replace("-","");
+//                    }
+//
+//                    if(!(number.indexOf(0)=='+')){
+//
+//                        if(!(number.indexOf(1)=='6')){
+//
+//                            number = "+6"+number;
+//                        }
+//
+//                        if((number.indexOf(1)=='6')) {
+//
+//                            number = "+"+number;
+//                        }
+//                    }
+
+
+                    ///////////// >>>>>>>>>>>>>
+
+                            String numberR = number;
+
+                            String numberFinal ="";
+//
+//                            if(i==0){
+//
+//                                numberR = numberOne;
+//                            }
+//
+//
+//                            if(i==1){
+//
+//                                numberR = numberTwo;
+//                            }
+//
+//
+//                            if(i==2){
+//
+//                                numberR = numberThree;
+//                                }
+//
+//
+//                            if(i==3){
+//
+//                                numberR = numberFour;
+//                            }
+//
+//
+//                            if(i==4){
+//
+//                                numberR = numberFive;
+//                            }
+//
+
+
+
+                            if(numberR.contains(" ")){
+
+                                numberR = numberR.replace(" ","");
+
+
+                            }
+
+
+                            if(numberR.contains("-")){
+
+                                numberR = numberR.replace("-","");
+                            }
+
+                            numberFinal = numberR;
+
+            //                System.out.println("numberFinal i>"+i+" :"+ numberFinal);
+
+                            //6018
+
+                            if((numberFinal.charAt(0))=='0'){
+
+                                String subCheck = numberFinal.substring(0,2);
+
+                                if(subCheck.equals("01")){
+
+                                    numberFinal = "+6"+numberFinal;
+                                }
+
+                                else {
+                                    numberFinal = "error";
+                                }
+
+                            }
+
+                            else if((numberFinal.charAt(0))=='6'){
+
+                                String subCheck = numberFinal.substring(0,3);
+
+                                if(subCheck.equals("601")){
+
+                                    numberFinal = "+"+numberFinal;
+                                }else {
+                                    numberFinal = "error";
+                                }
+
+                            }
+
+                            //finalize
+
+                                //+6018
+                                String subCheck = numberFinal.substring(0,4);
+
+                                if(subCheck.equals("+601")){
+
+                                    //userList.add(name,numberFinal);
+
+                                    userList.add(new UserFromAdmin(name,numberFinal));
+                                    userListNumberOnly.add(numberFinal);
+
+                                    recyclerViewAdapter_UserList.notifyDataSetChanged();
+                                }else {
+
+
+                                    //toast error message
+
+                                    Toast.makeText(Add_User_Activity.this,"number not added, due to error in format (+601)", Toast.LENGTH_SHORT).show();
+                                }
+
+
+
+
+                }
+
+
+
+
+
+                    ////////////>>>>>>>>>>
+
+                    //one more case, first letter is '+', but not followed by 6
+
+//                    else { //first letter is '+'
+//
+//                        if(!(number.indexOf(1)=='6')){
+//
+//                            number = "6"+number;
+//                        }else{ //2nd letter is + but
+//
+//
+//
+//                        }
+//
+//                    }
+
+                //    Log.i("checkAddingUser, ","6 request code, name:" + name+" , phone:"+number);
+
+//                    if(!number.equals("")||number!=null) {
+//
+//                        Log.i("checkAddingUser, ","7 request code");
+//
+//                        userList.add(new UserFromAdmin(name,number));
+//
+//                        userListNumberOnly.add(number);
+//
+//                        Log.i("checkADDtak ", ""+userListNumberOnly.size());
+//
+//                        //21May
+//                      //  addUserMap.put("employee_this_admin",userList.get(userList.size()).getPhone()); // need to check
+//
+//
+//
+//
+//
+//
+//                        recyclerViewAdapter_UserList.notifyDataSetChanged();
+//                        Log.i("checkAddingUser, ","8 before setadpater again");
+//
+//
+//                       // recyclerView.setAdapter(recyclerViewAdapter_UserList);
+//
+//                        Log.i("checkAddingUser, ","9 before setadpater again");
+//
+//                    }
 
                 }
 
             }
 
     }
-}
