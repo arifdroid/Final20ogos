@@ -80,11 +80,21 @@ public class RegAdmin_Activity extends AppCompatActivity implements View.OnClick
     //27 may
     private Button why_buttonTest;
 
+    //9 june
+
+    private Button button_login_user;
+
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_reg_admin_);
+
+        //9 June
+
+        button_login_user = findViewById(R.id.reg_admin_log_in_buttonID);
+
+        button_login_user.setOnClickListener(this);
 
         //buttonTest = findViewById(R.id.reg_admin_buttonTest);
 
@@ -267,6 +277,19 @@ public class RegAdmin_Activity extends AppCompatActivity implements View.OnClick
 
 
         switch (v.getId()){
+
+            //9 june
+
+            case R.id.reg_admin_log_in_buttonID:
+
+                //set reg admin to invisible. / gone
+
+
+
+
+
+
+                break;
 
             case R.id.why_button_test_id:
 

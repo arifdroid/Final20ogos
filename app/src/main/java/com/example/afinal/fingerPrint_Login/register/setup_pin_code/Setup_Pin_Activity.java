@@ -170,7 +170,7 @@ public class Setup_Pin_Activity extends AppCompatActivity {
                     timer2.cancel();
                 }
             }
-        },500,1750);
+        },500,1250);
 
         documentReference.addSnapshotListener(new EventListener<DocumentSnapshot>() {
             @Override

@@ -48,7 +48,8 @@
             android:hint="your name"
             android:inputType="textPersonName"
             android:textAlignment="center"
-            android:textColorHint="@color/material_white_blue"
+            android:textColor="@color/material_white_blue"
+            android:textColorHint="@color/hint_text_color"
             android:visibility="visible"
             app:layout_constraintBottom_toTopOf="@+id/guideline42"
             app:layout_constraintEnd_toStartOf="@+id/guideline44"
@@ -67,7 +68,8 @@
             android:hint="your phone number"
             android:inputType="phone"
             android:textAlignment="center"
-            android:textColorHint="@color/material_white_blue"
+            android:textColor="@color/material_white_blue"
+            android:textColorHint="@color/hint_text_color"
             android:visibility="visible"
             app:layout_constraintBottom_toTopOf="@+id/guideline46"
             app:layout_constraintEnd_toStartOf="@+id/guideline44"
@@ -240,7 +242,7 @@
             app:layout_constraintEnd_toStartOf="@+id/guideline53"
             app:layout_constraintStart_toStartOf="@+id/guideline55"
             app:layout_constraintTop_toTopOf="@+id/guideline47"
-            tools:visibility="visible" />
+            tools:visibility="invisible" />
 
         <androidx.constraintlayout.widget.Guideline
             android:id="@+id/guideline56"
@@ -417,6 +419,23 @@
             app:layout_constraintHorizontal_bias="0.498"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent" />
+
+        <Button
+            android:id="@+id/reg_admin_log_in_buttonID"
+            android:layout_width="0dp"
+            android:layout_height="0dp"
+            android:layout_marginTop="3dp"
+            android:layout_marginBottom="3dp"
+            android:background="@drawable/gradient_blue_button"
+            android:text="User"
+            android:textColor="@color/material_white_blue"
+            android:textSize="12sp"
+            app:layout_constraintBottom_toTopOf="@+id/guideline48"
+            app:layout_constraintEnd_toStartOf="@+id/guideline50"
+            app:layout_constraintHorizontal_bias="0.49"
+            app:layout_constraintStart_toStartOf="@+id/guideline49"
+            app:layout_constraintTop_toTopOf="@+id/guideline47"
+            tools:visibility="gone" />
 
     </androidx.constraintlayout.widget.ConstraintLayout>
 

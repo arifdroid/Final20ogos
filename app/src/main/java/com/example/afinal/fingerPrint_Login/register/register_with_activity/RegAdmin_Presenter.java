@@ -49,6 +49,7 @@ class RegAdmin_Presenter extends Observable implements  RegAdminPresenter_Interf
 
 
              phone = phone.replace("-","");
+             phone = phone.replace(" ","");
 
 
             if(first!= '+'){
@@ -89,9 +90,17 @@ class RegAdmin_Presenter extends Observable implements  RegAdminPresenter_Interf
             }else { //assume number start with plus
 
                 Log.i("22MayTest, ","44 , checkInputValid, phone" +phone);
-                phoneFinal = phone;
-                return true;
+                // +601
+                String checkFirst = phone.substring(0,4);
 
+                if(checkFirst.equals("+601")) {
+
+                    phoneFinal = phone;
+                    return true;
+                }else {
+
+                    return false;
+                }
             }
         }else {
 

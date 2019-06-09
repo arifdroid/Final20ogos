@@ -281,6 +281,16 @@
             app:maxImageSize="30dp"
             app:srcCompat="@drawable/ic_moving_4th_verse"
             tools:visibility="gone" />
+
+        <Button
+            android:id="@+id/reg_user_buttonTest"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="88dp"
+            android:layout_marginBottom="24dp"
+            android:text="Button"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintStart_toStartOf="parent" />
     </androidx.constraintlayout.widget.ConstraintLayout>
 
     <de.hdodenhof.circleimageview.CircleImageView
@@ -411,12 +421,13 @@
                     android:layout_width="0dp"
                     android:layout_height="0dp"
                     android:layout_marginStart="8dp"
-                    android:layout_marginTop="8dp"
+                    android:layout_marginTop="9dp"
                     android:layout_marginEnd="8dp"
-                    android:layout_marginBottom="3dp"
+                    android:layout_marginBottom="8dp"
                     android:text="User Detail"
                     android:textAlignment="center"
                     android:textColor="@color/material_white_blue"
+                    app:autoSizeTextType="uniform"
                     app:layout_constraintBottom_toBottomOf="parent"
                     app:layout_constraintEnd_toEndOf="parent"
                     app:layout_constraintStart_toStartOf="parent"
@@ -435,28 +446,28 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:orientation="horizontal"
-                app:layout_constraintGuide_percent="0.41" />
+                app:layout_constraintGuide_percent="0.4" />
 
             <androidx.constraintlayout.widget.Guideline
                 android:id="@+id/guideline157"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:orientation="horizontal"
-                app:layout_constraintGuide_percent="0.5" />
+                app:layout_constraintGuide_percent="0.48" />
 
             <androidx.constraintlayout.widget.Guideline
                 android:id="@+id/guideline158"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:orientation="horizontal"
-                app:layout_constraintGuide_percent="0.59" />
+                app:layout_constraintGuide_percent="0.56" />
 
             <androidx.constraintlayout.widget.Guideline
                 android:id="@+id/guideline3"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:orientation="horizontal"
-                app:layout_constraintGuide_percent="0.68" />
+                app:layout_constraintGuide_percent="0.64" />
 
 
             <androidx.constraintlayout.widget.Guideline
@@ -478,7 +489,7 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:orientation="vertical"
-                app:layout_constraintGuide_percent="0.24814814" />
+                app:layout_constraintGuide_percent="0.18" />
 
             <ImageView
                 android:id="@+id/reg_User_imageView_name_icon_id"
@@ -494,13 +505,13 @@
                 android:id="@+id/reg_User_textView_name_id"
                 android:layout_width="0dp"
                 android:layout_height="0dp"
-                android:layout_marginStart="3dp"
+                android:layout_marginStart="8dp"
                 android:layout_marginTop="8dp"
                 android:layout_marginBottom="16dp"
 
                 android:lines="2"
                 android:maxLines="2"
-                android:text="User: Arif Zamri"
+                android:text="Username : Arif "
                 android:textColor="@color/material_white_blue"
                 app:autoSizeTextType="uniform"
                 app:layout_constraintBottom_toTopOf="@+id/guideline156"
@@ -519,8 +530,6 @@
                 android:id="@+id/reg_User_imageView_phone_icon_id"
                 android:layout_width="0dp"
                 android:layout_height="0dp"
-                android:layout_marginStart="1dp"
-                android:layout_marginEnd="1dp"
                 app:layout_constraintBottom_toTopOf="@+id/guideline157"
                 app:layout_constraintEnd_toStartOf="@+id/guideline161"
                 app:layout_constraintStart_toStartOf="@+id/guideline160"
@@ -553,11 +562,11 @@
                 android:id="@+id/reg_User_textView_phone_id"
                 android:layout_width="0dp"
                 android:layout_height="0dp"
-                android:layout_marginStart="3dp"
+                android:layout_marginStart="8dp"
 
                 android:layout_marginTop="8dp"
                 android:layout_marginBottom="16dp"
-                android:text="User: +6018 4670568"
+                android:text="Userphone : +6018 4670568"
                 android:textColor="@color/material_white_blue"
                 app:autoSizeTextType="uniform"
                 app:layout_constraintBottom_toTopOf="@+id/guideline157"
@@ -569,10 +578,10 @@
                 android:id="@+id/reg_User_textView_nameAdmin_id"
                 android:layout_width="0dp"
                 android:layout_height="0dp"
-                android:layout_marginStart="3dp"
+                android:layout_marginStart="8dp"
                 android:layout_marginTop="8dp"
                 android:layout_marginBottom="16dp"
-                android:text="Admin : admin 1"
+                android:text="Adminname : Arif Hanif Zamri"
                 android:textColor="@color/material_white_blue"
                 app:autoSizeTextType="uniform"
                 app:layout_constraintBottom_toTopOf="@+id/guideline158"
@@ -595,10 +604,10 @@
                 android:layout_width="0dp"
                 android:layout_height="0dp"
 
-                android:layout_marginStart="3dp"
+                android:layout_marginStart="8dp"
                 android:layout_marginTop="8dp"
                 android:layout_marginBottom="16dp"
-                android:text="Admin : +6018 111111"
+                android:text="Adminphone : +6018 111111"
                 android:textColor="@color/material_white_blue"
                 app:autoSizeTextType="uniform"
                 app:layout_constraintBottom_toTopOf="@+id/guideline3"
@@ -611,7 +620,22 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:orientation="vertical"
-                app:layout_constraintGuide_percent="0.9" />
+                app:layout_constraintGuide_percent="0.92" />
+
+            <TextView
+                android:id="@+id/reg_user_message"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="8dp"
+                android:layout_marginTop="28dp"
+                android:layout_marginEnd="8dp"
+                android:maxLines="2"
+                android:text="please press next if all details above is correct"
+                android:textAlignment="center"
+                android:textColor="#D06EF9AF"
+                app:layout_constraintEnd_toStartOf="@+id/guideline57"
+                app:layout_constraintStart_toStartOf="@+id/guideline160"
+                app:layout_constraintTop_toTopOf="@+id/guideline3" />
 
         </androidx.constraintlayout.widget.ConstraintLayout>
     </androidx.cardview.widget.CardView>

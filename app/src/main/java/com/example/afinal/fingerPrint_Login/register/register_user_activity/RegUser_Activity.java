@@ -120,10 +120,18 @@ public class RegUser_Activity extends AppCompatActivity implements View.OnClickL
     private FloatingActionButton fButton_Next2;
 
 
+    // 7 june
+
+    private Button testbutton;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.reg_user);
+
+        testbutton = findViewById(R.id.reg_user_buttonTest);
+
+        testbutton.setOnClickListener(this);
 
         imageSetup =false;
 
@@ -464,6 +472,18 @@ public class RegUser_Activity extends AppCompatActivity implements View.OnClickL
             if(imageSetup){
 
             switch (v.getId()) {
+
+                //7 june
+
+
+                case R.id.reg_user_buttonTest:
+
+
+
+
+
+
+                    break;
 
                 //case R.id.regUser_Button_GetCodeID:
 
