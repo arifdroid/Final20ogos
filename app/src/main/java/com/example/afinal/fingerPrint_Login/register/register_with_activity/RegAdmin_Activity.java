@@ -84,13 +84,24 @@ public class RegAdmin_Activity extends AppCompatActivity implements View.OnClick
 
     private Button button_login_user;
 
+    private TextView textViewMessageLogin_INFO;
+
+    //this is to reuse button
+    private int login_first;
+
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_reg_admin_);
 
+        login_first =0;
+
         //9 June
+
+        textViewMessageLogin_INFO = findViewById(R.id.reg_admin_textView_infoMessageiD);
+
+        //textViewMessageLogin_INFO.setText("please enter your name, and phone number to register");
 
         button_login_user = findViewById(R.id.reg_admin_log_in_buttonID);
 
@@ -221,6 +232,20 @@ public class RegAdmin_Activity extends AppCompatActivity implements View.OnClick
             @Override
             public void onClick(View v) {
 
+                //9 june,
+
+                //button user and admin, gone.
+
+                register_as_user_button.setVisibility(View.GONE);
+                register_as_admin_button.setVisibility(View.GONE);
+
+                button_login_user.setVisibility(View.VISIBLE);
+
+                textViewMessageLogin_INFO.setText("enter user name and user phone number, then press next");
+
+                login_first =1;
+
+
             }
         });
 
@@ -282,12 +307,123 @@ public class RegAdmin_Activity extends AppCompatActivity implements View.OnClick
 
             case R.id.reg_admin_log_in_buttonID:
 
-                //set reg admin to invisible. / gone
+                if(login_first==1) {
+
+                    //set reg admin to invisible. / gone
+
+                    //fetch and save user name and phone.
+
+                    String userNameLogin = user_editTextName.getText().toString();
+                    String userPhoneLogin = user_editTextPhone.getText().toString();
+
+
+                    checkValid = presenter.checkInputValid(userNameLogin, userPhoneLogin);
+//
+                    if (checkValid) { //here we call
+
+                        //updated 18 may
+
+                        Log.i("22MayTest ", "4 , check is valid");
+
+                        userPhoneLogin = RegAdmin_Presenter.phoneFinal; //finalise number
+
+                        //Log.i("22MayTest ","5 , normalized num "+ userNameIsAdmin);
+
+                        globalUserName = userNameLogin;       //this will be used in next activity.
+                        globalUserPhone = userPhoneLogin;
+                        //since this person will become admin
+//                    globalAdminName=userNameIsAdmin;
+//                    globalAdminPhone = userPhoneIsAdmin;
+
+
+                        //
+//
+                        textViewMessageLogin_INFO.setText("please enter admin name and admin phone registered to, then press log in");
+
+                        button_login_user.setText("log in");
+
+                        //set animation
+                        user_editTextName.setVisibility(View.GONE);
+                        user_editTextPhone.setVisibility(View.GONE);
+
+//                    admin_editTextName.setVisibility(View.VISIBLE);
+//                    admin_editTextPhone.setVisibility(View.VISIBLE);
+
+
+                        //then animate button. to change.
+//
+                        //button_login_user.setVisibility(View.GONE);
+
+                        login_first=2;
+
+//                    check_admin_database_for_user_registering_button.setVisibility(View.VISIBLE);
+
+                        //textViewSureAsAdmin.setVisibility(View.VISIBLE);
+//
+//                    button_yes.setVisibility(View.VISIBLE);
+//                    button_no.setVisibility(View.VISIBLE);
+
+                        admin_editTextName.setVisibility(View.VISIBLE);
+                        admin_editTextPhone.setVisibility(View.VISIBLE);
+
+
+                        //this will be done, after received new input.
+
+//            globalAdminName = userName;
+//            globalAdminPhone =userPhone;
+//          boolean finalStatus = presenter.checkFromFirebaseSimulation(userName,userPhone);
+//
+//            if(finalStatus){
+//                //success
+//
+//               result(true);
+//
+//            }else {
+//
+//                result(false);
+//            }
+
+
+                    } else {
+
+                        Log.i("22MayTest ", "999 , not valid " + userPhoneLogin);
+
+                        textViewMessageLogin_INFO.setText("please enter valid name and phone");
+
+
+
+                        return;
+                    }
+
+
+                }else if(login_first==2){
+
+
+                    String adminNameLogin = admin_editTextName.getText().toString();
+                    String adminPhoneLogin = admin_editTextPhone.getText().toString();
+
+                    checkValid = presenter.checkInputValid(adminNameLogin, adminPhoneLogin);
+
+                    if(checkValid){
+
+                        //extract admin info
+
+                        aaa
 
 
 
 
 
+
+                    }else {
+
+                        login_first=1;
+
+                        textViewMessageLogin_INFO.setText("please enter valid name and phone");
+                    }
+
+
+                }
 
                 break;
 
@@ -410,9 +546,11 @@ public class RegAdmin_Activity extends AppCompatActivity implements View.OnClick
 
                 textViewMessage_LogIn.setVisibility(View.INVISIBLE);
 
+                textViewMessage.setVisibility(View.INVISIBLE);
+
 
                 statusnow = "wait..";
-                textViewMessage.setText(statusnow);
+                textViewMessageLogin_INFO.setText(statusnow);
 
                 //fetch and save user name and phone
 
@@ -495,6 +633,10 @@ public class RegAdmin_Activity extends AppCompatActivity implements View.OnClick
 
                     globalAdminName = adminName;
                     globalAdminPhone =adminPhone;
+
+                    //this will only check if admin exist. thats it.
+
+
                     boolean finalStatus = presenter.checkFromFirebaseSimulation(adminName,adminPhone);
 //
 

@@ -122,6 +122,9 @@ public class Login_Select_Action_Fragment extends Fragment implements View.OnCli
 
         //check if exist first,
 
+
+        //this file name Main_Pool
+
         File f = new File("/data/data/com.example.afinal/shared_prefs/com.example.finalV8_punchCard.MAIN_POOL.xml");
 
         if(f.exists()){
@@ -132,6 +135,11 @@ public class Login_Select_Action_Fragment extends Fragment implements View.OnCli
             //here should contain
 
             //can use string set, but we use simple counter, translate to string instead.
+
+            //in main pool, we will have "count_admin" value, 1 = 1 admin exists, 2 = 2 admins exist
+
+            //in main pool, also containt, "final_Admin_Phone_MainPool"
+
 
             String countAdmin = prefs_Main_Pool.getString("count_admin","");
             if(countAdmin!=null || !countAdmin.equals("")) {
@@ -146,14 +154,14 @@ public class Login_Select_Action_Fragment extends Fragment implements View.OnCli
 
                   //  String sharedPrefsCheck = adminPhoneHere;
 
-                    if(!sharedPrefsCheck.equals("")) { //
+                    if(!sharedPrefsCheck.equals("")) { //means there
 
-                        File fileHere = new File("/data/data/com.example.afinal/shared_prefs/" + sharedPrefsCheck + ".xml");
+                        File fileHere = new File("/data/data/com.example.afinal/shared_prefs/" + sharedPrefsCheck + ".xml"); //sharedPrefscheck == admin phone number
 
                         if (fileHere.exists()) {
 
                             SharedPreferences sharedPrefs_1 = getActivity().getSharedPreferences("com.example.finalV8_punchCard."+sharedPrefsCheck, Context.MODE_PRIVATE);
-                            //will be read sharedprefs of "com.example.finalV8_punchCard.+60184670568"
+                            //will read sharedprefs of "com.example.finalV8_punchCard.+60184670568" ,, admin phone?
 
                             nameHere_boolean= true;
 
@@ -182,7 +190,7 @@ public class Login_Select_Action_Fragment extends Fragment implements View.OnCli
                     //so when we pull here, need special way to pull two shared prefs data.
 
                     String sharedPrefsCheck_Admin_1 = prefs_Main_Pool.getString("final_Admin_Phone_MainPool",""); //this relevant if 1 admin only.
-                    String sharedPrefsCheck_Admin_2 = prefs_Main_Pool.getString("final_Admin_Phone_MainPool_2",""); //this relevant if 1 admin only.
+                    String sharedPrefsCheck_Admin_2 = prefs_Main_Pool.getString("final_Admin_Phone_MainPool_2",""); //this relevant if 2 admins only.
 
                     //handle admin 1 first.
 

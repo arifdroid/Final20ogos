@@ -87,6 +87,9 @@ public class Presenter_RegAdmin_AsAdmin_Activity extends Observable {
 
                                                     if(task.isSuccessful()){
 
+
+                                                        //we could just check from sharedprefs,
+
                                                         if(task.getResult().size()==1){ //means already a user for another admin,
                                                             //just confirmation.
 

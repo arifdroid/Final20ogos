@@ -2,6 +2,7 @@ package com.example.afinal.fingerPrint_Login.register.register_with_activity;
 
 import android.util.Log;
 
+import java.util.HashMap;
 import java.util.Objects;
 import java.util.Observable;
 import java.util.Observer;
@@ -19,9 +20,14 @@ class RegAdmin_Presenter extends Observable implements  RegAdminPresenter_Interf
     private boolean modelReturn;
     public static String phoneFinal;
 
+    //9 june
+
+    private HashMap modelHashMap;
+
 
     public RegAdmin_Presenter(RegAdminViewInterface regAdminViewInterface) {
 
+        modelHashMap = new HashMap();
 
         view = regAdminViewInterface;
 
@@ -108,6 +114,33 @@ class RegAdmin_Presenter extends Observable implements  RegAdminPresenter_Interf
             return false;
         }
     }
+
+
+
+
+    //9 june if logged in
+
+    public Boolean hashDataLogin(String name,String phone, String nameAdmin,String phoneAdmin){
+
+        modelHashMap = model.getIfLogInExist(name,phone,nameAdmin,phoneAdmin);
+
+
+
+
+        if(modelHashMap.isEmpty()) {
+
+
+            return false;
+
+        }else {
+
+
+            return true;
+        }
+    }
+
+
+
 
     //this is admin name and phone.
 

@@ -34,6 +34,7 @@ import com.google.firebase.storage.FirebaseStorage;
 import com.google.firebase.storage.StorageReference;
 import com.squareup.picasso.Picasso;
 
+import java.io.File;
 import java.util.HashMap;
 import java.util.Map;
 import java.util.Timer;
@@ -302,7 +303,77 @@ public class Setup_Pin_Activity extends AppCompatActivity {
                                 String number = number1+number2+number3+number4+"";
 
                                 //need to store to firestore as well.
-                                SharedPreferences prefs = getSharedPreferences(
+
+
+                            //11june need to check first, admin count.
+
+                    File f_MainPool = new File("/data/data/com.example.afinal/shared_prefs/com.example.finalV8_punchCard.MAIN_POOL.xml");
+
+                    if(f_MainPool.exists()){ //meaning, //we assume exist, else, just sent error
+
+                        SharedPreferences prefs_Main_Pool = getSharedPreferences("com.example.finalV8_punchCard.MAIN_POOL", Context.MODE_PRIVATE);
+
+                        String countAdmin = prefs_Main_Pool.getString("count_admin","");
+
+                        //11june no need check since this case, admin is user, , so no need to pull phone number.
+
+                        if(countAdmin!=null || !countAdmin.equals("")) {
+
+                            if (Integer.valueOf(countAdmin) == 1) {  //this means only 1 admin exist.
+
+
+                                String phoneAdminPulled = prefs_Main_Pool.getString("final_Admin_Phone_MainPool_1","");
+
+
+
+                                //11june, since user is admin, sharedprefs will be created will look like this.
+                                //but still count_admin, can be 1 or 2.
+
+                                //update wrong, since this page will be shared.
+
+                                File fileHere = new File("/data/data/com.example.afinal/shared_prefs/" + phoneAdminPulled + ".xml"); //sharedPrefscheck == admin phone number
+
+                                //will read sharedprefs of "com.example.finalV8_punchCard.+60184670568" ,, admin phone?
+
+                                //SharedPreferences.Editor editor = prefs.edit();
+
+                                if(fileHere.exists()){ //just double check
+
+                                    SharedPreferences sharedPrefs_1 = getSharedPreferences("com.example.finalV8_punchCard."+phoneAdminPulled, Context.MODE_PRIVATE);
+
+
+                                }else {// error
+
+
+
+                                }
+
+
+                            }else if(Integer.valueOf(countAdmin) == 2){
+
+
+                                String phoneAdminPulled = prefs_Main_Pool.getString("final_Admin_Phone_MainPool_2","");
+
+
+                            }else { //error
+
+
+                            }
+                        }
+
+
+
+
+
+
+                    }else{ //error, somehow sharedprefs from previous activity not created.
+
+
+
+                    }
+
+
+                    SharedPreferences prefs = getSharedPreferences(
                                         "com.example.finalV8_punchCard", Context.MODE_PRIVATE);
 
                                 SharedPreferences.Editor editor = prefs.edit();

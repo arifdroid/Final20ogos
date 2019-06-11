@@ -724,6 +724,8 @@ public class RegAdmin_AsAdmin_Activity extends AppCompatActivity implements Obse
 
             //first check with pool, need to update or create?
 
+            //11june this is just double check
+
             File f_MainPool = new File("/data/data/com.example.afinal/shared_prefs/com.example.finalV8_punchCard.MAIN_POOL.xml");
 
             if(f_MainPool.exists()){ //if exist, should
@@ -790,13 +792,15 @@ public class RegAdmin_AsAdmin_Activity extends AppCompatActivity implements Obse
 
             uploadFile(); //this might not finished in time.
 
-            Intent intent = new Intent(RegAdmin_AsAdmin_Activity.this,RegAdmin_asAdmin_Profile_Activity.class);
-            intent.putExtra("adminName_asAdmin",userName);
-            intent.putExtra("adminPhone_asAdmin",userPhone);
-            intent.putExtra("image_ref_asAdmin",this_image_ref.toString());
-            //intent.addFlags(Intent.)
+            // 11june
 
-            startActivity(intent);
+//            Intent intent = new Intent(RegAdmin_AsAdmin_Activity.this,RegAdmin_asAdmin_Profile_Activity.class);
+//            intent.putExtra("adminName_asAdmin",userName);
+//            intent.putExtra("adminPhone_asAdmin",userPhone);
+//            intent.putExtra("image_ref_asAdmin",this_image_ref.toString());
+//            //intent.addFlags(Intent.)
+//
+//            startActivity(intent);
 
 
 
@@ -882,17 +886,39 @@ public class RegAdmin_AsAdmin_Activity extends AppCompatActivity implements Obse
                         //if success save picture inside storage, the we save the referenece inside admin, i think better
                         //create user profile for this admin.
 
-                        DocumentReference reference = FirebaseFirestore.getInstance()
-                                .collection("employees_to_offices")
-                                .document(userName+userPhone+"document");
+//                        DocumentReference reference = FirebaseFirestore.getInstance()
+//                                .collection("employees_to_offices")
+//                                .document(userName+userPhone+"document");
+//
+//                        Map<String, Object> imm = new HashMap<>();
+//
+//                        imm.put("image",this_image_ref);
+//
+//                        reference.set(imm, SetOptions.merge());
 
-                        Map<String, Object> imm = new HashMap<>();
 
-                        imm.put("image",this_image_ref);
-
-                        reference.set(imm, SetOptions.merge());
 
                         Toast.makeText(RegAdmin_AsAdmin_Activity.this,"picture successfully uploaded",Toast.LENGTH_SHORT).show();
+
+                        //11june
+
+                        runOnUiThread(new Runnable() {
+                            @Override
+                            public void run() {
+
+                                //sharedprefs.
+
+                                Intent intent = new Intent(RegAdmin_AsAdmin_Activity.this,RegAdmin_asAdmin_Profile_Activity.class);
+                                intent.putExtra("adminName_asAdmin",userName);
+                                intent.putExtra("adminPhone_asAdmin",userPhone);
+                                intent.putExtra("image_ref_asAdmin",this_image_ref.toString());
+                                //intent.addFlags(Intent.)
+
+                                startActivity(intent);
+
+                            }
+                        });
+
 
                     }else {
 
