@@ -37,8 +37,10 @@ import android.widget.TimePicker;
 import android.widget.Toast;
 
 import com.example.afinal.R;
+import com.google.firebase.firestore.CollectionReference;
 import com.google.firebase.firestore.DocumentReference;
 import com.google.firebase.firestore.FirebaseFirestore;
+import com.google.firebase.firestore.SetOptions;
 import com.google.firebase.storage.FirebaseStorage;
 import com.google.firebase.storage.StorageReference;
 import com.squareup.picasso.Picasso;
@@ -67,6 +69,7 @@ public class RegAdmin_asAdmin_Profile_Activity extends AppCompatActivity impleme
     private boolean morningBooleanSet;
     private boolean imagetest;
     private Uri urihere;
+    private String count_admin;
 
     public void setPassResult(PassResult passResult){
         this.passResult = passResult;
@@ -170,6 +173,9 @@ public class RegAdmin_asAdmin_Profile_Activity extends AppCompatActivity impleme
 
         user_name_asAdmin = intent.getStringExtra("adminName_asAdmin");
         user_phone_asAdmin = intent.getStringExtra("adminPhone_asAdmin");
+
+        count_admin = intent.getStringExtra("admin_count");
+
 
         Log.i("downloadimagehere,", "name :"+user_name_asAdmin+ " , phone :"+user_phone_asAdmin);
 
@@ -307,19 +313,69 @@ public class RegAdmin_asAdmin_Profile_Activity extends AppCompatActivity impleme
 
                                 //create new shared pref pool
 
-                                SharedPreferences prefs = getSharedPreferences(
-                                        "com.example.finalV8_punchCard." + user_phone_asAdmin, Context.MODE_PRIVATE);
-
-                                SharedPreferences.Editor editor = prefs.edit(); // we need to know, which preferences belong to which admin,
-                                //if user registered to another admin.
-
-                                editor.putString("final_User_Name", user_name_asAdmin);
-                                editor.putString("final_User_Phone", user_phone_asAdmin);
-                                editor.putString("final_Admin_Name", user_name_asAdmin);
-                                editor.putString("final_Admin_Phone", user_phone_asAdmin);
+//                                SharedPreferences prefs = getSharedPreferences(
+//                                        "com.example.finalV8_punchCard." + user_phone_asAdmin, Context.MODE_PRIVATE);
+//
+//                                SharedPreferences.Editor editor = prefs.edit(); // we need to know, which preferences belong to which admin,
+//                                //if user registered to another admin.
+//
+//                                editor.putString("final_User_Name", user_name_asAdmin);
+//                                editor.putString("final_User_Phone", user_phone_asAdmin);
+//                                editor.putString("final_Admin_Name", user_name_asAdmin);
+//                                editor.putString("final_Admin_Phone", user_phone_asAdmin);
                                 //editor.putString("final_User_Picture", storageReference.toString());
 
-                                editor.commit();
+//                                editor.commit();
+
+
+
+                                //13 june, 2 things change, sharedprefs, change, and create documet
+
+                                //"users_top_detail"
+
+                                Map<String, Object> mapUserTopDetail = new HashMap<>();
+                                Map<String, Object> mapForAdminOnly = new HashMap<>();
+
+
+                                mapUserTopDetail.put("phone", user_phone_asAdmin);
+                                mapUserTopDetail.put("admin_count", count_admin);
+                                mapUserTopDetail.put("admin_phone_"+count_admin,user_phone_asAdmin);
+                                //this can be either admin_phone_1 or admin_phone_2
+
+
+
+
+                                CollectionReference cR_AllUser = FirebaseFirestore.getInstance().collection("users_top_detail");
+
+                                DocumentReference dR_User_Top = cR_AllUser.document(user_phone_asAdmin+"imauser");
+
+                                //set this
+
+                                if(count_admin.equals("2")) {
+
+                                    dR_User_Top.set(mapUserTopDetail, SetOptions.merge());
+
+
+                                }else {
+
+                                    dR_User_Top.set(mapUserTopDetail);
+                                }
+
+                                CollectionReference cR_admin_only= FirebaseFirestore.getInstance()
+                                        .collection("all_admins_collections");
+
+                                DocumentReference dR_admin_only = cR_admin_only.document(user_name_asAdmin+user_phone_asAdmin+"collection");
+
+                                mapForAdminOnly.put("phone",user_phone_asAdmin);
+                                mapForAdminOnly.put("name",user_name_asAdmin);
+
+
+                                dR_admin_only.set(mapForAdminOnly);
+
+
+
+                                //then for admin, set another collection
+
 
 
                                 DocumentReference documentReference = FirebaseFirestore.getInstance().collection("all_admin_doc_collections")

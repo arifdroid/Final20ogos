@@ -274,7 +274,7 @@ public class RegAdmin_AsAdmin_Activity extends AppCompatActivity implements Obse
             @SuppressLint("RestrictedApi")
             @Override
             public void onClick(View view) {
-                if(checkNumberOfAdminRegisteredTo()) {
+  //              if(checkNumberOfAdminRegisteredTo()) {
 
                     if(imageSetupTrue) {
 //                    userName = textViewName.getText().toString();
@@ -318,15 +318,15 @@ public class RegAdmin_AsAdmin_Activity extends AppCompatActivity implements Obse
                         Toast.makeText(RegAdmin_AsAdmin_Activity.this, "please set image", Toast.LENGTH_SHORT).show();
                     }
 
-
-                }else { //if FALSE,
-
-                    //intent go back, disallow register more than one user//or admin, since registering admin, means registering user.
-
-                    Intent intentBack = new Intent(RegAdmin_AsAdmin_Activity.this, FingerPrint_LogIn_Final_Activity.class);
-                    startActivity(intentBack);
-                    finish();
-                }
+//
+//                }else { //if FALSE,
+//
+//                    //intent go back, disallow register more than one user//or admin, since registering admin, means registering user.
+//
+//                    Intent intentBack = new Intent(RegAdmin_AsAdmin_Activity.this, FingerPrint_LogIn_Final_Activity.class);
+//                    startActivity(intentBack);
+//                    finish();
+//                }
             }
         });
 
@@ -534,6 +534,8 @@ public class RegAdmin_AsAdmin_Activity extends AppCompatActivity implements Obse
 
     //check shared preferences, if already 2, dont allow to register to admin
 
+    // 12 june no longer used
+
     private boolean checkNumberOfAdminRegisteredTo(){
 
         File f_MainPool = new File("/data/data/com.example.afinal/shared_prefs/com.example.finalV8_punchCard.MAIN_POOL.xml");
@@ -616,7 +618,11 @@ public class RegAdmin_AsAdmin_Activity extends AppCompatActivity implements Obse
 
             textViewMessageCode.setText("33, credential process , name: "+userName+", phone: "+userPhone);
 
-            presenter.checkCredentialWithUpdates(phoneAuthCredential, userName, userPhone);
+            //presenter.checkCredentialWithUpdates(phoneAuthCredential, userName, userPhone);
+
+            //12 june
+
+            presenter.checkCredentialWithUpdates_NewStructure(phoneAuthCredential,userName,userPhone);
         }
 
         textViewMessageCode.setText("33, credential process FAILED");
@@ -711,8 +717,13 @@ public class RegAdmin_AsAdmin_Activity extends AppCompatActivity implements Obse
         Log.i("checkFlowAsAdmin", "4");
         // 0 = initial , 1 = success , 2 = fail
         int adminDocumentCreated = ((Presenter_RegAdmin_AsAdmin_Activity) observable).getIfDocumentCreated();
+
+        int count_admin_asAdmin = ((Presenter_RegAdmin_AsAdmin_Activity) observable).getCount_admin_RegAsAdmin(); // by default = 1,
+
         copyadminCreated=adminDocumentCreated;
-        if(adminDocumentCreated==1){
+
+
+        if(adminDocumentCreated==1){ //mean we can create
 
             //setup shared preferences.
 
@@ -726,67 +737,72 @@ public class RegAdmin_AsAdmin_Activity extends AppCompatActivity implements Obse
 
             //11june this is just double check
 
-            File f_MainPool = new File("/data/data/com.example.afinal/shared_prefs/com.example.finalV8_punchCard.MAIN_POOL.xml");
+  //          File f_MainPool = new File("/data/data/com.example.afinal/shared_prefs/com.example.finalV8_punchCard.MAIN_POOL.xml");
 
-            if(f_MainPool.exists()){ //if exist, should
+ //           if(f_MainPool.exists()){ //if exist, should
 
                 //if exist, is already user to other admin, so counter should read 1.
                 //read count first if 2 or higher, send error.
 
-                SharedPreferences prefs_Main_Pool = this.getSharedPreferences("com.example.finalV8_punchCard.MAIN_POOL", Context.MODE_PRIVATE);
-
-                String count_admin = prefs_Main_Pool.getString("count_admin","");
-
-                if(Integer.valueOf(count_admin)==1){
-
-                    SharedPreferences.Editor editor_Main_Pool = prefs_Main_Pool.edit();
-
-                    editor_Main_Pool.putString("count_admin","2"); //here we update the count. //we could just check earlier.
-                    editor_Main_Pool.putString("final_Admin_Phone_MainPool_2",userPhone);
-                    //editor_Main_Pool.putString("")
-
-                    editor_Main_Pool.commit();
-
-
-                }if((Integer.valueOf(count_admin)>=2)){
-
-                    //this should be error. somehow, should not happen to have register to 2 admin.
-
-
-                }
-
-
-            }else {
-
-                //here we create, since it is not exist yet.
-
-
-                //here we update the data in admins_offices data.
-
-
-
-
-                SharedPreferences prefs_Main_Pool = this.getSharedPreferences("com.example.finalV8_punchCard.MAIN_POOL", Context.MODE_PRIVATE);
-
-                SharedPreferences.Editor editor_Main_Pool = prefs_Main_Pool.edit();
-
-                editor_Main_Pool.putString("count_admin","1");
-                editor_Main_Pool.putString("final_Admin_Phone_MainPool",userPhone);
-                //editor_Main_Pool.putString("final_Admin_Name_MainPool",userPhone);
-
-                //editor_Main_Pool.putString("")
-
-                editor_Main_Pool.commit();
-
-            }
-
-
-            timer.cancel();
-            Toast.makeText(this, "successfully registered", Toast.LENGTH_SHORT).show();
-
-            //storage reference upload here.
-
-            //uploadFile(uri);
+//                SharedPreferences prefs_Main_Pool = this.getSharedPreferences("com.example.finalV8_punchCard.MAIN_POOL", Context.MODE_PRIVATE);
+//
+//                String count_admin = prefs_Main_Pool.getString("count_admin","");
+//
+//                if(Integer.valueOf(count_admin)==1 | count_admin_asAdmin==2){ //meaning in perfect world, shared prefs exist, else, data pull
+//
+//             //update 13 june
+//
+//                //if(Integer.valueOf(count_admin)==1 && count_admin_asAdmin==2){
+//
+//                    SharedPreferences.Editor editor_Main_Pool = prefs_Main_Pool.edit();
+//
+//                    editor_Main_Pool.putString("count_admin","2"); //here we update the count. //we could just check earlier.
+//                    editor_Main_Pool.putString("final_Admin_Phone_MainPool_2",userPhone);
+//                    //editor_Main_Pool.putString("")
+//
+//                    editor_Main_Pool.commit();
+//
+//
+//                }if((Integer.valueOf(count_admin)>=2)){
+//
+//                    //this should be error. somehow, should not happen to have register to 2 admin.
+//
+//
+//                }
+//
+//
+//             // for case of registered but delete, then install, then register.
+//   //         }else if(count_admin_asAdmin==1){ //shared pres
+//
+//                //here we create, since it is not exist yet.
+//
+//
+//                //here we update the data in admins_offices data.
+//
+//
+//
+//
+//                SharedPreferences prefs_Main_Pool_one = this.getSharedPreferences("com.example.finalV8_punchCard.MAIN_POOL", Context.MODE_PRIVATE);
+//
+//                SharedPreferences.Editor editor_Main_Pool = prefs_Main_Pool_one.edit();
+//
+//                editor_Main_Pool.putString("count_admin","1");
+//                editor_Main_Pool.putString("final_Admin_Phone_MainPool",userPhone);
+//                //editor_Main_Pool.putString("final_Admin_Name_MainPool",userPhone);
+//
+//                //editor_Main_Pool.putString("")
+//
+//                editor_Main_Pool.commit();
+//
+//     //       }
+//
+//
+//            timer.cancel();
+//            Toast.makeText(this, "successfully registered", Toast.LENGTH_SHORT).show();
+//
+//            //storage reference upload here.
+//
+//            //uploadFile(uri);
 
             //28 may
 
@@ -794,18 +810,42 @@ public class RegAdmin_AsAdmin_Activity extends AppCompatActivity implements Obse
 
             // 11june
 
-//            Intent intent = new Intent(RegAdmin_AsAdmin_Activity.this,RegAdmin_asAdmin_Profile_Activity.class);
-//            intent.putExtra("adminName_asAdmin",userName);
-//            intent.putExtra("adminPhone_asAdmin",userPhone);
-//            intent.putExtra("image_ref_asAdmin",this_image_ref.toString());
-//            //intent.addFlags(Intent.)
-//
-//            startActivity(intent);
+            Intent intent = new Intent(RegAdmin_AsAdmin_Activity.this,RegAdmin_asAdmin_Profile_Activity.class);
+            intent.putExtra("adminName_asAdmin",userName);
+            intent.putExtra("adminPhone_asAdmin",userPhone);
+            intent.putExtra("image_ref_asAdmin",this_image_ref.toString());
+            intent.putExtra("admin_count","1");
+
+            //intent.addFlags(Intent.)
+
+            startActivity(intent);
 
 
 
 
         }
+
+
+            if(adminDocumentCreated==2){ //mean we can create
+
+                uploadFile(); //this might not finished in time.
+
+                // 11june
+
+                Intent intent = new Intent(RegAdmin_AsAdmin_Activity.this,RegAdmin_asAdmin_Profile_Activity.class);
+                intent.putExtra("adminName_asAdmin",userName);
+                intent.putExtra("adminPhone_asAdmin",userPhone);
+                intent.putExtra("image_ref_asAdmin",this_image_ref.toString());
+                intent.putExtra("admin_count","2");
+
+                //intent.addFlags(Intent.)
+
+                startActivity(intent);
+
+
+
+
+            }
         if(adminDocumentCreated==0){
 
             timer.cancel();
@@ -815,7 +855,7 @@ public class RegAdmin_AsAdmin_Activity extends AppCompatActivity implements Obse
 
 
         }
-        if(adminDocumentCreated==2){
+        if(adminDocumentCreated==3){
 
             timer.cancel();
             textViewMessage.setText("please try again");
@@ -828,7 +868,7 @@ public class RegAdmin_AsAdmin_Activity extends AppCompatActivity implements Obse
 
 
         }
-        if(adminDocumentCreated==3){ //already exist.
+        if(adminDocumentCreated==4){ //already exist.
 
             textViewMessage.setText("please try again");
             Toast.makeText(this,"phone already registered",Toast.LENGTH_SHORT).show();

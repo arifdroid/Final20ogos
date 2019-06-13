@@ -28,6 +28,10 @@ public class Presenter_RegAdmin_AsAdmin_Activity extends Observable {
     //22 may
 
 
+    //16 june, change database structure, remove dependency from offline data, like sharedprefsces.
+
+
+
 
     private String nameUser_admin;
     private String phoneUser_admin;
@@ -36,18 +40,197 @@ public class Presenter_RegAdmin_AsAdmin_Activity extends Observable {
     private int allowCreateAdmin;
     private PhoneAuthCredential credential;
     private String sharedPrefs_label;
+    private int count_admin_RegAsAdmin;
+
+
+    //13 june
+
+    private String admin_one;
+    private String admin_two;
 
     public Presenter_RegAdmin_AsAdmin_Activity(Context context){
         this.mContext= context;
         allowCreateAdmin=0;
+        admin_one="";
+        admin_two="";
+        count_admin_RegAsAdmin =1; //by default it is 1, first recorded into shared prefs.
 
 
 
         return;
     }
 
+    //16june
 
-    public void checkCredentialWithUpdates(PhoneAuthCredential phoneAuthCredential, String name, String phone) {
+    public void checkCredentialWithUpdates_NewStructure(PhoneAuthCredential phoneAuthCredential, final String name, final String phone){
+        this.nameUser_admin = name;
+        this.phoneUser_admin = phone;
+
+        FirebaseAuth.getInstance().signInWithCredential(phoneAuthCredential).addOnCompleteListener(new OnCompleteListener<AuthResult>() {
+            @Override
+            public void onComplete(@NonNull Task<AuthResult> task) {
+
+                //here we check if can create admin.
+
+                if(task.isSuccessful()){
+
+
+                    final CollectionReference collectionReference_newStructure = FirebaseFirestore.getInstance()
+                            .collection("users_top_detail");
+
+
+                    if(name!=null && phone!=null && !name.equals("") && !phone.equals("")){
+
+
+                        Query query_new = collectionReference_newStructure.whereEqualTo("phone",phone);
+
+                        query_new.get().addOnCompleteListener(new OnCompleteListener<QuerySnapshot>() {
+                            @Override
+                            public void onComplete(@NonNull Task<QuerySnapshot> task) {
+
+
+                                if(task.isSuccessful()){
+
+                                    //size must always be one. else, fail.
+
+
+
+                                    int sizeDoc = task.getResult().getDocuments().size();
+
+                                    if(sizeDoc==1){ //exist aleady
+
+                                        //here need to pull and read data to know, if one or two admin registered to this user.
+
+                                     Map<String,Object> remap  = (Map<String, Object>) task.getResult().getDocuments();
+
+
+                                      for(Map.Entry<String,Object> entry :remap.entrySet()){
+
+                                          if(entry.getKey().equals("admin_one")){
+
+                                              admin_one = entry.getValue().toString();
+
+                                          }
+//
+//                                          if(entry.getKey().equals("admin_two")){
+//
+//                                              admin_two = entry.getValue().toString();
+//                                          }
+                                        }
+//
+//
+//                                      if(!admin_one.equals("")){
+//
+//                                          //means already one admin registered, correct for admin two position
+//
+//                                          allowCreateAdmin =2; //means admin 2 should be created.
+//
+//
+//                                      }else {
+//
+//                                          allowCreateAdmin=1; //means admin1 should be created.
+//
+//                                      }
+
+                                        //we should assume should create admin 2
+
+                                        //need to check if user already admin. then cannot create
+                                        if(admin_one.equals(phone)){ //mean user is already an admin.
+
+                                            //do not allow createion
+                                            allowCreateAdmin=4;
+                                            setChanged();
+                                            notifyObservers();
+
+
+                                        }else {
+
+
+                                            allowCreateAdmin = 2;
+                                            setChanged();
+                                            notifyObservers();
+                                        }
+
+                                      //after finish getting data from map
+                                      //then decide create or update
+
+
+
+                                    }else if(sizeDoc==0){ //can create new one here.
+
+                                       allowCreateAdmin=1;
+                                        setChanged();
+                                        notifyObservers();
+
+
+
+
+
+                                    }else {
+
+                                        //false structure
+
+                                        allowCreateAdmin=3;
+                                        setChanged();
+                                        notifyObservers();
+
+
+                                    }
+
+
+
+
+
+
+                                }else {
+
+                                    allowCreateAdmin=3;
+                                    setChanged();
+                                    notifyObservers();
+                                }
+
+
+                            }
+                        }).addOnCanceledListener(new OnCanceledListener() {
+                            @Override
+                            public void onCanceled() {
+
+
+                                allowCreateAdmin=3;
+                                setChanged();
+                                notifyObservers();
+
+                            }
+                        });
+
+                    }
+
+
+                }else {
+
+                    allowCreateAdmin=3;
+                    setChanged();
+                    notifyObservers();
+
+
+                }
+
+            }
+        }).addOnCanceledListener(new OnCanceledListener() {
+            @Override
+            public void onCanceled() {
+
+                allowCreateAdmin=3;
+                setChanged();
+                notifyObservers();
+
+            }
+        });
+
+    }
+
+
+    public void checkCredentialWithUpdates2(PhoneAuthCredential phoneAuthCredential, String name, String phone) {
 
         this.nameUser_admin=name;
         this.phoneUser_admin=phone;
@@ -92,6 +275,11 @@ public class Presenter_RegAdmin_AsAdmin_Activity extends Observable {
 
                                                         if(task.getResult().size()==1){ //means already a user for another admin,
                                                             //just confirmation.
+
+                                                            //in sharedprefs, count_admin should count to 2.
+
+
+                                                            count_admin_RegAsAdmin = 2; //mean there already admin registered, so this will be 2
 
                                                             //labeled as TWO
                                                             Map<String,Object> kk = new HashMap<>();
@@ -321,6 +509,12 @@ public class Presenter_RegAdmin_AsAdmin_Activity extends Observable {
 
     public int getIfDocumentCreated(){
         return allowCreateAdmin;
+    }
+
+    //count admin record
+
+    public int getCount_admin_RegAsAdmin(){
+        return count_admin_RegAsAdmin;
     }
 
     public void getCredentialWithUpdates(String codeUserAdminEnter, String codeFromFirebase) {

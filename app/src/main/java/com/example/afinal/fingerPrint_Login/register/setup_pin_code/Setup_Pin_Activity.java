@@ -44,6 +44,10 @@ import javax.annotation.Nullable;
 
 public class Setup_Pin_Activity extends AppCompatActivity {
 
+    //this activity should share for both admin and user,
+
+    // one user/admin will only have one pin
+
     private EditText editText1, editText2, editText3, editText4;
     private TextView textView;
 
@@ -132,9 +136,13 @@ public class Setup_Pin_Activity extends AppCompatActivity {
         Log.i("finalSharePreDataCheck","Setup_Pin_Activity 2,name: "+ nameHere+ ", phone: "+phoneHere+ ", adminName:"
                 +adminName+" , adminPhone: "+adminPhone);
 
-        documentReference = FirebaseFirestore.getInstance().collection("all_admin_doc_collections")
-                .document(adminName+adminPhone+"doc").collection("all_employee_thisAdmin_collection")
-                .document(nameHere+phoneHere+"doc");
+
+//
+//        documentReference = FirebaseFirestore.getInstance().collection("all_admin_doc_collections")
+//                .document(adminName+adminPhone+"doc").collection("all_employee_thisAdmin_collection")
+//                .document(nameHere+phoneHere+"doc");
+
+        documentReference = FirebaseFirestore.getInstance().collection("users_top_detail").document(phoneHere+"imauser");
 
         Log.i("checkSharedPreferences ", "1");
 
@@ -289,96 +297,120 @@ public class Setup_Pin_Activity extends AppCompatActivity {
             @Override
             public void onClick(View view) {
 
-                if(editText1!=null && editText2!=null && editText3!=null && editText4!=null){
+                String number1 = editText1.getText().toString();
+                String number2 = editText2.getText().toString();
+                String number3 = editText3.getText().toString();
+                String number4 = editText4.getText().toString();
+
+                String number = number1+number2+number3+number4+"";
+
+                //if(editText1!=null && editText2!=null && editText3!=null && editText4!=null){
+
+                //12 june
+
+                if(!number.isEmpty()){    //if edittext gets the typed number
 
                                 //then can start intent here,
                                 //if(timer.)
                                 timer.cancel();
 
-                                String number1 = editText1.getText().toString();
-                                String number2 = editText2.getText().toString();
-                                String number3 = editText3.getText().toString();
-                                String number4 = editText4.getText().toString();
+//                                String number1 = editText1.getText().toString();
+//                                String number2 = editText2.getText().toString();
+//                                String number3 = editText3.getText().toString();
+//                                String number4 = editText4.getText().toString();
 
-                                String number = number1+number2+number3+number4+"";
+//                                String number = number1+number2+number3+number4+"";
 
                                 //need to store to firestore as well.
 
 
                             //11june need to check first, admin count.
 
-                    File f_MainPool = new File("/data/data/com.example.afinal/shared_prefs/com.example.finalV8_punchCard.MAIN_POOL.xml");
+//                    File f_MainPool = new File("/data/data/com.example.afinal/shared_prefs/com.example.finalV8_punchCard.MAIN_POOL.xml");
 
-                    if(f_MainPool.exists()){ //meaning, //we assume exist, else, just sent error
-
-                        SharedPreferences prefs_Main_Pool = getSharedPreferences("com.example.finalV8_punchCard.MAIN_POOL", Context.MODE_PRIVATE);
-
-                        String countAdmin = prefs_Main_Pool.getString("count_admin","");
-
-                        //11june no need check since this case, admin is user, , so no need to pull phone number.
-
-                        if(countAdmin!=null || !countAdmin.equals("")) {
-
-                            if (Integer.valueOf(countAdmin) == 1) {  //this means only 1 admin exist.
-
-
-                                String phoneAdminPulled = prefs_Main_Pool.getString("final_Admin_Phone_MainPool_1","");
-
-
-
-                                //11june, since user is admin, sharedprefs will be created will look like this.
-                                //but still count_admin, can be 1 or 2.
-
-                                //update wrong, since this page will be shared.
-
-                                File fileHere = new File("/data/data/com.example.afinal/shared_prefs/" + phoneAdminPulled + ".xml"); //sharedPrefscheck == admin phone number
-
-                                //will read sharedprefs of "com.example.finalV8_punchCard.+60184670568" ,, admin phone?
-
-                                //SharedPreferences.Editor editor = prefs.edit();
-
-                                if(fileHere.exists()){ //just double check
-
-                                    SharedPreferences sharedPrefs_1 = getSharedPreferences("com.example.finalV8_punchCard."+phoneAdminPulled, Context.MODE_PRIVATE);
-
-
-                                }else {// error
-
-
-
-                                }
-
-
-                            }else if(Integer.valueOf(countAdmin) == 2){
-
-
-                                String phoneAdminPulled = prefs_Main_Pool.getString("final_Admin_Phone_MainPool_2","");
-
-
-                            }else { //error
-
-
-                            }
-                        }
-
-
-
-
-
-
-                    }else{ //error, somehow sharedprefs from previous activity not created.
-
-
-
-                    }
-
-
-                    SharedPreferences prefs = getSharedPreferences(
-                                        "com.example.finalV8_punchCard", Context.MODE_PRIVATE);
-
-                                SharedPreferences.Editor editor = prefs.edit();
-
-                                editor.putString("final_User_Pin",number);
+//                    if(f_MainPool.exists()){ //meaning, //we assume exist, else, just sent error
+//
+//                        // check what previous activity registered.
+//
+//                        SharedPreferences prefs_Main_Pool = getSharedPreferences("com.example.finalV8_punchCard.MAIN_POOL", Context.MODE_PRIVATE);
+//
+//                        String countAdmin = prefs_Main_Pool.getString("count_admin","");
+//
+//                        //11june no need check since this case, admin is user, , so no need to pull phone number.
+//
+//                        if(countAdmin!=null || !countAdmin.equals("")) {
+//
+//                            if (Integer.valueOf(countAdmin) == 1) {  //this means only 1 admin exist.
+//
+//
+//                                String phoneAdminPulled = prefs_Main_Pool.getString("final_Admin_Phone_MainPool_1","");
+//
+//
+//
+//                                //11june, since user is admin, sharedprefs will be created will look like this.
+//                                //but still count_admin, can be 1 or 2.
+//
+//                                //update wrong, since this page will be shared.
+//
+//                                File fileHere = new File("/data/data/com.example.afinal/shared_prefs/" + phoneAdminPulled + ".xml"); //sharedPrefscheck == admin phone number
+//
+//                                //will read sharedprefs of "com.example.finalV8_punchCard.+60184670568" ,, admin phone?
+//
+//                                //SharedPreferences.Editor editor = prefs.edit();
+//
+//                                if(fileHere.exists()){ //just double check
+//
+//                                    SharedPreferences sharedPrefs_1 = getSharedPreferences("com.example.finalV8_punchCard."+phoneAdminPulled, Context.MODE_PRIVATE);
+//
+//                                    SharedPreferences.Editor editor_admin1 = sharedPrefs_1.edit();
+//
+//
+//                                    editor_admin1.putString("final_User_Name",nameHere);
+//                                    editor_admin1.putString("final_User_Phone",phoneHere);
+//                                    editor_admin1.putString("final_Admin_Name",adminName);
+//                                    editor_admin1.putString("final_Admin_Phone",adminPhone);
+//
+//                                    editor_admin1.commit();
+//
+//
+//
+//                                }else {// error
+//
+//
+//
+//                                }
+//
+//
+//                            }else if(Integer.valueOf(countAdmin) == 2){
+//
+//
+//                                String phoneAdminPulled = prefs_Main_Pool.getString("final_Admin_Phone_MainPool_2","");
+//
+//
+//                            }else { //error
+//
+//
+//                            }
+ //                       }
+//
+//
+//
+//
+//
+//
+//                    }else{ //error, somehow sharedprefs from previous activity not created.,,
+//
+//
+//
+//                    }
+//
+//
+//                    SharedPreferences prefs = getSharedPreferences(
+//                                        "com.example.finalV8_punchCard", Context.MODE_PRIVATE);
+//
+//                                SharedPreferences.Editor editor = prefs.edit();
+//
+//                                editor.putString("final_User_Pin",number);
 
                                 if(documentReference!=null){
 
@@ -389,11 +421,6 @@ public class Setup_Pin_Activity extends AppCompatActivity {
                                     documentReference.set(map, SetOptions.merge()).addOnSuccessListener(new OnSuccessListener<Void>() {
                                         @Override
                                         public void onSuccess(Void aVoid) {
-
-                                        }
-                                    }).addOnFailureListener(new OnFailureListener() {
-                                        @Override
-                                        public void onFailure(@NonNull Exception e) {
 
                                         }
                                     }).addOnCanceledListener(new OnCanceledListener() {
