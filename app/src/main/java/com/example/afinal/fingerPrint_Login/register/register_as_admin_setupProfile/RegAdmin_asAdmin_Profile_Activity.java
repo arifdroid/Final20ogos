@@ -340,6 +340,7 @@ public class RegAdmin_asAdmin_Profile_Activity extends AppCompatActivity impleme
                                 mapUserTopDetail.put("phone", user_phone_asAdmin);
                                 mapUserTopDetail.put("admin_count", count_admin);
                                 mapUserTopDetail.put("admin_phone_"+count_admin,user_phone_asAdmin);
+                                mapUserTopDetail.put("admin_name_"+count_admin,user_name_asAdmin);
                                 //this can be either admin_phone_1 or admin_phone_2
 
 

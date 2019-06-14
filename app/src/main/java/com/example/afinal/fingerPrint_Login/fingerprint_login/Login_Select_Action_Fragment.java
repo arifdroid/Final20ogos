@@ -12,6 +12,9 @@ import com.example.afinal.fingerPrint_Login.register.register_as_admin.register_
 import com.example.afinal.fingerPrint_Login.register.register_as_admin_add_userList.Add_User_Activity;
 import com.example.afinal.fingerPrint_Login.register.register_as_admin_setupProfile.RegAdmin_asAdmin_Profile_Activity;
 import com.example.afinal.fingerPrint_Login.register.setup_pin_code.Setup_Pin_Activity;
+import com.google.android.gms.tasks.OnCanceledListener;
+import com.google.android.gms.tasks.OnCompleteListener;
+import com.google.android.gms.tasks.Task;
 import com.google.android.material.floatingactionbutton.FloatingActionButton;
 
 import androidx.fragment.app.Fragment;
@@ -25,9 +28,14 @@ import android.widget.Toast;
 
 import com.example.afinal.R;
 import com.example.afinal.fingerPrint_Login.register.register_with_activity.RegAdmin_Activity;
+import com.google.firebase.firestore.CollectionReference;
+import com.google.firebase.firestore.DocumentReference;
+import com.google.firebase.firestore.DocumentSnapshot;
+import com.google.firebase.firestore.FirebaseFirestore;
 
 import java.io.File;
 import java.lang.reflect.Field;
+import java.util.Map;
 
 public class Login_Select_Action_Fragment extends Fragment implements View.OnClickListener {
 
@@ -53,6 +61,19 @@ public class Login_Select_Action_Fragment extends Fragment implements View.OnCli
     private boolean nameHere_boolean;
 
 
+    //14 june
+    //make zero dependency on sharedprefs. go full online
+
+    //problem is we need the user phone number ,, but we need to enter phone number each time,
+    //so need to atleast store this user phone number , if empty, ask user to enter pin and phone number to retrieve
+    //from log in phase.
+
+    private CollectionReference cR_topUserCollection;
+
+    private DocumentReference dR_topUserCollection;
+    private String myphone_extracted;
+
+
     //boom menu test
 
 //    private BoomMenuButton boomMenuButton;
@@ -70,6 +91,8 @@ public class Login_Select_Action_Fragment extends Fragment implements View.OnCli
 
         View rootView = inflater.inflate(R.layout.floatingbutton_fragment_select, container,false);
         mContext = container.getContext();
+
+        cR_topUserCollection = FirebaseFirestore.getInstance().collection("users_top_detail");
 
         nameHere_boolean = false;
 //
@@ -101,6 +124,7 @@ public class Login_Select_Action_Fragment extends Fragment implements View.OnCli
         textViewAdmin_1 = rootView.findViewById(R.id.final_textView_fb_admin1_id);
         textViewAdmin_2 = rootView.findViewById(R.id.final_textView_fb_admin2_id);
         textView_RegUser = rootView.findViewById(R.id.final_textView_fb_register_id);
+
 //        textView_RegAdmin = rootView.findViewById(R.id.select_fragment_textView_regAdmin_1id);
 
         //we pull from shared preferences here once
@@ -127,151 +151,229 @@ public class Login_Select_Action_Fragment extends Fragment implements View.OnCli
 
         File f = new File("/data/data/com.example.afinal/shared_prefs/com.example.finalV8_punchCard.MAIN_POOL.xml");
 
+
         if(f.exists()){
 
             SharedPreferences prefs_Main_Pool = getActivity().getSharedPreferences("com.example.finalV8_punchCard.MAIN_POOL", Context.MODE_PRIVATE);
-            ///if this not exist, means user need to register to an admin first.
 
-            //here should contain
+            myphone_extracted = prefs_Main_Pool.getString("my_phone_number","");
 
-            //can use string set, but we use simple counter, translate to string instead.
+            //problem is user might still extracting after button is pressed, so need to check.
 
-            //in main pool, we will have "count_admin" value, 1 = 1 admin exists, 2 = 2 admins exist
-
-            //in main pool, also containt, "final_Admin_Phone_MainPool"
+            if(!myphone_extracted.equals("") && myphone_extracted!=null&& !myphone_extracted.isEmpty()){
 
 
-            String countAdmin = prefs_Main_Pool.getString("count_admin","");
-            if(countAdmin!=null || !countAdmin.equals("")) {
+                dR_topUserCollection = cR_topUserCollection.document(myphone_extracted+"imauser");
 
-                if (Integer.valueOf(countAdmin) == 1) {  //this means only 1 admin exist.
+                dR_topUserCollection.get().addOnCompleteListener(new OnCompleteListener<DocumentSnapshot>() {
+                    @Override
+                    public void onComplete(@NonNull Task<DocumentSnapshot> task) {
 
-                    //hence pull the first value, ,, the admin phone, since we need the admin phone number to retrieve shared prefs
-
-                    String sharedPrefsCheck = prefs_Main_Pool.getString("final_Admin_Phone_MainPool",""); //this relevant if 1 admin only.
-
-                    //after pull admin phone, pull dedicated sharedpreferences to this admin, check exist? if not exist,
-
-                  //  String sharedPrefsCheck = adminPhoneHere;
-
-                    if(!sharedPrefsCheck.equals("")) { //means there
-
-                        File fileHere = new File("/data/data/com.example.afinal/shared_prefs/" + sharedPrefsCheck + ".xml"); //sharedPrefscheck == admin phone number
-
-                        if (fileHere.exists()) {
-
-                            SharedPreferences sharedPrefs_1 = getActivity().getSharedPreferences("com.example.finalV8_punchCard."+sharedPrefsCheck, Context.MODE_PRIVATE);
-                            //will read sharedprefs of "com.example.finalV8_punchCard.+60184670568" ,, admin phone?
-
-                            nameHere_boolean= true;
-
-                            nameHere = sharedPrefs_1.getString("final_User_Name","");
-                            phoneHere = sharedPrefs_1.getString("final_User_Phone","");
-                            adminName = sharedPrefs_1.getString("final_Admin_Name","");
-                            adminPhone = sharedPrefs_1.getString("final_Admin_Phone","");
+                        if(task.isSuccessful()){
 
 
+                            Map<String, Object> remap = task.getResult().getData();
 
-                        } else { //file not exist.
+                            for(Map.Entry<String, Object> mapHere : remap.entrySet()){
 
-                            Toast.makeText(getContext(),"issue: please contact admin.", Toast.LENGTH_LONG).show();
+                                //admin name, and admin phone. , relative user name, user phone.
+                                //admin count,
+                                if(mapHere.getKey().equals("phone")){
+                                    phoneHere = mapHere.getValue().toString();
+                                }
 
-
-                        }
-
-                    }else{ //somehow pulling data from pull dont contain admin phone
-
-                        Toast.makeText(getContext(),"issue: please contact admin.", Toast.LENGTH_LONG).show();
-
-                    }
-
-                }if(Integer.valueOf(countAdmin) == 2){ //if admin is admin 2nd time registered.
-
-                    //so when we pull here, need special way to pull two shared prefs data.
-
-                    String sharedPrefsCheck_Admin_1 = prefs_Main_Pool.getString("final_Admin_Phone_MainPool",""); //this relevant if 1 admin only.
-                    String sharedPrefsCheck_Admin_2 = prefs_Main_Pool.getString("final_Admin_Phone_MainPool_2",""); //this relevant if 2 admins only.
-
-                    //handle admin 1 first.
-
-                    if(!sharedPrefsCheck_Admin_1.equals("")){
-
-                        File fileHere = new File("/data/data/com.example.afinal/shared_prefs/" + sharedPrefsCheck_Admin_1 + ".xml");
-
-                        if(fileHere.exists()){
+                                if(mapHere.getKey().equals("admin_count")){
+                                    admin_count = mapHere.getValue().toString();
+                                }
 
 
-                            SharedPreferences sharedPrefs_1 = getActivity().getSharedPreferences("com.example.finalV8_punchCard."+sharedPrefsCheck_Admin_1, Context.MODE_PRIVATE);
-                            //will be read sharedprefs of "com.example.finalV8_punchCard.+60184670568"
-
-                            nameHere_boolean= true;
-
-                            nameHere = sharedPrefs_1.getString("final_User_Name","");
-                            phoneHere = sharedPrefs_1.getString("final_User_Phone","");
-                            adminName = sharedPrefs_1.getString("final_Admin_Name","");
-                            adminPhone = sharedPrefs_1.getString("final_Admin_Phone","");
-
-                        }else { //something wrong if not exist.
-
-                            Toast.makeText(getContext(),"issue: please contact admin.", Toast.LENGTH_LONG).show();
+                                if(mapHere.getKey().equals("admin_phone_1")){
+                                    adminPhone= mapHere.getValue().toString();
+                                }
 
 
-                        }
+                                if(mapHere.getKey().equals("admin_phone_2")){
+                                    adminPhone_2 = mapHere.getValue().toString();
+                                }
+
+                            }
 
 
-
-
-                    }
-                    else { //somehow admin 1 phone number not written
-
-                        Toast.makeText(getContext(),"issue: please contact admin.", Toast.LENGTH_LONG).show();
-
-
-
-                    }
-
-                    //handle admin 2nd
-
-
-                    if(!sharedPrefsCheck_Admin_2.equals("")){
-
-                        File fileHere = new File("/data/data/com.example.afinal/shared_prefs/" + sharedPrefsCheck_Admin_2 + ".xml");
-
-                        if(fileHere.exists()){
-
-
-                            SharedPreferences sharedPrefs_2 = getActivity().getSharedPreferences("com.example.finalV8_punchCard."+sharedPrefsCheck_Admin_2, Context.MODE_PRIVATE);
-                            //will be read sharedprefs of "com.example.finalV8_punchCard.+60184670568"
-
-                            nameHere_2 = sharedPrefs_2.getString("final_User_Name","");
-                            phoneHere_2 = sharedPrefs_2.getString("final_User_Phone","");
-                            adminName_2 = sharedPrefs_2.getString("final_Admin_Name","");
-                            adminPhone_2 = sharedPrefs_2.getString("final_Admin_Phone","");
-
-                        }else { //something wrong if not exist.
-
-                            Toast.makeText(getContext(),"issue: please contact admin.", Toast.LENGTH_LONG).show();
+                        }else{
 
 
                         }
 
                     }
+                }).addOnCanceledListener(new OnCanceledListener() {
+                    @Override
+                    public void onCanceled() {
 
-                }else { //other than string 1 or 2
+                    }
+                });
 
-                    Toast.makeText(getContext(),"issue: please contact admin.", Toast.LENGTH_LONG).show();
 
-                }
 
             }
 
-        }else { //if main pool dont even exist.
 
 
-            Toast.makeText(getContext(),"please register to an admin, or create admin", Toast.LENGTH_LONG).show();
+        }else { //this means it is either uninstalled after registration or never registered.
+
+
 
 
         }
+
+
+
+
+//
+//        if(f.exists()){
+//
+//            SharedPreferences prefs_Main_Pool = getActivity().getSharedPreferences("com.example.finalV8_punchCard.MAIN_POOL", Context.MODE_PRIVATE);
+//            ///if this not exist, means user need to register to an admin first.
+//
+//            //here should contain
+//
+//            //can use string set, but we use simple counter, translate to string instead.
+//
+//            //in main pool, we will have "count_admin" value, 1 = 1 admin exists, 2 = 2 admins exist
+//
+//            //in main pool, also containt, "final_Admin_Phone_MainPool"
+//
+//
+//            String countAdmin = prefs_Main_Pool.getString("count_admin","");
+//            if(countAdmin!=null || !countAdmin.equals("")) {
+//
+//                if (Integer.valueOf(countAdmin) == 1) {  //this means only 1 admin exist.
+//
+//                    //hence pull the first value, ,, the admin phone, since we need the admin phone number to retrieve shared prefs
+//
+//                    String sharedPrefsCheck = prefs_Main_Pool.getString("final_Admin_Phone_MainPool",""); //this relevant if 1 admin only.
+//
+//                    //after pull admin phone, pull dedicated sharedpreferences to this admin, check exist? if not exist,
+//
+//                  //  String sharedPrefsCheck = adminPhoneHere;
+//
+//                    if(!sharedPrefsCheck.equals("")) { //means there
+//
+//                        File fileHere = new File("/data/data/com.example.afinal/shared_prefs/" + sharedPrefsCheck + ".xml"); //sharedPrefscheck == admin phone number
+//
+//                        if (fileHere.exists()) {
+//
+//                            SharedPreferences sharedPrefs_1 = getActivity().getSharedPreferences("com.example.finalV8_punchCard."+sharedPrefsCheck, Context.MODE_PRIVATE);
+//                            //will read sharedprefs of "com.example.finalV8_punchCard.+60184670568" ,, admin phone?
+//
+//                            nameHere_boolean= true;
+//
+//                            nameHere = sharedPrefs_1.getString("final_User_Name","");
+//                            phoneHere = sharedPrefs_1.getString("final_User_Phone","");
+//                            adminName = sharedPrefs_1.getString("final_Admin_Name","");
+//                            adminPhone = sharedPrefs_1.getString("final_Admin_Phone","");
+//
+//
+//
+//                        } else { //file not exist.
+//
+//                            Toast.makeText(getContext(),"issue: please contact admin.", Toast.LENGTH_LONG).show();
+//
+//
+//                        }
+//
+//                    }else{ //somehow pulling data from pull dont contain admin phone
+//
+//                        Toast.makeText(getContext(),"issue: please contact admin.", Toast.LENGTH_LONG).show();
+//
+//                    }
+//
+//                }if(Integer.valueOf(countAdmin) == 2){ //if admin is admin 2nd time registered.
+//
+//                    //so when we pull here, need special way to pull two shared prefs data.
+//
+//                    String sharedPrefsCheck_Admin_1 = prefs_Main_Pool.getString("final_Admin_Phone_MainPool",""); //this relevant if 1 admin only.
+//                    String sharedPrefsCheck_Admin_2 = prefs_Main_Pool.getString("final_Admin_Phone_MainPool_2",""); //this relevant if 2 admins only.
+//
+//                    //handle admin 1 first.
+//
+//                    if(!sharedPrefsCheck_Admin_1.equals("")){
+//
+//                        File fileHere = new File("/data/data/com.example.afinal/shared_prefs/" + sharedPrefsCheck_Admin_1 + ".xml");
+//
+//                        if(fileHere.exists()){
+//
+//
+//                            SharedPreferences sharedPrefs_1 = getActivity().getSharedPreferences("com.example.finalV8_punchCard."+sharedPrefsCheck_Admin_1, Context.MODE_PRIVATE);
+//                            //will be read sharedprefs of "com.example.finalV8_punchCard.+60184670568"
+//
+//                            nameHere_boolean= true;
+//
+//                            nameHere = sharedPrefs_1.getString("final_User_Name","");
+//                            phoneHere = sharedPrefs_1.getString("final_User_Phone","");
+//                            adminName = sharedPrefs_1.getString("final_Admin_Name","");
+//                            adminPhone = sharedPrefs_1.getString("final_Admin_Phone","");
+//
+//                        }else { //something wrong if not exist.
+//
+//                            Toast.makeText(getContext(),"issue: please contact admin.", Toast.LENGTH_LONG).show();
+//
+//
+//                        }
+//
+//
+//
+//
+//                    }
+//                    else { //somehow admin 1 phone number not written
+//
+//                        Toast.makeText(getContext(),"issue: please contact admin.", Toast.LENGTH_LONG).show();
+//
+//
+//
+//                    }
+//
+//                    //handle admin 2nd
+//
+//
+//                    if(!sharedPrefsCheck_Admin_2.equals("")){
+//
+//                        File fileHere = new File("/data/data/com.example.afinal/shared_prefs/" + sharedPrefsCheck_Admin_2 + ".xml");
+//
+//                        if(fileHere.exists()){
+//
+//
+//                            SharedPreferences sharedPrefs_2 = getActivity().getSharedPreferences("com.example.finalV8_punchCard."+sharedPrefsCheck_Admin_2, Context.MODE_PRIVATE);
+//                            //will be read sharedprefs of "com.example.finalV8_punchCard.+60184670568"
+//
+//                            nameHere_2 = sharedPrefs_2.getString("final_User_Name","");
+//                            phoneHere_2 = sharedPrefs_2.getString("final_User_Phone","");
+//                            adminName_2 = sharedPrefs_2.getString("final_Admin_Name","");
+//                            adminPhone_2 = sharedPrefs_2.getString("final_Admin_Phone","");
+//
+//                        }else { //something wrong if not exist.
+//
+//                            Toast.makeText(getContext(),"issue: please contact admin.", Toast.LENGTH_LONG).show();
+//
+//
+//                        }
+//
+//                    }
+//
+//                }else { //other than string 1 or 2
+//
+//                    Toast.makeText(getContext(),"issue: please contact admin.", Toast.LENGTH_LONG).show();
+//
+//                }
+//
+//            }
+//
+//        }else { //if main pool dont even exist.
+//
+//
+//            Toast.makeText(getContext(),"please register to an admin, or create admin", Toast.LENGTH_LONG).show();
+//
+//
+//        }
 
         ///
 //
