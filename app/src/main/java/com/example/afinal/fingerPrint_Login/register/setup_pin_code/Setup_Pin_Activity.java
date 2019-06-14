@@ -314,6 +314,7 @@ public class Setup_Pin_Activity extends AppCompatActivity {
                                 //if(timer.)
                                 timer.cancel();
 
+
 //                                String number1 = editText1.getText().toString();
 //                                String number2 = editText2.getText().toString();
 //                                String number3 = editText3.getText().toString();
@@ -412,7 +413,19 @@ public class Setup_Pin_Activity extends AppCompatActivity {
 //
 //                                editor.putString("final_User_Pin",number);
 
-                                if(documentReference!=null){
+
+                            //14 june
+
+                    SharedPreferences prefs = getSharedPreferences(
+                                        "com.example.finalV8_punchCard.MAIN_POOL", Context.MODE_PRIVATE);
+
+                    SharedPreferences.Editor editor = prefs.edit();
+
+                    editor.putString("my_phone_number", phoneHere);
+
+                    editor.commit();
+
+                    if(documentReference!=null){
 
                                     Map<String,Object> map = new HashMap<>();
 

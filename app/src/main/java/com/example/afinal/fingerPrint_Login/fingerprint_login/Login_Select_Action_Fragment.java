@@ -181,8 +181,38 @@ public class Login_Select_Action_Fragment extends Fragment implements View.OnCli
                                 //admin count,
 
                                 //this is not needed since we have it in sharedprefs
+
+                                if(mapHere.getKey().equals("user_name_1")){
+                                    nameHere = mapHere.getValue().toString();
+
+                                    //handle null, or not registered, or wrong data input
+
+                                    if(nameHere.isEmpty()|| nameHere==null ){
+
+                                        nameHere = "";
+                                    }
+                                }
+
+
+                                if(mapHere.getKey().equals("user_name_2")){
+                                    nameHere_2 = mapHere.getValue().toString();
+
+
+                                    if(nameHere_2.isEmpty()|| nameHere_2==null ){
+
+                                        nameHere_2 = "";
+                                    }
+                                }
+
+
                                 if(mapHere.getKey().equals("phone")){
                                     phoneHere = mapHere.getValue().toString();
+
+
+                                    if(phoneHere.isEmpty()|| phoneHere==null ){
+
+                                        phoneHere = "";
+                                    }
                                 }
 //
 //                                if(mapHere.getKey().equals("admin_count")){
@@ -191,29 +221,63 @@ public class Login_Select_Action_Fragment extends Fragment implements View.OnCli
 //
                                 if(mapHere.getKey().equals("admin_name_1")){
                                     adminName= mapHere.getValue().toString();
+
+
+                                    if(adminName.isEmpty()|| adminName==null ){
+
+                                        adminName= "";
+                                    }
+
+
                                 }
+
+
 
 
 
                                 if(mapHere.getKey().equals("admin_name_2")){
                                     adminName_2= mapHere.getValue().toString();
+
+
+                                    if(adminName_2.isEmpty()|| adminName_2==null ){
+
+                                        adminName_2 = "";
+                                    }
                                 }
 
 
                                 if(mapHere.getKey().equals("admin_phone_1")){
                                     adminPhone= mapHere.getValue().toString();
+
+
+                                    if(adminPhone.isEmpty()|| adminPhone==null ){
+
+                                        adminPhone = "";
+                                    }
+
                                 }
 
 
                                 if(mapHere.getKey().equals("admin_phone_2")){
                                     adminPhone_2 = mapHere.getValue().toString();
+
+
+                                    if(adminPhone_2.isEmpty()|| adminPhone_2==null ){
+
+                                        adminPhone_2 = "";
+                                    }
                                 }
 
                             }
 
+                            nameHere_boolean =true;
+
+                            Toast.makeText(getContext(),"Success getting admin detail", Toast.LENGTH_SHORT).show();
+
 
                         }else{
 
+                            Toast.makeText(getContext(),"Fail getting admin detail", Toast.LENGTH_SHORT).show();
 
                         }
 
@@ -221,6 +285,8 @@ public class Login_Select_Action_Fragment extends Fragment implements View.OnCli
                 }).addOnCanceledListener(new OnCanceledListener() {
                     @Override
                     public void onCanceled() {
+
+                        Toast.makeText(getContext(),"Fail getting admin detail", Toast.LENGTH_SHORT).show();
 
                     }
                 });
@@ -233,7 +299,7 @@ public class Login_Select_Action_Fragment extends Fragment implements View.OnCli
 
         }else { //this means it is either uninstalled after registration or never registered.
 
-
+            Toast.makeText(getContext(),"Fail getting admin detail", Toast.LENGTH_SHORT).show();
 
 
         }
@@ -668,48 +734,63 @@ public class Login_Select_Action_Fragment extends Fragment implements View.OnCli
                 //to disable register user, save data to shared preferences,
                 //then pull data, if data exist, dont allow for register, show toast
 //                String test = nameHere;
-//                if(nameHere_boolean) {
-//                    FingerPrint_LogIn_Final_Activity.timeFragmentBoolean=true;
-//
-//                    ((FingerPrint_LogIn_Final_Activity) getActivity()).nameUser = nameHere; //
-//                    ((FingerPrint_LogIn_Final_Activity) getActivity()).phoneUser = phoneHere; //
-//                    ((FingerPrint_LogIn_Final_Activity) getActivity()).globalAdminNameHere = adminName; //
-//                    ((FingerPrint_LogIn_Final_Activity) getActivity()).globalAdminPhoneHere = adminPhone; //
-//
-//                    Log.i("finalSharePreDataCheck","Login_Select_Fragment 4, before return,name: "
-//                            + nameHere+ ", phone: "+phoneHere+ ", adminName:"
-//                            +adminName+" , adminPhone: "+adminPhone);
-//                }
-//
-//                //25 May
-//
-//                if(nameHere_boolean){
-//
-//
-//
-//
-//
-//                }
+                if(nameHere_boolean) {
+                    FingerPrint_LogIn_Final_Activity.timeFragmentBoolean=true;
+
+
+
+                    ((FingerPrint_LogIn_Final_Activity) getActivity()).nameUser = nameHere; //
+                    ((FingerPrint_LogIn_Final_Activity) getActivity()).phoneUser = phoneHere; //
+                    ((FingerPrint_LogIn_Final_Activity) getActivity()).globalAdminNameHere = adminName; //
+                    ((FingerPrint_LogIn_Final_Activity) getActivity()).globalAdminPhoneHere = adminPhone; //
+
+                    Log.i("finalSharePreDataCheck","Login_Select_Fragment 4, before return,name: "
+                            + nameHere+ ", phone: "+phoneHere+ ", adminName:"
+                            +adminName+" , adminPhone: "+adminPhone);
+
+                    getFragmentManager().popBackStack();
+                }
+
+                //25 May
+
+                else {
+
+
+                    Toast.makeText(getContext(),"please ensure you are connected to internet", Toast.LENGTH_SHORT).show();
+
+
+
+
+
+                }
 //
 //                //this is we setup shared prefe
-//                getFragmentManager().popBackStack();
+              //  getFragmentManager().popBackStack();
 
                 break;
             case R.id.final_fb_admin2:
-//                if(nameHere_boolean) {
-//                    FingerPrint_LogIn_Final_Activity.timeFragmentBoolean=true;
-//                    ((FingerPrint_LogIn_Final_Activity) getActivity()).nameUser = nameHere_2; //
-//                    ((FingerPrint_LogIn_Final_Activity) getActivity()).phoneUser = phoneHere_2; //
-//                    ((FingerPrint_LogIn_Final_Activity) getActivity()).globalAdminNameHere = adminName_2; //
-//                    ((FingerPrint_LogIn_Final_Activity) getActivity()).globalAdminPhoneHere = adminPhone_2; //
-//
-//                    Log.i("finalSharePreDataCheck","Login_Select_Fragment 4, before return,name: "
-//                            + nameHere_2+ ", phone: "+phoneHere_2+ ", adminName:"
-//                            +adminName_2+" , adminPhone: "+adminPhone_2);
-//                }
-//
-//                getFragmentManager().popBackStack();
-//
+                if(nameHere_boolean) {
+                    FingerPrint_LogIn_Final_Activity.timeFragmentBoolean=true;
+                    ((FingerPrint_LogIn_Final_Activity) getActivity()).nameUser = nameHere_2; //
+                    ((FingerPrint_LogIn_Final_Activity) getActivity()).phoneUser = phoneHere_2; //
+                    ((FingerPrint_LogIn_Final_Activity) getActivity()).globalAdminNameHere = adminName_2; //
+                    ((FingerPrint_LogIn_Final_Activity) getActivity()).globalAdminPhoneHere = adminPhone_2; //
+
+                    Log.i("finalSharePreDataCheck","Login_Select_Fragment 4, before return,name: "
+                            + nameHere_2+ ", phone: "+phoneHere_2+ ", adminName:"
+                            +adminName_2+" , adminPhone: "+adminPhone_2);
+
+                    getFragmentManager().popBackStack();
+
+                }else {
+
+                    Toast.makeText(getContext(),"please ensure you are connected to internet", Toast.LENGTH_SHORT).show();
+
+
+                }
+
+                //getFragmentManager().popBackStack();
+
 
 
                 break;

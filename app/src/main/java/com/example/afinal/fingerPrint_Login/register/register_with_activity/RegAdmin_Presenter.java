@@ -39,6 +39,8 @@ class RegAdmin_Presenter extends Observable implements  RegAdminPresenter_Interf
     @Override
     public boolean checkInputValid(String name, String phone) {
 
+        //for log in , we treat name as input.
+
         Log.i("22 May, ","00 , checkInputValid ");
 
         modelReturn = false;

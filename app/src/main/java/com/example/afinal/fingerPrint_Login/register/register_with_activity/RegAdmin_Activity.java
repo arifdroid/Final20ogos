@@ -1,7 +1,12 @@
 package com.example.afinal.fingerPrint_Login.register.register_with_activity;
 
+import android.content.Context;
 import android.content.Intent;
+
+import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
+
+import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.View;
@@ -12,10 +17,21 @@ import android.widget.Toast;
 
 import com.example.afinal.R;
 import com.example.afinal.fingerPrint_Login.TestActivity;
+import com.example.afinal.fingerPrint_Login.fingerprint_login.Login_Select_Action_Fragment;
 import com.example.afinal.fingerPrint_Login.register.register_as_admin.register_as_admin_regAdmin.RegAdmin_AsAdmin_Activity;
 import com.example.afinal.fingerPrint_Login.register.register_user_activity.RegUser_Activity;
+import com.google.android.gms.tasks.OnCanceledListener;
+import com.google.android.gms.tasks.OnCompleteListener;
+import com.google.android.gms.tasks.Task;
+import com.google.firebase.firestore.CollectionReference;
+import com.google.firebase.firestore.DocumentReference;
+import com.google.firebase.firestore.DocumentSnapshot;
+import com.google.firebase.firestore.FirebaseFirestore;
 import com.hanks.htextview.evaporate.EvaporateTextView;
 
+import java.io.File;
+import java.util.Map;
+import java.util.Objects;
 import java.util.Observable;
 import java.util.Observer;
 import java.util.Timer;
@@ -88,12 +104,26 @@ public class RegAdmin_Activity extends AppCompatActivity implements View.OnClick
 
     //this is to reuse button
     private int login_first;
+    private String myphone_extracted;
+
+    //14june
+    private CollectionReference cR_topUserCollection;
+    private DocumentReference dR_topUserCollection;
+    private String pinHere;
+    private String phoneHere;
+
+
+    //private String myphone_extracted;
 
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_reg_admin_);
+
+        cR_topUserCollection = FirebaseFirestore.getInstance().collection("users_top_detail");
+
+        pinHere ="";
 
         login_first =0;
 
@@ -129,6 +159,162 @@ public class RegAdmin_Activity extends AppCompatActivity implements View.OnClick
 //
 //            }
 //        });
+
+
+//        File f = new File("/data/data/com.example.afinal/shared_prefs/com.example.finalV8_punchCard.MAIN_POOL.xml");
+//
+//        if(f.exists()){
+//
+//            SharedPreferences prefs_Main_Pool = this.getSharedPreferences("com.example.finalV8_punchCard.MAIN_POOL", Context.MODE_PRIVATE);
+//
+//            myphone_extracted = prefs_Main_Pool.getString("my_phone_number","");
+//
+//            //problem is user might still extracting after button is pressed, so need to check.
+//
+//            if(!myphone_extracted.equals("") && myphone_extracted!=null&& !myphone_extracted.isEmpty()){
+//
+//
+//                dR_topUserCollection = cR_topUserCollection.document(myphone_extracted+"imauser");
+//
+//                dR_topUserCollection.get().addOnCompleteListener(new OnCompleteListener<DocumentSnapshot>() {
+//                    @Override
+//                    public void onComplete(@NonNull Task<DocumentSnapshot> task) {
+//
+//                        if(task.isSuccessful()){
+//
+//
+//                            Map<String, Object> remap = Objects.requireNonNull(task.getResult()).getData();
+//
+//                            for(Map.Entry<String, Object> mapHere : remap.entrySet()){
+//
+//                                //admin name, and admin phone. , relative user name, user phone.
+//                                //admin count,
+//
+//                                //this is not needed since we have it in sharedprefs
+//
+//                                if(mapHere.getKey().equals("user_name_1")){
+//                                    nameHere = mapHere.getValue().toString();
+//
+//                                    //handle null, or not registered, or wrong data input
+//
+//                                    if(nameHere.isEmpty()|| nameHere==null ){
+//
+//                                        nameHere = "";
+//                                    }
+//                                }
+//
+//
+//                                if(mapHere.getKey().equals("user_name_2")){
+//                                    nameHere_2 = mapHere.getValue().toString();
+//
+//
+//                                    if(nameHere_2.isEmpty()|| nameHere_2==null ){
+//
+//                                        nameHere_2 = "";
+//                                    }
+//                                }
+//
+//
+//                                if(mapHere.getKey().equals("phone")){
+//                                    phoneHere = mapHere.getValue().toString();
+//
+//
+//                                    if(phoneHere.isEmpty()|| phoneHere==null ){
+//
+//                                        phoneHere = "";
+//                                    }
+//                                }
+////
+////                                if(mapHere.getKey().equals("admin_count")){
+////                                    admin_count = mapHere.getValue().toString();
+////                                }
+////
+//                                if(mapHere.getKey().equals("admin_name_1")){
+//                                    adminName= mapHere.getValue().toString();
+//
+//
+//                                    if(adminName.isEmpty()|| adminName==null ){
+//
+//                                        adminName= "";
+//                                    }
+//
+//
+//                                }
+//
+//
+//
+//
+//
+//                                if(mapHere.getKey().equals("admin_name_2")){
+//                                    adminName_2= mapHere.getValue().toString();
+//
+//
+//                                    if(adminName_2.isEmpty()|| adminName_2==null ){
+//
+//                                        adminName_2 = "";
+//                                    }
+//                                }
+//
+//
+//                                if(mapHere.getKey().equals("admin_phone_1")){
+//                                    adminPhone= mapHere.getValue().toString();
+//
+//
+//                                    if(adminPhone.isEmpty()|| adminPhone==null ){
+//
+//                                        adminPhone = "";
+//                                    }
+//
+//                                }
+//
+//
+//                                if(mapHere.getKey().equals("admin_phone_2")){
+//                                    adminPhone_2 = mapHere.getValue().toString();
+//
+//
+//                                    if(adminPhone_2.isEmpty()|| adminPhone_2==null ){
+//
+//                                        adminPhone_2 = "";
+//                                    }
+//                                }
+//
+//                            }
+//
+//                            nameHere_boolean =true;
+//
+//                            Toast.makeText(getContext(),"Success getting admin detail", Toast.LENGTH_SHORT).show();
+//
+//
+//                        }else{
+//
+//                            Toast.makeText(getContext(),"Fail getting admin detail", Toast.LENGTH_SHORT).show();
+//
+//                        }
+//
+//                    }
+//                }).addOnCanceledListener(new OnCanceledListener() {
+//                    @Override
+//                    public void onCanceled() {
+//
+//                        Toast.makeText(getContext(),"Fail getting admin detail", Toast.LENGTH_SHORT).show();
+//
+//                    }
+//                });
+//
+//
+//
+//            }
+//
+//
+//
+//        }else { //this means it is either uninstalled after registration or never registered.
+//
+//            Toast.makeText(getContext(),"Fail getting admin detail", Toast.LENGTH_SHORT).show();
+//
+//
+//        }
+
+
 
         user_editTextName = findViewById(R.id.regFinal_EditText_UserName_iD);
         user_editTextPhone = findViewById(R.id.regFinal_EditText_User_Phone_iD);
@@ -239,9 +425,13 @@ public class RegAdmin_Activity extends AppCompatActivity implements View.OnClick
                 register_as_user_button.setVisibility(View.GONE);
                 register_as_admin_button.setVisibility(View.GONE);
 
+                //admin_editTextName.setVisibility(View.GONE);
+                admin_editTextName.setHint("4 pin code");
+
+
                 button_login_user.setVisibility(View.VISIBLE);
 
-                textViewMessageLogin_INFO.setText("enter user name and user phone number, then press next");
+                textViewMessageLogin_INFO.setText("please enter your phone number, and 4 pin log in");
 
                 login_first =1;
 
@@ -307,123 +497,313 @@ public class RegAdmin_Activity extends AppCompatActivity implements View.OnClick
 
             case R.id.reg_admin_log_in_buttonID:
 
-                if(login_first==1) {
 
-                    //set reg admin to invisible. / gone
-
-                    //fetch and save user name and phone.
-
-                    String userNameLogin = user_editTextName.getText().toString();
-                    String userPhoneLogin = user_editTextPhone.getText().toString();
+                final String userPinInput = user_editTextName.getText().toString();
+                final String userPhoneLogin = user_editTextPhone.getText().toString();
 
 
-                    checkValid = presenter.checkInputValid(userNameLogin, userPhoneLogin);
+                checkValid = presenter.checkInputValid(userPinInput, userPhoneLogin);
+
+
+                //
+
+                if(checkValid){
+
+                dR_topUserCollection = cR_topUserCollection.document(myphone_extracted+"imauser");
+
+                dR_topUserCollection.get().addOnCompleteListener(new OnCompleteListener<DocumentSnapshot>() {
+                    @Override
+                    public void onComplete(@NonNull Task<DocumentSnapshot> task) {
+
+                        if(task.isSuccessful()){
+
+
+                            Map<String, Object> remap = Objects.requireNonNull(task.getResult()).getData();
+
+                            for(Map.Entry<String, Object> mapHere : remap.entrySet()){
+
+                                //admin name, and admin phone. , relative user name, user phone.
+                                //admin count,
+
+                                //this is not needed since we have it in sharedprefs
+
+                                if(mapHere.getKey().equals("custom_pin")){
+
+                                    pinHere = mapHere.getValue().toString();
+                                }
+
+                                if(mapHere.getKey().equals("phone")){
+
+                                    phoneHere = mapHere.getValue().toString();
+                                }
+
+//                                if(mapHere.getKey().equals("user_name_1")){
+//                                    nameHere = mapHere.getValue().toString();
 //
-                    if (checkValid) { //here we call
-
-                        //updated 18 may
-
-                        Log.i("22MayTest ", "4 , check is valid");
-
-                        userPhoneLogin = RegAdmin_Presenter.phoneFinal; //finalise number
-
-                        //Log.i("22MayTest ","5 , normalized num "+ userNameIsAdmin);
-
-                        globalUserName = userNameLogin;       //this will be used in next activity.
-                        globalUserPhone = userPhoneLogin;
-                        //since this person will become admin
-//                    globalAdminName=userNameIsAdmin;
-//                    globalAdminPhone = userPhoneIsAdmin;
-
-
-                        //
+//                                    //handle null, or not registered, or wrong data input
 //
-                        textViewMessageLogin_INFO.setText("please enter admin name and admin phone registered to, then press log in");
-
-                        button_login_user.setText("log in");
-
-                        //set animation
-                        user_editTextName.setVisibility(View.GONE);
-                        user_editTextPhone.setVisibility(View.GONE);
-
-//                    admin_editTextName.setVisibility(View.VISIBLE);
-//                    admin_editTextPhone.setVisibility(View.VISIBLE);
-
-
-                        //then animate button. to change.
+//                                    if(nameHere.isEmpty()|| nameHere==null ){
 //
-                        //button_login_user.setVisibility(View.GONE);
-
-                        login_first=2;
-
-//                    check_admin_database_for_user_registering_button.setVisibility(View.VISIBLE);
-
-                        //textViewSureAsAdmin.setVisibility(View.VISIBLE);
+//                                        nameHere = "";
+//                                    }
+//                                }
 //
-//                    button_yes.setVisibility(View.VISIBLE);
-//                    button_no.setVisibility(View.VISIBLE);
-
-                        admin_editTextName.setVisibility(View.VISIBLE);
-                        admin_editTextPhone.setVisibility(View.VISIBLE);
-
-
-                        //this will be done, after received new input.
-
-//            globalAdminName = userName;
-//            globalAdminPhone =userPhone;
-//          boolean finalStatus = presenter.checkFromFirebaseSimulation(userName,userPhone);
 //
-//            if(finalStatus){
-//                //success
+//                                if(mapHere.getKey().equals("user_name_2")){
+//                                    nameHere_2 = mapHere.getValue().toString();
 //
-//               result(true);
 //
-//            }else {
+//                                    if(nameHere_2.isEmpty()|| nameHere_2==null ){
 //
-//                result(false);
-//            }
+//                                        nameHere_2 = "";
+//                                    }
+//                                }
+//
+//
+//                                if(mapHere.getKey().equals("phone")){
+//                                    phoneHere = mapHere.getValue().toString();
+//
+//
+//                                    if(phoneHere.isEmpty()|| phoneHere==null ){
+//
+//                                        phoneHere = "";
+//                                    }
+//                                }
+////
+////                                if(mapHere.getKey().equals("admin_count")){
+////                                    admin_count = mapHere.getValue().toString();
+////                                }
+////
+//                                if(mapHere.getKey().equals("admin_name_1")){
+//                                    adminName= mapHere.getValue().toString();
+//
+//
+//                                    if(adminName.isEmpty()|| adminName==null ){
+//
+//                                        adminName= "";
+//                                    }
+//
+//
+//                                }
+//
+//
+//
+//
+//
+//                                if(mapHere.getKey().equals("admin_name_2")){
+//                                    adminName_2= mapHere.getValue().toString();
+//
+//
+//                                    if(adminName_2.isEmpty()|| adminName_2==null ){
+//
+//                                        adminName_2 = "";
+//                                    }
+//                                }
+//
+//
+//                                if(mapHere.getKey().equals("admin_phone_1")){
+//                                    adminPhone= mapHere.getValue().toString();
+//
+//
+//                                    if(adminPhone.isEmpty()|| adminPhone==null ){
+//
+//                                        adminPhone = "";
+//                                    }
+//
+//                                }
+//
+//
+//                                if(mapHere.getKey().equals("admin_phone_2")){
+//                                    adminPhone_2 = mapHere.getValue().toString();
+//
+//
+//                                    if(adminPhone_2.isEmpty()|| adminPhone_2==null ){
+//
+//                                        adminPhone_2 = "";
+//                                    }
+//                                }
+
+                            }
+
+                        //    nameHere_boolean =true;
 
 
-                    } else {
-
-                        Log.i("22MayTest ", "999 , not valid " + userPhoneLogin);
-
-                        textViewMessageLogin_INFO.setText("please enter valid name and phone");
 
 
+                            if(pinHere.equals(userPinInput) && phoneHere.equals(userPhoneLogin)) {
 
-                        return;
+                                Toast.makeText(RegAdmin_Activity.this, "Success getting admin detail", Toast.LENGTH_SHORT).show();
+
+                                SharedPreferences prefs = getSharedPreferences(
+                                        "com.example.finalV8_punchCard.MAIN_POOL", Context.MODE_PRIVATE);
+
+                                SharedPreferences.Editor editor = prefs.edit();
+
+                                editor.putString("my_phone_number", userPhoneLogin);
+
+                                editor.commit();
+
+
+                                //14 june, suppose to work if app is uninstall, then reinstall, but already registered.
+                                //we recover with phone number and 4 pin code registered before.
+
+                                Intent intentHere = new Intent(RegAdmin_Activity.this, Login_Select_Action_Fragment.class);
+                                intentHere.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP | Intent.FLAG_ACTIVITY_CLEAR_TASK);
+
+                                startActivity(intentHere);
+
+
+
+
+
+                            }else {
+
+                                Toast.makeText(RegAdmin_Activity.this,"Wrong phone number or input pin", Toast.LENGTH_SHORT).show();
+
+                            }
+
+
+                        }else{
+
+                            Toast.makeText(RegAdmin_Activity.this,"Fail getting admin detail", Toast.LENGTH_SHORT).show();
+
+                        }
+
                     }
+                }).addOnCanceledListener(new OnCanceledListener() {
+                    @Override
+                    public void onCanceled() {
 
+                        Toast.makeText(RegAdmin_Activity.this,"Fail getting admin detail", Toast.LENGTH_SHORT).show();
 
-                }else if(login_first==2){
-
-
-                    String adminNameLogin = admin_editTextName.getText().toString();
-                    String adminPhoneLogin = admin_editTextPhone.getText().toString();
-
-                    checkValid = presenter.checkInputValid(adminNameLogin, adminPhoneLogin);
-
-                    if(checkValid){
-
-                        //extract admin info
-
-                        aaa
-
-
-
-
-
-
-                    }else {
-
-                        login_first=1;
-
-                        textViewMessageLogin_INFO.setText("please enter valid name and phone");
                     }
+                });
+
 
 
                 }
+
+
+
+//
+//
+//                if(login_first==1) {
+//
+//                    //set reg admin to invisible. / gone
+//
+//                    //fetch and save user name and phone.
+//
+//                    String userNameLogin = user_editTextName.getText().toString();
+//                    String userPhoneLogin = user_editTextPhone.getText().toString();
+//
+//
+//                    checkValid = presenter.checkInputValid(userNameLogin, userPhoneLogin);
+////
+//                    if (checkValid) { //here we call
+//
+//                        //updated 18 may
+//
+//                        Log.i("22MayTest ", "4 , check is valid");
+//
+//                        userPhoneLogin = RegAdmin_Presenter.phoneFinal; //finalise number
+//
+//                        //Log.i("22MayTest ","5 , normalized num "+ userNameIsAdmin);
+//
+//                        globalUserName = userNameLogin;       //this will be used in next activity.
+//                        globalUserPhone = userPhoneLogin;
+//                        //since this person will become admin
+////                    globalAdminName=userNameIsAdmin;
+////                    globalAdminPhone = userPhoneIsAdmin;
+//
+//
+//                        //
+////
+//                        textViewMessageLogin_INFO.setText("please enter admin name and admin phone registered to, then press log in");
+//
+//                        button_login_user.setText("log in");
+//
+//                        //set animation
+//                        user_editTextName.setVisibility(View.GONE);
+//                        user_editTextPhone.setVisibility(View.GONE);
+//
+////                    admin_editTextName.setVisibility(View.VISIBLE);
+////                    admin_editTextPhone.setVisibility(View.VISIBLE);
+//
+//
+//                        //then animate button. to change.
+////
+//                        //button_login_user.setVisibility(View.GONE);
+//
+//                        login_first=2;
+//
+////                    check_admin_database_for_user_registering_button.setVisibility(View.VISIBLE);
+//
+//                        //textViewSureAsAdmin.setVisibility(View.VISIBLE);
+////
+////                    button_yes.setVisibility(View.VISIBLE);
+////                    button_no.setVisibility(View.VISIBLE);
+//
+//                        admin_editTextName.setVisibility(View.VISIBLE);
+//                        admin_editTextPhone.setVisibility(View.VISIBLE);
+//
+//
+//                        //this will be done, after received new input.
+//
+////            globalAdminName = userName;
+////            globalAdminPhone =userPhone;
+////          boolean finalStatus = presenter.checkFromFirebaseSimulation(userName,userPhone);
+////
+////            if(finalStatus){
+////                //success
+////
+////               result(true);
+////
+////            }else {
+////
+////                result(false);
+////            }
+//
+//
+//                    } else {
+//
+//                        Log.i("22MayTest ", "999 , not valid " + userPhoneLogin);
+//
+//                        textViewMessageLogin_INFO.setText("please enter valid name and phone");
+//
+//
+//
+//                        return;
+//                    }
+//
+//
+//                }else if(login_first==2){
+//
+//
+//                    String adminNameLogin = admin_editTextName.getText().toString();
+//                    String adminPhoneLogin = admin_editTextPhone.getText().toString();
+//
+//                    checkValid = presenter.checkInputValid(adminNameLogin, adminPhoneLogin);
+//
+//                    if(checkValid){
+//
+//                        //extract admin info
+//
+//                        aaa
+//
+//
+//
+//
+//
+//
+//                    }else {
+//
+//                        login_first=1;
+//
+//                        textViewMessageLogin_INFO.setText("please enter valid name and phone");
+//                    }
+//
+//
+//                }
 
                 break;
 
