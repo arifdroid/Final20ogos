@@ -36,6 +36,7 @@ import com.google.firebase.firestore.FirebaseFirestore;
 import java.io.File;
 import java.lang.reflect.Field;
 import java.util.Map;
+import java.util.Objects;
 
 public class Login_Select_Action_Fragment extends Fragment implements View.OnClickListener {
 
@@ -172,18 +173,30 @@ public class Login_Select_Action_Fragment extends Fragment implements View.OnCli
                         if(task.isSuccessful()){
 
 
-                            Map<String, Object> remap = task.getResult().getData();
+                            Map<String, Object> remap = Objects.requireNonNull(task.getResult()).getData();
 
                             for(Map.Entry<String, Object> mapHere : remap.entrySet()){
 
                                 //admin name, and admin phone. , relative user name, user phone.
                                 //admin count,
+
+                                //this is not needed since we have it in sharedprefs
                                 if(mapHere.getKey().equals("phone")){
                                     phoneHere = mapHere.getValue().toString();
                                 }
+//
+//                                if(mapHere.getKey().equals("admin_count")){
+//                                    admin_count = mapHere.getValue().toString();
+//                                }
+//
+                                if(mapHere.getKey().equals("admin_name_1")){
+                                    adminName= mapHere.getValue().toString();
+                                }
 
-                                if(mapHere.getKey().equals("admin_count")){
-                                    admin_count = mapHere.getValue().toString();
+
+
+                                if(mapHere.getKey().equals("admin_name_2")){
+                                    adminName_2= mapHere.getValue().toString();
                                 }
 
 
