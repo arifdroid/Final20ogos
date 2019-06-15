@@ -112,6 +112,8 @@ public class RegAdmin_Activity extends AppCompatActivity implements View.OnClick
     private String pinHere;
     private String phoneHere;
 
+    private String adminCountHere;
+
 
     //private String myphone_extracted;
 
@@ -122,6 +124,8 @@ public class RegAdmin_Activity extends AppCompatActivity implements View.OnClick
         setContentView(R.layout.activity_reg_admin_);
 
         cR_topUserCollection = FirebaseFirestore.getInstance().collection("users_top_detail");
+
+        adminCountHere="";
 
         pinHere ="";
 
@@ -361,6 +365,8 @@ public class RegAdmin_Activity extends AppCompatActivity implements View.OnClick
 
                 intent.putExtra("adminName_asAdmin", globalUserName);
                 intent.putExtra("adminPhone_asAdmin", globalUserPhone);
+
+
 
 
                 startActivity(intent);
@@ -965,6 +971,64 @@ public class RegAdmin_Activity extends AppCompatActivity implements View.OnClick
 
                     check_admin_database_for_user_registering_button.setVisibility(View.VISIBLE);
 
+
+
+                    //14 june
+//
+//                    dR_topUserCollection = cR_topUserCollection.document(myphone_extracted+"imauser");
+//
+//
+//                    dR_topUserCollection.get().addOnCompleteListener(new OnCompleteListener<DocumentSnapshot>() {
+//                        @Override
+//                        public void onComplete(@NonNull Task<DocumentSnapshot> task) {
+//
+//                            if(task.isSuccessful()){
+//
+//                                Map<String, Object> remap = Objects.requireNonNull(task.getResult()).getData();
+//
+//                                for(Map.Entry<String, Object> mapHere : remap.entrySet()){
+//
+//                                    //admin name, and admin phone. , relative user name, user phone.
+//                                    //admin count,
+//
+//                                    //this is not needed since we have it in sharedprefs
+//
+//                                    if(mapHere.getKey().equals("admin_count")){
+//
+//                                        adminCountHere = mapHere.getValue().toString();
+//                                    }
+//
+//
+//                                }
+//
+//
+//                                if(adminCountHere.isEmpty() || adminCountHere.equals("") || adminCountHere!=null){
+//
+//                                    adminCountHere="1";
+//
+//                                }
+//
+//
+//
+//
+//                            }else {
+//
+//                                //try again.
+//
+//                            }
+//
+//
+//                        }
+//                    }).addOnCanceledListener(new OnCanceledListener() {
+//                        @Override
+//                        public void onCanceled() {
+//
+//
+//
+//
+//
+//                        }
+//                    });
 
 
 

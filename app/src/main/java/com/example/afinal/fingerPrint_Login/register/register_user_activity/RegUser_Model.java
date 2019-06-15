@@ -58,6 +58,11 @@ private boolean checkUserDocStatus;
 
                         Log.i("checkUserReg Flow: ", "[Model] , 31 , no document, can create");
 
+
+                        //no document has been created for this admin, though, it might have created for another admin.
+
+
+
                         setNewReturn(true);
                        // checkUserDocStatus=true;
                     }else {
@@ -89,7 +94,7 @@ private boolean checkUserDocStatus;
 
             Log.i("checkUserReg Flow: ", "[Model] , 35 , task checkUserDocStatus: "+ checkUserDocStatus);
 
-            checkUserDocStatus = b;
+            checkUserDocStatus = true;
 
             setChanged();
             notifyObservers();

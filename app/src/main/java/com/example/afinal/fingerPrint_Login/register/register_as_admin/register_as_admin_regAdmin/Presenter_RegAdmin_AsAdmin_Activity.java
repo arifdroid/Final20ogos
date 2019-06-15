@@ -104,11 +104,19 @@ public class Presenter_RegAdmin_AsAdmin_Activity extends Observable {
                                      Map<String,Object> remap  = (Map<String, Object>) task.getResult().getDocuments();
 
 
+                                     //check balik
+
                                       for(Map.Entry<String,Object> entry :remap.entrySet()){
 
-                                          if(entry.getKey().equals("admin_one")){
+                                          if(entry.getKey().equals("admin_phone_1")){
 
                                               admin_one = entry.getValue().toString();
+
+                                          }
+
+                                          if(entry.getKey().equals("admin_phone_2")){
+
+                                              admin_two = entry.getValue().toString();
 
                                           }
 //
@@ -135,7 +143,7 @@ public class Presenter_RegAdmin_AsAdmin_Activity extends Observable {
                                         //we should assume should create admin 2
 
                                         //need to check if user already admin. then cannot create
-                                        if(admin_one.equals(phone)){ //mean user is already an admin.
+                                        if(admin_one.equals(phone)|| admin_two.equals(phone)){ //mean user is already an admin.
 
                                             //do not allow createion
                                             allowCreateAdmin=4;
