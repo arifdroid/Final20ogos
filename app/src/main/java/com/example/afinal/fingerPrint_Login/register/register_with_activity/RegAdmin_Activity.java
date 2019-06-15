@@ -318,8 +318,6 @@ public class RegAdmin_Activity extends AppCompatActivity implements View.OnClick
 //
 //        }
 
-
-
         user_editTextName = findViewById(R.id.regFinal_EditText_UserName_iD);
         user_editTextPhone = findViewById(R.id.regFinal_EditText_User_Phone_iD);
 
