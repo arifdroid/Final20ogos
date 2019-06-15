@@ -757,82 +757,84 @@ public class RegUser_Activity extends AppCompatActivity implements View.OnClickL
 
                 adminMapCount.put("admin_count","1");
 
-            }else if(admin_count_extracted.equals("1")){
+                adminMapCount.put("phone", userPhone);
 
-                adminMapCount.put("admin_count","2");
+                adminMapCount.put("admin_phone_1",adminPhone);
 
-            }
+                adminMapCount.put("admin_name_1",adminName);
 
-
-            dR_User_Top.set(adminMapCount, SetOptions.merge()).addOnCompleteListener(new OnCompleteListener<Void>() {
-                @Override
-                public void onComplete(@NonNull Task<Void> task) {
-
-                    // copied here.
-
-                if(task.isSuccessful()){
-
-                    DocumentReference documentReference = FirebaseFirestore.getInstance().collection("all_admin_doc_collections")
-                            .document(adminName+adminPhone+"doc").collection("all_employee_thisAdmin_collection")
-                            .document(userName+userPhone+"doc");
-
-                    Map<Object,String> userprofile_data = new HashMap<>();
-
-                    userprofile_data.put("name",userName);
-                    userprofile_data.put("phone",userPhone);
-                    userprofile_data.put("image",documentReference.toString());
-                    //userprofile_data.put("");
-
-                    //   textViewMessage.setText("success.. setting up account");
-
-                    //documentReference
-
-                    documentReference.set(userprofile_data).addOnCompleteListener(new OnCompleteListener<Void>() {
-                        @Override
-                        public void onComplete(@NonNull Task<Void> task) {
-                            if(task.isSuccessful()){
-
-                                Log.i("documentSet ", "1");
+                adminMapCount.put("user_name_1",userName);
 
 
-                                if(mImageuri!=null) {
+                dR_User_Top.set(adminMapCount).addOnCompleteListener(new OnCompleteListener<Void>() {
+                    @Override
+                    public void onComplete(@NonNull Task<Void> task) {
 
-                                    storageReference = FirebaseStorage.getInstance().getReference("" + adminName + adminPhone+"doc").child("" + userName + userPhone +"image");
-                                    storageReference.putFile(mImageuri).addOnCompleteListener(new OnCompleteListener<UploadTask.TaskSnapshot>() {
-                                        @Override
-                                        public void onComplete(@NonNull Task<UploadTask.TaskSnapshot> task) {
+                        // copied here.
 
-                                            if(task.isSuccessful()){
+                        if(task.isSuccessful()){
 
-                                                Log.i("checkImageUploaded", "1");
+                            DocumentReference documentReference = FirebaseFirestore.getInstance().collection("all_admin_doc_collections")
+                                    .document(adminName+adminPhone+"doc").collection("all_employee_thisAdmin_collection")
+                                    .document(userName+userPhone+"doc");
 
-                                                Log.i("checkSharedPreferences ", "before image upload success");
+                            Map<Object,String> userprofile_data = new HashMap<>();
 
-                                            }else {
-                                                //task not successful
+                            userprofile_data.put("name",userName);
+                            userprofile_data.put("phone",userPhone);
+                            userprofile_data.put("image",documentReference.toString());
+                            //userprofile_data.put("");
 
-                                                Log.i("checkImageUploaded", "2");
+                            //   textViewMessage.setText("success.. setting up account");
 
-                                                Log.i("checkSharedPreferences ", "before image upload task fail");
+                            //documentReference
 
-                                            }
+                            documentReference.set(userprofile_data).addOnCompleteListener(new OnCompleteListener<Void>() {
+                                @Override
+                                public void onComplete(@NonNull Task<Void> task) {
+                                    if(task.isSuccessful()){
+
+                                        Log.i("documentSet ", "1");
+
+
+                                        if(mImageuri!=null) {
+
+                                            storageReference = FirebaseStorage.getInstance().getReference("" + adminName + adminPhone+"doc").child("" + userName + userPhone +"image");
+                                            storageReference.putFile(mImageuri).addOnCompleteListener(new OnCompleteListener<UploadTask.TaskSnapshot>() {
+                                                @Override
+                                                public void onComplete(@NonNull Task<UploadTask.TaskSnapshot> task) {
+
+                                                    if(task.isSuccessful()){
+
+                                                        Log.i("checkImageUploaded", "1");
+
+                                                        Log.i("checkSharedPreferences ", "before image upload success");
+
+                                                    }else {
+                                                        //task not successful
+
+                                                        Log.i("checkImageUploaded", "2");
+
+                                                        Log.i("checkSharedPreferences ", "before image upload task fail");
+
+                                                    }
+
+                                                }
+                                            }).addOnCanceledListener(new OnCanceledListener() {
+                                                @Override
+                                                public void onCanceled() {
+
+                                                    Log.i("checkImageUploaded", "3");
+                                                }
+                                            });
 
                                         }
-                                    }).addOnCanceledListener(new OnCanceledListener() {
-                                        @Override
-                                        public void onCanceled() {
 
-                                            Log.i("checkImageUploaded", "3");
-                                        }
-                                    });
+                                        //should we check,
 
-                                }
+                                        //here we saved all in sharedpreferences //create 4 pin id.
 
-                                //should we check,
-
-                                //here we saved all in sharedpreferences //create 4 pin id.
-
-                                //check sharedpref into the right admin. ..first check pool, where to create.
+                                        //check sharedpref into the right admin. ..first check pool, where to create.
 
 
 
@@ -920,47 +922,463 @@ public class RegUser_Activity extends AppCompatActivity implements View.OnClickL
 
 
 
-                                //we skipped this?
+                                        //we skipped this?
 
-                                Toast.makeText(RegUser_Activity.this,"user succesfully created", Toast.LENGTH_SHORT).show();
+                                        Toast.makeText(RegUser_Activity.this,"user succesfully created", Toast.LENGTH_SHORT).show();
 
 //                        Intent intent = new Intent(RegUser_Activity.this, Setup_Pin_Activity.class);
 //
 //                        startActivity(intent);
 
-                                //intent.addFlags()
+                                        //intent.addFlags()
 
-                                //   finish();
-
-
-                            }else {
-
-                                Log.i("documentSet ", "2, task failed");
+                                        //   finish();
 
 
-                            }
+                                    }else {
+
+                                        Log.i("documentSet ", "2, task failed");
+
+
+                                    }
+                                }
+
+
+                            });
+
+
+
+
+                        }else {
+
+
+
                         }
 
+                    }
+                }).addOnCanceledListener(new OnCanceledListener() {
+                    @Override
+                    public void onCanceled() {
 
-                    });
+                    }
+                });
 
 
 
 
-                }else {
+            }else if(admin_count_extracted.equals("1")){
+
+                adminMapCount.put("admin_count","2");
+
+
+                adminMapCount.put("phone", userPhone);
+
+                adminMapCount.put("admin_phone_2",adminPhone);
+
+                adminMapCount.put("admin_name_2",adminName);
+
+                adminMapCount.put("user_name_2",userName);
+
+
+                dR_User_Top.set(adminMapCount, SetOptions.merge()).addOnCompleteListener(new OnCompleteListener<Void>() {
+                    @Override
+                    public void onComplete(@NonNull Task<Void> task) {
+
+                        // copied here.
+
+                        if(task.isSuccessful()){
+
+                            DocumentReference documentReference = FirebaseFirestore.getInstance().collection("all_admin_doc_collections")
+                                    .document(adminName+adminPhone+"doc").collection("all_employee_thisAdmin_collection")
+                                    .document(userName+userPhone+"doc");
+
+                            Map<Object,String> userprofile_data = new HashMap<>();
+
+                            userprofile_data.put("name",userName);
+                            userprofile_data.put("phone",userPhone);
+                            userprofile_data.put("image",documentReference.toString());
+                            //userprofile_data.put("");
+
+                            //   textViewMessage.setText("success.. setting up account");
+
+                            //documentReference
+
+                            documentReference.set(userprofile_data).addOnCompleteListener(new OnCompleteListener<Void>() {
+                                @Override
+                                public void onComplete(@NonNull Task<Void> task) {
+                                    if(task.isSuccessful()){
+
+                                        Log.i("documentSet ", "1");
+
+
+                                        if(mImageuri!=null) {
+
+                                            storageReference = FirebaseStorage.getInstance().getReference("" + adminName + adminPhone+"doc").child("" + userName + userPhone +"image");
+                                            storageReference.putFile(mImageuri).addOnCompleteListener(new OnCompleteListener<UploadTask.TaskSnapshot>() {
+                                                @Override
+                                                public void onComplete(@NonNull Task<UploadTask.TaskSnapshot> task) {
+
+                                                    if(task.isSuccessful()){
+
+                                                        Log.i("checkImageUploaded", "1");
+
+                                                        Log.i("checkSharedPreferences ", "before image upload success");
+
+                                                    }else {
+                                                        //task not successful
+
+                                                        Log.i("checkImageUploaded", "2");
+
+                                                        Log.i("checkSharedPreferences ", "before image upload task fail");
+
+                                                    }
+
+                                                }
+                                            }).addOnCanceledListener(new OnCanceledListener() {
+                                                @Override
+                                                public void onCanceled() {
+
+                                                    Log.i("checkImageUploaded", "3");
+                                                }
+                                            });
+
+                                        }
+
+                                        //should we check,
+
+                                        //here we saved all in sharedpreferences //create 4 pin id.
+
+                                        //check sharedpref into the right admin. ..first check pool, where to create.
 
 
 
-                }
+//                        if(count_adminGlobal==0){ //here we can create the whole.
+//
+//                            //create 2 file2,
+//
+//                            SharedPreferences prefs_Main_Pool = RegUser_Activity.this.getSharedPreferences("com.example.finalV8_punchCard.MAIN_POOL", Context.MODE_PRIVATE);
+//
+//                            SharedPreferences.Editor editor_Main_Pool = prefs_Main_Pool.edit();
+//
+//                            editor_Main_Pool.putString("count_admin","1");
+//                            editor_Main_Pool.putString("final_Admin_Phone_MainPool",userPhone);
+//
+//                            editor_Main_Pool.commit();
+//
+//                            //here for direct
+//
+//
+//                            SharedPreferences prefs = getSharedPreferences(
+//                                    "com.example.finalV8_punchCard."+adminPhone, Context.MODE_PRIVATE);
+//
+//                            SharedPreferences.Editor editor = prefs.edit(); // we need to know, which preferences belong to which admin,
+//                            //if user registered to another admin.
+//
+//
+//                            editor.putString("final_User_Name",userName);
+//                            editor.putString("final_User_Phone",userPhone);
+//                            editor.putString("final_Admin_Phone",adminPhone);
+//                            editor.putString("final_Admin_Name", adminName);
+//
+//                            editor.putString("final_User_Picture", storageReference.toString());
+//
+//                            Log.i("finalSharePreDataCheck","Reg_User_Activity 1,name: "+ userName+ ", phone: "+userPhone + ", adminName:"
+//                                    +adminName+" , adminPhone: "+adminPhone);
+//
+//
+//                            //FingerPrint_LogIn_Final_Activity.userCount++;
+//
+//                            editor.commit();
+//
+//                        }if(count_adminGlobal==1){
+//
+//                            //create file
+//
+//                            SharedPreferences prefs_Main_Pool = RegUser_Activity.this.getSharedPreferences("com.example.finalV8_punchCard.MAIN_POOL", Context.MODE_PRIVATE);
+//
+//                            SharedPreferences.Editor editor_Main_Pool = prefs_Main_Pool.edit();
+//
+//                            editor_Main_Pool.putString("count_admin","2");
+//                            editor_Main_Pool.putString("final_Admin_Phone_MainPool_2",userPhone);
+//
+//                            editor_Main_Pool.commit();
+//
+//
+//                            SharedPreferences prefs = getSharedPreferences(
+//                                    "com.example.finalV8_punchCard."+adminPhone, Context.MODE_PRIVATE);
+//
+//                            SharedPreferences.Editor editor = prefs.edit(); // we need to know, which preferences belong to which admin,
+//                            //if user registered to another admin.
+//
+//
+//                            editor.putString("final_User_Name",userName);
+//                            editor.putString("final_User_Phone",userPhone);
+//                            editor.putString("final_Admin_Phone",adminPhone);
+//                            editor.putString("final_Admin_Name", adminName);
+//
+//                            editor.putString("final_User_Picture", storageReference.toString());
+//
+//                            Log.i("finalSharePreDataCheck","Reg_User_Activity 1,name: "+ userName+ ", phone: "+userPhone + ", adminName:"
+//                                    +adminName+" , adminPhone: "+adminPhone);
+//
+//
+//                            //FingerPrint_LogIn_Final_Activity.userCount++;
+//
+//                            editor.commit();
+//
+//
+//
+//                        }if(count_adminGlobal>=2){
+//
+//                            //cancel create, should not create here.,, not create anything.
+//
+//                        }
 
-                }
-            }).addOnCanceledListener(new OnCanceledListener() {
-                @Override
-                public void onCanceled() {
 
-                }
-            });
 
+                                        //we skipped this?
+
+                                        Toast.makeText(RegUser_Activity.this,"user succesfully created", Toast.LENGTH_SHORT).show();
+
+//                        Intent intent = new Intent(RegUser_Activity.this, Setup_Pin_Activity.class);
+//
+//                        startActivity(intent);
+
+                                        //intent.addFlags()
+
+                                        //   finish();
+
+
+                                    }else {
+
+                                        Log.i("documentSet ", "2, task failed");
+
+
+                                    }
+                                }
+
+
+                            });
+
+
+
+
+                        }else {
+
+
+
+                        }
+
+                    }
+                }).addOnCanceledListener(new OnCanceledListener() {
+                    @Override
+                    public void onCanceled() {
+
+                    }
+                });
+
+
+
+            }
+
+//
+//            dR_User_Top.set(adminMapCount, SetOptions.merge()).addOnCompleteListener(new OnCompleteListener<Void>() {
+//                @Override
+//                public void onComplete(@NonNull Task<Void> task) {
+//
+//                    // copied here.
+//
+//                if(task.isSuccessful()){
+//
+//                    DocumentReference documentReference = FirebaseFirestore.getInstance().collection("all_admin_doc_collections")
+//                            .document(adminName+adminPhone+"doc").collection("all_employee_thisAdmin_collection")
+//                            .document(userName+userPhone+"doc");
+//
+//                    Map<Object,String> userprofile_data = new HashMap<>();
+//
+//                    userprofile_data.put("name",userName);
+//                    userprofile_data.put("phone",userPhone);
+//                    userprofile_data.put("image",documentReference.toString());
+//                    //userprofile_data.put("");
+//
+//                    //   textViewMessage.setText("success.. setting up account");
+//
+//                    //documentReference
+//
+//                    documentReference.set(userprofile_data).addOnCompleteListener(new OnCompleteListener<Void>() {
+//                        @Override
+//                        public void onComplete(@NonNull Task<Void> task) {
+//                            if(task.isSuccessful()){
+//
+//                                Log.i("documentSet ", "1");
+//
+//
+//                                if(mImageuri!=null) {
+//
+//                                    storageReference = FirebaseStorage.getInstance().getReference("" + adminName + adminPhone+"doc").child("" + userName + userPhone +"image");
+//                                    storageReference.putFile(mImageuri).addOnCompleteListener(new OnCompleteListener<UploadTask.TaskSnapshot>() {
+//                                        @Override
+//                                        public void onComplete(@NonNull Task<UploadTask.TaskSnapshot> task) {
+//
+//                                            if(task.isSuccessful()){
+//
+//                                                Log.i("checkImageUploaded", "1");
+//
+//                                                Log.i("checkSharedPreferences ", "before image upload success");
+//
+//                                            }else {
+//                                                //task not successful
+//
+//                                                Log.i("checkImageUploaded", "2");
+//
+//                                                Log.i("checkSharedPreferences ", "before image upload task fail");
+//
+//                                            }
+//
+//                                        }
+//                                    }).addOnCanceledListener(new OnCanceledListener() {
+//                                        @Override
+//                                        public void onCanceled() {
+//
+//                                            Log.i("checkImageUploaded", "3");
+//                                        }
+//                                    });
+//
+//                                }
+//
+//                                //should we check,
+//
+//                                //here we saved all in sharedpreferences //create 4 pin id.
+//
+//                                //check sharedpref into the right admin. ..first check pool, where to create.
+//
+//
+//
+////                        if(count_adminGlobal==0){ //here we can create the whole.
+////
+////                            //create 2 file2,
+////
+////                            SharedPreferences prefs_Main_Pool = RegUser_Activity.this.getSharedPreferences("com.example.finalV8_punchCard.MAIN_POOL", Context.MODE_PRIVATE);
+////
+////                            SharedPreferences.Editor editor_Main_Pool = prefs_Main_Pool.edit();
+////
+////                            editor_Main_Pool.putString("count_admin","1");
+////                            editor_Main_Pool.putString("final_Admin_Phone_MainPool",userPhone);
+////
+////                            editor_Main_Pool.commit();
+////
+////                            //here for direct
+////
+////
+////                            SharedPreferences prefs = getSharedPreferences(
+////                                    "com.example.finalV8_punchCard."+adminPhone, Context.MODE_PRIVATE);
+////
+////                            SharedPreferences.Editor editor = prefs.edit(); // we need to know, which preferences belong to which admin,
+////                            //if user registered to another admin.
+////
+////
+////                            editor.putString("final_User_Name",userName);
+////                            editor.putString("final_User_Phone",userPhone);
+////                            editor.putString("final_Admin_Phone",adminPhone);
+////                            editor.putString("final_Admin_Name", adminName);
+////
+////                            editor.putString("final_User_Picture", storageReference.toString());
+////
+////                            Log.i("finalSharePreDataCheck","Reg_User_Activity 1,name: "+ userName+ ", phone: "+userPhone + ", adminName:"
+////                                    +adminName+" , adminPhone: "+adminPhone);
+////
+////
+////                            //FingerPrint_LogIn_Final_Activity.userCount++;
+////
+////                            editor.commit();
+////
+////                        }if(count_adminGlobal==1){
+////
+////                            //create file
+////
+////                            SharedPreferences prefs_Main_Pool = RegUser_Activity.this.getSharedPreferences("com.example.finalV8_punchCard.MAIN_POOL", Context.MODE_PRIVATE);
+////
+////                            SharedPreferences.Editor editor_Main_Pool = prefs_Main_Pool.edit();
+////
+////                            editor_Main_Pool.putString("count_admin","2");
+////                            editor_Main_Pool.putString("final_Admin_Phone_MainPool_2",userPhone);
+////
+////                            editor_Main_Pool.commit();
+////
+////
+////                            SharedPreferences prefs = getSharedPreferences(
+////                                    "com.example.finalV8_punchCard."+adminPhone, Context.MODE_PRIVATE);
+////
+////                            SharedPreferences.Editor editor = prefs.edit(); // we need to know, which preferences belong to which admin,
+////                            //if user registered to another admin.
+////
+////
+////                            editor.putString("final_User_Name",userName);
+////                            editor.putString("final_User_Phone",userPhone);
+////                            editor.putString("final_Admin_Phone",adminPhone);
+////                            editor.putString("final_Admin_Name", adminName);
+////
+////                            editor.putString("final_User_Picture", storageReference.toString());
+////
+////                            Log.i("finalSharePreDataCheck","Reg_User_Activity 1,name: "+ userName+ ", phone: "+userPhone + ", adminName:"
+////                                    +adminName+" , adminPhone: "+adminPhone);
+////
+////
+////                            //FingerPrint_LogIn_Final_Activity.userCount++;
+////
+////                            editor.commit();
+////
+////
+////
+////                        }if(count_adminGlobal>=2){
+////
+////                            //cancel create, should not create here.,, not create anything.
+////
+////                        }
+//
+//
+//
+//                                //we skipped this?
+//
+//                                Toast.makeText(RegUser_Activity.this,"user succesfully created", Toast.LENGTH_SHORT).show();
+//
+////                        Intent intent = new Intent(RegUser_Activity.this, Setup_Pin_Activity.class);
+////
+////                        startActivity(intent);
+//
+//                                //intent.addFlags()
+//
+//                                //   finish();
+//
+//
+//                            }else {
+//
+//                                Log.i("documentSet ", "2, task failed");
+//
+//
+//                            }
+//                        }
+//
+//
+//                    });
+//
+//
+//
+//
+//                }else {
+//
+//
+//
+//                }
+//
+//                }
+//            }).addOnCanceledListener(new OnCanceledListener() {
+//                @Override
+//                public void onCanceled() {
+//
+//                }
+//            });
+//
 
 
 

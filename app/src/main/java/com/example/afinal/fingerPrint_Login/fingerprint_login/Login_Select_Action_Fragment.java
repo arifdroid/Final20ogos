@@ -150,6 +150,8 @@ public class Login_Select_Action_Fragment extends Fragment implements View.OnCli
 
         //this file name Main_Pool
 
+        //this is needed so that we can extract admin count,
+
         File f = new File("/data/data/com.example.afinal/shared_prefs/com.example.finalV8_punchCard.MAIN_POOL.xml");
 
 

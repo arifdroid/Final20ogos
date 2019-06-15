@@ -41,6 +41,7 @@ import com.google.firebase.auth.PhoneAuthCredential;
 import com.google.firebase.auth.PhoneAuthProvider;
 import com.google.firebase.firestore.CollectionReference;
 import com.google.firebase.firestore.DocumentReference;
+import com.google.firebase.firestore.DocumentSnapshot;
 import com.google.firebase.firestore.FirebaseFirestore;
 import com.google.firebase.firestore.Query;
 import com.google.firebase.firestore.QuerySnapshot;
@@ -121,11 +122,17 @@ public class RegAdmin_AsAdmin_Activity extends AppCompatActivity implements Obse
     //28 may
     private Button button28may;
 
+    //14 june
+    private String admin_count;
+    private boolean boolean_admin_count;
+
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_reg_admin__as_admin_);
+
+        boolean_admin_count=false;
 
         Log.i("checkFlowDestroy", "2 reg_admin");
 //
@@ -164,8 +171,61 @@ public class RegAdmin_AsAdmin_Activity extends AppCompatActivity implements Obse
 
         Intent intent = getIntent();
 
-        userName = intent.getStringExtra("adminName_asAdmin_2");
-        userPhone = intent.getStringExtra("adminPhone_asAdmin_2");
+        userName = intent.getStringExtra("adminName_asAdmin");
+        userPhone = intent.getStringExtra("adminPhone_asAdmin");
+
+        CollectionReference cR_topUser = FirebaseFirestore.getInstance()
+                .collection("users_top_detail");
+
+        DocumentReference dR_topUser = cR_topUser.document(userPhone+"imauser");
+
+        dR_topUser.get().addOnCompleteListener(new OnCompleteListener<DocumentSnapshot>() {
+            @Override
+            public void onComplete(@NonNull Task<DocumentSnapshot> task) {
+
+                if(task.isSuccessful()){
+
+                Map<String,Object> remap = task.getResult().getData();
+
+
+
+                if(task.getResult().getData().isEmpty()){
+                    //meaning no recorded yet, it is zero
+
+                    admin_count="0";
+                }
+
+
+                for(Map.Entry<String,Object> remapHere : remap.entrySet()){
+
+                   if(remapHere.getKey().equals("admin_count")){
+
+                       admin_count = remapHere.getValue().toString();
+                   }
+
+                }
+
+
+                boolean_admin_count =true;
+
+
+                }else {
+
+
+                }
+
+
+
+            }
+        }).addOnCanceledListener(new OnCanceledListener() {
+            @Override
+            public void onCanceled() {
+
+
+
+            }
+        });
+
 
         Log.i("22may_as_admin"," name:"+userName + ", phone:"+userPhone);
 
@@ -618,7 +678,7 @@ public class RegAdmin_AsAdmin_Activity extends AppCompatActivity implements Obse
 
             textViewMessageCode.setText("33, credential process , name: "+userName+", phone: "+userPhone);
 
-            //presenter.checkCredentialWithUpdates(phoneAuthCredential, userName, userPhone);
+            //presenter.checkCredentialWithUpdates2(phoneAuthCredential, userName, userPhone);
 
             //12 june
 
@@ -814,7 +874,14 @@ public class RegAdmin_AsAdmin_Activity extends AppCompatActivity implements Obse
             intent.putExtra("adminName_asAdmin",userName);
             intent.putExtra("adminPhone_asAdmin",userPhone);
             intent.putExtra("image_ref_asAdmin",this_image_ref.toString());
-            intent.putExtra("admin_count","1");
+
+            if(admin_count.equals("0")) {
+
+                intent.putExtra("admin_count", "1");
+            }else if(admin_count.equals("1")){
+
+                intent.putExtra("admin_count", "2");
+            }
 
             //intent.addFlags(Intent.)
 
@@ -836,7 +903,13 @@ public class RegAdmin_AsAdmin_Activity extends AppCompatActivity implements Obse
                 intent.putExtra("adminName_asAdmin",userName);
                 intent.putExtra("adminPhone_asAdmin",userPhone);
                 intent.putExtra("image_ref_asAdmin",this_image_ref.toString());
-                intent.putExtra("admin_count","2");
+                if(admin_count.equals("0")) {
+
+                    intent.putExtra("admin_count", "1");
+                }else if(admin_count.equals("1")){
+
+                    intent.putExtra("admin_count", "2");
+                }
 
                 //intent.addFlags(Intent.)
 
