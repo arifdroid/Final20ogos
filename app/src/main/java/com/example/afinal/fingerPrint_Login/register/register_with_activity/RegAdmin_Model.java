@@ -92,7 +92,7 @@ public class RegAdmin_Model extends Observable implements RegAdminModel_Interfac
                             }
 
                             if(remap.getKey().equals("")){ //this is record for sharedpreferences.
-                                a
+
                             }
 
 

@@ -250,41 +250,49 @@ public class RegUser_Activity extends AppCompatActivity implements View.OnClickL
             @Override
             public void onComplete(@NonNull Task<DocumentSnapshot> task) {
 
-                if(task.isSuccessful()){
+                if(task.isSuccessful()) {
 
                     //need to recheck
 
-                    boolean user_registered = task.getResult().exists(); //this is wrong.
 
-                    if(user_registered){ //we need to check count, if one or two.
+                    boolean user_registered = Objects.requireNonNull(task.getResult()).exists(); //this is wrong.
+
+                    if (user_registered) { //we need to check count, if one or two.
 
 
                         Map<String, Object> remap = task.getResult().getData();
 
-                        for(Map.Entry<String,Object> remapHere : remap.entrySet()){
+                        for (Map.Entry<String, Object> remapHere : remap.entrySet()) {
 
-                            if(remapHere.getKey().equals("admin_count")){
+                            if (remapHere.getKey().equals("admin_count")) {
 
-                                //we could extract 0, 1 or 2
+                                //we could extract 1 or 2
 
                                 admin_count_extracted = remapHere.getValue().toString();
                             }
 
                         }
 
+                        if(admin_count_extracted.equals("1")) {
+                            boolean_admin_count = true;
+                        }else {
 
-                        boolean_admin_count = true;
+
+                            Toast.makeText(RegUser_Activity.this,"maximum number of 2 users registered",Toast.LENGTH_SHORT).show();
+                            boolean_admin_count=false;
+                        }
 
 
 
-                    }else { //if never existed we registered count as one.
+                    } else { //if never existed we registered count as one.
 
-                        admin_count_extracted ="0"; //register as 1, first timer.
+                        //confused
+
+                        admin_count_extracted = "0"; //register as 1, first timer.,, if 0 will need to
 
 
                         boolean_admin_count = true;
                     }
-
 
 
 
@@ -416,9 +424,7 @@ public class RegUser_Activity extends AppCompatActivity implements View.OnClickL
                 //    textViewMessage.setText("credential verified, wait..");
 
                     //then check with firebase.
-                    Log.i("checkUserReg Flow: ", "[Activity] , 6 , task successfull");
 
-                    final FirebaseUser user = FirebaseAuth.getInstance().getCurrentUser();
 
                     //get the reference to admin collection,
                     final CollectionReference cR_ifRegistered = FirebaseFirestore.getInstance().collection("all_admins_collections");
@@ -598,8 +604,7 @@ public class RegUser_Activity extends AppCompatActivity implements View.OnClickL
 
                     if (boolean_admin_count) {
 
-
-                        if(admin_count_extracted.equals("1")|| admin_count_extracted.equals("2")) {
+                        if(admin_count_extracted.equals("1")|| admin_count_extracted.equals("0")) {
 
 
                             //  textViewMessage.setText("getting code..");
@@ -609,7 +614,9 @@ public class RegUser_Activity extends AppCompatActivity implements View.OnClickL
                             //presenter.phonecallBack();
                             getCallBack(userPhone);
 
-                        }else{
+                        }else if(admin_count_extracted.equals("2")){
+
+                            Toast.makeText(RegUser_Activity.this,"our are only allowed to be registered to 2 admins",Toast.LENGTH_SHORT).show();
 
                             //something wrong when extracting.
 

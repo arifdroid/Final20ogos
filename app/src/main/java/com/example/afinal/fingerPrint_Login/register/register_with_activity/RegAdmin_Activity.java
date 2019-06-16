@@ -923,9 +923,9 @@ public class RegAdmin_Activity extends AppCompatActivity implements View.OnClick
 
             case R.id.regAdmin_button_user_id:
 
-                textViewMessage_LogIn.setVisibility(View.INVISIBLE);
+                textViewMessage_LogIn.setVisibility(View.GONE);
 
-                textViewMessage.setVisibility(View.INVISIBLE);
+                textViewMessage.setVisibility(View.GONE);
 
 
                 statusnow = "wait..";
@@ -1077,7 +1077,6 @@ public class RegAdmin_Activity extends AppCompatActivity implements View.OnClick
 
                     //this will only check if admin exist. thats it.
 
-
                     boolean finalStatus = presenter.checkFromFirebaseSimulation(adminName,adminPhone);
 //
 
@@ -1169,9 +1168,6 @@ public class RegAdmin_Activity extends AppCompatActivity implements View.OnClick
             // passing intent move to next activity if successful
 
             Intent intent = new Intent(RegAdmin_Activity.this, RegUser_Activity.class);
-
-
-
 
 
             intent.putExtra("admin_name", globalAdminName); //this just pass intent.

@@ -123,17 +123,16 @@ public class Setup_Pin_Activity extends AppCompatActivity {
                 phoneHere = intent.getStringExtra("sentUserPhone");
                 adminName = intent.getStringExtra("sentAdminName");
                 adminPhone = intent.getStringExtra("sentAdminPhone");
-            }
-            if(adminName.equals("")|| adminName==null){
-
-                adminName = nameHere; //we assume this is from admin page, register as admin, so admin and user has same detail.
-                adminPhone=phoneHere;
 
             }
 
-        Log.i("finalSharePreDataCheck","Setup_Pin_Activity 2,name: "+ nameHere+ ", phone: "+phoneHere+ ", adminName:"
-                +adminName+" , adminPhone: "+adminPhone);
-
+            //
+//            if(adminName.equals("")|| adminName==null){
+//
+//                adminName = nameHere; //we assume this is from admin page, register as admin, so admin and user has same detail.
+//                adminPhone=phoneHere;
+//
+//            }
 
 //
 //        documentReference = FirebaseFirestore.getInstance().collection("all_admin_doc_collections")
@@ -145,6 +144,7 @@ public class Setup_Pin_Activity extends AppCompatActivity {
         Log.i("checkSharedPreferences ", "1");
 
         // storageReference
+
         storageReference = FirebaseStorage.getInstance().getReference().child(""+adminName+adminPhone+"doc").child(""+nameHere+phoneHere+"image");
         //FirebaseStorage.getInstance().getReference("" + adminName + adminPhone+"doc").child("" + userPhone + userName +"image")
 
