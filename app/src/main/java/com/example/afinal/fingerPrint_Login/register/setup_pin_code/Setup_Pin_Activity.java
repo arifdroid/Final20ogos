@@ -97,7 +97,6 @@ public class Setup_Pin_Activity extends AppCompatActivity {
 
         textView.setText("enter 4 pin password you prefer");
 
-
 //        SharedPreferences prefs = getSharedPreferences("com.example.finalV8_punchCard", Context.MODE_PRIVATE);
 //
 //        final String nameHere = prefs.getString("final_User_Name","");
@@ -105,7 +104,6 @@ public class Setup_Pin_Activity extends AppCompatActivity {
 //        String adminName = prefs.getString("final_Admin_Name","");
 //        String adminPhone = prefs.getString("final_Admin_Phone","");
       //  String ref = prefs.getString("final_pth_user","");
-
             final Intent intent = getIntent();
 
             checkAdmin = intent.getStringExtra("checkadminOrUser");

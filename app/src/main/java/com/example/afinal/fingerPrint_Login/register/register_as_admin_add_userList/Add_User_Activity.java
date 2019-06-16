@@ -79,10 +79,6 @@ public class Add_User_Activity extends AppCompatActivity implements View.OnClick
         // 21 May
         addUserMap = new HashMap<>();
 
-
-
-
-
         Intent intent = getIntent();
 
         user_name_asAdmin = intent.getStringExtra("adminName_asAdmin");
@@ -90,9 +86,7 @@ public class Add_User_Activity extends AppCompatActivity implements View.OnClick
 
         Log.i("checkADDtak", "0, name:"+user_name_asAdmin+" , number:"+user_phone_asAdmin);
 
-
         initRecycler();
-
 
        // recyclerView.setOnClickListener(this);
         buttonNext.setOnClickListener(this);
