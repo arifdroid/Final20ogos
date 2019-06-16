@@ -20,6 +20,7 @@ import com.example.afinal.fingerPrint_Login.register.PassResultMap;
 import com.example.afinal.fingerPrint_Login.register.TimePickerFragment;
 import com.example.afinal.fingerPrint_Login.register.WifiReceiver;
 import com.example.afinal.fingerPrint_Login.register.register_as_admin_add_userList.Add_User_Activity;
+import com.google.android.gms.tasks.OnCanceledListener;
 import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.Task;
 import com.google.android.material.floatingactionbutton.FloatingActionButton;
@@ -185,13 +186,11 @@ public class RegAdmin_asAdmin_Profile_Activity extends AppCompatActivity impleme
         //23 may check
 
         storageReference = FirebaseStorage.getInstance().getReference().child("uploads").child("picture"+ user_name_asAdmin+user_phone_asAdmin);
-
 //
 
         //storageReference.getDownloadUrl().getResult()
 
         //
-
 
         adminDetailsList = new ArrayList<>();
 
@@ -358,11 +357,11 @@ public class RegAdmin_asAdmin_Profile_Activity extends AppCompatActivity impleme
 
                                     dR_User_Top.set(mapUserTopDetail, SetOptions.merge());
 
+                                    //merge existing one.
 
                                 }else {
 
-
-
+                                     //create new one, else
                                     dR_User_Top.set(mapUserTopDetail);
                                 }
 
@@ -411,18 +410,56 @@ public class RegAdmin_asAdmin_Profile_Activity extends AppCompatActivity impleme
                                 documentReference.set(mapUserAsAdmin);
 
 
-                                Intent intent = new Intent(RegAdmin_asAdmin_Profile_Activity.this, Add_User_Activity.class);
+                                DocumentReference documentReferenceAdmin_asUser = documentReference.collection("all_employee_this_admin_Collections")
+                                            .document(user_name_asAdmin+user_phone_asAdmin+"doc");
 
-                                intent.putExtra("adminName_asAdmin",user_name_asAdmin);
-                                intent.putExtra("adminPhone_asAdmin",user_phone_asAdmin);
 
-                                startActivity(intent);
+                                Map<String, Object> mapAdminAsUser = new HashMap<>();
+                                mapAdminAsUser.put("name", user_name_asAdmin);
+                                mapAdminAsUser.put("phone", user_phone_asAdmin);
+                                //mapAdminAsUser.put("rating", wifiSSIDHere);
+                                mapAdminAsUser.put("ts_mon_morning", "");
+                                mapAdminAsUser.put("ts_tue_morning", "");
+                                mapAdminAsUser.put("ts_wed_morning", "");
+                                mapAdminAsUser.put("ts_thu_morning", "");
+                                mapAdminAsUser.put("ts_fri_morning", "");
+                                mapAdminAsUser.put("ts_mon_evening", "");
+                                mapAdminAsUser.put("ts_tue_evening", "");
+                                mapAdminAsUser.put("ts_wed_evening", "");
+                                mapAdminAsUser.put("ts_thu_evening", "");
+                                mapAdminAsUser.put("ts_fri_evening", "");
 
+
+                                documentReferenceAdmin_asUser.set(mapAdminAsUser).addOnCompleteListener(new OnCompleteListener<Void>() {
+                                    @Override
+                                    public void onComplete(@NonNull Task<Void> task) {
+
+                                        if(task.isSuccessful()){
+
+                                            Intent intent = new Intent(RegAdmin_asAdmin_Profile_Activity.this, Add_User_Activity.class);
+                                            intent.putExtra("adminName_asAdmin",user_name_asAdmin);
+                                            intent.putExtra("adminPhone_asAdmin",user_phone_asAdmin);
+                                            startActivity(intent);
+
+                                        } else {
+
+                                          Toast.makeText(RegAdmin_asAdmin_Profile_Activity.this,"please wait 5 seconds and try again.", Toast.LENGTH_SHORT).show();
+
+                                        }
+                                    }
+                                }).addOnCanceledListener(new OnCanceledListener() {
+                                    @Override
+                                    public void onCanceled() {
+
+                                        Toast.makeText(RegAdmin_asAdmin_Profile_Activity.this,"please wait 5 seconds and try again.", Toast.LENGTH_SHORT).show();
+
+                                    }
+                                });
 
                             } else {
 
                                 Toast.makeText(RegAdmin_asAdmin_Profile_Activity.this, "only " + count + " boxes checked , size list " + adminDetailsList.size(), Toast.LENGTH_SHORT).show();
-                                ;
+
                             }
 
                         }

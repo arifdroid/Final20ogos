@@ -175,65 +175,65 @@ public class RegAdmin_AsAdmin_Activity extends AppCompatActivity implements Obse
         userName = intent.getStringExtra("adminName_asAdmin");
         userPhone = intent.getStringExtra("adminPhone_asAdmin");
 
-        CollectionReference cR_topUser = FirebaseFirestore.getInstance()
-                .collection("users_top_detail");
-
-        DocumentReference dR_topUser = cR_topUser.document(userPhone+"imauser");
-
-        dR_topUser.get().addOnCompleteListener(new OnCompleteListener<DocumentSnapshot>() {
-            @Override
-            public void onComplete(@NonNull Task<DocumentSnapshot> task) {
-
-                //16 june check back flow
-
-                if(task.isSuccessful()){
-
-
-                if(Objects.requireNonNull(task.getResult()).exists()) {
-
-                    Map<String, Object> remap = task.getResult().getData();
-
-
-                    if (task.getResult().getData().isEmpty()) {
-                        //meaning no recorded yet, it is zero
-
-                        admin_count = "0";
-                    }
-
-
-                    if (remap != null) {
-                        for (Map.Entry<String, Object> remapHere : remap.entrySet()) {
-
-                            if (remapHere.getKey().equals("admin_count")) {
-
-                                admin_count = remapHere.getValue().toString();
-                            }
-
-                        }
-                    }
-
-
-                    boolean_admin_count = true;
-
-
-                } //assume if exist.
-
-                }else {
-
-
-                }
-
-
-
-            }
-        }).addOnCanceledListener(new OnCanceledListener() {
-            @Override
-            public void onCanceled() {
-
-
-
-            }
-        });
+//        CollectionReference cR_topUser = FirebaseFirestore.getInstance()
+//                .collection("users_top_detail");
+//
+//        DocumentReference dR_topUser = cR_topUser.document(userPhone+"imauser");
+//
+//        dR_topUser.get().addOnCompleteListener(new OnCompleteListener<DocumentSnapshot>() {
+//            @Override
+//            public void onComplete(@NonNull Task<DocumentSnapshot> task) {
+//
+//                //16 june check back flow
+//
+//                if(task.isSuccessful()){
+//
+//
+//                if(Objects.requireNonNull(task.getResult()).exists()) {
+//
+//                    Map<String, Object> remap = task.getResult().getData();
+//
+//
+//                    if (task.getResult().getData().isEmpty()) {
+//                        //meaning no recorded yet, it is zero
+//
+//                        admin_count = "0";
+//                    }
+//
+//
+//                    if (remap != null) {
+//                        for (Map.Entry<String, Object> remapHere : remap.entrySet()) {
+//
+//                            if (remapHere.getKey().equals("admin_count")) {
+//
+//                                admin_count = remapHere.getValue().toString();
+//                            }
+//
+//                        }
+//                    }
+//
+//
+//                    boolean_admin_count = true;
+//
+//
+//                } //assume if exist.
+//
+//                }else {
+//
+//
+//                }
+//
+//
+//
+//            }
+//        }).addOnCanceledListener(new OnCanceledListener() {
+//            @Override
+//            public void onCanceled() {
+//
+//
+//
+//            }
+//        });
 
         textViewName.setText(userName);
         textViewPhone.setText(userPhone);
@@ -868,27 +868,25 @@ public class RegAdmin_AsAdmin_Activity extends AppCompatActivity implements Obse
             intent.putExtra("adminPhone_asAdmin",userPhone);
             intent.putExtra("image_ref_asAdmin",this_image_ref.toString());
 
-            check count admin right or not, check logic part. in presenter as well
+            intent.putExtra("admin_count", "1");
+
+           // check count admin right or not, check logic part. in presenter as well
 
             //actually we could just assume, if 1, put 1. right?
-
-            if(admin_count.equals("0")) {
-
-                intent.putExtra("admin_count", "1");
-            }else if(admin_count.equals("1")){
-
-                intent.putExtra("admin_count", "2");
-            }
+//
+//            if(admin_count.equals("0")) {
+//
+//                intent.putExtra("admin_count", "1");
+//            }else if(admin_count.equals("1")){
+//
+//                intent.putExtra("admin_count", "2");
+//            }
 
             //intent.addFlags(Intent.)
 
             startActivity(intent);
 
-
-
-
         }
-
 
             if(adminDocumentCreated==2){ //mean we can create
 
@@ -900,20 +898,18 @@ public class RegAdmin_AsAdmin_Activity extends AppCompatActivity implements Obse
                 intent.putExtra("adminName_asAdmin",userName);
                 intent.putExtra("adminPhone_asAdmin",userPhone);
                 intent.putExtra("image_ref_asAdmin",this_image_ref.toString());
-                if(admin_count.equals("0")) {
 
-                    intent.putExtra("admin_count", "1");
-                }else if(admin_count.equals("1")){
-
-                    intent.putExtra("admin_count", "2");
-                }
+                intent.putExtra("admin_count", "2");
+//                if(admin_count.equals("0")) {
+//
+//                    intent.putExtra("admin_count", "1");
+//                }else if(admin_count.equals("1")){
+//
+//                    intent.putExtra("admin_count", "2");
+//                }
 
                 //intent.addFlags(Intent.)
-
                 startActivity(intent);
-
-
-
 
             }
         if(adminDocumentCreated==0){
