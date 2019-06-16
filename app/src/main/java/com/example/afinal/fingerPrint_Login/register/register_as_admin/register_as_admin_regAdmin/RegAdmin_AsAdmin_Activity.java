@@ -54,6 +54,7 @@ import com.hanks.htextview.evaporate.EvaporateTextView;
 import java.io.File;
 import java.util.HashMap;
 import java.util.Map;
+import java.util.Objects;
 import java.util.Observable;
 import java.util.Observer;
 import java.util.Set;
@@ -183,31 +184,39 @@ public class RegAdmin_AsAdmin_Activity extends AppCompatActivity implements Obse
             @Override
             public void onComplete(@NonNull Task<DocumentSnapshot> task) {
 
+                //16 june check back flow
+
                 if(task.isSuccessful()){
 
-                Map<String,Object> remap = task.getResult().getData();
+
+                if(Objects.requireNonNull(task.getResult()).exists()) {
+
+                    Map<String, Object> remap = task.getResult().getData();
 
 
+                    if (task.getResult().getData().isEmpty()) {
+                        //meaning no recorded yet, it is zero
 
-                if(task.getResult().getData().isEmpty()){
-                    //meaning no recorded yet, it is zero
-
-                    admin_count="0";
-                }
-
-
-                for(Map.Entry<String,Object> remapHere : remap.entrySet()){
-
-                   if(remapHere.getKey().equals("admin_count")){
-
-                       admin_count = remapHere.getValue().toString();
-                   }
-
-                }
+                        admin_count = "0";
+                    }
 
 
-                boolean_admin_count =true;
+                    if (remap != null) {
+                        for (Map.Entry<String, Object> remapHere : remap.entrySet()) {
 
+                            if (remapHere.getKey().equals("admin_count")) {
+
+                                admin_count = remapHere.getValue().toString();
+                            }
+
+                        }
+                    }
+
+
+                    boolean_admin_count = true;
+
+
+                } //assume if exist.
 
                 }else {
 
@@ -225,9 +234,6 @@ public class RegAdmin_AsAdmin_Activity extends AppCompatActivity implements Obse
 
             }
         });
-
-
-        Log.i("22may_as_admin"," name:"+userName + ", phone:"+userPhone);
 
         textViewName.setText(userName);
         textViewPhone.setText(userPhone);
@@ -429,9 +435,6 @@ public class RegAdmin_AsAdmin_Activity extends AppCompatActivity implements Obse
 
         mCallBack = new PhoneAuthProvider.OnVerificationStateChangedCallbacks() {
 
-
-
-
             @Override
             public void onVerificationCompleted(final PhoneAuthCredential phoneAuthCredential) {
 
@@ -441,13 +444,9 @@ public class RegAdmin_AsAdmin_Activity extends AppCompatActivity implements Obse
 
                 //textViewMessage.setText("phone verified, try automatically...");
 
-                textViewMessageCode.setText("checking in credential, please wait..");
-
-                Log.i("checkCredential,"," 1 , phone"+userPhone);
-
+                textViewMessageCode.setText("try log in automatically..");
 
                 checkPhoneCredential(phoneAuthCredential);
-
 
 
 //
@@ -523,7 +522,6 @@ public class RegAdmin_AsAdmin_Activity extends AppCompatActivity implements Obse
             public void onVerificationFailed(FirebaseException e) {
 
                 Toast.makeText(RegAdmin_AsAdmin_Activity.this,"verification fail: ",Toast.LENGTH_LONG).show();
-                Log.i("failtoverify","1 : "+e.getMessage());
                 textViewMessageCode.setText("fail verify");
 
 
@@ -533,9 +531,10 @@ public class RegAdmin_AsAdmin_Activity extends AppCompatActivity implements Obse
             public void onCodeSent(String s, PhoneAuthProvider.ForceResendingToken forceResendingToken) {
                 super.onCodeSent(s, forceResendingToken);
                 codeFromFirebase=s;
-
                 Log.i("checkCode", codeFromFirebase);
-                textViewMessageCode.setText("checking in credential, please wait.. "+codeFromFirebase);
+                //textViewMessageCode.setText("checking in credential, please wait.. "+codeFromFirebase);
+
+                // we should put timer here,
 
             }
         };
@@ -666,26 +665,20 @@ public class RegAdmin_AsAdmin_Activity extends AppCompatActivity implements Obse
     private void checkCredential(String codeUserAdminEnter, String codeFromFirebase) {
 
         presenter.getCredentialWithUpdates(codeUserAdminEnter,codeFromFirebase);
-
-
     }
 
     private void checkPhoneCredential(PhoneAuthCredential phoneAuthCredential) {
 
-        Log.i("checkCredential,"," 2 , phone"+userPhone);
+        //if(userName!=null&&userPhone!=null) {
 
-        if(userName!=null&&userPhone!=null) {
-
-            textViewMessageCode.setText("33, credential process , name: "+userName+", phone: "+userPhone);
+            textViewMessageCode.setText("logging in automatically with credential");
 
             //presenter.checkCredentialWithUpdates2(phoneAuthCredential, userName, userPhone);
 
             //12 june
 
             presenter.checkCredentialWithUpdates_NewStructure(phoneAuthCredential,userName,userPhone);
-        }
-
-        textViewMessageCode.setText("33, credential process FAILED");
+       // }
 
 
     }
@@ -874,6 +867,10 @@ public class RegAdmin_AsAdmin_Activity extends AppCompatActivity implements Obse
             intent.putExtra("adminName_asAdmin",userName);
             intent.putExtra("adminPhone_asAdmin",userPhone);
             intent.putExtra("image_ref_asAdmin",this_image_ref.toString());
+
+            check count admin right or not, check logic part. in presenter as well
+
+            //actually we could just assume, if 1, put 1. right?
 
             if(admin_count.equals("0")) {
 

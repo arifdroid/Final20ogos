@@ -89,36 +89,41 @@ public class Presenter_RegAdmin_AsAdmin_Activity extends Observable {
                             public void onComplete(@NonNull Task<QuerySnapshot> task) {
 
 
-                                if(task.isSuccessful()){
+                                //task.getResult().
+
+                                if(task.isSuccessful()) {
+
+                                    if(!task.getResult().isEmpty()){   //meaning there is document.
 
                                     //size must always be one. else, fail.
 
 
-
                                     int sizeDoc = task.getResult().getDocuments().size();
 
-                                    if(sizeDoc==1){ //exist aleady
+                                    if (sizeDoc == 1) { //exist aleady
 
                                         //here need to pull and read data to know, if one or two admin registered to this user.
 
-                                     Map<String,Object> remap  = (Map<String, Object>) task.getResult().getDocuments();
+                                        Map<String, Object> remap = (Map<String, Object>) task.getResult().getDocuments();
 
 
-                                     //check balik
+                                        //check balik
 
-                                      for(Map.Entry<String,Object> entry :remap.entrySet()){
+                                        for (Map.Entry<String, Object> entry : remap.entrySet()) {
 
-                                          if(entry.getKey().equals("admin_phone_1")){
+                                            if (entry.getKey().equals("admin_phone_1")) {
 
-                                              admin_one = entry.getValue().toString();
+                                                //meaning, admin one already registered.
+                                                admin_one = entry.getValue().toString();
 
-                                          }
+                                            }
 
-                                          if(entry.getKey().equals("admin_phone_2")){
-
-                                              admin_two = entry.getValue().toString();
-
-                                          }
+//                                            if (entry.getKey().equals("admin_phone_2")) {
+//
+//                                                //meaning admin_2 already registered to another admin
+//                                                admin_two = entry.getValue().toString();
+//
+//                                            }
 //
 //                                          if(entry.getKey().equals("admin_two")){
 //
@@ -143,42 +148,46 @@ public class Presenter_RegAdmin_AsAdmin_Activity extends Observable {
                                         //we should assume should create admin 2
 
                                         //need to check if user already admin. then cannot create
-                                        if(admin_one.equals(phone)|| admin_two.equals(phone)){ //mean user is already an admin.
+                                        if (admin_one.equals(phone)) { //mean user is already an admin.
 
                                             //do not allow createion
-                                            allowCreateAdmin=4;
+                                            allowCreateAdmin = 4;
                                             setChanged();
                                             notifyObservers();
 
+                                        }else if(!admin_two.isEmpty()||!admin_two.equals("")){ //this should mean, no more room to register admin
 
-                                        }else {
 
+                                            //do not allow createion
+                                            allowCreateAdmin = 4;
+                                            setChanged();
+                                            notifyObservers();
+
+                                        } else {
+
+                                            //though still need checking, since
 
                                             allowCreateAdmin = 2; //allow creating
                                             setChanged();
                                             notifyObservers();
                                         }
 
-                                      //after finish getting data from map
-                                      //then decide create or update
+                                        //after finish getting data from map
+                                        //then decide create or update
 
 
+                                    } else if (sizeDoc == 0) { //can create new one here.
 
-                                    }else if(sizeDoc==0){ //can create new one here.
-
-                                       allowCreateAdmin=1;
+                                        allowCreateAdmin = 1;
                                         setChanged();
                                         notifyObservers();
 
 
-
-
-
-                                    }else {
+                                    } else {
 
                                         //false structure
 
-                                        allowCreateAdmin=3;
+                                        allowCreateAdmin = 3;
                                         setChanged();
                                         notifyObservers();
 
@@ -186,9 +195,14 @@ public class Presenter_RegAdmin_AsAdmin_Activity extends Observable {
                                     }
 
 
+                                } //document should be exist
+                                else { //not exist, mean first time registering as user right?
 
-
-
+                                    //16 june
+                                        allowCreateAdmin = 1;       //not sure which one would run
+                                        setChanged();
+                                        notifyObservers();
+                                }
 
                                 }else {
 
@@ -535,7 +549,6 @@ public class Presenter_RegAdmin_AsAdmin_Activity extends Observable {
             notifyObservers();
         }
 
-        return;
     }
 
     public PhoneAuthCredential getCredential() {
