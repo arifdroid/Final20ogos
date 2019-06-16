@@ -18,7 +18,7 @@ class RegAdmin_Presenter extends Observable implements  RegAdminPresenter_Interf
     private RegAdmin_Model model;
 
     private boolean modelReturn;
-    public static String phoneFinal;
+    public  String phoneFinal;
 
     //9 june
 
@@ -44,72 +44,91 @@ class RegAdmin_Presenter extends Observable implements  RegAdminPresenter_Interf
         Log.i("22 May, ","00 , checkInputValid ");
 
         modelReturn = false;
-        if((name!=null&& phone!=null)||(name!="" && phone!="")){
+
+
+        if((name!=null&& phone!=null)||(name!="" && phone!="")) { //still need to check
 
             String checkPhoneinput = phone;
 
-            Character first = phone.charAt(0);
+            char first = phone.charAt(0);
 
 
             //22 may
             //dash also need to change. //we need to static variable can be accessed once from calling main.
             //call only once.
 
+            // phone >  6019- 211 2111
+            // first > 6
 
-             phone = phone.replace("-","");
-             phone = phone.replace(" ","");
+
+            phone = phone.replace("-", "");
+            phone = phone.replace(" ", "");
+
+            // phone >  60192112111
+            // first > 6
+
+            //check if phone number too short or too long, return false.
+
+            int lengthPhone = phone.length();
+
+            if (lengthPhone >= 10 && lengthPhone <= 13) {
 
 
-            if(first!= '+'){
+            if (first != '+') {
 
                 //something wrong with input. either return false or add plus +6
 
-                if(first=='6'){
+                if (first == '6') {
 
-                    phone = "+"+phone; //notice we only change data here, not globally
+                    phone = "+" + phone; //notice we only change data here, not globally
+
+                    // phone >  +60192112111
 
                     phoneFinal = phone;
-
-                    Log.i("22 May, ","11 , checkInputValid, phone" +phone);
 
                     return true;
 
 
-                }else if(first=='0'){
+                } else if (first == '0') {
 
-                    phone = "+6"+ phone;
+                    phone = "+6" + phone;
 
                     phoneFinal = phone;
-
-                    Log.i("22MayTest, ","22 , checkInputValid, phone" +phone);
 
                     return true;
 
 
-                }else{
+                } else {
 
 
-                    Log.i("22MayTest, ","33 , checkInputValid, phone" +phone);
+                    Log.i("22MayTest, ", "33 , checkInputValid, phone" + phone);
                     return false;
                 }
 
 
+            } else { //assume number start with plus
 
-            }else { //assume number start with plus
-
-                Log.i("22MayTest, ","44 , checkInputValid, phone" +phone);
+                Log.i("22MayTest, ", "44 , checkInputValid, phone" + phone);
                 // +601
-                String checkFirst = phone.substring(0,4);
+                String checkFirst = phone.substring(0, 4);
 
-                if(checkFirst.equals("+601")) {
+                if (checkFirst.equals("+601")) {
 
                     phoneFinal = phone;
                     return true;
-                }else {
+                } else {
 
                     return false;
                 }
             }
+
+
+
+        }// check phone length
+
+        else {
+            return false; //phone length is not between 10 and 13, check after trimming spaces " " and dash "-"
+        }
         }else {
 
             Log.i("22MayTest, ","55 , checkInputValid, phone" +phone);
@@ -205,5 +224,9 @@ class RegAdmin_Presenter extends Observable implements  RegAdminPresenter_Interf
         }
     }
 
+
+    public String getPhoneFinal(){
+        return phoneFinal;
+    }
 
 }

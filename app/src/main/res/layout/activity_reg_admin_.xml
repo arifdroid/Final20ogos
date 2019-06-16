@@ -395,14 +395,14 @@
 
         <TextView
             android:id="@+id/reg_admin_textView_infoMessageiD"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
+            android:layout_width="0dp"
+            android:layout_height="0dp"
             android:layout_marginStart="8dp"
             android:layout_marginTop="3dp"
             android:layout_marginEnd="8dp"
             android:layout_marginBottom="3dp"
             android:maxLines="2"
-            android:text="please enter name, and phone number to register"
+            android:text="if you want to become user, click user, if admin, click admin"
             android:textAlignment="center"
 
             android:textColor="@color/material_white_blue"

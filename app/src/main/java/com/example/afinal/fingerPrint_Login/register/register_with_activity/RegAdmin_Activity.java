@@ -36,12 +36,18 @@ import java.util.Observable;
 import java.util.Observer;
 import java.util.Timer;
 
+// 15 june,
+//this page must handle if phone number entered is not valid,
+//must follow +601* **** , without space, or dash '-'
+
+//1st ask user, whether they want to register as user, or admin
+
+
 public class RegAdmin_Activity extends AppCompatActivity implements View.OnClickListener, RegAdminViewInterface, Observer {
 
     //18 may, some functionality change, page can serve
     // to register both admin, and user.
     //originally, this is for user. so.
-
 
 
     private TextView textViewMessage;
@@ -356,16 +362,11 @@ public class RegAdmin_Activity extends AppCompatActivity implements View.OnClick
             public void onClick(View v) {
 
                 Intent intent = new Intent(RegAdmin_Activity.this, RegAdmin_AsAdmin_Activity.class);
-
 //                intent.putExtra("adminName_asAdmin", globalAdminName); //this just pass intent.
 //                intent.putExtra("adminPhone_asAdmin", globalAdminPhone);
                 //18 May , put extra intent.
-
                 intent.putExtra("adminName_asAdmin", globalUserName);
                 intent.putExtra("adminPhone_asAdmin", globalUserPhone);
-
-
-
 
                 startActivity(intent);
 
@@ -376,6 +377,7 @@ public class RegAdmin_Activity extends AppCompatActivity implements View.OnClick
             @Override
             public void onClick(View v) {
 
+                //15 june,
                 globalAdminName = "";
                 globalAdminPhone = "";
                 globalUserName="";
@@ -852,19 +854,15 @@ public class RegAdmin_Activity extends AppCompatActivity implements View.OnClick
                 String userNameIsAdmin = user_editTextName.getText().toString();
                 String userPhoneIsAdmin = user_editTextPhone.getText().toString();
 
-                Log.i("22MayTest, ","3 name user: "+userNameIsAdmin + " phone user: "+userPhoneIsAdmin);
-
                 checkValid = presenter.checkInputValid(userNameIsAdmin,userPhoneIsAdmin);
 //
                 if(checkValid){ //here we call
 
                     //updated 18 may
 
-                    Log.i("22MayTest ","4 , check is valid");
+                    //userPhoneIsAdmin = RegAdmin_Presenter.phoneFinal; //finalise number ,,
 
-                    userPhoneIsAdmin = RegAdmin_Presenter.phoneFinal; //finalise number
-
-                    Log.i("22MayTest ","5 , normalized num "+ userNameIsAdmin);
+                    userPhoneIsAdmin = presenter.getPhoneFinal();
 
                     globalUserName= userNameIsAdmin;       //this will be used in next activity.
                     globalUserPhone = userPhoneIsAdmin;
@@ -887,7 +885,7 @@ public class RegAdmin_Activity extends AppCompatActivity implements View.OnClick
                     register_as_admin_button.setVisibility(View.GONE);
                     register_as_user_button.setVisibility(View.GONE);
 
-//                    check_admin_database_for_user_registering_button.setVisibility(View.VISIBLE);
+//                  check_admin_database_for_user_registering_button.setVisibility(View.VISIBLE);
 
                     textViewSureAsAdmin.setVisibility(View.VISIBLE);
 
@@ -913,9 +911,6 @@ public class RegAdmin_Activity extends AppCompatActivity implements View.OnClick
 
 
                 }else {
-
-                    Log.i("22MayTest ","999 , not valid "+userPhoneIsAdmin);
-
 
                     return;
                 }
@@ -947,7 +942,9 @@ public class RegAdmin_Activity extends AppCompatActivity implements View.OnClick
 
                     //updated 18 may
 
-                    userPhone = RegAdmin_Presenter.phoneFinal;
+                    //userPhone = RegAdmin_Presenter.phoneFinal;
+
+                    userPhone = presenter.getPhoneFinal();
 
                     globalUserName= userName;       //this will be used in next activity.
                     globalUserPhone = userPhone;
@@ -1071,7 +1068,9 @@ public class RegAdmin_Activity extends AppCompatActivity implements View.OnClick
 
                     //this will be done, after received new input.
 
-                    adminPhone = RegAdmin_Presenter.phoneFinal;
+                    //adminPhone = RegAdmin_Presenter.phoneFinal;
+
+                    adminPhone = presenter.getPhoneFinal();
 
                     globalAdminName = adminName;
                     globalAdminPhone =adminPhone;

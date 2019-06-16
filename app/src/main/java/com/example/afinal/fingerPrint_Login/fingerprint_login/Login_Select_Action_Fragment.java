@@ -85,10 +85,31 @@ public class Login_Select_Action_Fragment extends Fragment implements View.OnCli
 //    private boolean popAdmin_1;
 //    private boolean popAdmin_2;
 
+    //15june we could set timer for loading top user collection, if after 10 seconds still not data pulled.
+    //tell user to register if not registered yet.
+    //if registered before please send report to developer.
+
     @Nullable
     @Override
     public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
         //        return super.onCreateView(inflater, container, savedInstanceState);
+
+        //14 june
+
+        //initialize string to empty, or "", , for detail
+
+        nameHere = "";
+        nameHere_2="";
+        adminName="";
+        adminName_2="";
+        phoneHere="";
+        phoneHere_2="";
+        adminPhone="";
+        adminPhone_2="";
+        myphone_extracted="";
+
+        //for cases like, the document is not existed, this details shall remain "";
+
 
         View rootView = inflater.inflate(R.layout.floatingbutton_fragment_select, container,false);
         mContext = container.getContext();
@@ -114,7 +135,7 @@ public class Login_Select_Action_Fragment extends Fragment implements View.OnCli
 //
 //
 //
-//        floatButton_Admin_1 = rootView.findViewById(R.id.finall_fb_one_id);
+        floatButton_Admin_1 = rootView.findViewById(R.id.finall_fb_one_id);
         floatButton_Admin_2 = rootView.findViewById(R.id.final_fb_admin2);
         floatButton_Reg_User = rootView.findViewById(R.id.final_fb_register_id);
         //floatButton_Reg_Admin = rootView.findViewById(R.id.select_fragment_FloatButton_RegisterAdminiD);
@@ -154,64 +175,71 @@ public class Login_Select_Action_Fragment extends Fragment implements View.OnCli
 
         File f = new File("/data/data/com.example.afinal/shared_prefs/com.example.finalV8_punchCard.MAIN_POOL.xml");
 
+        //this // note that after running these lines, we will saved all ndetails, hence there will never "", unless we kill the app, and
+        //run again
 
         if(f.exists()){
 
-            SharedPreferences prefs_Main_Pool = getActivity().getSharedPreferences("com.example.finalV8_punchCard.MAIN_POOL", Context.MODE_PRIVATE);
+            SharedPreferences prefs_Main_Pool = Objects.requireNonNull(getActivity()).getSharedPreferences("com.example.finalV8_punchCard.MAIN_POOL", Context.MODE_PRIVATE);
 
             myphone_extracted = prefs_Main_Pool.getString("my_phone_number","");
 
             //problem is user might still extracting after button is pressed, so need to check.
 
-            if(!myphone_extracted.equals("") && myphone_extracted!=null&& !myphone_extracted.isEmpty()){
+            if(!myphone_extracted.equals("") && myphone_extracted!=null&& !myphone_extracted.isEmpty()) {
 
 
-                dR_topUserCollection = cR_topUserCollection.document(myphone_extracted+"imauser");
+                dR_topUserCollection = cR_topUserCollection.document(myphone_extracted + "imauser");
 
                 dR_topUserCollection.get().addOnCompleteListener(new OnCompleteListener<DocumentSnapshot>() {
                     @Override
                     public void onComplete(@NonNull Task<DocumentSnapshot> task) {
 
-                        if(task.isSuccessful()){
+                        if(task.getResult().exists()){
 
+                        if (task.isSuccessful()) {
+
+//                            if(task.getResult().exists()){
+//
+//                            }
 
                             Map<String, Object> remap = Objects.requireNonNull(task.getResult()).getData();
 
-                            for(Map.Entry<String, Object> mapHere : remap.entrySet()){
+                            for (Map.Entry<String, Object> mapHere : remap.entrySet()) {
 
                                 //admin name, and admin phone. , relative user name, user phone.
                                 //admin count,
 
                                 //this is not needed since we have it in sharedprefs
 
-                                if(mapHere.getKey().equals("user_name_1")){
+                                if (mapHere.getKey().equals("user_name_1")) {
                                     nameHere = mapHere.getValue().toString();
 
                                     //handle null, or not registered, or wrong data input
 
-                                    if(nameHere.isEmpty()|| nameHere==null ){
+                                    if (nameHere.isEmpty() || nameHere == null) {
 
                                         nameHere = "";
                                     }
                                 }
 
 
-                                if(mapHere.getKey().equals("user_name_2")){
+                                if (mapHere.getKey().equals("user_name_2")) {
                                     nameHere_2 = mapHere.getValue().toString();
 
 
-                                    if(nameHere_2.isEmpty()|| nameHere_2==null ){
+                                    if (nameHere_2.isEmpty() || nameHere_2 == null) {
 
                                         nameHere_2 = "";
                                     }
                                 }
 
 
-                                if(mapHere.getKey().equals("phone")){
+                                if (mapHere.getKey().equals("phone")) {
                                     phoneHere = mapHere.getValue().toString();
 
 
-                                    if(phoneHere.isEmpty()|| phoneHere==null ){
+                                    if (phoneHere.isEmpty() || phoneHere == null) {
 
                                         phoneHere = "";
                                     }
@@ -221,38 +249,35 @@ public class Login_Select_Action_Fragment extends Fragment implements View.OnCli
 //                                    admin_count = mapHere.getValue().toString();
 //                                }
 //
-                                if(mapHere.getKey().equals("admin_name_1")){
-                                    adminName= mapHere.getValue().toString();
+                                if (mapHere.getKey().equals("admin_name_1")) {
+                                    adminName = mapHere.getValue().toString();
 
 
-                                    if(adminName.isEmpty()|| adminName==null ){
+                                    if (adminName.isEmpty() || adminName == null) {
 
-                                        adminName= "";
+                                        adminName = "";
                                     }
 
 
                                 }
 
 
+                                if (mapHere.getKey().equals("admin_name_2")) {
+                                    adminName_2 = mapHere.getValue().toString();
 
 
-
-                                if(mapHere.getKey().equals("admin_name_2")){
-                                    adminName_2= mapHere.getValue().toString();
-
-
-                                    if(adminName_2.isEmpty()|| adminName_2==null ){
+                                    if (adminName_2.isEmpty() || adminName_2 == null) {
 
                                         adminName_2 = "";
                                     }
                                 }
 
 
-                                if(mapHere.getKey().equals("admin_phone_1")){
-                                    adminPhone= mapHere.getValue().toString();
+                                if (mapHere.getKey().equals("admin_phone_1")) {
+                                    adminPhone = mapHere.getValue().toString();
 
 
-                                    if(adminPhone.isEmpty()|| adminPhone==null ){
+                                    if (adminPhone.isEmpty() || adminPhone == null) {
 
                                         adminPhone = "";
                                     }
@@ -260,11 +285,11 @@ public class Login_Select_Action_Fragment extends Fragment implements View.OnCli
                                 }
 
 
-                                if(mapHere.getKey().equals("admin_phone_2")){
+                                if (mapHere.getKey().equals("admin_phone_2")) {
                                     adminPhone_2 = mapHere.getValue().toString();
 
 
-                                    if(adminPhone_2.isEmpty()|| adminPhone_2==null ){
+                                    if (adminPhone_2.isEmpty() || adminPhone_2 == null) {
 
                                         adminPhone_2 = "";
                                     }
@@ -272,23 +297,28 @@ public class Login_Select_Action_Fragment extends Fragment implements View.OnCli
 
                             }
 
-                            nameHere_boolean =true;
+                            nameHere_boolean = true;
 
-                            Toast.makeText(getContext(),"Success getting admin detail", Toast.LENGTH_SHORT).show();
+                            Toast.makeText(getContext(), "Success getting admin detail", Toast.LENGTH_SHORT).show();
 
 
-                        }else{
+                        } else {
 
-                            Toast.makeText(getContext(),"Fail getting admin detail", Toast.LENGTH_SHORT).show();
+                            nameHere_boolean = false;
+
+
+                            Toast.makeText(getContext(), "Fail getting admin detail", Toast.LENGTH_SHORT).show();
 
                         }
+
+                    }
 
                     }
                 }).addOnCanceledListener(new OnCanceledListener() {
                     @Override
                     public void onCanceled() {
 
-                        Toast.makeText(getContext(),"Fail getting admin detail", Toast.LENGTH_SHORT).show();
+                        Toast.makeText(getContext(), "Fail getting admin detail", Toast.LENGTH_SHORT).show();
 
                     }
                 });
@@ -470,7 +500,7 @@ public class Login_Select_Action_Fragment extends Fragment implements View.OnCli
 //
 //        }
 
-      //  floatButton_Admin_1.setOnClickListener(this);
+        floatButton_Admin_1.setOnClickListener(this);
         floatButton_Admin_2.setOnClickListener(this);
         floatButton_Reg_User.setOnClickListener(this);
 //        floatButton_Reg_Admin.setOnClickListener(this);
@@ -746,7 +776,7 @@ public class Login_Select_Action_Fragment extends Fragment implements View.OnCli
                     ((FingerPrint_LogIn_Final_Activity) getActivity()).globalAdminNameHere = adminName; //
                     ((FingerPrint_LogIn_Final_Activity) getActivity()).globalAdminPhoneHere = adminPhone; //
 
-                    Log.i("finalSharePreDataCheck","Login_Select_Fragment 4, before return,name: "
+                    Log.i("flow15june ","Login_Select_Fragment , before return,name: "
                             + nameHere+ ", phone: "+phoneHere+ ", adminName:"
                             +adminName+" , adminPhone: "+adminPhone);
 
@@ -773,16 +803,16 @@ public class Login_Select_Action_Fragment extends Fragment implements View.OnCli
             case R.id.final_fb_admin2:
                 if(nameHere_boolean) {
                     FingerPrint_LogIn_Final_Activity.timeFragmentBoolean=true;
-                    ((FingerPrint_LogIn_Final_Activity) getActivity()).nameUser = nameHere_2; //
+                    ((FingerPrint_LogIn_Final_Activity) Objects.requireNonNull(getActivity())).nameUser = nameHere_2; //
                     ((FingerPrint_LogIn_Final_Activity) getActivity()).phoneUser = phoneHere_2; //
                     ((FingerPrint_LogIn_Final_Activity) getActivity()).globalAdminNameHere = adminName_2; //
                     ((FingerPrint_LogIn_Final_Activity) getActivity()).globalAdminPhoneHere = adminPhone_2; //
 
-                    Log.i("finalSharePreDataCheck","Login_Select_Fragment 4, before return,name: "
-                            + nameHere_2+ ", phone: "+phoneHere_2+ ", adminName:"
-                            +adminName_2+" , adminPhone: "+adminPhone_2);
+                    Log.i("flow15june ","Login_Select_Fragment , before return,name: "
+                            + nameHere+ ", phone: "+phoneHere+ ", adminName:"
+                            +adminName+" , adminPhone: "+adminPhone);
 
-                    getFragmentManager().popBackStack();
+                    Objects.requireNonNull(getFragmentManager()).popBackStack();
 
                 }else {
 
