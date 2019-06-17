@@ -802,7 +802,7 @@ public class RegUser_Activity extends AppCompatActivity implements View.OnClickL
 
                                         if(mImageuri!=null) {
 
-                                            storageReference = FirebaseStorage.getInstance().getReference("" + adminName + adminPhone+"doc").child("" + userName + userPhone +"image");
+                                            storageReference = FirebaseStorage.getInstance().getReference().child("uploads").child("picture"+ userName+userPhone);
                                             storageReference.putFile(mImageuri).addOnCompleteListener(new OnCompleteListener<UploadTask.TaskSnapshot>() {
                                                 @Override
                                                 public void onComplete(@NonNull Task<UploadTask.TaskSnapshot> task) {
