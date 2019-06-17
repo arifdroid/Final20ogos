@@ -140,7 +140,7 @@ public class TimeStampFireStore_Handler  extends Observable {
 
                                 String tuedate = kk.getValue().toString();
 
-                                object.setMon_date(tuedate);
+                                object.setTue_date(tuedate);
 
                             }
 
@@ -148,7 +148,7 @@ public class TimeStampFireStore_Handler  extends Observable {
 
                                 String weddate = kk.getValue().toString();
 
-                                object.setMon_date(weddate);
+                                object.setWed_date(weddate);
 
                             }
 
@@ -156,7 +156,7 @@ public class TimeStampFireStore_Handler  extends Observable {
 
                                 String thudate = kk.getValue().toString();
 
-                                object.setMon_date(thudate);
+                                object.setThu_date(thudate);
 
                             }
 
@@ -164,7 +164,7 @@ public class TimeStampFireStore_Handler  extends Observable {
 
                                 String fridate = kk.getValue().toString();
 
-                                object.setMon_date(fridate);
+                                object.setFri_date(fridate);
 
                             }
 

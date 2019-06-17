@@ -58,6 +58,8 @@ public class FragmentTimeStamp extends Fragment implements Observer, View.OnClic
     private TimerTask mTt1;
     private int iii;
     private String date;
+    private Handler mTimerHandler_today;
+    private Timer timer_today;
 
     //interface pass result.
 
@@ -1420,23 +1422,23 @@ public class FragmentTimeStamp extends Fragment implements Observer, View.OnClic
 
                             if (i == 0) {
 
-                                returnToRecyclerArrayList.add(new ReturnToRecycler(namehere, "8 April", testTimeStamp.getMon_morning(), "LATE"));
+                                returnToRecyclerArrayList.add(new ReturnToRecycler(namehere, testTimeStamp.getMon_date(), testTimeStamp.getMon_morning(), "LATE"));
                             }
                             if (i == 1) {
 
-                                returnToRecyclerArrayList.add(new ReturnToRecycler(namehere, "9 April", testTimeStamp.getTue_morning(), "LATE"));
+                                returnToRecyclerArrayList.add(new ReturnToRecycler(namehere, testTimeStamp.getTue_date(), testTimeStamp.getTue_morning(), "LATE"));
                             }
                             if (i == 2) {
 
-                                returnToRecyclerArrayList.add(new ReturnToRecycler(namehere, "10 April", testTimeStamp.getWed_morning(), "LATE"));
+                                returnToRecyclerArrayList.add(new ReturnToRecycler(namehere, testTimeStamp.getWed_date(), testTimeStamp.getWed_morning(), "LATE"));
                             }
                             if (i == 3) {
 
-                                returnToRecyclerArrayList.add(new ReturnToRecycler(namehere, "11 April", testTimeStamp.getThu_morning(), "LATE"));
+                                returnToRecyclerArrayList.add(new ReturnToRecycler(namehere, testTimeStamp.getThu_date(), testTimeStamp.getThu_morning(), "LATE"));
                             }
                             if (i == 4) {
 
-                                returnToRecyclerArrayList.add(new ReturnToRecycler(namehere, "12 April", testTimeStamp.getFri_morning(), "LATE"));
+                                returnToRecyclerArrayList.add(new ReturnToRecycler(namehere, testTimeStamp.getFri_date(), testTimeStamp.getFri_morning(), "LATE"));
                             }
 
 
@@ -1482,23 +1484,23 @@ public class FragmentTimeStamp extends Fragment implements Observer, View.OnClic
 
                             if (i == 0) {
 
-                                returnToRecyclerArrayList.add(new ReturnToRecycler(namehere, "8 April", testTimeStamp.getMon_evening(), "LATE"));
+                                returnToRecyclerArrayList.add(new ReturnToRecycler(namehere, testTimeStamp.getMon_date(), testTimeStamp.getMon_evening(), "LATE"));
                             }
                             if (i == 1) {
 
-                                returnToRecyclerArrayList.add(new ReturnToRecycler(namehere, "9 April", testTimeStamp.getTue_evening(), "LATE"));
+                                returnToRecyclerArrayList.add(new ReturnToRecycler(namehere, testTimeStamp.getTue_date(), testTimeStamp.getTue_evening(), "LATE"));
                             }
                             if (i == 2) {
 
-                                returnToRecyclerArrayList.add(new ReturnToRecycler(namehere, "10 April", testTimeStamp.getWed_evening(), "LATE"));
+                                returnToRecyclerArrayList.add(new ReturnToRecycler(namehere, testTimeStamp.getWed_date(), testTimeStamp.getWed_evening(), "LATE"));
                             }
                             if (i == 3) {
 
-                                returnToRecyclerArrayList.add(new ReturnToRecycler(namehere, "11 April", testTimeStamp.getThu_evening(), "LATE"));
+                                returnToRecyclerArrayList.add(new ReturnToRecycler(namehere, testTimeStamp.getThu_date(), testTimeStamp.getThu_evening(), "LATE"));
                             }
                             if (i == 4) {
 
-                                returnToRecyclerArrayList.add(new ReturnToRecycler(namehere, "12 April", testTimeStamp.getFri_evening(), "LATE"));
+                                returnToRecyclerArrayList.add(new ReturnToRecycler(namehere, testTimeStamp.getFri_date(), testTimeStamp.getFri_evening(), "LATE"));
                             }
 
 
@@ -1549,22 +1551,22 @@ public class FragmentTimeStamp extends Fragment implements Observer, View.OnClic
 
                             if(i==0){
 
-                                returnToRecyclerArrayList.add(new ReturnToRecycler(namehere,"8 April",testTimeStamp.getMon_morning(),"LATE"));
+                                returnToRecyclerArrayList.add(new ReturnToRecycler(namehere,testTimeStamp.getMon_date(),testTimeStamp.getMon_morning(),"LATE"));
                             }if(i==1){
 
-                                returnToRecyclerArrayList.add(new ReturnToRecycler(namehere,"9 April",testTimeStamp.getTue_morning(),"LATE"));
+                                returnToRecyclerArrayList.add(new ReturnToRecycler(namehere,testTimeStamp.getTue_date(),testTimeStamp.getTue_morning(),"LATE"));
                             }
                             if(i==2){
 
-                                returnToRecyclerArrayList.add(new ReturnToRecycler(namehere,"10 April",testTimeStamp.getWed_morning(),"LATE"));
+                                returnToRecyclerArrayList.add(new ReturnToRecycler(namehere,testTimeStamp.getWed_date(),testTimeStamp.getWed_morning(),"LATE"));
                             }
                             if(i==3){
 
-                                returnToRecyclerArrayList.add(new ReturnToRecycler(namehere,"11 April",testTimeStamp.getThu_morning(),"LATE"));
+                                returnToRecyclerArrayList.add(new ReturnToRecycler(namehere,testTimeStamp.getThu_date(),testTimeStamp.getThu_morning(),"LATE"));
                             }
                             if(i==4){
 
-                                returnToRecyclerArrayList.add(new ReturnToRecycler(namehere,"12 April",testTimeStamp.getFri_morning(),"LATE"));
+                                returnToRecyclerArrayList.add(new ReturnToRecycler(namehere,testTimeStamp.getFri_date(),testTimeStamp.getFri_morning(),"LATE"));
                             }
 
 
@@ -1607,22 +1609,22 @@ public class FragmentTimeStamp extends Fragment implements Observer, View.OnClic
 
                             if(i==0){
 
-                                returnToRecyclerArrayList.add(new ReturnToRecycler(namehere,"8 April",testTimeStamp.getMon_evening(),"LATE"));
+                                returnToRecyclerArrayList.add(new ReturnToRecycler(namehere,testTimeStamp.getMon_date(),testTimeStamp.getMon_evening(),"LATE"));
                             }if(i==1){
 
-                                returnToRecyclerArrayList.add(new ReturnToRecycler(namehere,"9 April",testTimeStamp.getTue_evening(),"LATE"));
+                                returnToRecyclerArrayList.add(new ReturnToRecycler(namehere,testTimeStamp.getTue_date(),testTimeStamp.getTue_evening(),"LATE"));
                             }
                             if(i==2){
 
-                                returnToRecyclerArrayList.add(new ReturnToRecycler(namehere,"10 April",testTimeStamp.getWed_evening(),"LATE"));
+                                returnToRecyclerArrayList.add(new ReturnToRecycler(namehere,testTimeStamp.getWed_date(),testTimeStamp.getWed_evening(),"LATE"));
                             }
                             if(i==3){
 
-                                returnToRecyclerArrayList.add(new ReturnToRecycler(namehere,"11 April",testTimeStamp.getThu_evening(),"LATE"));
+                                returnToRecyclerArrayList.add(new ReturnToRecycler(namehere,testTimeStamp.getThu_date(),testTimeStamp.getThu_evening(),"LATE"));
                             }
                             if(i==4){
 
-                                returnToRecyclerArrayList.add(new ReturnToRecycler(namehere,"12 April",testTimeStamp.getFri_evening(),"LATE"));
+                                returnToRecyclerArrayList.add(new ReturnToRecycler(namehere,testTimeStamp.getFri_date(),testTimeStamp.getFri_evening(),"LATE"));
                             }
 
 
@@ -1668,9 +1670,15 @@ public class FragmentTimeStamp extends Fragment implements Observer, View.OnClic
 
                  mTimerHandler = new Handler();
 
+                mTimerHandler_today = new Handler();
+
 
 
                 timer = new Timer();
+
+                timer_today = new Timer();
+
+
 
                 chart.setVisibleXRange(0f, 2f);
                 chart.setVisibleYRange(0f, 2f, dataSetArrayList_Final.get(1).getAxisDependency());
@@ -1714,6 +1722,46 @@ public class FragmentTimeStamp extends Fragment implements Observer, View.OnClic
 
             case R.id.bottomNav_floatButtonShowLateToday2iD:
 
+                setupWhosLate_Today(); //setup data first.
+
+                mTimerHandler_today = new Handler();
+
+
+
+                timer_today = new Timer();
+
+                chart.setVisibleXRange(0f, 2f);
+                chart.setVisibleYRange(0f, 2f, dataSetArrayList_Final.get(1).getAxisDependency());
+
+
+
+                timer_today.scheduleAtFixedRate(new TimerTask() {
+
+                    @Override
+                    public void run() {
+
+
+                        if(loopCount<finalPointerArrayList.size()) {
+
+                            loopWhosLate();
+                            // this will not work, because, ,,
+                            // or maybe we can detect, if changing
+
+
+                            getActivity().runOnUiThread(new Runnable() {
+                                @Override
+                                public void run() {
+                                    textView.setText(loopCount+"");
+                                }
+                            });
+
+
+                        }else {
+
+                            resizechart_andStopLoop();
+                        }
+                    }
+                },0,4000);
 
                 break;
 
