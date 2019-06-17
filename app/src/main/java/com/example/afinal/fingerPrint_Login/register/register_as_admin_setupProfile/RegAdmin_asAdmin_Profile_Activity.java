@@ -410,7 +410,7 @@ public class RegAdmin_asAdmin_Profile_Activity extends AppCompatActivity impleme
                                 documentReference.set(mapUserAsAdmin);
 
 
-                                DocumentReference documentReferenceAdmin_asUser = documentReference.collection("all_employee_this_admin_Collections")
+                                DocumentReference documentReferenceAdmin_asUser = documentReference.collection("all_employee_thisAdmin_Collections")
                                             .document(user_name_asAdmin+user_phone_asAdmin+"doc");
 
 

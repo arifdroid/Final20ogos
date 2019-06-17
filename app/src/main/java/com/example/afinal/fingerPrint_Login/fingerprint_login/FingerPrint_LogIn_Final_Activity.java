@@ -681,6 +681,8 @@ public class FingerPrint_LogIn_Final_Activity extends AppCompatActivity implemen
     @Override
     public void update(Observable o, Object arg) {
 
+        //18 june , what if fingerprint not working.?
+
 
         counterFlowHere++;
         Log.i("checkUpdateFinal", "1");
@@ -697,12 +699,16 @@ public class FingerPrint_LogIn_Final_Activity extends AppCompatActivity implemen
 
                 countUserverified++;
 
+                boxMessageDisplay.setText("fingerprint verified");
+
                 Log.i("wherelocationRegister :", "FLOW 1, countVerified:" + countUserverified + " , userLatitude: " + userLatitude);
 
                 presenter.getCurrent_User_Admin_Server_Value(nameUser, phoneUser, globalAdminNameHere, globalAdminPhoneHere);
 
             } else if (s.equals("try again")) {
                 // userLongitude=null;
+
+                boxMessageDisplay.setText("fingerprint not verified");
 
                 Log.i("checkFinalFlow : ", " 7 backFragment(), try again fingerprint ");
 

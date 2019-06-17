@@ -1660,7 +1660,7 @@ public class FragmentTimeStamp extends Fragment implements Observer, View.OnClic
 
             case R.id.bottomNav_floatButtonShowLateWeeklyiD:
 
-
+                loopCount=0;
 
                 //logic for who we want to view. , so we need an array record, which entry is late. , correspond to who is late.
 
@@ -1722,6 +1722,8 @@ public class FragmentTimeStamp extends Fragment implements Observer, View.OnClic
 
             case R.id.bottomNav_floatButtonShowLateToday2iD:
 
+                loopCount=0;
+
                 setupWhosLate_Today(); //setup data first.
 
                 mTimerHandler_today = new Handler();
@@ -1770,10 +1772,10 @@ public class FragmentTimeStamp extends Fragment implements Observer, View.OnClic
 
 
                 Intent intent = new Intent(getActivity(), FingerPrint_LogIn_Final_Activity.class);
-
+                //finish();
                 startActivity(intent);
-
                 break;
+
         }
     }
 
