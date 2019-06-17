@@ -215,7 +215,7 @@ public class FragmentTimeStamp extends Fragment implements Observer, View.OnClic
 
 
         returnToRecyclerArrayList = new ArrayList<>();
-        returnToRecyclerArrayList.add(new ReturnToRecycler("name","date","0800","on time"));
+        returnToRecyclerArrayList.add(new ReturnToRecycler("name","date","0800","on time", null));
         //recycler view setup 10.20AM
         startRun = false;
         recyclerView = rootView.findViewById(R.id.bottom_nav_timeStamp_recycler_id);
@@ -1422,23 +1422,23 @@ public class FragmentTimeStamp extends Fragment implements Observer, View.OnClic
 
                             if (i == 0) {
 
-                                returnToRecyclerArrayList.add(new ReturnToRecycler(namehere, testTimeStamp.getMon_date(), testTimeStamp.getMon_morning(), "LATE"));
+                                returnToRecyclerArrayList.add(new ReturnToRecycler(namehere, testTimeStamp.getMon_date(), testTimeStamp.getMon_morning(), "LATE", testTimeStamp.getUrlCreation()));
                             }
                             if (i == 1) {
 
-                                returnToRecyclerArrayList.add(new ReturnToRecycler(namehere, testTimeStamp.getTue_date(), testTimeStamp.getTue_morning(), "LATE"));
+                                returnToRecyclerArrayList.add(new ReturnToRecycler(namehere, testTimeStamp.getTue_date(), testTimeStamp.getTue_morning(), "LATE", testTimeStamp.getUrlCreation()));
                             }
                             if (i == 2) {
 
-                                returnToRecyclerArrayList.add(new ReturnToRecycler(namehere, testTimeStamp.getWed_date(), testTimeStamp.getWed_morning(), "LATE"));
+                                returnToRecyclerArrayList.add(new ReturnToRecycler(namehere, testTimeStamp.getWed_date(), testTimeStamp.getWed_morning(), "LATE", testTimeStamp.getUrlCreation()));
                             }
                             if (i == 3) {
 
-                                returnToRecyclerArrayList.add(new ReturnToRecycler(namehere, testTimeStamp.getThu_date(), testTimeStamp.getThu_morning(), "LATE"));
+                                returnToRecyclerArrayList.add(new ReturnToRecycler(namehere, testTimeStamp.getThu_date(), testTimeStamp.getThu_morning(), "LATE", testTimeStamp.getUrlCreation()));
                             }
                             if (i == 4) {
 
-                                returnToRecyclerArrayList.add(new ReturnToRecycler(namehere, testTimeStamp.getFri_date(), testTimeStamp.getFri_morning(), "LATE"));
+                                returnToRecyclerArrayList.add(new ReturnToRecycler(namehere, testTimeStamp.getFri_date(), testTimeStamp.getFri_morning(), "LATE", testTimeStamp.getUrlCreation()));
                             }
 
 
@@ -1484,23 +1484,23 @@ public class FragmentTimeStamp extends Fragment implements Observer, View.OnClic
 
                             if (i == 0) {
 
-                                returnToRecyclerArrayList.add(new ReturnToRecycler(namehere, testTimeStamp.getMon_date(), testTimeStamp.getMon_evening(), "LATE"));
+                                returnToRecyclerArrayList.add(new ReturnToRecycler(namehere, testTimeStamp.getMon_date(), testTimeStamp.getMon_evening(), "LATE", testTimeStamp.getUrlCreation()));
                             }
                             if (i == 1) {
 
-                                returnToRecyclerArrayList.add(new ReturnToRecycler(namehere, testTimeStamp.getTue_date(), testTimeStamp.getTue_evening(), "LATE"));
+                                returnToRecyclerArrayList.add(new ReturnToRecycler(namehere, testTimeStamp.getTue_date(), testTimeStamp.getTue_evening(), "LATE", testTimeStamp.getUrlCreation()));
                             }
                             if (i == 2) {
 
-                                returnToRecyclerArrayList.add(new ReturnToRecycler(namehere, testTimeStamp.getWed_date(), testTimeStamp.getWed_evening(), "LATE"));
+                                returnToRecyclerArrayList.add(new ReturnToRecycler(namehere, testTimeStamp.getWed_date(), testTimeStamp.getWed_evening(), "LATE", testTimeStamp.getUrlCreation()));
                             }
                             if (i == 3) {
 
-                                returnToRecyclerArrayList.add(new ReturnToRecycler(namehere, testTimeStamp.getThu_date(), testTimeStamp.getThu_evening(), "LATE"));
+                                returnToRecyclerArrayList.add(new ReturnToRecycler(namehere, testTimeStamp.getThu_date(), testTimeStamp.getThu_evening(), "LATE", testTimeStamp.getUrlCreation()));
                             }
                             if (i == 4) {
 
-                                returnToRecyclerArrayList.add(new ReturnToRecycler(namehere, testTimeStamp.getFri_date(), testTimeStamp.getFri_evening(), "LATE"));
+                                returnToRecyclerArrayList.add(new ReturnToRecycler(namehere, testTimeStamp.getFri_date(), testTimeStamp.getFri_evening(), "LATE", testTimeStamp.getUrlCreation()));
                             }
 
 
@@ -1551,22 +1551,22 @@ public class FragmentTimeStamp extends Fragment implements Observer, View.OnClic
 
                             if(i==0){
 
-                                returnToRecyclerArrayList.add(new ReturnToRecycler(namehere,testTimeStamp.getMon_date(),testTimeStamp.getMon_morning(),"LATE"));
+                                returnToRecyclerArrayList.add(new ReturnToRecycler(namehere,testTimeStamp.getMon_date(),testTimeStamp.getMon_morning(),"LATE", testTimeStamp.getUrlCreation()));
                             }if(i==1){
 
-                                returnToRecyclerArrayList.add(new ReturnToRecycler(namehere,testTimeStamp.getTue_date(),testTimeStamp.getTue_morning(),"LATE"));
+                                returnToRecyclerArrayList.add(new ReturnToRecycler(namehere,testTimeStamp.getTue_date(),testTimeStamp.getTue_morning(),"LATE", testTimeStamp.getUrlCreation()));
                             }
                             if(i==2){
 
-                                returnToRecyclerArrayList.add(new ReturnToRecycler(namehere,testTimeStamp.getWed_date(),testTimeStamp.getWed_morning(),"LATE"));
+                                returnToRecyclerArrayList.add(new ReturnToRecycler(namehere,testTimeStamp.getWed_date(),testTimeStamp.getWed_morning(),"LATE", testTimeStamp.getUrlCreation()));
                             }
                             if(i==3){
 
-                                returnToRecyclerArrayList.add(new ReturnToRecycler(namehere,testTimeStamp.getThu_date(),testTimeStamp.getThu_morning(),"LATE"));
+                                returnToRecyclerArrayList.add(new ReturnToRecycler(namehere,testTimeStamp.getThu_date(),testTimeStamp.getThu_morning(),"LATE", testTimeStamp.getUrlCreation()));
                             }
                             if(i==4){
 
-                                returnToRecyclerArrayList.add(new ReturnToRecycler(namehere,testTimeStamp.getFri_date(),testTimeStamp.getFri_morning(),"LATE"));
+                                returnToRecyclerArrayList.add(new ReturnToRecycler(namehere,testTimeStamp.getFri_date(),testTimeStamp.getFri_morning(),"LATE", testTimeStamp.getUrlCreation()));
                             }
 
 
@@ -1609,22 +1609,22 @@ public class FragmentTimeStamp extends Fragment implements Observer, View.OnClic
 
                             if(i==0){
 
-                                returnToRecyclerArrayList.add(new ReturnToRecycler(namehere,testTimeStamp.getMon_date(),testTimeStamp.getMon_evening(),"LATE"));
+                                returnToRecyclerArrayList.add(new ReturnToRecycler(namehere,testTimeStamp.getMon_date(),testTimeStamp.getMon_evening(),"LATE", testTimeStamp.getUrlCreation()));
                             }if(i==1){
 
-                                returnToRecyclerArrayList.add(new ReturnToRecycler(namehere,testTimeStamp.getTue_date(),testTimeStamp.getTue_evening(),"LATE"));
+                                returnToRecyclerArrayList.add(new ReturnToRecycler(namehere,testTimeStamp.getTue_date(),testTimeStamp.getTue_evening(),"LATE", testTimeStamp.getUrlCreation()));
                             }
                             if(i==2){
 
-                                returnToRecyclerArrayList.add(new ReturnToRecycler(namehere,testTimeStamp.getWed_date(),testTimeStamp.getWed_evening(),"LATE"));
+                                returnToRecyclerArrayList.add(new ReturnToRecycler(namehere,testTimeStamp.getWed_date(),testTimeStamp.getWed_evening(),"LATE", testTimeStamp.getUrlCreation()));
                             }
                             if(i==3){
 
-                                returnToRecyclerArrayList.add(new ReturnToRecycler(namehere,testTimeStamp.getThu_date(),testTimeStamp.getThu_evening(),"LATE"));
+                                returnToRecyclerArrayList.add(new ReturnToRecycler(namehere,testTimeStamp.getThu_date(),testTimeStamp.getThu_evening(),"LATE", testTimeStamp.getUrlCreation()));
                             }
                             if(i==4){
 
-                                returnToRecyclerArrayList.add(new ReturnToRecycler(namehere,testTimeStamp.getFri_date(),testTimeStamp.getFri_evening(),"LATE"));
+                                returnToRecyclerArrayList.add(new ReturnToRecycler(namehere,testTimeStamp.getFri_date(),testTimeStamp.getFri_evening(),"LATE", testTimeStamp.getUrlCreation()));
                             }
 
 

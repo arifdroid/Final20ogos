@@ -1,10 +1,12 @@
 package com.example.afinal.fingerPrint_Login.main_activity_fragment;
 
 import android.content.Context;
+import android.net.Uri;
 import android.util.Log;
 import android.widget.Toast;
 
 import com.example.afinal.R;
+import com.example.afinal.fingerPrint_Login.Upload;
 import com.example.afinal.fingerPrint_Login.fingerprint_login.FingerPrint_LogIn_Final_Activity;
 import com.example.afinal.fingerPrint_Login.oop.TestTimeStamp;
 import com.github.mikephil.charting.charts.LineChart;
@@ -17,6 +19,8 @@ import com.google.firebase.firestore.CollectionReference;
 import com.google.firebase.firestore.DocumentSnapshot;
 import com.google.firebase.firestore.FirebaseFirestore;
 import com.google.firebase.firestore.QuerySnapshot;
+import com.google.firebase.storage.FirebaseStorage;
+import com.google.firebase.storage.StorageReference;
 
 import java.util.ArrayList;
 import java.util.Collection;
@@ -58,6 +62,8 @@ public class TimeStampFireStore_Handler  extends Observable {
     private ArrayList<ArrayList<Entry>> listof_entryList;
 
     private String userName, userPhone,adminName,adminPhone;
+    private String namehere;
+    private String phoneHere;
 
 
     public TimeStampFireStore_Handler(Context context,LineDataSet dataSet, LineData data, LineChart chart) {
@@ -99,6 +105,7 @@ public class TimeStampFireStore_Handler  extends Observable {
     //decide to fetch which data.
     public void startFecthData(){
 
+        //18 june, we start to load images.
 
         collectionReferenceTest.get().addOnCompleteListener(new OnCompleteListener<QuerySnapshot>() {
             @Override
@@ -176,13 +183,27 @@ public class TimeStampFireStore_Handler  extends Observable {
                                 //this is the problem, since we have to retrieve evrything now.
                                 //lets try first
 
-                                String namehere = kk.getValue().toString();
+                                 namehere = kk.getValue().toString();
 
                                 Log.i("checkTimeStamp ", "flow: special 99 : " + namehere);
 
 
                                     object.setName(namehere);
                             } // end name hash
+
+                            //18 june
+
+                            if(kk.getKey().equals("phone")){
+
+                                 phoneHere = kk.getValue().toString();
+
+
+
+                                //object.setUrlCreation();
+                            }
+
+
+
 
                             if (kk.getKey().equals("ts_mon_morning")) { //this is never set? why?
 
@@ -281,6 +302,16 @@ public class TimeStampFireStore_Handler  extends Observable {
                             }
 
                         } //end hash-map loop
+
+
+                        StorageReference storage = FirebaseStorage.getInstance().getReference().child("uploads").child("picture"+namehere+phoneHere);
+
+                        Uri urlImage = storage.getDownloadUrl().getResult();
+
+                        //could this not finish in time before other data finish
+                        object.setUrlCreation(urlImage);
+
+                        //object.setUrlCreation(object.setUrlCreation());
 
                         testTimeStampsList.add(object); //mistake here.
 

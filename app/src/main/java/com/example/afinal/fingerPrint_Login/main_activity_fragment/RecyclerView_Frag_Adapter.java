@@ -7,6 +7,8 @@ import android.view.ViewGroup;
 import android.widget.TextView;
 
 import com.example.afinal.R;
+import com.example.afinal.fingerPrint_Login.register.register_as_admin_setupProfile.RegAdmin_asAdmin_Profile_Activity;
+import com.squareup.picasso.Picasso;
 
 import org.w3c.dom.Text;
 
@@ -46,6 +48,17 @@ public class RecyclerView_Frag_Adapter extends RecyclerView.Adapter<RecyclerView
 //        holder.textViewTime.setText("Time");
 //        holder.textViewStatus.setText("Status");
 //        holder.textViewDate.setText("Date");
+
+
+        //Picasso.with(RegAdmin_asAdmin_Profile_Activity.this).load(urihere).into(circleImageView);
+
+        //holder.circleImageView.
+
+        Picasso.with(mContext).load(hereList.get(position).getImageUri())
+                .fit()
+                .centerCrop()
+                .into(holder.circleImageView);
+
 
         String date_date = hereList.get(position).getDate().substring(0,2);
         String date_month = hereList.get(position).getDate().substring(3,6);

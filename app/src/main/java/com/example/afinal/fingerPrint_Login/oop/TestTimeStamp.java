@@ -1,5 +1,7 @@
 package com.example.afinal.fingerPrint_Login.oop;
 
+import android.net.Uri;
+
 public class TestTimeStamp {
 
     //recorded data, missing, means, got mc. also need to point out, which data was it?
@@ -212,6 +214,12 @@ public class TestTimeStamp {
 
     private String name;
 
+    //18 june
+
+    private Uri urlCreation;
+
+
+
     public TestTimeStamp(int referenceiD) {
         this.referenceiD = referenceiD;
     }
@@ -279,5 +287,13 @@ public class TestTimeStamp {
 
     public void setFri_morning(String fri_morning) {
         this.fri_morning = fri_morning;
+    }
+
+    public Uri getUrlCreation() {
+        return urlCreation;
+    }
+
+    public void setUrlCreation(Uri urlCreation) {
+        this.urlCreation = urlCreation;
     }
 }
