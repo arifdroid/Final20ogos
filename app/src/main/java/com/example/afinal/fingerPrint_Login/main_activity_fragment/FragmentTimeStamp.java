@@ -1,5 +1,6 @@
 package com.example.afinal.fingerPrint_Login.main_activity_fragment;
 
+import android.content.Intent;
 import android.os.Bundle;
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
@@ -17,12 +18,12 @@ import android.widget.TextView;
 
 import com.example.afinal.R;
 import com.example.afinal.fingerPrint_Login.customclass.OurLayoutManager;
+import com.example.afinal.fingerPrint_Login.fingerprint_login.FingerPrint_LogIn_Final_Activity;
 import com.example.afinal.fingerPrint_Login.oop.EntryMorning;
 import com.example.afinal.fingerPrint_Login.oop.MC_Null_TestTimeStamp;
 import com.example.afinal.fingerPrint_Login.oop.TestTimeStamp;
 import com.github.lzyzsd.randomcolor.RandomColor;
 import com.github.mikephil.charting.charts.LineChart;
-import com.github.mikephil.charting.components.AxisBase;
 import com.github.mikephil.charting.components.Legend;
 import com.github.mikephil.charting.components.LegendEntry;
 import com.github.mikephil.charting.components.XAxis;
@@ -30,14 +31,12 @@ import com.github.mikephil.charting.components.YAxis;
 import com.github.mikephil.charting.data.Entry;
 import com.github.mikephil.charting.data.LineData;
 import com.github.mikephil.charting.data.LineDataSet;
-import com.github.mikephil.charting.formatter.IAxisValueFormatter;
 import com.github.mikephil.charting.formatter.ValueFormatter;
 import com.google.android.material.floatingactionbutton.FloatingActionButton;
 import com.google.firebase.firestore.CollectionReference;
 import com.google.firebase.firestore.FirebaseFirestore;
 
 import java.util.ArrayList;
-import java.util.Collections;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -125,7 +124,7 @@ public class FragmentTimeStamp extends Fragment implements Observer, View.OnClic
 
     //adding option manipulate viewport
 
-    private FloatingActionButton fButton, fButtonReset;
+    private FloatingActionButton fButton, fButtonReset , fButtonToday, fButtonWeeek;
 
     //set list, to refer who is MC or null, or not recorded.
 
@@ -217,9 +216,18 @@ public class FragmentTimeStamp extends Fragment implements Observer, View.OnClic
 
         ///
 
-        fButton = rootView.findViewById(R.id.bottomNav_floatButtonShowLateTodayiD);
+        fButton = rootView.findViewById(R.id.bottomNav_floatButtonBackiD);
 
-        fButtonReset = rootView.findViewById(R.id.bottomNav_floatButtonResetiD);
+        fButtonReset = rootView.findViewById(R.id.bottomNav_floatButtonShowLateResetiD);
+
+
+        fButtonToday = rootView.findViewById(R.id.bottomNav_floatButtonShowLateToday2iD);
+
+
+        fButtonWeeek = rootView.findViewById(R.id.bottomNav_floatButtonShowLateWeeklyiD);
+
+
+
 
         dataSetArrayList = new ArrayList<>();
         testTimeStampsList = new ArrayList<>();
@@ -363,6 +371,8 @@ public class FragmentTimeStamp extends Fragment implements Observer, View.OnClic
 
         fButton.setOnClickListener(this);
         fButtonReset.setOnClickListener(this);
+        fButtonToday.setOnClickListener(this);
+        fButtonWeeek.setOnClickListener(this);
 
         return rootView;
 
@@ -1473,13 +1483,13 @@ public class FragmentTimeStamp extends Fragment implements Observer, View.OnClic
 
         switch (v.getId()) {
 
-            case R.id.bottomNav_floatButtonResetiD:
+            case R.id.bottomNav_floatButtonShowLateResetiD:
 
                 chart.fitScreen();
 
                 break;
 
-            case R.id.bottomNav_floatButtonShowLateTodayiD:
+            case R.id.bottomNav_floatButtonShowLateWeeklyiD:
 
 
 
@@ -1535,6 +1545,20 @@ public class FragmentTimeStamp extends Fragment implements Observer, View.OnClic
                 break;
 
 
+            case R.id.bottomNav_floatButtonShowLateToday2iD:
+
+
+                break;
+
+
+            case R.id.bottomNav_floatButtonBackiD:
+
+
+                Intent intent = new Intent(getActivity(), FingerPrint_LogIn_Final_Activity.class);
+
+                startActivity(intent);
+
+                break;
         }
     }
 
