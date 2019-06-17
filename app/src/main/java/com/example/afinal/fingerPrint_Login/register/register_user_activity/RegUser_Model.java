@@ -31,7 +31,6 @@ private boolean checkUserDocStatus;
 
         Query query1 = cR_uid_employee_this.whereEqualTo("phone",phone);
 
-        Log.i("checkUserReg Flow: ", "[Model] , 29 , checkUserMode");
 
         query1.get().addOnCompleteListener(new OnCompleteListener<QuerySnapshot>() {
 
@@ -39,8 +38,6 @@ private boolean checkUserDocStatus;
             public void onComplete(@NonNull Task<QuerySnapshot> task) {
 
                 if(task.isSuccessful()){
-
-                    Log.i("checkUserReg Flow: ", "[Model] , 30 , task successfull");
 
                     //should return 1 document only
 
@@ -50,17 +47,12 @@ private boolean checkUserDocStatus;
 
                         //checkUserDocStatus=false; //means user document already existed
 
-                        Log.i("checkUserReg Flow: ", "[Model] , 31 , task existed");
                         setNewReturn(false);
 
 
                     }else if(size==0){
 
-                        Log.i("checkUserReg Flow: ", "[Model] , 31 , no document, can create");
-
-
                         //no document has been created for this admin, though, it might have created for another admin.
-
 
 
                         setNewReturn(true);
@@ -87,12 +79,8 @@ private boolean checkUserDocStatus;
     //this is where we tell observer
     private void setNewReturn(boolean b) {
 
-        Log.i("checkUserReg Flow: ", "[Model] , 34 , setReturn b: "+ b + " ,checkUserDocStatus : "+ checkUserDocStatus);
-
 
         if(b==true) {
-
-            Log.i("checkUserReg Flow: ", "[Model] , 35 , task checkUserDocStatus: "+ checkUserDocStatus);
 
             checkUserDocStatus = true;
 
@@ -102,10 +90,7 @@ private boolean checkUserDocStatus;
             //here we set the document, shared preferences.
 
 
-
         }else {
-
-            Log.i("checkUserReg Flow: ", "[Model] , 36 , task checkUserDocStatus: "+ checkUserDocStatus);
 
             checkUserDocStatus = false;
 

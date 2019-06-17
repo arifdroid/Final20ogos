@@ -108,15 +108,10 @@ class RegUser_Presenter extends Observable implements RegUser_Presenter_Interfac
 
             //((RegUser_Model) o).returnCheckDoc_Updated();
 
-            Log.i("checkUserReg Flow: ", "[Presenter] , 25 , observer update, return: "+ ((RegUser_Model) o).getReturnDoc_Updated());
-
 
             boolean updatedCheckDoc = ((RegUser_Model) o).getReturnDoc_Updated();
 
             if(updatedCheckDoc==true){
-
-                Log.i("checkUserReg Flow: ", "[Presenter] , 26 , observer update, return true: ");
-
 
                 gotDoc = updatedCheckDoc;
 
@@ -146,12 +141,6 @@ class RegUser_Presenter extends Observable implements RegUser_Presenter_Interfac
         return;
     }
 
-//    private void setBoolean(Boolean b){
-//
-//        if()
-//
-//
-//    }
 
     private void setStatus(String doc_created) {
 

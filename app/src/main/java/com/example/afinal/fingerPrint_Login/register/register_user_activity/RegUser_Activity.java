@@ -412,9 +412,6 @@ public class RegUser_Activity extends AppCompatActivity implements View.OnClickL
 
         statusnow= "wait..";
       //  textViewMessage.setText(statusnow);
-
-        Log.i("checkUserReg Flow: ", "[Activity] , 5 , getting credential process");
-
         FirebaseAuth.getInstance().signInWithCredential(phoneAuthCredential).addOnCompleteListener(new OnCompleteListener<AuthResult>() {
             @Override
             public void onComplete(@NonNull Task<AuthResult> task) {
@@ -440,17 +437,20 @@ public class RegUser_Activity extends AppCompatActivity implements View.OnClickL
 
                             if(task.isSuccessful()) {
 
-                                Log.i("checkUserReg Flow: ", "[Activity] , 7 , ");
+                                //17 june
+                                //there could also be another
+
+                             // boolean_exist_doc_here = task.getResult().e
+
 
                                 int documentSnapshotSize = task.getResult().getDocuments().size();
 
-                                if (documentSnapshotSize == 1) { //if size is one, user is registered by one admin.
+                                if (documentSnapshotSize == 1 || documentSnapshotSize == 2) { //if size is one, user is registered by one admin.
 
                                     //then here we can log in
 
                                     registrationProcessFireStore();
 
-                                    Log.i("checkUserReg Flow: ", "[Activity] , 8 , go to creating document now ");
 
 
                                 } else {
@@ -459,7 +459,6 @@ public class RegUser_Activity extends AppCompatActivity implements View.OnClickL
                                     //sign him out from firebase authentication page.
                                     //or somehow he already registered to other admin // this is supposed to be admin functions.
 
-                                    Log.i("checkUserReg Flow: ", "[Activity] , 9 ,fail if  ");
 
 
                                     logOutNow();
@@ -467,7 +466,6 @@ public class RegUser_Activity extends AppCompatActivity implements View.OnClickL
 
                             }
                             else {
-                                Log.i("checkUserReg Flow: ", "[Activity] , 10 , task fail ");
 
                                 logOutNow();
                             }
@@ -487,8 +485,6 @@ public class RegUser_Activity extends AppCompatActivity implements View.OnClickL
         }).addOnCanceledListener(new OnCanceledListener() {
             @Override
             public void onCanceled() {
-
-                Log.i("checkUserReg Flow: ", "[Activity] , 11 ,canceled  ");
 
 
                 logOutNow();
@@ -750,8 +746,6 @@ public class RegUser_Activity extends AppCompatActivity implements View.OnClickL
         //here we create, but what if constant fail.
         //after 60 seconds, observable do not return update. we need to delete all operation,
 
-        Log.i("checkUserReg Flow: ", "[Activity] , 17 ,checkDocResutl, result suppose to create ");
-
         if(status.equals("doc created")){
 
             //here we also need to create referrel
@@ -763,6 +757,8 @@ public class RegUser_Activity extends AppCompatActivity implements View.OnClickL
             if(admin_count_extracted.equals("0")){
 
                 adminMapCount.put("admin_count","1");
+
+                admin_count_extracted ="1";
 
                 adminMapCount.put("phone", userPhone);
 
@@ -812,17 +808,11 @@ public class RegUser_Activity extends AppCompatActivity implements View.OnClickL
                                                 public void onComplete(@NonNull Task<UploadTask.TaskSnapshot> task) {
 
                                                     if(task.isSuccessful()){
+                                                      //      image boolean
 
-                                                        Log.i("checkImageUploaded", "1");
-
-                                                        Log.i("checkSharedPreferences ", "before image upload success");
 
                                                     }else {
                                                         //task not successful
-
-                                                        Log.i("checkImageUploaded", "2");
-
-                                                        Log.i("checkSharedPreferences ", "before image upload task fail");
 
                                                     }
 
@@ -831,7 +821,7 @@ public class RegUser_Activity extends AppCompatActivity implements View.OnClickL
                                                 @Override
                                                 public void onCanceled() {
 
-                                                    Log.i("checkImageUploaded", "3");
+
                                                 }
                                             });
 
@@ -985,6 +975,8 @@ public class RegUser_Activity extends AppCompatActivity implements View.OnClickL
                 adminMapCount.put("admin_name_2",adminName);
 
                 adminMapCount.put("user_name_2",userName);
+
+                admin_count_extracted ="2";
 
 
                 dR_User_Top.set(adminMapCount, SetOptions.merge()).addOnCompleteListener(new OnCompleteListener<Void>() {
@@ -1601,6 +1593,7 @@ public class RegUser_Activity extends AppCompatActivity implements View.OnClickL
                             intent1.putExtra("sentUserPhone", userPhone);
                             intent1.putExtra("sentAdminName", adminName);
                             intent1.putExtra("sentAdminPhone", adminPhone);
+                            intent1.putExtra("checkadminOrUser","user");
 
                             //intent1.addFlags(Intent.)
                             startActivity(intent1);
@@ -1644,17 +1637,12 @@ public class RegUser_Activity extends AppCompatActivity implements View.OnClickL
             if(resultBoolean){
             //if(resultHere.equals("doc created")){
 
-                Log.i("checkUserReg Flow: ", "[Activity] , 19 ,update doc created ");
-
-
                 checkDocResult("doc created");
             }
 
             else {
 
             //if(resultHere.equals("please contact admin")){
-
-                Log.i("checkUserReg Flow: ", "[Activity] , 20 ,contact admin , fail ");
 
                 checkDocResult("please contact admin");
             }
@@ -1663,7 +1651,6 @@ public class RegUser_Activity extends AppCompatActivity implements View.OnClickL
 
         }
 
-        return;
 
     }
 }
