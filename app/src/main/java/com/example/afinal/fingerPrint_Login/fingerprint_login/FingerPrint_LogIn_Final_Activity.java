@@ -770,7 +770,6 @@ public class FingerPrint_LogIn_Final_Activity extends AppCompatActivity implemen
             Log.i("checkUpdateFinal", "5 remapLocation :" + remapLocation);
             if (remapLocation != null) {
 
-                Log.i("wherelocationRegister :", "FLOW 4, countVerified:" + countUserverified + " , userLatitude: " + userLatitude);
 
                 for (Map.Entry<String, Object> kk : remapLocation.entrySet()) {
 
