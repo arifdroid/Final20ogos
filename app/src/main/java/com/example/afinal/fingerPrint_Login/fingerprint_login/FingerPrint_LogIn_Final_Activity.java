@@ -189,6 +189,13 @@ public class FingerPrint_LogIn_Final_Activity extends AppCompatActivity implemen
 //    }
 
 
+    //17 june
+
+    private TextView nameDisplay, phoneDisplay, dateDisplay, hourDisplay, amOrpmDisplay, outMessageDisplay, boxMessageDisplay;
+
+    private TextView wifiDisplay, locationDisplay, morningDisplay,eveningDisplay, adminDisplay;
+
+
     //22 may
     private int lastCheckId;
 
@@ -391,7 +398,9 @@ public class FingerPrint_LogIn_Final_Activity extends AppCompatActivity implemen
     private Handler handler = new Handler();
     private String seconds_fromPhone = "";
     private String timeFromPhone = "";
-
+    private String timeHour="";
+    private String dateFromPhone="";
+    private String amOrPmFromPhone="";
 
 
     @Override
@@ -404,6 +413,23 @@ public class FingerPrint_LogIn_Final_Activity extends AppCompatActivity implemen
         bottomNavigationView.setOnNavigationItemSelectedListener(mOnNavigationItemSelectedListener);
 
         bottomNavigationView.setItemIconTintList(null);
+
+
+        //17 june
+
+        nameDisplay = findViewById(R.id.fingerPrintFinal_textView_Name_id);
+        phoneDisplay = findViewById(R.id.fingerPrintFinal_textView_Phone_id);
+        hourDisplay = findViewById(R.id.fingerprintFinal_textViewHourID);
+        dateDisplay = findViewById(R.id.fingerPrintFinal_textView_Date_id);
+        outMessageDisplay = findViewById(R.id.fingerPrintFinal_textView_Message_id);
+        boxMessageDisplay = findViewById(R.id.fingerPrintFinal_textView_MessageInBox_id);
+
+        wifiDisplay = findViewById(R.id.fingerPrintFinal_textView_wifiStatus_id);
+        locationDisplay = findViewById(R.id.fingerPrintFinal_textView_locationStatus_id);
+        morningDisplay = findViewById(R.id.fingerPrintFinal_textView_morningStatus_id);
+        eveningDisplay = findViewById(R.id.fingerPrintFinal_textView_eveningStatus_id);
+        adminDisplay = findViewById(R.id.fingerPrintFinal_textView_adminStatus_id);
+
 
 
         //setting up for bottom nav
@@ -430,12 +456,15 @@ public class FingerPrint_LogIn_Final_Activity extends AppCompatActivity implemen
 
         //rolling text view
 
-        @SuppressLint("SimpleDateFormat") final DateFormat format = new SimpleDateFormat("HH:mm:ss");
+        @SuppressLint("SimpleDateFormat") final DateFormat format = new SimpleDateFormat("dd MMM yyyy hh:mm:ss zzz");
 
         Log.i("checkSecond :", "time: "+timeFromPhone);
 
 
         Log.i("checkSecond :", "second: "+seconds_fromPhone);
+
+        dateFromPhone = format.format(new Date());
+
 
         final RollingTextView timeView = findViewById(R.id.rolling_second_textView_ID);
         timeView.setAnimationDuration(300);
@@ -445,12 +474,43 @@ public class FingerPrint_LogIn_Final_Activity extends AppCompatActivity implemen
             public void run() {
                 timeFromPhone = format.format(new Date());
 
-                seconds_fromPhone = timeFromPhone.substring(6,8);
+
+                seconds_fromPhone = timeFromPhone.substring(18,20);
 
                 timeView.setText(seconds_fromPhone);
                 handler.postDelayed(this, 1000L);
+
+                Log.i("timeFromPhone", timeFromPhone);
+
+                timeHour = timeFromPhone.substring(12,17);
+
+                //if(timeHour.equals(timeHour))
+                hourDisplay.setText(timeHour);
             }
         });
+
+        amOrPmFromPhone = dateFromPhone.substring(12,14);
+
+        Integer intAmOrPm = Integer.valueOf(amOrPmFromPhone);
+
+        if(intAmOrPm>=0 && intAmOrPm<=11.59){
+
+            amOrpmDisplay.setText("AM");
+
+        }else {
+
+            amOrpmDisplay.setText("PM");
+        }
+
+
+        dateFromPhone = dateFromPhone.substring(0,6);
+
+
+        dateDisplay.setText(dateFromPhone);
+
+
+
+
 
 
         //
@@ -618,10 +678,13 @@ public class FingerPrint_LogIn_Final_Activity extends AppCompatActivity implemen
         counterFlowHere++;
         Log.i("checkUpdateFinal", "1");
 
+        nameDisplay.setText(nameUser);
+
+        phoneDisplay.setText(phoneUser);
+
         if (o instanceof FingerPrintFinal_Presenter) {
 
             String s = ((FingerPrintFinal_Presenter) o).getFinalStringResult();
-          //  textView.setText(s); //textview is null, since fingerprint do not return result, update always running.
 
             if (s.equals("success verified")) {
 
@@ -641,18 +704,14 @@ public class FingerPrint_LogIn_Final_Activity extends AppCompatActivity implemen
                 presenter.stopListetingFingerprint();
             }
 
-            Log.i("checkUpdateFinal", "2 fingerprint :" + s);
             //getTime
             String time = ((FingerPrintFinal_Presenter) o).getDateAndTimeNow(); //problem if, always updating,
 
             dateAndTimeNow = time;
 
-            Log.i("checkUpdateFinal", " time :" + time);
             //getFireStore
             Map<String, Object> remapAdminConstraint = ((FingerPrintFinal_Presenter) o).getReturnMap();
-            Log.i("checkUpdateFinal", "3 remapAdminConstraint :" + remapAdminConstraint);
 
-            Log.i("wherelocationRegister :", "FLOW 2, countVerified:" + countUserverified + " , userLatitude: " + userLatitude);
             if (remapAdminConstraint != null) {
 
                 for (Map.Entry<String, Object> kk : remapAdminConstraint.entrySet()) {
@@ -693,12 +752,16 @@ public class FingerPrint_LogIn_Final_Activity extends AppCompatActivity implemen
                         phoneAdminConstraint = kk.getValue().toString();
                     }
 
-                    Log.i("wherelocationRegister :", "FLOW 3, countVerified:" + countUserverified + " , userLatitude: " + userLatitude);
 
                 }
 
-                Log.i("checkUpdateFinal", "4 remapAdminConstraint :" + remapAdminConstraint + ", ssid constraint :" + ssidConstraint);
                 checkAdminConstraintProcess = true;
+
+                morningDisplay.setText(morningConstraint);
+                eveningDisplay.setText(eveningConstraint);
+                wifiDisplay.setText(ssidConstraint);
+                locationDisplay.setText(locationConstraint);
+                adminDisplay.setText(globalAdminNameHere);
 
             }
             //getLocation

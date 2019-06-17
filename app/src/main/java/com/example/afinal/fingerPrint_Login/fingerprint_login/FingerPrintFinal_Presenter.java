@@ -284,20 +284,12 @@ class FingerPrintFinal_Presenter extends Observable {
 
    public void getCurrent_User_Admin_Server_Value(String nameUser, String phoneUser, String globalAdminNameHere, String globalAdminPhoneHere) { // this probably finsih later
 
-       Log.i("finalSharePreDataCheck","FingerPrintLogin_Final_Activity [PRESENTER] 7 , before return,name: "
-               + nameUser+ ", phone: "+phoneUser+ ", adminName:"
-               +globalAdminNameHere+" , adminPhone: "+globalAdminPhoneHere);
 
-        Log.i("getCurrentConstraint: ", "1");
         //assume shared preferences got value. pass from fragment.
         if(nameUser!=null && phoneUser!=null && globalAdminPhoneHere!=null && globalAdminNameHere!=null ){
-            Log.i("getCurrentConstraint: ", "2");
             //this still can fail. go to admin document.
             DocumentReference documentReference = FirebaseFirestore.getInstance().collection("all_admin_doc_collections")
                     .document(globalAdminNameHere+globalAdminPhoneHere+"doc");
-
-            Log.i("getCurrentConstraint: ", "2.2, document reference" + documentReference.toString());
-
 
             //Log.i("getCurrentConstraint: ", "3.1, task check" + );
 
@@ -306,8 +298,6 @@ class FingerPrintFinal_Presenter extends Observable {
                 public void onComplete(@NonNull Task<DocumentSnapshot> task) {
 
                     if(task.isSuccessful()){
-
-                        Log.i("checkDownloadDoc", "1 Presenter Task succesfull");
 
 
                         Map<String, Object> remap;
