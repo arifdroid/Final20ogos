@@ -57,6 +57,7 @@ public class FragmentTimeStamp extends Fragment implements Observer, View.OnClic
     private Timer mTimer1;
     private TimerTask mTt1;
     private int iii;
+    private String date;
 
     //interface pass result.
 
@@ -205,6 +206,8 @@ public class FragmentTimeStamp extends Fragment implements Observer, View.OnClic
 
 
         today = Main_BottomNav_Activity.dayToday;
+        date = Main_BottomNav_Activity.dateToday;
+
 
         returnToRecyclerArrayList = new ArrayList<>();
         returnToRecyclerArrayList.add(new ReturnToRecycler("name","date","0800","on time"));

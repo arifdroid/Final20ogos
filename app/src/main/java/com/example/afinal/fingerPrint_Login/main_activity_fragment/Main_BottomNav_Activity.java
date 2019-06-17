@@ -39,6 +39,7 @@ public class Main_BottomNav_Activity extends AppCompatActivity {
     //17 june
 
     public static String dayToday;
+    public static String dateToday;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -50,6 +51,7 @@ public class Main_BottomNav_Activity extends AppCompatActivity {
         Intent intent = getIntent();
 
         dayToday = intent.getStringExtra("today");
+        dateToday= intent.getStringExtra("date");
 
         setupViewPager(viewPager);
 

@@ -102,7 +102,7 @@ public class TimeStampCheckFragment extends DialogFragment {
         day = getArguments().getString("day", "");
        // getDialog().setTitle(question);
 //a
-        String date = getArguments().getString("date","");
+        final String date = getArguments().getString("date","");
 
         timestampnow = getArguments().getString("timestamp","");
 
@@ -222,7 +222,14 @@ public class TimeStampCheckFragment extends DialogFragment {
                                 //intent to next activity,
 
                                 Intent intent = new Intent(getActivity(), Main_BottomNav_Activity.class);
+
+                                //17 june
+
                                 intent.putExtra("today",day);
+                                intent.putExtra("date", date);
+                                //intent.putExtra()
+                                //intent.getStringExtra("username",)
+
                                 intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP|Intent.FLAG_ACTIVITY_NEW_TASK);
                                 startActivity(intent);
 

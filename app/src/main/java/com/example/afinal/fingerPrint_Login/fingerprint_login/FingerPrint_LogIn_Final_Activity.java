@@ -195,6 +195,8 @@ public class FingerPrint_LogIn_Final_Activity extends AppCompatActivity implemen
 
     private TextView wifiDisplay, locationDisplay, morningDisplay,eveningDisplay, adminDisplay;
 
+    public static String globalUserName, globalUserPhone,globalAdminName,globalAdminPhone;
+
 
     //22 may
     private int lastCheckId;
@@ -416,6 +418,11 @@ public class FingerPrint_LogIn_Final_Activity extends AppCompatActivity implemen
 
 
         //17 june
+
+        globalUserName ="";
+        globalUserPhone="";
+        globalAdminName="";
+        globalAdminPhone="";
 
         nameDisplay = findViewById(R.id.fingerPrintFinal_textView_Name_id);
         phoneDisplay = findViewById(R.id.fingerPrintFinal_textView_Phone_id);
@@ -1146,6 +1153,12 @@ public class FingerPrint_LogIn_Final_Activity extends AppCompatActivity implemen
         Log.i("checkDiaglogFragment", "1, time:"+timeCurrent+" , dayNow:"+dayNow+" , date today:"+dateNow);
 
         Log.i("checkDiaglogFragment", "2, offsetMorning: "+ offsetMorning);
+
+
+        globalUserPhone=userPhone;
+        globalUserName=userName;
+        globalAdminName=globalAdminNameHere;
+        globalAdminPhone=globalAdminPhoneHere;
 
         if(offsetMorning>=-3f&&offsetMorning<=3f){ //meaning withing 3 hourse or morning constraint
 

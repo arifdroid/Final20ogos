@@ -5,6 +5,7 @@ import android.util.Log;
 import android.widget.Toast;
 
 import com.example.afinal.R;
+import com.example.afinal.fingerPrint_Login.fingerprint_login.FingerPrint_LogIn_Final_Activity;
 import com.example.afinal.fingerPrint_Login.oop.TestTimeStamp;
 import com.github.mikephil.charting.charts.LineChart;
 import com.github.mikephil.charting.data.Entry;
@@ -31,6 +32,7 @@ import static java.security.AccessController.getContext;
 
 public class TimeStampFireStore_Handler  extends Observable {
 
+    private final CollectionReference collectionReferenceTest17june;
     private CollectionReference collectionReferenceTest;
     private List<Entry> entriesV2;
 
@@ -55,12 +57,19 @@ public class TimeStampFireStore_Handler  extends Observable {
 
     private ArrayList<ArrayList<Entry>> listof_entryList;
 
+    private String userName, userPhone,adminName,adminPhone;
+
 
     public TimeStampFireStore_Handler(Context context,LineDataSet dataSet, LineData data, LineChart chart) {
         this.mContext = context;
         this.chart = chart;
         this.data = data;
         this.dataSet=dataSet;
+
+        adminName= FingerPrint_LogIn_Final_Activity.globalAdminName;
+        adminPhone = FingerPrint_LogIn_Final_Activity.globalAdminPhone;
+        userName = FingerPrint_LogIn_Final_Activity.globalUserName;
+        userPhone = FingerPrint_LogIn_Final_Activity.globalUserPhone;
 
         entriesV2 = new ArrayList<>();
         entriesV3 = new ArrayList<>();
@@ -70,6 +79,14 @@ public class TimeStampFireStore_Handler  extends Observable {
         collectionReferenceTest = FirebaseFirestore.getInstance().collection("all_admin_doc_collections")
                 .document("ariff+60190_doc")
                 .collection("all_employee_thisAdmin_collection");
+
+        //17 june
+
+//        date, name admin, name user
+        collectionReferenceTest17june = FirebaseFirestore.getInstance().collection("all_admin_doc_collections")
+                .document(adminName+adminPhone+"doc")
+                .collection("all_employee_thisAdmin_collection");
+
 
 
         Log.i("checkChartFlowFinal ", "handler, 1");
@@ -86,6 +103,8 @@ public class TimeStampFireStore_Handler  extends Observable {
         collectionReferenceTest.get().addOnCompleteListener(new OnCompleteListener<QuerySnapshot>() {
             @Override
             public void onComplete(@NonNull Task<QuerySnapshot> task) {
+
+                //17 june we need to add date, into our document
 
                 if (task.isSuccessful()) {
 
