@@ -187,6 +187,14 @@ public class FragmentTimeStamp extends Fragment implements Observer, View.OnClic
 
     // we need the time pass today. so we request here.
 
+
+    //17 june
+
+    private String today;
+
+    //we need to pull and store date as welll.
+
+
     @Nullable
     @Override
     public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
@@ -194,6 +202,9 @@ public class FragmentTimeStamp extends Fragment implements Observer, View.OnClic
 
         View rootView = inflater.inflate(R.layout.bottom_nav_timestamp_fragment, container, false);
         //textView = rootView.findViewById(R.id.bottom_nav_fragment_timeStamp_textView);
+
+
+        today = Main_BottomNav_Activity.dayToday;
 
         returnToRecyclerArrayList = new ArrayList<>();
         returnToRecyclerArrayList.add(new ReturnToRecycler("name","date","0800","on time"));
@@ -1356,6 +1367,156 @@ public class FragmentTimeStamp extends Fragment implements Observer, View.OnClic
     private void setupWhosLate(){
 
         //for(LineDataSet dataSet: dataSetArrayList_Final){
+        int todayHere=0;
+
+        if(today.equals("Mon")){
+            todayHere=0;
+        }else if(today.equals("Tue")){
+            todayHere=1;
+        }else if(today.equals("Wed")){
+            todayHere=2;
+        }else if(today.equals("Thu")){
+            todayHere=3;
+        }else if(today.equals("Fri")){
+            todayHere=4;
+        }
+
+        // check morning first., mean halve the data
+        for(int j= 0; j<dataSetArrayList_Final.size()/2;j++){
+
+            //for(today.equals())
+
+
+
+
+
+            for(int i=0; i<5; i++) {
+
+                float timestampthis = dataSetArrayList_Final.get(j).getEntryForIndex(i).getY();
+
+
+                if(todayHere==i){
+
+                if (timestampthis <= 15.01f) {
+
+                    finalPointerArrayList.add(new FinalPointer(j, i));
+                    if (returnToRecyclerArrayList.get(0).getName().equals("name")) {
+                        returnToRecyclerArrayList.remove(0);
+                    }
+
+                    //float timenow = dataSetArrayList_Final.get(j).getEntryForIndex(i).getY();
+
+                    String namehere = dataSetArrayList_Final.get(j).getLabel();
+
+                    for (TestTimeStamp testTimeStamp : finalListRemap) {
+
+                        if (testTimeStamp.getName().equals(namehere)) {
+
+                            if (i == 0) {
+
+                                returnToRecyclerArrayList.add(new ReturnToRecycler(namehere, "8 April", testTimeStamp.getMon_morning(), "LATE"));
+                            }
+                            if (i == 1) {
+
+                                returnToRecyclerArrayList.add(new ReturnToRecycler(namehere, "9 April", testTimeStamp.getTue_morning(), "LATE"));
+                            }
+                            if (i == 2) {
+
+                                returnToRecyclerArrayList.add(new ReturnToRecycler(namehere, "10 April", testTimeStamp.getWed_morning(), "LATE"));
+                            }
+                            if (i == 3) {
+
+                                returnToRecyclerArrayList.add(new ReturnToRecycler(namehere, "11 April", testTimeStamp.getThu_morning(), "LATE"));
+                            }
+                            if (i == 4) {
+
+                                returnToRecyclerArrayList.add(new ReturnToRecycler(namehere, "12 April", testTimeStamp.getFri_morning(), "LATE"));
+                            }
+
+
+                        }
+                    }
+
+                    //returnToRecyclerArrayList.add(new ReturnToRecycler(dataSetArrayList_Final.get(j).getLabel(),"9 April",dataSetArrayList_Final.get(j).getEntryForIndex(i).getY(),))
+
+                }
+
+            }//if today
+
+            } //loop cancel, change one day only.
+
+        }
+
+        //then evening logic.
+
+        for(int j= dataSetArrayList_Final.size()/2; j<dataSetArrayList_Final.size();j++){
+
+            for(int i=0; i<5; i++) {
+
+                float timestampthis = dataSetArrayList_Final.get(j).getEntryForIndex(i).getY();
+
+                if(todayHere==i){
+
+                if (timestampthis >= 5.99f) { // relative to final data, not chart, no offset.
+
+                    finalPointerArrayList.add(new FinalPointer(j, i)); // add another complete set pointer.
+
+                    // finalPointerArrayList.add(new FinalPointer(j,i));
+                    if (returnToRecyclerArrayList.get(0).getName().equals("name")) {
+                        returnToRecyclerArrayList.remove(0);
+                    }
+
+                    //float timenow = dataSetArrayList_Final.get(j).getEntryForIndex(i).getY();
+
+                    String namehere = dataSetArrayList_Final.get(j).getLabel();
+
+                    for (TestTimeStamp testTimeStamp : finalListRemap) {
+
+                        if (testTimeStamp.getName().equals(namehere)) {
+
+                            if (i == 0) {
+
+                                returnToRecyclerArrayList.add(new ReturnToRecycler(namehere, "8 April", testTimeStamp.getMon_evening(), "LATE"));
+                            }
+                            if (i == 1) {
+
+                                returnToRecyclerArrayList.add(new ReturnToRecycler(namehere, "9 April", testTimeStamp.getTue_evening(), "LATE"));
+                            }
+                            if (i == 2) {
+
+                                returnToRecyclerArrayList.add(new ReturnToRecycler(namehere, "10 April", testTimeStamp.getWed_evening(), "LATE"));
+                            }
+                            if (i == 3) {
+
+                                returnToRecyclerArrayList.add(new ReturnToRecycler(namehere, "11 April", testTimeStamp.getThu_evening(), "LATE"));
+                            }
+                            if (i == 4) {
+
+                                returnToRecyclerArrayList.add(new ReturnToRecycler(namehere, "12 April", testTimeStamp.getFri_evening(), "LATE"));
+                            }
+
+
+                        }
+                    }
+
+
+                }
+
+
+            }// evening today
+            }
+
+        }
+
+        recyclerView_frag_adapter.notifyDataSetChanged();
+        recyclerView.setAdapter(recyclerView_frag_adapter);
+
+
+    }
+
+    private void setupWhosLate_Today(){
+
+        //for(LineDataSet dataSet: dataSetArrayList_Final){
 
 
         // check morning first., mean halve the data
@@ -1425,7 +1586,7 @@ public class FragmentTimeStamp extends Fragment implements Observer, View.OnClic
 
                     finalPointerArrayList.add(new FinalPointer(j,i)); // add another complete set pointer.
 
-                   // finalPointerArrayList.add(new FinalPointer(j,i));
+                    // finalPointerArrayList.add(new FinalPointer(j,i));
                     if(returnToRecyclerArrayList.get(0).getName().equals("name")){
                         returnToRecyclerArrayList.remove(0);
                     }

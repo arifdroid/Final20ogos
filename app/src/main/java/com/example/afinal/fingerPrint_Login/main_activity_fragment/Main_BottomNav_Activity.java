@@ -1,5 +1,6 @@
 package com.example.afinal.fingerPrint_Login.main_activity_fragment;
 
+import android.content.Intent;
 import android.os.Bundle;
 import androidx.annotation.NonNull;
 import com.google.android.material.bottomnavigation.BottomNavigationView;
@@ -35,12 +36,20 @@ public class Main_BottomNav_Activity extends AppCompatActivity {
         }
     };
 
+    //17 june
+
+    public static String dayToday;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main__bottom_nav_);
 
         viewPager = findViewById(R.id.bottomNav_view_pager_frameID);
+
+        Intent intent = getIntent();
+
+        dayToday = intent.getStringExtra("today");
 
         setupViewPager(viewPager);
 

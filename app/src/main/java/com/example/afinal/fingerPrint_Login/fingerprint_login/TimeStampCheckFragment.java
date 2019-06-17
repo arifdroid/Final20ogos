@@ -222,6 +222,7 @@ public class TimeStampCheckFragment extends DialogFragment {
                                 //intent to next activity,
 
                                 Intent intent = new Intent(getActivity(), Main_BottomNav_Activity.class);
+                                intent.putExtra("today",day);
                                 intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP|Intent.FLAG_ACTIVITY_NEW_TASK);
                                 startActivity(intent);
 
