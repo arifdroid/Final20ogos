@@ -209,6 +209,9 @@ public class FragmentTimeStamp extends Fragment implements Observer, View.OnClic
         date = Main_BottomNav_Activity.dateToday;
 
 
+       // need to use timestamp, then process it later. in retrieving part.
+
+
         returnToRecyclerArrayList = new ArrayList<>();
         returnToRecyclerArrayList.add(new ReturnToRecycler("name","date","0800","on time"));
         //recycler view setup 10.20AM

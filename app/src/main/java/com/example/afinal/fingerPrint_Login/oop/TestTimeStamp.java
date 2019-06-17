@@ -120,6 +120,54 @@ public class TestTimeStamp {
     private String thu_evening;
     private String fri_evening;
 
+    //setting for date
+
+    private String mon_date;
+    private String tue_date;
+    private String wed_date;
+    private String thu_date;
+    private String fri_date;
+
+    public String getMon_date() {
+        return mon_date;
+    }
+
+    public void setMon_date(String mon_date) {
+        this.mon_date = mon_date;
+    }
+
+    public String getTue_date() {
+        return tue_date;
+    }
+
+    public void setTue_date(String tue_date) {
+        this.tue_date = tue_date;
+    }
+
+    public String getWed_date() {
+        return wed_date;
+    }
+
+    public void setWed_date(String wed_date) {
+        this.wed_date = wed_date;
+    }
+
+    public String getThu_date() {
+        return thu_date;
+    }
+
+    public void setThu_date(String thu_date) {
+        this.thu_date = thu_date;
+    }
+
+    public String getFri_date() {
+        return fri_date;
+    }
+
+    public void setFri_date(String fri_date) {
+        this.fri_date = fri_date;
+    }
+
     public String getMon_evening() {
         return mon_evening;
     }

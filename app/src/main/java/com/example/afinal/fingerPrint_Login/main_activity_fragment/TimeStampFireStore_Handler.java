@@ -126,6 +126,51 @@ public class TimeStampFireStore_Handler  extends Observable {
 
                             Log.i("checkChartFlowFinal ", "handler, 3");
 
+                            //17 june >>>>>>>>>>>>>>
+
+                            if (kk.getKey().equals("mon_date")) {
+
+                                String mondate = kk.getValue().toString();
+
+                                object.setMon_date(mondate);
+
+                            }
+
+                            if (kk.getKey().equals("tue_date")) {
+
+                                String tuedate = kk.getValue().toString();
+
+                                object.setMon_date(tuedate);
+
+                            }
+
+                            if (kk.getKey().equals("wed_date")) {
+
+                                String weddate = kk.getValue().toString();
+
+                                object.setMon_date(weddate);
+
+                            }
+
+                            if (kk.getKey().equals("thu_date")) {
+
+                                String thudate = kk.getValue().toString();
+
+                                object.setMon_date(thudate);
+
+                            }
+
+                            if (kk.getKey().equals("fri_date")) {
+
+                                String fridate = kk.getValue().toString();
+
+                                object.setMon_date(fridate);
+
+                            }
+
+
+                            // >>>>>>>>>>>>>>>>
+
                             if (kk.getKey().equals("name")) {
                                 //first access value might be ts morning, hence, when found name, this field not available anymore
                                 //this is the problem, since we have to retrieve evrything now.
