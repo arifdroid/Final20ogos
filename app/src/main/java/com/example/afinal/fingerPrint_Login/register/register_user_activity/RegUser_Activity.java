@@ -577,11 +577,6 @@ public class RegUser_Activity extends AppCompatActivity implements View.OnClickL
 
                 case R.id.reg_user_buttonTest:
 
-
-
-
-
-
                     break;
 
                 //case R.id.regUser_Button_GetCodeID:
@@ -594,7 +589,9 @@ public class RegUser_Activity extends AppCompatActivity implements View.OnClickL
 //                    userName = name;
 //                    userPhone = phone;
 
+                    String booleanadmincount = String.valueOf(boolean_admin_count);
 
+                    Toast.makeText(RegUser_Activity.this,"admin count" + booleanadmincount, Toast.LENGTH_SHORT).show();
 
                     //we can create boolean check, if user is maxed here.
 
@@ -662,6 +659,8 @@ public class RegUser_Activity extends AppCompatActivity implements View.OnClickL
         }else {
 
                // textViewMessage.setText("please click picture, and set profile picture");
+
+                Toast.makeText(RegUser_Activity.this,"please click and choose your image", Toast.LENGTH_SHORT).show();
             }
 
 
@@ -785,7 +784,31 @@ public class RegUser_Activity extends AppCompatActivity implements View.OnClickL
 
                             userprofile_data.put("name",userName);
                             userprofile_data.put("phone",userPhone);
-                            userprofile_data.put("image",documentReference.toString());
+                          //  userprofile_data.put("image",documentReference.toString());
+
+
+                            userprofile_data.put("mon_date","");
+                            userprofile_data.put("tue_date","");
+                            userprofile_data.put("wed_date","");
+                            userprofile_data.put("thu_date","");
+                            userprofile_data.put("fri_date","");
+
+                            userprofile_data.put("ts_mon_morning","");
+                            userprofile_data.put("ts_tue_morning","");
+                            userprofile_data.put("ts_wed_morning","");
+                            userprofile_data.put("ts_thu_morning","");
+                            userprofile_data.put("ts_fri_morning","");
+
+                            userprofile_data.put("ts_mon_evening","");
+                            userprofile_data.put("ts_tue_evening","");
+                            userprofile_data.put("ts_wed_evening","");
+                            userprofile_data.put("ts_thu_evening","");
+                            userprofile_data.put("ts_fri_evening","");
+
+
+                            userprofile_data.put("status","user");
+
+
                             //userprofile_data.put("");
 
                             //   textViewMessage.setText("success.. setting up account");

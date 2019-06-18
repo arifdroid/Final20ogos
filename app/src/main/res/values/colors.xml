@@ -5,6 +5,9 @@
     <color name="colorAccent">#D81B60</color>
     <color name="transparent">#80000000</color>
     <color name="check">#0EDDDA</color>
+
+    <color name="transparent2">#00090909</color>
+
     <color name="backsemidark">#A7FFFFFF</color>
     <color name="material_white">#FAFAFA</color>
     <color name="material_black_grey">#212121</color>

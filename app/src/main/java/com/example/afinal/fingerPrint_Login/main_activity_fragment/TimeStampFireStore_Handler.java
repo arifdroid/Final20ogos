@@ -107,7 +107,7 @@ public class TimeStampFireStore_Handler  extends Observable {
 
         //18 june, we start to load images.
 
-        collectionReferenceTest.get().addOnCompleteListener(new OnCompleteListener<QuerySnapshot>() {
+        collectionReferenceTest17june.get().addOnCompleteListener(new OnCompleteListener<QuerySnapshot>() {
             @Override
             public void onComplete(@NonNull Task<QuerySnapshot> task) {
 

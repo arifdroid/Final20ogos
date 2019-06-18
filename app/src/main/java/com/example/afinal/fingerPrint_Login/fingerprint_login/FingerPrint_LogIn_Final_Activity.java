@@ -461,6 +461,9 @@ public class FingerPrint_LogIn_Final_Activity extends AppCompatActivity implemen
         constraintLayoutLocationIcon = findViewById(R.id.final_constraint_location_id);
         constraintLayoutWifiIcon = findViewById(R.id.final_constraint_wifi_id);
 
+
+        amOrpmDisplay = findViewById(R.id.fingerPrintFinal_textViewAMorPM_id);
+
         //rolling text view
 
         @SuppressLint("SimpleDateFormat") final DateFormat format = new SimpleDateFormat("dd MMM yyyy hh:mm:ss zzz");
@@ -497,6 +500,9 @@ public class FingerPrint_LogIn_Final_Activity extends AppCompatActivity implemen
         });
 
         amOrPmFromPhone = dateFromPhone.substring(12,14);
+
+        nameDisplay.setText("username");
+        phoneDisplay.setText("userphone");
 
         Integer intAmOrPm = Integer.valueOf(amOrPmFromPhone);
 
@@ -655,8 +661,9 @@ public class FingerPrint_LogIn_Final_Activity extends AppCompatActivity implemen
     @Override
     public void onClick(View v) {
 
-
-        presenter.removeLocationNow();
+        if(!presenter.getRemapLocation().isEmpty()) {
+            presenter.removeLocationNow();
+        }
         presenter.deleteObserver(this);
         //reset back status
         // nameUser="";
@@ -687,9 +694,7 @@ public class FingerPrint_LogIn_Final_Activity extends AppCompatActivity implemen
         counterFlowHere++;
         Log.i("checkUpdateFinal", "1");
 
-        nameDisplay.setText(nameUser);
 
-        phoneDisplay.setText(phoneUser);
 
         if (o instanceof FingerPrintFinal_Presenter) {
 
@@ -775,6 +780,10 @@ public class FingerPrint_LogIn_Final_Activity extends AppCompatActivity implemen
                 wifiDisplay.setText(ssidConstraint);
                 locationDisplay.setText(locationConstraint);
                 adminDisplay.setText(globalAdminNameHere);
+
+                nameDisplay.setText(nameUser);
+
+                phoneDisplay.setText(phoneUser);
 
             }
             //getLocation

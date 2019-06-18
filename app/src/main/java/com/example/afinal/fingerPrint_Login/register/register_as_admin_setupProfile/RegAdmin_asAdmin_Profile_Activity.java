@@ -410,7 +410,7 @@ public class RegAdmin_asAdmin_Profile_Activity extends AppCompatActivity impleme
                                 documentReference.set(mapUserAsAdmin);
 
 
-                                DocumentReference documentReferenceAdmin_asUser = documentReference.collection("all_employee_thisAdmin_Collections")
+                                DocumentReference documentReferenceAdmin_asUser = documentReference.collection("all_employee_thisAdmin_collection")
                                             .document(user_name_asAdmin+user_phone_asAdmin+"doc");
 
 
@@ -428,6 +428,14 @@ public class RegAdmin_asAdmin_Profile_Activity extends AppCompatActivity impleme
                                 mapAdminAsUser.put("ts_wed_evening", "");
                                 mapAdminAsUser.put("ts_thu_evening", "");
                                 mapAdminAsUser.put("ts_fri_evening", "");
+
+                                mapAdminAsUser.put("status","admin");
+
+                                mapAdminAsUser.put("mon_date","");
+                                mapAdminAsUser.put("tue_date","");
+                                mapAdminAsUser.put("wed_date","");
+                                mapAdminAsUser.put("thu_date","");
+                                mapAdminAsUser.put("fri_date","");
 
 
                                 documentReferenceAdmin_asUser.set(mapAdminAsUser).addOnCompleteListener(new OnCompleteListener<Void>() {

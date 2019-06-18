@@ -1,6 +1,7 @@
 package com.example.afinal.fingerPrint_Login.main_activity_fragment;
 
 import android.content.Intent;
+import android.graphics.Color;
 import android.os.Bundle;
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
@@ -345,6 +346,13 @@ public class FragmentTimeStamp extends Fragment implements Observer, View.OnClic
         entries.add(new Entry(3, 5));
         entries.add(new Entry(4, 6));
 
+
+        //by default, transparent.
+       // chart.setBackgroundColor(ContextCompat.getColor(getContext(),R.color.transparent2));
+
+
+
+        //chart.color
 
         //dataSet2 = new LineDataSet();
         dataSet = new LineDataSet(entries, "check out V1");

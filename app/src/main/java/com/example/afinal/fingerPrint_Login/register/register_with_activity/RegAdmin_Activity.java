@@ -350,6 +350,8 @@ public class RegAdmin_Activity extends AppCompatActivity implements View.OnClick
 
         check_admin_database_for_user_registering_button = findViewById(R.id.regAdmin_Check_ID);
 
+        check_admin_database_for_user_registering_button.setOnClickListener(this);
+
         button_yes = findViewById(R.id.reg_admin_button_yes_id);
         button_no = findViewById(R.id.reg_admin_button_no_id);
 
@@ -1079,7 +1081,7 @@ public class RegAdmin_Activity extends AppCompatActivity implements View.OnClick
 
                     boolean finalStatus = presenter.checkFromFirebaseSimulation(adminName,adminPhone);
 //
-
+                    Toast.makeText(RegAdmin_Activity.this,"verifying with server..", Toast.LENGTH_SHORT).show();
             // 22 May, this variable will be updated, after model finish checking with database.
 
             if(finalStatus){

@@ -506,10 +506,11 @@
                 android:layout_width="0dp"
                 android:layout_height="0dp"
                 android:layout_marginStart="8dp"
-                android:layout_marginTop="8dp"
-                android:layout_marginBottom="16dp"
+                android:layout_marginTop="7dp"
+                android:layout_marginBottom="13dp"
 
                 android:lines="2"
+
                 android:maxLines="2"
                 android:text="Username : Arif "
                 android:textColor="@color/material_white_blue"
@@ -534,6 +535,7 @@
                 app:layout_constraintEnd_toStartOf="@+id/guideline161"
                 app:layout_constraintStart_toStartOf="@+id/guideline160"
                 app:layout_constraintTop_toBottomOf="@+id/reg_User_imageView_name_icon_id"
+                app:srcCompat="@drawable/ic_admin_phone_icon_only"
                 tools:srcCompat="@drawable/ic_admin_phone_icon_only" />
 
             <ImageView
@@ -564,8 +566,8 @@
                 android:layout_height="0dp"
                 android:layout_marginStart="8dp"
 
-                android:layout_marginTop="8dp"
-                android:layout_marginBottom="16dp"
+                android:layout_marginTop="7dp"
+                android:layout_marginBottom="13dp"
                 android:text="Userphone : +6018 4670568"
                 android:textColor="@color/material_white_blue"
                 app:autoSizeTextType="uniform"
@@ -579,8 +581,8 @@
                 android:layout_width="0dp"
                 android:layout_height="0dp"
                 android:layout_marginStart="8dp"
-                android:layout_marginTop="8dp"
-                android:layout_marginBottom="16dp"
+                android:layout_marginTop="7dp"
+                android:layout_marginBottom="13dp"
                 android:text="Adminname : Arif Hanif Zamri"
                 android:textColor="@color/material_white_blue"
                 app:autoSizeTextType="uniform"
@@ -597,6 +599,7 @@
                 app:layout_constraintEnd_toStartOf="@+id/guideline161"
                 app:layout_constraintStart_toStartOf="@+id/guideline160"
                 app:layout_constraintTop_toBottomOf="@+id/reg_User_imageView_nameAdmin_icon_id"
+                app:srcCompat="@drawable/ic_admin_phone_icon_only"
                 tools:srcCompat="@drawable/ic_admin_phone_icon_only" />
 
             <TextView
@@ -605,8 +608,8 @@
                 android:layout_height="0dp"
 
                 android:layout_marginStart="8dp"
-                android:layout_marginTop="8dp"
-                android:layout_marginBottom="16dp"
+                android:layout_marginTop="7dp"
+                android:layout_marginBottom="13dp"
                 android:text="Adminphone : +6018 111111"
                 android:textColor="@color/material_white_blue"
                 app:autoSizeTextType="uniform"

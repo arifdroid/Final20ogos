@@ -436,6 +436,7 @@
             android:text="Next"
             android:textColor="@color/material_white_blue"
             android:textSize="12sp"
+            android:visibility="gone"
             app:layout_constraintBottom_toTopOf="@+id/guideline48"
             app:layout_constraintEnd_toStartOf="@+id/guideline50"
             app:layout_constraintHorizontal_bias="0.49"
