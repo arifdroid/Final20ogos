@@ -61,6 +61,7 @@ import java.util.Observer;
 public class FingerPrint_LogIn_Final_Activity extends AppCompatActivity implements FingerPrintFinal_View_Interface, View.OnClickListener, Observer, OnServerTime_Interface {
 
     public static int userCount;
+    public static boolean booleanResultExtracted;
 
     private FloatingActionButton floatButtonGetAction;
    // private TextView textView;
@@ -327,12 +328,12 @@ public class FingerPrint_LogIn_Final_Activity extends AppCompatActivity implemen
                     if(lastCheckId==R.id.nav_wifi) {
                         imageViewWifiIcon.setVisibility(View.INVISIBLE);
                         constraintLayoutWifiIcon.setVisibility(View.INVISIBLE);
-                        barWifi.setVisibility(View.INVISIBLE);
+                        barWifi.setVisibility(View.GONE);
                     }
 
-                    imageViewMorningIcon.setVisibility(View.VISIBLE);
-                    constraintLayoutMorningIcon.setVisibility(View.VISIBLE);
-                    barMorning.setVisibility(View.VISIBLE);
+                    imageViewMorningIcon.setVisibility(View.GONE);
+                    constraintLayoutMorningIcon.setVisibility(View.GONE);
+                    barMorning.setVisibility(View.GONE);
 
                     lastCheckId=R.id.nav_morning;
 
@@ -341,25 +342,42 @@ public class FingerPrint_LogIn_Final_Activity extends AppCompatActivity implemen
                 case R.id.nav_evening:
 
 
-                    imageViewAdminIcon.setVisibility(View.INVISIBLE);
-                    cardViewAdminIcon.setVisibility(View.INVISIBLE);
-                    barAdmin.setVisibility(View.INVISIBLE);
 
+                    if(lastCheckId==R.id.nav_admin) {
+
+                        imageViewAdminIcon.setVisibility(View.GONE);
+                        cardViewAdminIcon.setVisibility(View.GONE);
+                        barAdmin.setVisibility(View.GONE);
+                    }
+
+                    if(lastCheckId==R.id.nav_location) {
+
+
+                        imageViewLocationIcon.setVisibility(View.GONE);
+                        constraintLayoutLocationIcon.setVisibility(View.GONE);
+                        barLocation.setVisibility(View.GONE);
+
+                    }
+
+                    if(lastCheckId==R.id.nav_morning) {
+                        imageViewMorningIcon.setVisibility(View.GONE);
+                        constraintLayoutMorningIcon.setVisibility(View.GONE);
+                        barMorning.setVisibility(View.GONE);
+                    }
+
+                    if(lastCheckId==R.id.nav_wifi) {
+                        imageViewWifiIcon.setVisibility(View.GONE);
+                        constraintLayoutWifiIcon.setVisibility(View.GONE);
+                        barWifi.setVisibility(View.GONE);
+                    }
+
+//
                     imageViewEveningIcon.setVisibility(View.VISIBLE);
                     cardViewEveningIcon.setVisibility(View.VISIBLE);
                     barEvening.setVisibility(View.VISIBLE);
 
-                    imageViewMorningIcon.setVisibility(View.INVISIBLE);
-                    constraintLayoutMorningIcon.setVisibility(View.INVISIBLE);
-                    barMorning.setVisibility(View.INVISIBLE);
+                    lastCheckId=R.id.nav_evening;
 
-                    imageViewLocationIcon.setVisibility(View.INVISIBLE);
-                    constraintLayoutLocationIcon.setVisibility(View.INVISIBLE);
-                    barLocation.setVisibility(View.INVISIBLE);
-
-                    imageViewWifiIcon.setVisibility(View.INVISIBLE);
-                    constraintLayoutWifiIcon.setVisibility(View.INVISIBLE);
-                    barWifi.setVisibility(View.INVISIBLE);
 //
 
 
@@ -372,21 +390,36 @@ public class FingerPrint_LogIn_Final_Activity extends AppCompatActivity implemen
                     cardViewAdminIcon.setVisibility(View.VISIBLE);
                     barAdmin.setVisibility(View.VISIBLE);
 
-                    imageViewEveningIcon.setVisibility(View.INVISIBLE);
-                    cardViewEveningIcon.setVisibility(View.INVISIBLE);
-                    barEvening.setVisibility(View.INVISIBLE);
+                    lastCheckId=R.id.nav_admin;
 
-                    imageViewMorningIcon.setVisibility(View.INVISIBLE);
-                    constraintLayoutMorningIcon.setVisibility(View.INVISIBLE);
-                    barMorning.setVisibility(View.INVISIBLE);
 
-                    imageViewLocationIcon.setVisibility(View.INVISIBLE);
-                    constraintLayoutLocationIcon.setVisibility(View.INVISIBLE);
-                    barLocation.setVisibility(View.INVISIBLE);
+                    if(lastCheckId==R.id.nav_evening) {
 
-                    imageViewWifiIcon.setVisibility(View.INVISIBLE);
-                    constraintLayoutWifiIcon.setVisibility(View.INVISIBLE);
-                    barWifi.setVisibility(View.INVISIBLE);
+                        imageViewEveningIcon.setVisibility(View.GONE);
+                        cardViewEveningIcon.setVisibility(View.GONE);
+                        barEvening.setVisibility(View.GONE);
+                    }
+
+                    if(lastCheckId==R.id.nav_location) {
+
+
+                        imageViewLocationIcon.setVisibility(View.GONE);
+                        constraintLayoutLocationIcon.setVisibility(View.GONE);
+                        barLocation.setVisibility(View.GONE);
+
+                    }
+
+                    if(lastCheckId==R.id.nav_morning) {
+                        imageViewMorningIcon.setVisibility(View.GONE);
+                        constraintLayoutMorningIcon.setVisibility(View.GONE);
+                        barMorning.setVisibility(View.INVISIBLE);
+                    }
+
+                    if(lastCheckId==R.id.nav_wifi) {
+                        imageViewWifiIcon.setVisibility(View.GONE);
+                        constraintLayoutWifiIcon.setVisibility(View.GONE);
+                        barWifi.setVisibility(View.GONE);
+                    }
 
 
                     break;
@@ -409,6 +442,8 @@ public class FingerPrint_LogIn_Final_Activity extends AppCompatActivity implemen
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_finger_print__log_in__final_);
+
+        booleanResultExtracted = false;
 
         bottomNavigationView = findViewById(R.id.bottomNavigationView_fingerprint);
 
@@ -675,6 +710,7 @@ public class FingerPrint_LogIn_Final_Activity extends AppCompatActivity implemen
 
         //25 may
 
+        booleanResultExtracted =false;
 
 
         getSupportFragmentManager().beginTransaction()
@@ -694,7 +730,8 @@ public class FingerPrint_LogIn_Final_Activity extends AppCompatActivity implemen
         counterFlowHere++;
         Log.i("checkUpdateFinal", "1");
 
-
+        if (booleanResultExtracted) {
+                //ensure result extracted
 
         if (o instanceof FingerPrintFinal_Presenter) {
 
@@ -792,160 +829,164 @@ public class FingerPrint_LogIn_Final_Activity extends AppCompatActivity implemen
             Log.i("checkUpdateFinal", "5 remapLocation :" + remapLocation);
             if (remapLocation != null) {
 
+                Toast.makeText(FingerPrint_LogIn_Final_Activity.this,"location process HACK: latitude "+userLatitude,Toast.LENGTH_SHORT).show();
+
 
                 for (Map.Entry<String, Object> kk : remapLocation.entrySet()) {
 
                     if (kk.getKey().equals("userLatitude")) {
 
                         //https://stackoverflow.com/questions/20438627/getlastknownlocation-returns-null
-                    //if(mLocationManager.getLastKnownLocation())
-                    userLatitude = kk.getValue().toString();
+                        //if(mLocationManager.getLastKnownLocation())
+                        userLatitude = kk.getValue().toString();
 
-                    if(userLatitude.equals(lastLocationRecorded)){
+                        if (userLatitude.equals(lastLocationRecorded)) {
 
-                        userLatitude = "0"; //stop reading this.
+                            userLatitude = "0"; //stop reading this.
+                        }
+
+
                     }
 
 
+                    if (kk.getKey().equals("userLongitude")) {
+                        userLongitude = kk.getValue().toString();
+                    }
+
                 }
 
+                Log.i("c", "6 remapLocation :" + remapLocation + " latite :" + userLatitude);
 
-                if (kk.getKey().equals("userLongitude")) {
-                    userLongitude = kk.getValue().toString();
+                Log.i("wherelocationRegister :", "FLOW 6, countVerified:" + countUserverified + " , userLatitude: " + userLatitude);
+                checkLocationProcess = true;
+            }
+
+            //process for check ssid for 1st enter, with wifi connected, diallow 2nd enter, reset
+            if (lastSSIDrecorded.equals(userSSID)) { //
+                wifiManager = (WifiManager) getApplicationContext().getSystemService(Context.WIFI_SERVICE);
+                wifiInfo = wifiManager.getConnectionInfo();
+                userSSID = null;
+                userBSSID = null;
+
+                if (wifiInfo != null) {
+                    Toast.makeText(this, "getting wifi network info", Toast.LENGTH_SHORT).show();
+                    userSSID = wifiInfo.getSSID();
+                    userBSSID = wifiInfo.getBSSID();
+                } else {
+                    userSSID = "--rerun";
+                    userBSSID = null;
+                    Toast.makeText(this, "please check wifi network connection", Toast.LENGTH_SHORT).show();
+
+                }
+            }
+            if (lastSSIDrecorded.equals("--rerun")) {
+
+                wifiManager = (WifiManager) getApplicationContext().getSystemService(Context.WIFI_SERVICE);
+                wifiInfo = wifiManager.getConnectionInfo();
+
+                if (wifiInfo != null) {
+
+                    if (counterFlowHere == 100) {
+                        Toast.makeText(this, "getting wifi network info again", Toast.LENGTH_SHORT).show();
+                    }
+                    userSSID = wifiInfo.getSSID();
+                    userBSSID = wifiInfo.getBSSID();
+
                 }
 
             }
 
-            Log.i("c","6 remapLocation :"+ remapLocation + " latite :"+ userLatitude );
-
-            Log.i("wherelocationRegister :","FLOW 6, countVerified:"+countUserverified+" , userLatitude: "+userLatitude);
-            checkLocationProcess= true;
-        }
-
-        //process for check ssid for 1st enter, with wifi connected, diallow 2nd enter, reset
-        if(lastSSIDrecorded.equals(userSSID)){ //
-            wifiManager = (WifiManager) getApplicationContext().getSystemService(Context.WIFI_SERVICE);
-            wifiInfo = wifiManager.getConnectionInfo();
-            userSSID=null;
-            userBSSID=null;
-
-            if(wifiInfo!=null) {
-                Toast.makeText(this, "getting wifi network info", Toast.LENGTH_SHORT).show();
-                userSSID = wifiInfo.getSSID();
-                userBSSID = wifiInfo.getBSSID();
-            }else {
-                userSSID="--rerun";
-                userBSSID=null;
-                Toast.makeText(this, "please check wifi network connection", Toast.LENGTH_SHORT).show();
-
-            }
-        }
-        if(lastSSIDrecorded.equals("--rerun")){
-
-            wifiManager = (WifiManager) getApplicationContext().getSystemService(Context.WIFI_SERVICE);
-            wifiInfo = wifiManager.getConnectionInfo();
-
-            if(wifiInfo!=null) {
-
-                if(counterFlowHere==100) {
-                    Toast.makeText(this, "getting wifi network info again", Toast.LENGTH_SHORT).show();
-                }
-                userSSID = wifiInfo.getSSID();
-                userBSSID = wifiInfo.getBSSID();
-
-            }
-
-        }
-
-        //then get time.
+            //then get time.
 
 
+            //here we process
 
 
-        //here we process
-
-
-        if(checkAdminConstraintProcess ==true && checkLocationProcess ==true && dateAndTimeNow!=null && !dateAndTimeNow.equals("") && s.equals("success verified")){ //meaning all data being fetch
+            if (checkAdminConstraintProcess == true && checkLocationProcess == true && dateAndTimeNow != null && !dateAndTimeNow.equals("") && s.equals("success verified")) { //meaning all data being fetch
 
 //            if(morningConstraint!=null &&eveningConstraint!=null && dateAndTimeNow!=null && userLongitude!=null && userLatitude!=null
 //        && latitudeConstraint!=null && longitudeConstraint!=null && userBSSID!=null && userSSID!=null
 //        && ssidConstraint!=null && bssidConstraint!=null) {
 
-            Log.i("finalCheckFlowHere", "1");
+                Log.i("finalCheckFlowHere", "1");
 
-            Log.i("wherelocationRegister :","FLOW 6, countVerified:"+countUserverified+" , userLatitude: "+userLatitude);
+                Log.i("wherelocationRegister :", "FLOW 6, countVerified:" + countUserverified + " , userLatitude: " + userLatitude);
 
-            if(phoneAdminConstraint!=null&& !phoneAdminConstraint.equals("")){ //means the right admin have finish downloaded, but might some case, phone data retrieve, but not others?
-                                            //MAYBE
-                Log.i("finalCheckFlowHere", "2, phone admin pull:" + phoneAdminConstraint);
+                if (phoneAdminConstraint != null && !phoneAdminConstraint.equals("")) { //means the right admin have finish downloaded, but might some case, phone data retrieve, but not others?
+                    //MAYBE
+                    Log.i("finalCheckFlowHere", "2, phone admin pull:" + phoneAdminConstraint);
 
-                //first check if within network.
-                if(userSSID.equals(ssidConstraint)){
+                    //first check if within network.
+                    if (userSSID.equals(ssidConstraint)) {
 
-                    Log.i("wherelocationRegister :","FLOW 7, countVerified:"+countUserverified+" , userLatitude: "+userLatitude);
+                        Log.i("wherelocationRegister :", "FLOW 7, countVerified:" + countUserverified + " , userLatitude: " + userLatitude);
 
-                    Log.i("finalCheckFlowHere", "2, admin ssid:" + ssidConstraint+" , user ssid"+ userSSID);
+                        Log.i("finalCheckFlowHere", "2, admin ssid:" + ssidConstraint + " , user ssid" + userSSID);
 
-                    //Toast.makeText(this,"bssid different" ,Toast.LENGTH_LONG).show();
+                        //Toast.makeText(this,"bssid different" ,Toast.LENGTH_LONG).show();
 
-                 //   presenter.deleteObserver(this); //here fingerprint wont work anymore
+                        //   presenter.deleteObserver(this); //here fingerprint wont work anymore
 
-                    lastSSIDrecorded=userSSID;
-
-
-
-                    if(userBSSID.equals(bssidConstraint)){
-
-                        Toast.makeText(this,"bssid same, ssid :"+ userSSID ,Toast.LENGTH_LONG).show();
-
-                        presenter.deleteObserver(this);
-
-                        setUserTimeStamp(globalAdminNameHere,globalAdminPhoneHere,nameUser,phoneUser,dateAndTimeNow,userLatitude,userLongitude,morningConstraint,eveningConstraint);
+                        lastSSIDrecorded = userSSID;
 
 
-                    }else { //if bssid different might need to check other bssid available by admin.
+                        if (userBSSID.equals(bssidConstraint)) {
 
-                       // Toast.makeText(this,"bssid different, bssid "+userBSSID ,Toast.LENGTH_LONG).show();
-                       // presenter.deleteObserver(this);
+                            Toast.makeText(this, "bssid same, ssid :" + userSSID, Toast.LENGTH_LONG).show();
 
-                        Log.i("wherelocationRegister :","FLOW 8, countVerified:"+countUserverified+" , userLatitude: "+userLatitude);
+                            presenter.deleteObserver(this);
+
+                            setUserTimeStamp(globalAdminNameHere, globalAdminPhoneHere, nameUser, phoneUser, dateAndTimeNow, userLatitude, userLongitude, morningConstraint, eveningConstraint);
+
+
+                        } else { //if bssid different might need to check other bssid available by admin.
+
+                            // Toast.makeText(this,"bssid different, bssid "+userBSSID ,Toast.LENGTH_LONG).show();
+                            // presenter.deleteObserver(this);
+
+                            Log.i("wherelocationRegister :", "FLOW 8, countVerified:" + countUserverified + " , userLatitude: " + userLatitude);
+                            loginWithLocation();
+
+                        }
+
+                    } else { //if outside wifi network. use location instead
+
+                        Log.i("wherelocationRegister :", "FLOW 9, countVerified:" + countUserverified + " , userLatitude: " + userLatitude);
+
+
+                        Log.i("finalCheckFlowHere", "3, ssid different, location check, latitude admin:"
+                                + latitudeConstraint + " , user latitude" + userLatitude);
+
+                        Log.i("finalCheckNetwork", "2, ssid different, ssidUser:"
+                                + userSSID + " , ssidAdmin: " + ssidConstraint);
+
+                        Log.i("finalCheckNetwork", "3, ssid different, bssidUser:"
+                                + userBSSID + " , bssidConstraint: " + bssidConstraint);
+
+
+                        //presenter.
+
+                        //so process location., //if user dont provide location, ask user to provide.
+
                         loginWithLocation();
 
+
                     }
-
-                }else { //if outside wifi network. use location instead
-
-                    Log.i("wherelocationRegister :","FLOW 9, countVerified:"+countUserverified+" , userLatitude: "+userLatitude);
-
-
-                    Log.i("finalCheckFlowHere", "3, ssid different, location check, latitude admin:"
-                            + latitudeConstraint+" , user latitude"+ userLatitude);
-
-                    Log.i("finalCheckNetwork", "2, ssid different, ssidUser:"
-                            + userSSID+" , ssidAdmin: "+ ssidConstraint);
-
-                    Log.i("finalCheckNetwork", "3, ssid different, bssidUser:"
-                            + userBSSID+" , bssidConstraint: "+ bssidConstraint);
-
-
-                    //presenter.
-
-                    //so process location., //if user dont provide location, ask user to provide.
-
-                    loginWithLocation();
-
 
 
                 }
 
-
-
+                //       }
             }
 
- //       }
         }
 
-    }
+    } //this is to ensure we extracted from top user collection
+    else {
+
+            Log.i("checkFinal_18June", "result not finish extracted");
+     }
+
 
     if(counterFlowHere==250){
 

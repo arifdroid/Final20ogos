@@ -539,6 +539,7 @@ class FingerPrintFinal_Presenter extends Observable {
                                 Log.i("locationListener","11");
 
 
+                                Toast.makeText(mContext,"location HACK DETECTED: latitude "+userLatitude,Toast.LENGTH_SHORT).show();
 
                                 setChanged();
                                 notifyObservers();
