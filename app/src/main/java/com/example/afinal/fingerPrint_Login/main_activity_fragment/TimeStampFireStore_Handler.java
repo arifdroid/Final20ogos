@@ -306,6 +306,9 @@ public class TimeStampFireStore_Handler  extends Observable {
 
                         StorageReference storage = FirebaseStorage.getInstance().getReference().child("uploads").child("picture"+namehere+phoneHere);
 
+
+                        as expected, not finish loading in time.
+
                         Uri urlImage = storage.getDownloadUrl().getResult();
 
                         //could this not finish in time before other data finish
