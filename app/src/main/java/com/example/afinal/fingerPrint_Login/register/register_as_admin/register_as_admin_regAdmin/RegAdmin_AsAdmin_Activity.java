@@ -32,6 +32,8 @@ import com.example.afinal.R;
 import com.example.afinal.fingerPrint_Login.fingerprint_login.FingerPrint_LogIn_Final_Activity;
 import com.example.afinal.fingerPrint_Login.register.register_as_admin_setupProfile.RegAdmin_asAdmin_Profile_Activity;
 import com.example.afinal.fingerPrint_Login.register.register_user_activity.RegUser_Activity;
+import com.example.afinal.fingerPrint_Login.sample_test.FileUtil;
+import com.example.afinal.fingerPrint_Login.sample_test.Sample_Only_Activity;
 import com.github.mikephil.charting.utils.FileUtils;
 import com.google.android.gms.tasks.OnCanceledListener;
 import com.google.android.gms.tasks.OnCompleteListener;
@@ -587,15 +589,14 @@ public class RegAdmin_AsAdmin_Activity extends AppCompatActivity implements Obse
 
                 //FileUtil.
 
-                image_File =  new File(uriImage.getPath());
-
                 try {
+                    image_File = FileUtil.from(RegAdmin_AsAdmin_Activity.this,uriImage);
 
                     image_File = new Compressor(this).compressToFile(image_File);
 
-                    //uriImage = image_File.getAbsolutePath().uri;
-
                     uriImage = Uri.fromFile(image_File);
+
+                    showImage(uriImage);
 
                     imageSetupTrue=true;
 
@@ -605,16 +606,19 @@ public class RegAdmin_AsAdmin_Activity extends AppCompatActivity implements Obse
                 }
 
 
+
+            }else {
+                imageSetupTrue=false;
             }
         }
 
     }
 
-    private void showImage(Bitmap btmap) {
+    private void showImage(Uri uri) {
 
         ///circleImageView_regAsAdmin.setImageURI(uri);
 
-        circleImageView_regAsAdmin.setImageBitmap(btmap);
+        circleImageView_regAsAdmin.setImageURI(uri);
 
         Toast.makeText(RegAdmin_AsAdmin_Activity.this,"image setup", Toast.LENGTH_SHORT).show();
 
@@ -1002,7 +1006,7 @@ public class RegAdmin_AsAdmin_Activity extends AppCompatActivity implements Obse
 
     private void uploadFile(){
 
-        if(btMapImage!=null){
+        if(imageSetupTrue){
 
 
             // uploads.adminnamephone.jpg etc.
@@ -1068,6 +1072,9 @@ public class RegAdmin_AsAdmin_Activity extends AppCompatActivity implements Obse
 
 
 
+        }else {
+
+            Toast.makeText(RegAdmin_AsAdmin_Activity.this,"please setup image", Toast.LENGTH_SHORT).show();
         }
 
     }

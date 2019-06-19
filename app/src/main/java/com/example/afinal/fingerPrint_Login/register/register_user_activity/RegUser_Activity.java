@@ -11,6 +11,7 @@ import androidx.appcompat.app.AppCompatActivity;
 import androidx.cardview.widget.CardView;
 
 import de.hdodenhof.circleimageview.CircleImageView;
+import id.zelory.compressor.Compressor;
 
 import android.content.SharedPreferences;
 import android.net.Uri;
@@ -26,8 +27,10 @@ import android.widget.Toast;
 
 import com.example.afinal.R;
 import com.example.afinal.fingerPrint_Login.fingerprint_login.FingerPrint_LogIn_Final_Activity;
+import com.example.afinal.fingerPrint_Login.register.register_as_admin.register_as_admin_regAdmin.RegAdmin_AsAdmin_Activity;
 import com.example.afinal.fingerPrint_Login.register.register_with_activity.RegAdmin_Activity;
 import com.example.afinal.fingerPrint_Login.register.setup_pin_code.Setup_Pin_Activity;
+import com.example.afinal.fingerPrint_Login.sample_test.FileUtil;
 import com.google.android.gms.tasks.OnCanceledListener;
 import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.Task;
@@ -55,6 +58,7 @@ import com.hanks.htextview.evaporate.EvaporateTextView;
 import org.w3c.dom.Text;
 
 import java.io.File;
+import java.io.IOException;
 import java.util.HashMap;
 import java.util.Map;
 import java.util.Objects;
@@ -133,6 +137,7 @@ public class RegUser_Activity extends AppCompatActivity implements View.OnClickL
     private boolean boolean_admin_count;
     private CollectionReference cR_AllUser;
     private DocumentReference dR_User_Top;
+    private File image_File;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -392,9 +397,28 @@ public class RegUser_Activity extends AppCompatActivity implements View.OnClickL
 
                 mImageuri = data.getData();
 
-                imageSetup =true;
+                try {
+                    image_File = FileUtil.from(RegUser_Activity.this,mImageuri);
 
-                showImage(mImageuri);
+                    image_File = new Compressor(this).compressToFile(image_File);
+
+                    mImageuri = Uri.fromFile(image_File);
+
+
+                    imageSetup =true;
+
+                    showImage(mImageuri);
+
+                } catch (IOException e) {
+                    e.printStackTrace();
+
+                    imageSetup=false;
+                }
+
+
+            }else {
+
+                imageSetup = false;
             }
 
         }
@@ -820,8 +844,6 @@ public class RegUser_Activity extends AppCompatActivity implements View.OnClickL
                                 public void onComplete(@NonNull Task<Void> task) {
                                     if(task.isSuccessful()){
 
-                                        Log.i("documentSet ", "1");
-
 
                                         if(mImageuri!=null) {
 
@@ -833,16 +855,22 @@ public class RegUser_Activity extends AppCompatActivity implements View.OnClickL
                                                     if(task.isSuccessful()){
                                                       //      image boolean
 
+                                                        Toast.makeText(RegUser_Activity.this,"your data successfully uploaded", Toast.LENGTH_SHORT).show();
+
 
                                                     }else {
                                                         //task not successful
 
+                                                        Toast.makeText(RegUser_Activity.this,"image failed to upload", Toast.LENGTH_SHORT).show();
                                                     }
 
                                                 }
                                             }).addOnCanceledListener(new OnCanceledListener() {
                                                 @Override
                                                 public void onCanceled() {
+
+
+                                                    Toast.makeText(RegUser_Activity.this,"image failed to upload", Toast.LENGTH_SHORT).show();
 
 
                                                 }
