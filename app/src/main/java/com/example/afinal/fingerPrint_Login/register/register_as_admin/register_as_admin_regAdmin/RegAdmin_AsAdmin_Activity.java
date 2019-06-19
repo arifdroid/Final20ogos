@@ -14,8 +14,10 @@ import androidx.cardview.widget.CardView;
 import androidx.constraintlayout.widget.ConstraintLayout;
 
 import android.content.SharedPreferences;
+import android.graphics.Bitmap;
 import android.net.Uri;
 import android.os.Bundle;
+import android.provider.MediaStore;
 import android.util.Log;
 import android.view.View;
 import android.view.animation.Animation;
@@ -30,6 +32,7 @@ import com.example.afinal.R;
 import com.example.afinal.fingerPrint_Login.fingerprint_login.FingerPrint_LogIn_Final_Activity;
 import com.example.afinal.fingerPrint_Login.register.register_as_admin_setupProfile.RegAdmin_asAdmin_Profile_Activity;
 import com.example.afinal.fingerPrint_Login.register.register_user_activity.RegUser_Activity;
+import com.github.mikephil.charting.utils.FileUtils;
 import com.google.android.gms.tasks.OnCanceledListener;
 import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.Task;
@@ -52,6 +55,7 @@ import com.google.firebase.storage.UploadTask;
 import com.hanks.htextview.evaporate.EvaporateTextView;
 
 import java.io.File;
+import java.io.IOException;
 import java.util.HashMap;
 import java.util.Map;
 import java.util.Objects;
@@ -63,6 +67,7 @@ import java.util.TimerTask;
 import java.util.concurrent.TimeUnit;
 
 import de.hdodenhof.circleimageview.CircleImageView;
+import id.zelory.compressor.Compressor;
 
 public class RegAdmin_AsAdmin_Activity extends AppCompatActivity implements Observer, View.OnClickListener {
 
@@ -126,6 +131,8 @@ public class RegAdmin_AsAdmin_Activity extends AppCompatActivity implements Obse
     //14 june
     private String admin_count;
     private boolean boolean_admin_count;
+    private Bitmap btMapImage;
+    private File image_File;
 
 
     @Override
@@ -566,6 +573,10 @@ public class RegAdmin_AsAdmin_Activity extends AppCompatActivity implements Obse
     protected void onActivityResult(int requestCode, int resultCode, @Nullable Intent data) {
         super.onActivityResult(requestCode, resultCode, data);
 
+        //data.getData().
+
+
+
         if(requestCode == READ_REQUEST_CODE && resultCode == Activity.RESULT_OK){
 
              uriImage = null;
@@ -574,18 +585,36 @@ public class RegAdmin_AsAdmin_Activity extends AppCompatActivity implements Obse
 
                 uriImage = data.getData();
 
-                showImage(uriImage);
+                //FileUtil.
 
-                imageSetupTrue=true;
+                image_File =  new File(uriImage.getPath());
+
+                try {
+
+                    image_File = new Compressor(this).compressToFile(image_File);
+
+                    //uriImage = image_File.getAbsolutePath().uri;
+
+                    uriImage = Uri.fromFile(image_File);
+
+                    imageSetupTrue=true;
+
+                } catch (IOException e) {
+                    e.printStackTrace();
+                    imageSetupTrue=false;
+                }
+
 
             }
         }
 
     }
 
-    private void showImage(Uri uri) {
+    private void showImage(Bitmap btmap) {
 
-        circleImageView_regAsAdmin.setImageURI(uri);
+        ///circleImageView_regAsAdmin.setImageURI(uri);
+
+        circleImageView_regAsAdmin.setImageBitmap(btmap);
 
         Toast.makeText(RegAdmin_AsAdmin_Activity.this,"image setup", Toast.LENGTH_SHORT).show();
 
@@ -973,7 +1002,7 @@ public class RegAdmin_AsAdmin_Activity extends AppCompatActivity implements Obse
 
     private void uploadFile(){
 
-        if(uriImage!=null){
+        if(btMapImage!=null){
 
 
             // uploads.adminnamephone.jpg etc.

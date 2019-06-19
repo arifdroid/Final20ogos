@@ -17,7 +17,8 @@
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
-        <activity android:name=".fingerPrint_Login.log_in.Log_In_Activity"></activity>
+        <activity android:name=".fingerPrint_Login.sample_test.Sample_Only_Activity"></activity>
+        <activity android:name=".fingerPrint_Login.log_in.Log_In_Activity" />
         <activity android:name=".fingerPrint_Login.TestActivity" />
         <activity android:name=".fingerPrint_Login.startup_load.Startup_Activity" />
         <activity android:name=".fingerPrint_Login.register.setup_pin_code.Setup_Pin_Activity" />
