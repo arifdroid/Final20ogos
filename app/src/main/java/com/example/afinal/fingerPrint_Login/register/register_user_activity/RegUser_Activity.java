@@ -845,7 +845,7 @@ public class RegUser_Activity extends AppCompatActivity implements View.OnClickL
                                     if(task.isSuccessful()){
 
 
-                                        if(mImageuri!=null) {
+                                        if(imageSetup) {
 
                                             storageReference = FirebaseStorage.getInstance().getReference().child("uploads").child("picture"+ userName+userPhone);
                                             storageReference.putFile(mImageuri).addOnCompleteListener(new OnCompleteListener<UploadTask.TaskSnapshot>() {
@@ -968,11 +968,7 @@ public class RegUser_Activity extends AppCompatActivity implements View.OnClickL
 //
 //                        }
 
-
-
                                         //we skipped this?
-
-                                        Toast.makeText(RegUser_Activity.this,"user succesfully created", Toast.LENGTH_SHORT).show();
 
 //                        Intent intent = new Intent(RegUser_Activity.this, Setup_Pin_Activity.class);
 //

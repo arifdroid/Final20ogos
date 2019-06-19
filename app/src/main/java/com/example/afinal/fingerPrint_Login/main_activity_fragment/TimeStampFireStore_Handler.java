@@ -13,6 +13,7 @@ import com.github.mikephil.charting.charts.LineChart;
 import com.github.mikephil.charting.data.Entry;
 import com.github.mikephil.charting.data.LineData;
 import com.github.mikephil.charting.data.LineDataSet;
+import com.google.android.gms.tasks.OnCanceledListener;
 import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.Task;
 import com.google.firebase.firestore.CollectionReference;
@@ -64,6 +65,7 @@ public class TimeStampFireStore_Handler  extends Observable {
     private String userName, userPhone,adminName,adminPhone;
     private String namehere;
     private String phoneHere;
+    private Uri urlImage;
 
 
     public TimeStampFireStore_Handler(Context context,LineDataSet dataSet, LineData data, LineChart chart) {
@@ -307,9 +309,27 @@ public class TimeStampFireStore_Handler  extends Observable {
                         StorageReference storage = FirebaseStorage.getInstance().getReference().child("uploads").child("picture"+namehere+phoneHere);
 
 
-                      //  as expected, not finish loading in time.
+                        //as expected, not finish loading in time.
 
-                        Uri urlImage = storage.getDownloadUrl().getResult();
+                        urlImage = storage.getDownloadUrl().getResult();
+
+
+                        storage.getDownloadUrl().addOnCompleteListener(new OnCompleteListener<Uri>() {
+                            @Override
+                            public void onComplete(@NonNull Task<Uri> task) {
+
+                                try get uri here.
+
+
+                            }
+                        }).addOnCanceledListener(new OnCanceledListener() {
+                            @Override
+                            public void onCanceled() {
+
+                            }
+                        });
+
+
 
                         //could this not finish in time before other data finish
                         object.setUrlCreation(urlImage);
