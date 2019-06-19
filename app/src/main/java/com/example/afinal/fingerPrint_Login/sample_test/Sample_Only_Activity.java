@@ -44,8 +44,10 @@ public class Sample_Only_Activity extends AppCompatActivity {
     private Uri uriResult;
 
     private TextView textView1;
-    private TextView textView2;
+    private TextView textView2, textView3;
     private Bitmap imageBitmap;
+    private String sizeString;
+    private String sizeString2;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -63,6 +65,8 @@ public class Sample_Only_Activity extends AppCompatActivity {
         textView1 = findViewById(R.id.textViewImageTest1);
 
         textView2 = findViewById(R.id.textViewImageTest2);
+
+        textView3 = findViewById(R.id.textviewimagetest3id);
 
 
 
@@ -113,28 +117,98 @@ public class Sample_Only_Activity extends AppCompatActivity {
 
                                             Toast.makeText(Sample_Only_Activity.this,"success download image", Toast.LENGTH_SHORT).show();
 
-                                            File fileHere = new File(uriResult.getPath());
+                                           // File fileHere = new File(uriResult.getPath());
+
+                                            try {
+                                                File fileHere2 = FileUtil.from(Sample_Only_Activity.this,uriImageHere);
 
 
-                                            long size = fileHere.length();
-
-                                            // Convert the bytes to Kilobytes (1 KB = 1024 Bytes)
-
-                                            long fileSizeInKB = size / 1024;
 
 
-                                            // Convert the KB to MegaBytes (1 MB = 1024 KBytes)
-                                            long fileSizeInMB = fileSizeInKB / 1024;
+                                                long size = fileHere2.length();
 
-                                            final String sizeString2 = String.valueOf(fileSizeInKB);
+                                                // Convert the bytes to Kilobytes (1 KB = 1024 Bytes)
 
-                                            runOnUiThread(new Runnable() {
-                                                @Override
-                                                public void run() {
+                                                long fileSizeInKB = size / 1024;
 
-                                                    textView2.setText(sizeString2 + "Mb");
+
+                                                // Convert the KB to MegaBytes (1 MB = 1024 KBytes)
+                                                long fileSizeInMB = fileSizeInKB / 1024;
+
+                                                if(fileSizeInMB<=1) {
+
+                                                    sizeString2 = String.valueOf(fileSizeInKB);
+
+//                                                runOnUiThread(new Runnable() {
+//                                                    @Override
+//                                                    public void run() {
+
+                                                    textView2.setText(sizeString2 + " Kb");
+//                                                    }
+//                                                });
+//
+
+
+
+                                                }else {
+
+                                                    sizeString2 = String.valueOf(fileSizeInMB);
+//                                                runOnUiThread(new Runnable() {
+//                                                    @Override
+//                                                    public void run() {
+
+                                                    textView2.setText(sizeString2 + " Mb");
+//                                                    }
+//                                                });
+
                                                 }
-                                            });
+
+
+
+
+                                            } catch (IOException e) {
+                                                e.printStackTrace();
+                                            }
+
+//
+//                                            long size = fileHere.length();
+//
+//                                            // Convert the bytes to Kilobytes (1 KB = 1024 Bytes)
+//
+//                                            long fileSizeInKB = size / 1024;
+//
+//
+//                                            // Convert the KB to MegaBytes (1 MB = 1024 KBytes)
+//                                            long fileSizeInMB = fileSizeInKB / 1024;
+//
+//                                            if(fileSizeInMB<=1) {
+//
+//                                                sizeString2 = String.valueOf(fileSizeInKB);
+//
+////                                                runOnUiThread(new Runnable() {
+////                                                    @Override
+////                                                    public void run() {
+//
+//                                                        textView2.setText(sizeString2 + " Kb");
+////                                                    }
+////                                                });
+////
+//
+//
+//
+//                                            }else {
+//
+//                                                sizeString2 = String.valueOf(fileSizeInMB);
+////                                                runOnUiThread(new Runnable() {
+////                                                    @Override
+////                                                    public void run() {
+//
+//                                                        textView2.setText(sizeString2 + " Mb");
+////                                                    }
+////                                                });
+//
+//                                            }
+
 
 
 
@@ -194,6 +268,26 @@ public class Sample_Only_Activity extends AppCompatActivity {
 
                 try {
                     imageFile = FileUtil.from(Sample_Only_Activity.this,uriImageHere);
+
+                    long size = imageFile.length();
+
+                    // Convert the bytes to Kilobytes (1 KB = 1024 Bytes)
+
+                    long fileSizeInKB = size / 1024;
+
+
+                    // Convert the KB to MegaBytes (1 MB = 1024 KBytes)
+                    long fileSizeInMB = fileSizeInKB / 1024;
+
+                    final String sizeString = String.valueOf(fileSizeInMB);
+
+                    runOnUiThread(new Runnable() {
+                        @Override
+                        public void run() {
+
+                            textView3.setText("before compressed:"+ sizeString + " Mb");
+                        }
+                    });
 
                     Log.i("testimagecompressed","00 :"+imageFile.toString());
 
@@ -258,15 +352,33 @@ public class Sample_Only_Activity extends AppCompatActivity {
                     // Convert the KB to MegaBytes (1 MB = 1024 KBytes)
                     long fileSizeInMB = fileSizeInKB / 1024;
 
-                    final String sizeString = String.valueOf(fileSizeInKB);
+                    if(fileSizeInMB<=1){
 
-                    runOnUiThread(new Runnable() {
-                        @Override
-                        public void run() {
+                        sizeString = String.valueOf(fileSizeInKB);
 
-                            textView1.setText(sizeString + "Mb");
-                        }
-                    });
+                        runOnUiThread(new Runnable() {
+                            @Override
+                            public void run() {
+
+                                textView1.setText("after compressed :"+sizeString + " Kb");
+                            }
+                        });
+
+                    }else {
+
+                        sizeString = String.valueOf(fileSizeInMB);
+
+                        runOnUiThread(new Runnable() {
+                            @Override
+                            public void run() {
+
+                                textView1.setText("after compressed :"+sizeString + " Mb");
+                            }
+                        });
+
+                    }
+
+
 
                     imageUploaded_boolean = true;
 
