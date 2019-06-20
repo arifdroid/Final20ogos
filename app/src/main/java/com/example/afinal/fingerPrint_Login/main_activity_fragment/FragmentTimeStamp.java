@@ -1405,10 +1405,6 @@ public class FragmentTimeStamp extends Fragment implements Observer, View.OnClic
 
             //for(today.equals())
 
-
-
-
-
             for(int i=0; i<5; i++) {
 
                 float timestampthis = dataSetArrayList_Final.get(j).getEntryForIndex(i).getY();
@@ -1467,6 +1463,8 @@ public class FragmentTimeStamp extends Fragment implements Observer, View.OnClic
         }
 
         //then evening logic.
+
+        //returnToRecyclerArrayList ...
 
         for(int j= dataSetArrayList_Final.size()/2; j<dataSetArrayList_Final.size();j++){
 

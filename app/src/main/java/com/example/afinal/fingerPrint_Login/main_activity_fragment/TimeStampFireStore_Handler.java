@@ -340,47 +340,49 @@ public class TimeStampFireStore_Handler  extends Observable {
 
                         // >>>>>>>>>> 20 june
 //
-//                        storage.getDownloadUrl().addOnCompleteListener(new OnCompleteListener<Uri>() {
-//                            @Override
-//                            public void onComplete(@NonNull Task<Uri> task) {
-//                          //      try get uri here.
-//
-//                                if(task.isSuccessful()){
-//
-//                                        urlImage = task.getResult();
-//
-//                                        object.setUrlCreation(urlImage);
-//
-//                                        testTimeStampsList.add(object); //after finish getting all data, then we add to array
-//
-//                                    if(sizeDoc==i){ //meaning, finish loop all document, then we can update returned result, return true with result.
-//
-//                                        Log.i("checkChartFlowFinal ", "handler, 5");
-//
-//                                        // setReturnData();
-//
-//                                        // setReturnEntry();
-//
-//                                        setReturnListOfEntry(testTimeStampsList);
-//
-//
-//                                    }
-//
-//
-//
-//                                }
-//                                else {
-//
-//
-//
-//                                }
-////                            }
-//                        }).addOnCanceledListener(new OnCanceledListener() {
-//                            @Override
-//                            public void onCanceled() {
-//
-//                            }
-//                        });
+                        storage.getDownloadUrl().addOnCompleteListener(new OnCompleteListener<Uri>() {
+                            @Override
+                            public void onComplete(@NonNull Task<Uri> task) {
+                          //      try get uri here.
+
+                                if(task.isSuccessful()){
+
+                                        urlImage = task.getResult();
+
+                                        object.setUrlCreation(urlImage);
+
+                                        testTimeStampsList.add(object); //after finish getting all data, then we add to array
+
+                                    if(sizeDoc==i){ //meaning, finish loop all document, then we can update returned result, return true with result.
+
+                                        Log.i("checkChartFlowFinal ", "handler, 5");
+
+                                        // setReturnData();
+
+                                        // setReturnEntry();
+
+                                        problem this never true
+
+                                        setReturnListOfEntry(testTimeStampsList);
+
+
+                                    }
+
+
+
+                                }
+                                else {
+
+
+
+                                }
+                            }
+                        }).addOnCanceledListener(new OnCanceledListener() {
+                            @Override
+                            public void onCanceled() {
+
+                            }
+                        });
 
 
                         // >>>>>>>>>> 20 june UPP
@@ -401,26 +403,26 @@ public class TimeStampFireStore_Handler  extends Observable {
 
                     //20 june, change place inside downloading picture loop
 
-                    if(sizeDoc==i){ //meaning, finish loop all document, then we can update returned result, return true with result.
-
-                        Log.i("20_june", "[Handler check size ], sizedocument: "+sizeDoc+ " , i:"+i + " > SAME");
-
-
-                        Log.i("checkChartFlowFinal ", "handler, 5");
-
-                        // setReturnData();
-
-                       // setReturnEntry();
-
-                        setReturnListOfEntry(testTimeStampsList);
-
-
-                    }
-
-                    else {
-
-                        Log.i("20_june", "[Handler check size ], sizedocument: "+sizeDoc+ " , i:"+i + " > NOT SAME");
-                    }
+//                    if(sizeDoc==i){ //meaning, finish loop all document, then we can update returned result, return true with result.
+//
+//                        Log.i("20_june", "[Handler check size ], sizedocument: "+sizeDoc+ " , i:"+i + " > SAME");
+//
+//
+//                        Log.i("checkChartFlowFinal ", "handler, 5");
+//
+//                        // setReturnData();
+//
+//                       // setReturnEntry();
+//
+//                        setReturnListOfEntry(testTimeStampsList);
+//
+//
+//                    }
+//
+//                    else {
+//
+//                        Log.i("20_june", "[Handler check size ], sizedocument: "+sizeDoc+ " , i:"+i + " > NOT SAME");
+//                    }
 
                 } //end task loop
                 else {
@@ -444,8 +446,6 @@ public class TimeStampFireStore_Handler  extends Observable {
 
         //then we want to populate entry.
         //int k=0;
-
-        Log.i("20_june", "[Handler] > set to return. sizeDoc:"+sizeDoc +" , list:"+testTimeStampsList);
 
 
         if(testTimeStampsList.size()==sizeDoc){
