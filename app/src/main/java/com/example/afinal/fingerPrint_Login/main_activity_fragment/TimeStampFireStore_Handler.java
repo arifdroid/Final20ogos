@@ -67,6 +67,7 @@ public class TimeStampFireStore_Handler  extends Observable {
     private String phoneHere;
     private Uri urlImage;
     private TestTimeStamp object;
+    private int i;
 
 
     public TimeStampFireStore_Handler(Context context,LineDataSet dataSet, LineData data, LineChart chart) {
@@ -98,7 +99,7 @@ public class TimeStampFireStore_Handler  extends Observable {
 
 
 
-        Log.i("checkChartFlowFinal ", "handler, 1");
+        Log.i("20_june", "[Handler 1]");
 
 
 
@@ -110,6 +111,8 @@ public class TimeStampFireStore_Handler  extends Observable {
 
         //18 june, we start to load images.
 
+        Log.i("20_june", "[Handler 1] > [ fecthdata() 1 ]");
+
         collectionReferenceTest17june.get().addOnCompleteListener(new OnCompleteListener<QuerySnapshot>() {
             @Override
             public void onComplete(@NonNull Task<QuerySnapshot> task) {
@@ -118,10 +121,16 @@ public class TimeStampFireStore_Handler  extends Observable {
 
                 if (task.isSuccessful()) {
 
-                    int i = 0;
+                    Log.i("20_june", "[Handler 1] > [ fecthdata() 2 ] > task success");
+
+                    i = 0;
                     for (DocumentSnapshot documentSnapshot : task.getResult().getDocuments()) {
 
                     sizeDoc = task.getResult().size();
+
+
+                        Log.i("20_june", "[Handler 1] > [ fecthdata() 3 ] > task success :, size doc :"+sizeDoc);
+
 
                         Map<String, Object> map;
                         map = documentSnapshot.getData();
@@ -312,6 +321,13 @@ public class TimeStampFireStore_Handler  extends Observable {
                         } //end hash-map loop
 
 
+                        Log.i("20_june", "[Handler 1] > [ fecthdata() 4 ] > FINISH LOOP document ");
+
+
+                        Log.i("20_june", "[Loop Handler] , i :"+i+" name:"+object.getName()+" , phone:"+object.getPhone());
+
+
+
                         StorageReference storage = FirebaseStorage.getInstance().getReference().child("uploads").child("picture"+object.getName()+object.getPhone());
 
 
@@ -320,46 +336,54 @@ public class TimeStampFireStore_Handler  extends Observable {
                         //urlImage = storage.getDownloadUrl().getResult();
 
 
-                        storage.getDownloadUrl().addOnCompleteListener(new OnCompleteListener<Uri>() {
-                            @Override
-                            public void onComplete(@NonNull Task<Uri> task) {
-                          //      try get uri here.
+                        // >>>>>>>>>> 20 june
+//
+//                        storage.getDownloadUrl().addOnCompleteListener(new OnCompleteListener<Uri>() {
+//                            @Override
+//                            public void onComplete(@NonNull Task<Uri> task) {
+//                          //      try get uri here.
+//
+//                                if(task.isSuccessful()){
+//
+//                                        urlImage = task.getResult();
+//
+//                                        object.setUrlCreation(urlImage);
+//
+//                                        testTimeStampsList.add(object); //after finish getting all data, then we add to array
+//
+//                                    if(sizeDoc==i){ //meaning, finish loop all document, then we can update returned result, return true with result.
+//
+//                                        Log.i("checkChartFlowFinal ", "handler, 5");
+//
+//                                        // setReturnData();
+//
+//                                        // setReturnEntry();
+//
+//                                        setReturnListOfEntry(testTimeStampsList);
+//
+//
+//                                    }
+//
+//
+//
+//                                }
+//                                else {
+//
+//
+//
+//                                }
+////                            }
+//                        }).addOnCanceledListener(new OnCanceledListener() {
+//                            @Override
+//                            public void onCanceled() {
+//
+//                            }
+//                        });
 
-                                if(task.isSuccessful()){
 
-                                        urlImage = task.getResult();
-
-                                        object.setUrlCreation(urlImage);
-
-                                        testTimeStampsList.add(object); //after finish getting all data, then we add to array
+                        // >>>>>>>>>> 20 june UPP
 
 
-                                }
-                                else {
-
-
-
-                                }
-                            }
-                        }).addOnCanceledListener(new OnCanceledListener() {
-                            @Override
-                            public void onCanceled() {
-
-                            }
-                        });
-
-
-                        //  object.setUrlCreation(urlImage);
-
-
-                        //could this not finish in time before other data finish
-
-
-                        //object.setUrlCreation(object.setUrlCreation());
-
-                        //mistake here.
-
-                        //log to see if document data exist, successfully extracted.
 
                         Log.i("checkTimeStamp ", "flow: 10");
 
@@ -372,7 +396,13 @@ public class TimeStampFireStore_Handler  extends Observable {
 //
 //                    }
 
+
+                    //20 june, change place inside downloading picture loop
+
                     if(sizeDoc==i){ //meaning, finish loop all document, then we can update returned result, return true with result.
+
+                        Log.i("20_june", "[Handler check size ], sizedocument: "+sizeDoc+ " , i:"+i + " > SAME");
+
 
                         Log.i("checkChartFlowFinal ", "handler, 5");
 
@@ -385,10 +415,15 @@ public class TimeStampFireStore_Handler  extends Observable {
 
                     }
 
-                    Log.i("checkChartFlowFinal ", "handler, 6");
+                    else {
+
+                        Log.i("20_june", "[Handler check size ], sizedocument: "+sizeDoc+ " , i:"+i + " > NOT SAME");
+                    }
 
                 } //end task loop
                 else {
+
+                    Log.i("20_june", "[Handler] task not successful ");
 
                 }//task not successful
 
@@ -408,19 +443,32 @@ public class TimeStampFireStore_Handler  extends Observable {
         //then we want to populate entry.
         //int k=0;
 
+        Log.i("20_june", "[Handler] > set to return. sizeDoc:"+sizeDoc +" , list:"+testTimeStampsList);
+
 
         if(testTimeStampsList.size()==sizeDoc){
+
+
+            Log.i("20_june", "[Handler] > set to return. sizeDoc:"+sizeDoc +" , list:"+testTimeStampsList+" >> SAME");
+
 
             setChanged();
             notifyObservers();
             return;
 
         }
+        else {
+
+            Log.i("20_june", "[Handler] > set to return. sizeDoc:"+sizeDoc +" , list:"+testTimeStampsList+" >> NOT SAME");
+        }
 
 
     }
 
     public ArrayList<TestTimeStamp> reTURNFINAL(){
+
+        Log.i("20_june", "[Handler] > RETURN RESULT , name:"+ testTimeStampsList.get(0).getName()+ " ,, name 2"+ testTimeStampsList.get(1).getName());
+
 
         return testTimeStampsList;
     }

@@ -389,11 +389,11 @@ public class FragmentTimeStamp extends Fragment implements Observer, View.OnClic
 
         timeStampFireStore_handler.addObserver(this);
 
-        Log.i("checkChartFlowFinal ", "observer, 2");
+        Log.i("20_june", "[FragTimeStamp 1]");
 
         timeStampFireStore_handler.startFecthData(); //will always be false, unless notified update, and update ui once return true
 
-        Log.i("checkChartFlowFinal ", "observer, 3");
+        Log.i("20_june", "[FragTimeStamp 2]");
 
 
         fButton.setOnClickListener(this);

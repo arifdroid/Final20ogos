@@ -336,7 +336,9 @@ public class Login_Select_Action_Fragment extends Fragment implements View.OnCli
             Toast.makeText(getContext(),"succes HACK ", Toast.LENGTH_SHORT).show();
 
 
-            myphone_extracted = "+60184670568";
+            myphone_extracted = "";
+
+
 
 
             if(!myphone_extracted.equals("") && myphone_extracted!=null&& !myphone_extracted.isEmpty()) {
