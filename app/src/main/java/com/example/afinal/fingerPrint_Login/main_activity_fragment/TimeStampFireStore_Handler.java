@@ -66,6 +66,7 @@ public class TimeStampFireStore_Handler  extends Observable {
     private String namehere;
     private String phoneHere;
     private Uri urlImage;
+    private TestTimeStamp object;
 
 
     public TimeStampFireStore_Handler(Context context,LineDataSet dataSet, LineData data, LineChart chart) {
@@ -126,7 +127,7 @@ public class TimeStampFireStore_Handler  extends Observable {
                         map = documentSnapshot.getData();
 
                         i++;
-                        TestTimeStamp object = new TestTimeStamp(i); //setting object, with index i, as reference.
+                         object = new TestTimeStamp(i); //setting object, with index i, as reference.
                         //what we want to do, we set each object, as references that we want to extract.
 
                         // then setup return array list of array list of entries,
@@ -303,24 +304,42 @@ public class TimeStampFireStore_Handler  extends Observable {
                                 object.setFri_evening(fri_evening);
                             }
 
+                            if(kk.getKey().equals("phone")){
+
+                                object.setPhone(kk.getValue().toString());
+                            }
+
                         } //end hash-map loop
 
 
-                        StorageReference storage = FirebaseStorage.getInstance().getReference().child("uploads").child("picture"+namehere+phoneHere);
+                        StorageReference storage = FirebaseStorage.getInstance().getReference().child("uploads").child("picture"+object.getName()+object.getPhone());
 
 
                         //as expected, not finish loading in time.
 
-                        urlImage = storage.getDownloadUrl().getResult();
+                        //urlImage = storage.getDownloadUrl().getResult();
 
 
                         storage.getDownloadUrl().addOnCompleteListener(new OnCompleteListener<Uri>() {
                             @Override
                             public void onComplete(@NonNull Task<Uri> task) {
+                          //      try get uri here.
 
-                                try get uri here.
+                                if(task.isSuccessful()){
+
+                                        urlImage = task.getResult();
+
+                                        object.setUrlCreation(urlImage);
+
+                                        testTimeStampsList.add(object); //after finish getting all data, then we add to array
 
 
+                                }
+                                else {
+
+
+
+                                }
                             }
                         }).addOnCanceledListener(new OnCanceledListener() {
                             @Override
@@ -330,13 +349,15 @@ public class TimeStampFireStore_Handler  extends Observable {
                         });
 
 
+                        //  object.setUrlCreation(urlImage);
+
 
                         //could this not finish in time before other data finish
-                        object.setUrlCreation(urlImage);
+
 
                         //object.setUrlCreation(object.setUrlCreation());
 
-                        testTimeStampsList.add(object); //mistake here.
+                        //mistake here.
 
                         //log to see if document data exist, successfully extracted.
 
@@ -385,7 +406,7 @@ public class TimeStampFireStore_Handler  extends Observable {
     private void setReturnListOfEntry(ArrayList<TestTimeStamp> testTimeStampsList) {
 
         //then we want to populate entry.
-        int k=0;
+        //int k=0;
 
 
         if(testTimeStampsList.size()==sizeDoc){
