@@ -425,13 +425,20 @@ public class FragmentTimeStamp extends Fragment implements Observer, View.OnClic
 
             ////////////>>>>>>>>>>>>>>>> 4 april 10AM
 
-            HashMap<String,Float> remapAfter = new HashMap<>(); //this is final will be reuse.
+            HashMap<String, Float> remapAfter = new HashMap<>(); //this is final will be reuse.
 
             int sizeTest = finalListRemap.size();
+
+            if (finalListRemap.size() >= 1) {
+
+
+            Log.i("20_june", "[FragTimeStamp UPDATE 1]");
 
             for (TestTimeStamp testTimeStamp : finalListRemap) {
 
                 //by default need to set pro_ ** to false?
+
+                Log.i("20_june", "[FragTimeStamp UPDATE 2] , name: " + testTimeStamp.getName() + ", phone:" + testTimeStamp.getPhone());
 
                 testTimeStamp.setProb_mon_morning(false);
                 testTimeStamp.setProb_tue_morning(false);
@@ -451,7 +458,7 @@ public class FragmentTimeStamp extends Fragment implements Observer, View.OnClic
 
                 //we need to handle this separately though, for cases like no entry recorded, like MC. >> add remark in testTimeStamp.
 
-                if (testTimeStamp.getMon_morning().equals("") || testTimeStamp.getMon_morning().isEmpty() || testTimeStamp.getMon_morning() == null|| testTimeStamp.getMon_morning().equals("0")) {
+                if (testTimeStamp.getMon_morning().equals("") || testTimeStamp.getMon_morning().isEmpty() || testTimeStamp.getMon_morning() == null || testTimeStamp.getMon_morning().equals("0")) {
 
                     //arrayListMC_Null.add(new MC_Null_TestTimeStamp(testTimeStamp.getName(),testTimeStamp)); //we add original value,, need to add pointer? so no need to track loop which day, or entry got problem?
                     // no need for this. just add boolean to original time stamp.
@@ -460,35 +467,35 @@ public class FragmentTimeStamp extends Fragment implements Observer, View.OnClic
                     testTimeStamp.setMon_morning("8");
                 }
 
-                if (testTimeStamp.getTue_morning().equals("") || testTimeStamp.getTue_morning().isEmpty() || testTimeStamp.getTue_morning() == null|| testTimeStamp.getTue_morning().equals("0")) {
+                if (testTimeStamp.getTue_morning().equals("") || testTimeStamp.getTue_morning().isEmpty() || testTimeStamp.getTue_morning() == null || testTimeStamp.getTue_morning().equals("0")) {
 
                     testTimeStamp.setProb_tue_morning(true);
                     testTimeStamp.setTue_morning("8");
                 }
 
-                if (testTimeStamp.getWed_morning().equals("") || testTimeStamp.getWed_morning().isEmpty() || testTimeStamp.getWed_morning() == null|| testTimeStamp.getWed_morning().equals("0")) {
+                if (testTimeStamp.getWed_morning().equals("") || testTimeStamp.getWed_morning().isEmpty() || testTimeStamp.getWed_morning() == null || testTimeStamp.getWed_morning().equals("0")) {
 
                     testTimeStamp.setProb_wed_morning(true);
                     testTimeStamp.setWed_morning("8");
                 }
 
-                if (testTimeStamp.getThu_morning().equals("") || testTimeStamp.getThu_morning().isEmpty() || testTimeStamp.getThu_morning() == null|| testTimeStamp.getThu_morning().equals("0")) {
+                if (testTimeStamp.getThu_morning().equals("") || testTimeStamp.getThu_morning().isEmpty() || testTimeStamp.getThu_morning() == null || testTimeStamp.getThu_morning().equals("0")) {
                     testTimeStamp.setProb_thu_morning(true);
                     testTimeStamp.setThu_morning("8");
                 }
 
-                if (testTimeStamp.getFri_morning().equals("") || testTimeStamp.getFri_morning().isEmpty() || testTimeStamp.getFri_morning() == null|| testTimeStamp.getFri_morning().equals("0")) {
+                if (testTimeStamp.getFri_morning().equals("") || testTimeStamp.getFri_morning().isEmpty() || testTimeStamp.getFri_morning() == null || testTimeStamp.getFri_morning().equals("0")) {
                     testTimeStamp.setProb_fri_morning(true);
                     testTimeStamp.setFri_morning("8");
                 }
 
                 // evening,
 
-                if (testTimeStamp.getMon_evening().equals("") || testTimeStamp.getMon_evening().isEmpty() || testTimeStamp.getMon_evening() == null|| testTimeStamp.getMon_evening().equals("0")) {
+                if (testTimeStamp.getMon_evening().equals("") || testTimeStamp.getMon_evening().isEmpty() || testTimeStamp.getMon_evening() == null || testTimeStamp.getMon_evening().equals("0")) {
                     testTimeStamp.setProb_mon_evening(true);
                     testTimeStamp.setMon_evening("17");
                 }
-                if (testTimeStamp.getTue_evening().equals("") || testTimeStamp.getTue_evening().isEmpty() || testTimeStamp.getTue_evening() == null|| testTimeStamp.getTue_evening().equals("0")) {
+                if (testTimeStamp.getTue_evening().equals("") || testTimeStamp.getTue_evening().isEmpty() || testTimeStamp.getTue_evening() == null || testTimeStamp.getTue_evening().equals("0")) {
                     testTimeStamp.setProb_tue_evening(true);
                     testTimeStamp.setTue_evening("17");
                 }
@@ -502,7 +509,7 @@ public class FragmentTimeStamp extends Fragment implements Observer, View.OnClic
                     testTimeStamp.setProb_thu_evening(true);
                     testTimeStamp.setThu_evening("17");
                 }
-                if (testTimeStamp.getFri_evening().equals("") || testTimeStamp.getFri_evening().isEmpty() || testTimeStamp.getFri_evening() == null|| testTimeStamp.getFri_evening().equals("0")) {
+                if (testTimeStamp.getFri_evening().equals("") || testTimeStamp.getFri_evening().isEmpty() || testTimeStamp.getFri_evening() == null || testTimeStamp.getFri_evening().equals("0")) {
                     testTimeStamp.setProb_fri_evening(true);
                     testTimeStamp.setFri_evening("17");
                 }
@@ -547,286 +554,285 @@ public class FragmentTimeStamp extends Fragment implements Observer, View.OnClic
                 remap.put("fri_evening_map", fri_evening_remap);
 
 
-
                 // we could remap
 
                 for (Map.Entry<String, Float> entry : remap.entrySet()) {
 
-                        if(entry.getKey().equals("mon_morning_map")) {
+                    if (entry.getKey().equals("mon_morning_map")) {
 
-                            Float afterAdjusted=0f;
-
-                            if (entry.getValue() >= 6f && entry.getValue() < 7f) { // which entry got extracted,
-                                Float beforeAdjusted = 6f+ (1f-((entry.getValue()-6f)/0.6f)); // ... >  6.30 .. +
-                                entry.setValue(beforeAdjusted + 12f-2f); // here we adjusted right?
-
-                                afterAdjusted = entry.getValue();
-
-                            }
-
-                            if (entry.getValue() >= 7f && entry.getValue() < 8f) {
-                                Float beforeAdjusted = 7f+ (1f-((entry.getValue()-7f)/0.6f)); // ... >  6.30 .. +
-                                entry.setValue(beforeAdjusted + 10f-2f);
-                                afterAdjusted = entry.getValue();
-                            }
-
-                            if (entry.getValue() >= 8f && entry.getValue() < 9f) {
-                                Float beforeAdjusted = 8f+ (1f-((entry.getValue()-8f)/0.6f)); // ... >  6.30 .. +
-                                entry.setValue(beforeAdjusted + 8f-2f);
-                                afterAdjusted = entry.getValue();
-                            }
-
-                            if (entry.getValue() >= 9f && entry.getValue() < 10f) {
-                                Float beforeAdjusted = 9f+ (1f-((entry.getValue()-9f)/0.6f)); // ... >  6.30 .. +
-                                entry.setValue(beforeAdjusted + 6f-2f);
-                                afterAdjusted = entry.getValue();
-                            }
-
-
-                            if (entry.getValue() >= 10f && entry.getValue() < 11f) {
-                                Float beforeAdjusted = 10f+ (1f-((entry.getValue()-10f)/0.6f)); // ... >  6.30 .. +
-                                entry.setValue(beforeAdjusted + 4f-2f);
-                                afterAdjusted = entry.getValue();
-
-                            }
-
-                            if (entry.getValue() >= 11f && entry.getValue() < 12f) {
-                                Float beforeAdjusted = 11f+ (1f-((entry.getValue()-11f)/0.6f)); // ... >  6.30 .. +
-                                entry.setValue(beforeAdjusted + 2f-2f);
-
-                                afterAdjusted = entry.getValue();
-                            }
-
-                            if (entry.getValue() >= 12f && entry.getValue() < 13f) {
-
-                                Float beforeAdjusted = 12f+ (1f-((entry.getValue()-12f)/0.6f)); // ... >  6.30 .. +
-                                entry.setValue(beforeAdjusted + 0f-2f);
-                                afterAdjusted= entry.getValue();
-                            }
-
-                            remapAfter.put("mon_morning",afterAdjusted);
-
-                        } //finish monday
-
-                    if(entry.getKey().equals("tue_morning_map")) {
-
-                        Float afterAdjusted=0f;
+                        Float afterAdjusted = 0f;
 
                         if (entry.getValue() >= 6f && entry.getValue() < 7f) { // which entry got extracted,
-                            Float beforeAdjusted = 6f+ (1f-((entry.getValue()-6f)/0.6f)); // ... >  6.30 .. +
-                            entry.setValue(beforeAdjusted + 12f-2f); // here we adjusted right?
+                            Float beforeAdjusted = 6f + (1f - ((entry.getValue() - 6f) / 0.6f)); // ... >  6.30 .. +
+                            entry.setValue(beforeAdjusted + 12f - 2f); // here we adjusted right?
 
                             afterAdjusted = entry.getValue();
 
                         }
 
                         if (entry.getValue() >= 7f && entry.getValue() < 8f) {
-                            Float beforeAdjusted = 7f+ (1f-((entry.getValue()-7f)/0.6f)); // ... >  6.30 .. +
-                            entry.setValue(beforeAdjusted + 10f-2f);
+                            Float beforeAdjusted = 7f + (1f - ((entry.getValue() - 7f) / 0.6f)); // ... >  6.30 .. +
+                            entry.setValue(beforeAdjusted + 10f - 2f);
                             afterAdjusted = entry.getValue();
                         }
 
                         if (entry.getValue() >= 8f && entry.getValue() < 9f) {
-                            Float beforeAdjusted = 8f+ (1f-((entry.getValue()-8f)/0.6f)); // ... >  6.30 .. +
-                            entry.setValue(beforeAdjusted + 8f-2f);
+                            Float beforeAdjusted = 8f + (1f - ((entry.getValue() - 8f) / 0.6f)); // ... >  6.30 .. +
+                            entry.setValue(beforeAdjusted + 8f - 2f);
                             afterAdjusted = entry.getValue();
                         }
 
                         if (entry.getValue() >= 9f && entry.getValue() < 10f) {
-                            Float beforeAdjusted = 9f+ (1f-((entry.getValue()-9f)/0.6f)); // ... >  6.30 .. +
-                            entry.setValue(beforeAdjusted + 6f-2f);
+                            Float beforeAdjusted = 9f + (1f - ((entry.getValue() - 9f) / 0.6f)); // ... >  6.30 .. +
+                            entry.setValue(beforeAdjusted + 6f - 2f);
                             afterAdjusted = entry.getValue();
                         }
 
 
                         if (entry.getValue() >= 10f && entry.getValue() < 11f) {
-                            Float beforeAdjusted = 10f+ (1f-((entry.getValue()-10f)/0.6f)); // ... >  6.30 .. +
-                            entry.setValue(beforeAdjusted + 4f-2f);
+                            Float beforeAdjusted = 10f + (1f - ((entry.getValue() - 10f) / 0.6f)); // ... >  6.30 .. +
+                            entry.setValue(beforeAdjusted + 4f - 2f);
                             afterAdjusted = entry.getValue();
 
                         }
 
                         if (entry.getValue() >= 11f && entry.getValue() < 12f) {
-                            Float beforeAdjusted = 11f+ (1f-((entry.getValue()-11f)/0.6f)); // ... >  6.30 .. +
-                            entry.setValue(beforeAdjusted + 2f-2f);
+                            Float beforeAdjusted = 11f + (1f - ((entry.getValue() - 11f) / 0.6f)); // ... >  6.30 .. +
+                            entry.setValue(beforeAdjusted + 2f - 2f);
 
                             afterAdjusted = entry.getValue();
                         }
 
                         if (entry.getValue() >= 12f && entry.getValue() < 13f) {
 
-                            Float beforeAdjusted = 12f+ (1f-((entry.getValue()-12f)/0.6f)); // ... >  6.30 .. +
-                            entry.setValue(beforeAdjusted + 0f-2f);
-                            afterAdjusted= entry.getValue();
+                            Float beforeAdjusted = 12f + (1f - ((entry.getValue() - 12f) / 0.6f)); // ... >  6.30 .. +
+                            entry.setValue(beforeAdjusted + 0f - 2f);
+                            afterAdjusted = entry.getValue();
                         }
 
-                        remapAfter.put("tue_morning",afterAdjusted);
+                        remapAfter.put("mon_morning", afterAdjusted);
+
+                    } //finish monday
+
+                    if (entry.getKey().equals("tue_morning_map")) {
+
+                        Float afterAdjusted = 0f;
+
+                        if (entry.getValue() >= 6f && entry.getValue() < 7f) { // which entry got extracted,
+                            Float beforeAdjusted = 6f + (1f - ((entry.getValue() - 6f) / 0.6f)); // ... >  6.30 .. +
+                            entry.setValue(beforeAdjusted + 12f - 2f); // here we adjusted right?
+
+                            afterAdjusted = entry.getValue();
+
+                        }
+
+                        if (entry.getValue() >= 7f && entry.getValue() < 8f) {
+                            Float beforeAdjusted = 7f + (1f - ((entry.getValue() - 7f) / 0.6f)); // ... >  6.30 .. +
+                            entry.setValue(beforeAdjusted + 10f - 2f);
+                            afterAdjusted = entry.getValue();
+                        }
+
+                        if (entry.getValue() >= 8f && entry.getValue() < 9f) {
+                            Float beforeAdjusted = 8f + (1f - ((entry.getValue() - 8f) / 0.6f)); // ... >  6.30 .. +
+                            entry.setValue(beforeAdjusted + 8f - 2f);
+                            afterAdjusted = entry.getValue();
+                        }
+
+                        if (entry.getValue() >= 9f && entry.getValue() < 10f) {
+                            Float beforeAdjusted = 9f + (1f - ((entry.getValue() - 9f) / 0.6f)); // ... >  6.30 .. +
+                            entry.setValue(beforeAdjusted + 6f - 2f);
+                            afterAdjusted = entry.getValue();
+                        }
+
+
+                        if (entry.getValue() >= 10f && entry.getValue() < 11f) {
+                            Float beforeAdjusted = 10f + (1f - ((entry.getValue() - 10f) / 0.6f)); // ... >  6.30 .. +
+                            entry.setValue(beforeAdjusted + 4f - 2f);
+                            afterAdjusted = entry.getValue();
+
+                        }
+
+                        if (entry.getValue() >= 11f && entry.getValue() < 12f) {
+                            Float beforeAdjusted = 11f + (1f - ((entry.getValue() - 11f) / 0.6f)); // ... >  6.30 .. +
+                            entry.setValue(beforeAdjusted + 2f - 2f);
+
+                            afterAdjusted = entry.getValue();
+                        }
+
+                        if (entry.getValue() >= 12f && entry.getValue() < 13f) {
+
+                            Float beforeAdjusted = 12f + (1f - ((entry.getValue() - 12f) / 0.6f)); // ... >  6.30 .. +
+                            entry.setValue(beforeAdjusted + 0f - 2f);
+                            afterAdjusted = entry.getValue();
+                        }
+
+                        remapAfter.put("tue_morning", afterAdjusted);
 
                     } // tue morning
 
-                    if(entry.getKey().equals("wed_morning_map")) {
+                    if (entry.getKey().equals("wed_morning_map")) {
 
-                        Float afterAdjusted=0f;
+                        Float afterAdjusted = 0f;
 
                         if (entry.getValue() >= 6f && entry.getValue() < 7f) { // which entry got extracted,
-                            Float beforeAdjusted = 6f+ (1f-((entry.getValue()-6f)/0.6f)); // ... >  6.30 .. +
-                            entry.setValue(beforeAdjusted + 12f-2f); // here we adjusted right?
+                            Float beforeAdjusted = 6f + (1f - ((entry.getValue() - 6f) / 0.6f)); // ... >  6.30 .. +
+                            entry.setValue(beforeAdjusted + 12f - 2f); // here we adjusted right?
 
                             afterAdjusted = entry.getValue();
 
                         }
 
                         if (entry.getValue() >= 7f && entry.getValue() < 8f) {
-                            Float beforeAdjusted = 7f+ (1f-((entry.getValue()-7f)/0.6f)); // ... >  6.30 .. +
-                            entry.setValue(beforeAdjusted + 10f-2f);
+                            Float beforeAdjusted = 7f + (1f - ((entry.getValue() - 7f) / 0.6f)); // ... >  6.30 .. +
+                            entry.setValue(beforeAdjusted + 10f - 2f);
                             afterAdjusted = entry.getValue();
                         }
 
                         if (entry.getValue() >= 8f && entry.getValue() < 9f) {
-                            Float beforeAdjusted = 8f+ (1f-((entry.getValue()-8f)/0.6f)); // ... >  6.30 .. +
-                            entry.setValue(beforeAdjusted + 8f-2f);
+                            Float beforeAdjusted = 8f + (1f - ((entry.getValue() - 8f) / 0.6f)); // ... >  6.30 .. +
+                            entry.setValue(beforeAdjusted + 8f - 2f);
                             afterAdjusted = entry.getValue();
                         }
 
                         if (entry.getValue() >= 9f && entry.getValue() < 10f) {
-                            Float beforeAdjusted = 9f+ (1f-((entry.getValue()-9f)/0.6f)); // ... >  6.30 .. +
-                            entry.setValue(beforeAdjusted + 6f-2f);
+                            Float beforeAdjusted = 9f + (1f - ((entry.getValue() - 9f) / 0.6f)); // ... >  6.30 .. +
+                            entry.setValue(beforeAdjusted + 6f - 2f);
                             afterAdjusted = entry.getValue();
                         }
 
 
                         if (entry.getValue() >= 10f && entry.getValue() < 11f) {
-                            Float beforeAdjusted = 10f+ (1f-((entry.getValue()-10f)/0.6f)); // ... >  6.30 .. +
-                            entry.setValue(beforeAdjusted + 4f-2f);
+                            Float beforeAdjusted = 10f + (1f - ((entry.getValue() - 10f) / 0.6f)); // ... >  6.30 .. +
+                            entry.setValue(beforeAdjusted + 4f - 2f);
                             afterAdjusted = entry.getValue();
 
                         }
 
                         if (entry.getValue() >= 11f && entry.getValue() < 12f) {
-                            Float beforeAdjusted = 11f+ (1f-((entry.getValue()-11f)/0.6f)); // ... >  6.30 .. +
-                            entry.setValue(beforeAdjusted + 2f-2f);
+                            Float beforeAdjusted = 11f + (1f - ((entry.getValue() - 11f) / 0.6f)); // ... >  6.30 .. +
+                            entry.setValue(beforeAdjusted + 2f - 2f);
 
                             afterAdjusted = entry.getValue();
                         }
 
                         if (entry.getValue() >= 12f && entry.getValue() < 13f) {
 
-                            Float beforeAdjusted = 12f+ (1f-((entry.getValue()-12f)/0.6f)); // ... >  6.30 .. +
-                            entry.setValue(beforeAdjusted + 0f-2f);
-                            afterAdjusted= entry.getValue();
+                            Float beforeAdjusted = 12f + (1f - ((entry.getValue() - 12f) / 0.6f)); // ... >  6.30 .. +
+                            entry.setValue(beforeAdjusted + 0f - 2f);
+                            afterAdjusted = entry.getValue();
                         }
 
-                        remapAfter.put("wed_morning",afterAdjusted);
+                        remapAfter.put("wed_morning", afterAdjusted);
 
                     } // wed morning
 
-                    if(entry.getKey().equals("thu_morning_map")) {
+                    if (entry.getKey().equals("thu_morning_map")) {
 
-                        Float afterAdjusted=0f;
+                        Float afterAdjusted = 0f;
 
                         if (entry.getValue() >= 6f && entry.getValue() < 7f) { // which entry got extracted,
-                            Float beforeAdjusted = 6f+ (1f-((entry.getValue()-6f)/0.6f)); // ... >  6.30 .. +
-                            entry.setValue(beforeAdjusted + 12f-2f); // here we adjusted right?
+                            Float beforeAdjusted = 6f + (1f - ((entry.getValue() - 6f) / 0.6f)); // ... >  6.30 .. +
+                            entry.setValue(beforeAdjusted + 12f - 2f); // here we adjusted right?
 
                             afterAdjusted = entry.getValue();
 
                         }
 
                         if (entry.getValue() >= 7f && entry.getValue() < 8f) {
-                            Float beforeAdjusted = 7f+ (1f-((entry.getValue()-7f)/0.6f)); // ... >  6.30 .. +
-                            entry.setValue(beforeAdjusted + 10f-2f);
+                            Float beforeAdjusted = 7f + (1f - ((entry.getValue() - 7f) / 0.6f)); // ... >  6.30 .. +
+                            entry.setValue(beforeAdjusted + 10f - 2f);
                             afterAdjusted = entry.getValue();
                         }
 
                         if (entry.getValue() >= 8f && entry.getValue() < 9f) {
-                            Float beforeAdjusted = 8f+ (1f-((entry.getValue()-8f)/0.6f)); // ... >  6.30 .. +
-                            entry.setValue(beforeAdjusted + 8f-2f);
+                            Float beforeAdjusted = 8f + (1f - ((entry.getValue() - 8f) / 0.6f)); // ... >  6.30 .. +
+                            entry.setValue(beforeAdjusted + 8f - 2f);
                             afterAdjusted = entry.getValue();
                         }
 
                         if (entry.getValue() >= 9f && entry.getValue() < 10f) {
-                            Float beforeAdjusted = 9f+ (1f-((entry.getValue()-9f)/0.6f)); // ... >  6.30 .. +
-                            entry.setValue(beforeAdjusted + 6f-2f);
+                            Float beforeAdjusted = 9f + (1f - ((entry.getValue() - 9f) / 0.6f)); // ... >  6.30 .. +
+                            entry.setValue(beforeAdjusted + 6f - 2f);
                             afterAdjusted = entry.getValue();
                         }
 
 
                         if (entry.getValue() >= 10f && entry.getValue() < 11f) {
-                            Float beforeAdjusted = 10f+ (1f-((entry.getValue()-10f)/0.6f)); // ... >  6.30 .. +
-                            entry.setValue(beforeAdjusted + 4f-2f);
+                            Float beforeAdjusted = 10f + (1f - ((entry.getValue() - 10f) / 0.6f)); // ... >  6.30 .. +
+                            entry.setValue(beforeAdjusted + 4f - 2f);
                             afterAdjusted = entry.getValue();
 
                         }
 
                         if (entry.getValue() >= 11f && entry.getValue() < 12f) {
-                            Float beforeAdjusted = 11f+ (1f-((entry.getValue()-11f)/0.6f)); // ... >  6.30 .. +
-                            entry.setValue(beforeAdjusted + 2f-2f);
+                            Float beforeAdjusted = 11f + (1f - ((entry.getValue() - 11f) / 0.6f)); // ... >  6.30 .. +
+                            entry.setValue(beforeAdjusted + 2f - 2f);
 
                             afterAdjusted = entry.getValue();
                         }
 
                         if (entry.getValue() >= 12f && entry.getValue() < 13f) {
 
-                            Float beforeAdjusted = 12f+ (1f-((entry.getValue()-12f)/0.6f)); // ... >  6.30 .. +
-                            entry.setValue(beforeAdjusted + 0f-2f);
-                            afterAdjusted= entry.getValue();
+                            Float beforeAdjusted = 12f + (1f - ((entry.getValue() - 12f) / 0.6f)); // ... >  6.30 .. +
+                            entry.setValue(beforeAdjusted + 0f - 2f);
+                            afterAdjusted = entry.getValue();
                         }
-                        remapAfter.put("thu_morning",afterAdjusted);
+                        remapAfter.put("thu_morning", afterAdjusted);
 
                     } // thursday morning
 
-                    if(entry.getKey().equals("fri_morning_map")) {
+                    if (entry.getKey().equals("fri_morning_map")) {
 
-                        Float afterAdjusted=0f;
+                        Float afterAdjusted = 0f;
 
                         if (entry.getValue() >= 6f && entry.getValue() < 7f) { // which entry got extracted,
-                            Float beforeAdjusted = 6f+ (1f-((entry.getValue()-6f)/0.6f)); // ... >  6.30 .. +
-                            entry.setValue(beforeAdjusted + 12f-2f); // here we adjusted right?
+                            Float beforeAdjusted = 6f + (1f - ((entry.getValue() - 6f) / 0.6f)); // ... >  6.30 .. +
+                            entry.setValue(beforeAdjusted + 12f - 2f); // here we adjusted right?
 
                             afterAdjusted = entry.getValue();
 
                         }
 
                         if (entry.getValue() >= 7f && entry.getValue() < 8f) {
-                            Float beforeAdjusted = 7f+ (1f-((entry.getValue()-7f)/0.6f)); // ... >  6.30 .. +
-                            entry.setValue(beforeAdjusted + 10f-2f);
+                            Float beforeAdjusted = 7f + (1f - ((entry.getValue() - 7f) / 0.6f)); // ... >  6.30 .. +
+                            entry.setValue(beforeAdjusted + 10f - 2f);
                             afterAdjusted = entry.getValue();
                         }
 
                         if (entry.getValue() >= 8f && entry.getValue() < 9f) {
-                            Float beforeAdjusted = 8f+ (1f-((entry.getValue()-8f)/0.6f)); // ... >  6.30 .. +
-                            entry.setValue(beforeAdjusted + 8f-2f);
+                            Float beforeAdjusted = 8f + (1f - ((entry.getValue() - 8f) / 0.6f)); // ... >  6.30 .. +
+                            entry.setValue(beforeAdjusted + 8f - 2f);
                             afterAdjusted = entry.getValue();
                         }
 
                         if (entry.getValue() >= 9f && entry.getValue() < 10f) {
-                            Float beforeAdjusted = 9f+ (1f-((entry.getValue()-9f)/0.6f)); // ... >  6.30 .. +
-                            entry.setValue(beforeAdjusted + 6f-2f);
+                            Float beforeAdjusted = 9f + (1f - ((entry.getValue() - 9f) / 0.6f)); // ... >  6.30 .. +
+                            entry.setValue(beforeAdjusted + 6f - 2f);
                             afterAdjusted = entry.getValue();
                         }
 
 
                         if (entry.getValue() >= 10f && entry.getValue() < 11f) {
-                            Float beforeAdjusted = 10f+ (1f-((entry.getValue()-10f)/0.6f)); // ... >  6.30 .. +
-                            entry.setValue(beforeAdjusted + 4f-2f);
+                            Float beforeAdjusted = 10f + (1f - ((entry.getValue() - 10f) / 0.6f)); // ... >  6.30 .. +
+                            entry.setValue(beforeAdjusted + 4f - 2f);
                             afterAdjusted = entry.getValue();
 
                         }
 
                         if (entry.getValue() >= 11f && entry.getValue() < 12f) {
-                            Float beforeAdjusted = 11f+ (1f-((entry.getValue()-11f)/0.6f)); // ... >  6.30 .. +
-                            entry.setValue(beforeAdjusted + 2f-2f);
+                            Float beforeAdjusted = 11f + (1f - ((entry.getValue() - 11f) / 0.6f)); // ... >  6.30 .. +
+                            entry.setValue(beforeAdjusted + 2f - 2f);
 
                             afterAdjusted = entry.getValue();
                         }
 
                         if (entry.getValue() >= 12f && entry.getValue() < 13f) {
 
-                            Float beforeAdjusted = 12f+ (1f-((entry.getValue()-12f)/0.6f)); // ... >  6.30 .. +
-                            entry.setValue(beforeAdjusted + 0f-2f);
-                            afterAdjusted= entry.getValue();
+                            Float beforeAdjusted = 12f + (1f - ((entry.getValue() - 12f) / 0.6f)); // ... >  6.30 .. +
+                            entry.setValue(beforeAdjusted + 0f - 2f);
+                            afterAdjusted = entry.getValue();
                         }
-                        remapAfter.put("fri_morning",afterAdjusted);
+                        remapAfter.put("fri_morning", afterAdjusted);
 
                     }
 
@@ -837,229 +843,229 @@ public class FragmentTimeStamp extends Fragment implements Observer, View.OnClic
                     //actually, number return in +12h format, so . 5pm = 17pm.
 
 
-                    if(entry.getKey().equals("mon_evening_map")) {
+                    if (entry.getKey().equals("mon_evening_map")) {
 
-                        Float afterAdjusted=0f;
+                        Float afterAdjusted = 0f;
 
                         if (entry.getValue() >= 16f && entry.getValue() < 17f) {
-                            Float beforeAdjusted = 16f+ (1f-((entry.getValue()-16f)/0.6f)); // ... > this is getting  the minutes valued, scaled.
-                            entry.setValue(beforeAdjusted -10f); //this is the offset,
-                            afterAdjusted= entry.getValue();
+                            Float beforeAdjusted = 16f + (1f - ((entry.getValue() - 16f) / 0.6f)); // ... > this is getting  the minutes valued, scaled.
+                            entry.setValue(beforeAdjusted - 10f); //this is the offset,
+                            afterAdjusted = entry.getValue();
                         }
 
                         if (entry.getValue() >= 17f && entry.getValue() < 18f) {
-                            Float beforeAdjusted = 17f+ (1f-((entry.getValue()-17f)/0.6f)); // ... > this is getting  the minutes valued, scaled.
-                            entry.setValue(beforeAdjusted -12f); //this is the offset,
-                            afterAdjusted= entry.getValue();
+                            Float beforeAdjusted = 17f + (1f - ((entry.getValue() - 17f) / 0.6f)); // ... > this is getting  the minutes valued, scaled.
+                            entry.setValue(beforeAdjusted - 12f); //this is the offset,
+                            afterAdjusted = entry.getValue();
                         }
 
                         if (entry.getValue() >= 18f && entry.getValue() < 19f) {
-                            Float beforeAdjusted = 18f+ (1f-((entry.getValue()-18f)/0.6f)); // ... > this is getting  the minutes valued, scaled.
-                            entry.setValue(beforeAdjusted -14f); //this is the offset,
-                            afterAdjusted= entry.getValue();
+                            Float beforeAdjusted = 18f + (1f - ((entry.getValue() - 18f) / 0.6f)); // ... > this is getting  the minutes valued, scaled.
+                            entry.setValue(beforeAdjusted - 14f); //this is the offset,
+                            afterAdjusted = entry.getValue();
                         }
 
                         if (entry.getValue() >= 19f && entry.getValue() < 20f) {
-                            Float beforeAdjusted = 19f+ (1f-((entry.getValue()-19f)/0.6f)); // ... > this is getting  the minutes valued, scaled.
-                            entry.setValue(beforeAdjusted -16f); //this is the offset,
-                            afterAdjusted= entry.getValue();
+                            Float beforeAdjusted = 19f + (1f - ((entry.getValue() - 19f) / 0.6f)); // ... > this is getting  the minutes valued, scaled.
+                            entry.setValue(beforeAdjusted - 16f); //this is the offset,
+                            afterAdjusted = entry.getValue();
 
                         }
 
                         if (entry.getValue() >= 20f && entry.getValue() < 21f) {
-                            Float beforeAdjusted = 20f+ (1f-((entry.getValue()-20f)/0.6f)); // ... > this is getting  the minutes valued, scaled.
-                            entry.setValue(beforeAdjusted -18f); //this is the offset,
-                            afterAdjusted= entry.getValue();
+                            Float beforeAdjusted = 20f + (1f - ((entry.getValue() - 20f) / 0.6f)); // ... > this is getting  the minutes valued, scaled.
+                            entry.setValue(beforeAdjusted - 18f); //this is the offset,
+                            afterAdjusted = entry.getValue();
                         }
 
                         if (entry.getValue() >= 21f && entry.getValue() < 22f) {
-                            Float beforeAdjusted = 21f+ (1f-((entry.getValue()-21f)/0.6f)); // ... > this is getting  the minutes valued, scaled.
-                            entry.setValue(beforeAdjusted -20f); //this is the offset,
-                            afterAdjusted= entry.getValue();
+                            Float beforeAdjusted = 21f + (1f - ((entry.getValue() - 21f) / 0.6f)); // ... > this is getting  the minutes valued, scaled.
+                            entry.setValue(beforeAdjusted - 20f); //this is the offset,
+                            afterAdjusted = entry.getValue();
                         }
 
-                        remapAfter.put("mon_evening",afterAdjusted);
+                        remapAfter.put("mon_evening", afterAdjusted);
 
                     }
 
-                    if(entry.getKey().equals("tue_evening_map")) {
+                    if (entry.getKey().equals("tue_evening_map")) {
 
-                        Float afterAdjusted=0f;
+                        Float afterAdjusted = 0f;
                         if (entry.getValue() >= 16f && entry.getValue() < 17f) {
-                            Float beforeAdjusted = 16f+ (1f-((entry.getValue()-16f)/0.6f)); // ... > this is getting  the minutes valued, scaled.
-                            entry.setValue(beforeAdjusted -10f); //this is the offset,
-                            afterAdjusted= entry.getValue();
+                            Float beforeAdjusted = 16f + (1f - ((entry.getValue() - 16f) / 0.6f)); // ... > this is getting  the minutes valued, scaled.
+                            entry.setValue(beforeAdjusted - 10f); //this is the offset,
+                            afterAdjusted = entry.getValue();
                         }
 
                         if (entry.getValue() >= 17f && entry.getValue() < 18f) {
-                            Float beforeAdjusted = 17f+ (1f-((entry.getValue()-17f)/0.6f)); // ... > this is getting  the minutes valued, scaled.
-                            entry.setValue(beforeAdjusted -12f); //this is the offset,
-                            afterAdjusted= entry.getValue();
+                            Float beforeAdjusted = 17f + (1f - ((entry.getValue() - 17f) / 0.6f)); // ... > this is getting  the minutes valued, scaled.
+                            entry.setValue(beforeAdjusted - 12f); //this is the offset,
+                            afterAdjusted = entry.getValue();
                         }
 
                         if (entry.getValue() >= 18f && entry.getValue() < 19f) {
-                            Float beforeAdjusted = 18f+ (1f-((entry.getValue()-18f)/0.6f)); // ... > this is getting  the minutes valued, scaled.
-                            entry.setValue(beforeAdjusted -14f); //this is the offset,
-                            afterAdjusted= entry.getValue();
+                            Float beforeAdjusted = 18f + (1f - ((entry.getValue() - 18f) / 0.6f)); // ... > this is getting  the minutes valued, scaled.
+                            entry.setValue(beforeAdjusted - 14f); //this is the offset,
+                            afterAdjusted = entry.getValue();
                         }
 
                         if (entry.getValue() >= 19f && entry.getValue() < 20f) {
-                            Float beforeAdjusted = 19f+ (1f-((entry.getValue()-19f)/0.6f)); // ... > this is getting  the minutes valued, scaled.
-                            entry.setValue(beforeAdjusted -16f); //this is the offset,
-                            afterAdjusted= entry.getValue();
+                            Float beforeAdjusted = 19f + (1f - ((entry.getValue() - 19f) / 0.6f)); // ... > this is getting  the minutes valued, scaled.
+                            entry.setValue(beforeAdjusted - 16f); //this is the offset,
+                            afterAdjusted = entry.getValue();
 
                         }
 
                         if (entry.getValue() >= 20f && entry.getValue() < 21f) {
-                            Float beforeAdjusted = 20f+ (1f-((entry.getValue()-20f)/0.6f)); // ... > this is getting  the minutes valued, scaled.
-                            entry.setValue(beforeAdjusted -18f); //this is the offset,
-                            afterAdjusted= entry.getValue();
+                            Float beforeAdjusted = 20f + (1f - ((entry.getValue() - 20f) / 0.6f)); // ... > this is getting  the minutes valued, scaled.
+                            entry.setValue(beforeAdjusted - 18f); //this is the offset,
+                            afterAdjusted = entry.getValue();
                         }
 
                         if (entry.getValue() >= 21f && entry.getValue() < 22f) {
-                            Float beforeAdjusted = 21f+ (1f-((entry.getValue()-21f)/0.6f)); // ... > this is getting  the minutes valued, scaled.
-                            entry.setValue(beforeAdjusted -20f); //this is the offset,
-                            afterAdjusted= entry.getValue();
+                            Float beforeAdjusted = 21f + (1f - ((entry.getValue() - 21f) / 0.6f)); // ... > this is getting  the minutes valued, scaled.
+                            entry.setValue(beforeAdjusted - 20f); //this is the offset,
+                            afterAdjusted = entry.getValue();
                         }
-                        remapAfter.put("tue_evening",afterAdjusted);
+                        remapAfter.put("tue_evening", afterAdjusted);
 
                     }
 
-                    if(entry.getKey().equals("wed_evening_map")) {
+                    if (entry.getKey().equals("wed_evening_map")) {
 
-                        Float afterAdjusted=0f;
+                        Float afterAdjusted = 0f;
 
 
                         if (entry.getValue() >= 16f && entry.getValue() < 17f) {
-                            Float beforeAdjusted = 16f+ (1f-((entry.getValue()-16f)/0.6f)); // ... > this is getting  the minutes valued, scaled.
-                            entry.setValue(beforeAdjusted -10f); //this is the offset,
-                            afterAdjusted= entry.getValue();
+                            Float beforeAdjusted = 16f + (1f - ((entry.getValue() - 16f) / 0.6f)); // ... > this is getting  the minutes valued, scaled.
+                            entry.setValue(beforeAdjusted - 10f); //this is the offset,
+                            afterAdjusted = entry.getValue();
                         }
 
                         if (entry.getValue() >= 17f && entry.getValue() < 18f) {
-                            Float beforeAdjusted = 17f+ (1f-((entry.getValue()-17f)/0.6f)); // ... > this is getting  the minutes valued, scaled.
-                            entry.setValue(beforeAdjusted -12f); //this is the offset,
-                            afterAdjusted= entry.getValue();
+                            Float beforeAdjusted = 17f + (1f - ((entry.getValue() - 17f) / 0.6f)); // ... > this is getting  the minutes valued, scaled.
+                            entry.setValue(beforeAdjusted - 12f); //this is the offset,
+                            afterAdjusted = entry.getValue();
                         }
 
                         if (entry.getValue() >= 18f && entry.getValue() < 19f) {
-                            Float beforeAdjusted = 18f+ (1f-((entry.getValue()-18f)/0.6f)); // ... > this is getting  the minutes valued, scaled.
-                            entry.setValue(beforeAdjusted -14f); //this is the offset,
-                            afterAdjusted= entry.getValue();
+                            Float beforeAdjusted = 18f + (1f - ((entry.getValue() - 18f) / 0.6f)); // ... > this is getting  the minutes valued, scaled.
+                            entry.setValue(beforeAdjusted - 14f); //this is the offset,
+                            afterAdjusted = entry.getValue();
                         }
 
                         if (entry.getValue() >= 19f && entry.getValue() < 20f) {
-                            Float beforeAdjusted = 19f+ (1f-((entry.getValue()-19f)/0.6f)); // ... > this is getting  the minutes valued, scaled.
-                            entry.setValue(beforeAdjusted -16f); //this is the offset,
-                            afterAdjusted= entry.getValue();
+                            Float beforeAdjusted = 19f + (1f - ((entry.getValue() - 19f) / 0.6f)); // ... > this is getting  the minutes valued, scaled.
+                            entry.setValue(beforeAdjusted - 16f); //this is the offset,
+                            afterAdjusted = entry.getValue();
 
                         }
 
                         if (entry.getValue() >= 20f && entry.getValue() < 21f) {
-                            Float beforeAdjusted = 20f+ (1f-((entry.getValue()-20f)/0.6f)); // ... > this is getting  the minutes valued, scaled.
-                            entry.setValue(beforeAdjusted -18f); //this is the offset,
-                            afterAdjusted= entry.getValue();
+                            Float beforeAdjusted = 20f + (1f - ((entry.getValue() - 20f) / 0.6f)); // ... > this is getting  the minutes valued, scaled.
+                            entry.setValue(beforeAdjusted - 18f); //this is the offset,
+                            afterAdjusted = entry.getValue();
                         }
 
                         if (entry.getValue() >= 21f && entry.getValue() < 22f) {
-                            Float beforeAdjusted = 21f+ (1f-((entry.getValue()-21f)/0.6f)); // ... > this is getting  the minutes valued, scaled.
-                            entry.setValue(beforeAdjusted -20f); //this is the offset,
-                            afterAdjusted= entry.getValue();
+                            Float beforeAdjusted = 21f + (1f - ((entry.getValue() - 21f) / 0.6f)); // ... > this is getting  the minutes valued, scaled.
+                            entry.setValue(beforeAdjusted - 20f); //this is the offset,
+                            afterAdjusted = entry.getValue();
                         }
 
-                        remapAfter.put("wed_evening",afterAdjusted);
+                        remapAfter.put("wed_evening", afterAdjusted);
 
                     }
 
-                    if(entry.getKey().equals("thu_evening_map")) {
+                    if (entry.getKey().equals("thu_evening_map")) {
 
-                        Float afterAdjusted=0f;
+                        Float afterAdjusted = 0f;
 
 
                         if (entry.getValue() >= 16f && entry.getValue() < 17f) {
-                            Float beforeAdjusted = 16f+ (1f-((entry.getValue()-16f)/0.6f)); // ... > this is getting  the minutes valued, scaled.
-                            entry.setValue(beforeAdjusted -10f); //this is the offset,
-                            afterAdjusted= entry.getValue();
+                            Float beforeAdjusted = 16f + (1f - ((entry.getValue() - 16f) / 0.6f)); // ... > this is getting  the minutes valued, scaled.
+                            entry.setValue(beforeAdjusted - 10f); //this is the offset,
+                            afterAdjusted = entry.getValue();
                         }
 
                         if (entry.getValue() >= 17f && entry.getValue() < 18f) {
-                            Float beforeAdjusted = 17f+ (1f-((entry.getValue()-17f)/0.6f)); // ... > this is getting  the minutes valued, scaled.
-                            entry.setValue(beforeAdjusted -12f); //this is the offset,
-                            afterAdjusted= entry.getValue();
+                            Float beforeAdjusted = 17f + (1f - ((entry.getValue() - 17f) / 0.6f)); // ... > this is getting  the minutes valued, scaled.
+                            entry.setValue(beforeAdjusted - 12f); //this is the offset,
+                            afterAdjusted = entry.getValue();
                         }
 
                         if (entry.getValue() >= 18f && entry.getValue() < 19f) {
-                            Float beforeAdjusted = 18f+ (1f-((entry.getValue()-18f)/0.6f)); // ... > this is getting  the minutes valued, scaled.
-                            entry.setValue(beforeAdjusted -14f); //this is the offset,
-                            afterAdjusted= entry.getValue();
+                            Float beforeAdjusted = 18f + (1f - ((entry.getValue() - 18f) / 0.6f)); // ... > this is getting  the minutes valued, scaled.
+                            entry.setValue(beforeAdjusted - 14f); //this is the offset,
+                            afterAdjusted = entry.getValue();
                         }
 
                         if (entry.getValue() >= 19f && entry.getValue() < 20f) {
-                            Float beforeAdjusted = 19f+ (1f-((entry.getValue()-19f)/0.6f)); // ... > this is getting  the minutes valued, scaled.
-                            entry.setValue(beforeAdjusted -16f); //this is the offset,
-                            afterAdjusted= entry.getValue();
+                            Float beforeAdjusted = 19f + (1f - ((entry.getValue() - 19f) / 0.6f)); // ... > this is getting  the minutes valued, scaled.
+                            entry.setValue(beforeAdjusted - 16f); //this is the offset,
+                            afterAdjusted = entry.getValue();
 
                         }
 
                         if (entry.getValue() >= 20f && entry.getValue() < 21f) {
-                            Float beforeAdjusted = 20f+ (1f-((entry.getValue()-20f)/0.6f)); // ... > this is getting  the minutes valued, scaled.
-                            entry.setValue(beforeAdjusted -18f); //this is the offset,
-                            afterAdjusted= entry.getValue();
+                            Float beforeAdjusted = 20f + (1f - ((entry.getValue() - 20f) / 0.6f)); // ... > this is getting  the minutes valued, scaled.
+                            entry.setValue(beforeAdjusted - 18f); //this is the offset,
+                            afterAdjusted = entry.getValue();
                         }
 
                         if (entry.getValue() >= 21f && entry.getValue() < 22f) {
-                            Float beforeAdjusted = 21f+ (1f-((entry.getValue()-21f)/0.6f)); // ... > this is getting  the minutes valued, scaled.
-                            entry.setValue(beforeAdjusted -20f); //this is the offset,
-                            afterAdjusted= entry.getValue();
+                            Float beforeAdjusted = 21f + (1f - ((entry.getValue() - 21f) / 0.6f)); // ... > this is getting  the minutes valued, scaled.
+                            entry.setValue(beforeAdjusted - 20f); //this is the offset,
+                            afterAdjusted = entry.getValue();
                         }
 
-                        remapAfter.put("thu_evening",afterAdjusted);
+                        remapAfter.put("thu_evening", afterAdjusted);
 
                     }
 
-                    if(entry.getKey().equals("fri_evening_map")) {
+                    if (entry.getKey().equals("fri_evening_map")) {
 
-                        Float afterAdjusted=0f;
+                        Float afterAdjusted = 0f;
 
 
                         if (entry.getValue() >= 16f && entry.getValue() < 17f) {
-                            Float beforeAdjusted = 16f+ (1f-((entry.getValue()-16f)/0.6f)); // ... > this is getting  the minutes valued, scaled.
-                            entry.setValue(beforeAdjusted -10f); //this is the offset,
-                            afterAdjusted= entry.getValue();
+                            Float beforeAdjusted = 16f + (1f - ((entry.getValue() - 16f) / 0.6f)); // ... > this is getting  the minutes valued, scaled.
+                            entry.setValue(beforeAdjusted - 10f); //this is the offset,
+                            afterAdjusted = entry.getValue();
                         }
 
                         if (entry.getValue() >= 17f && entry.getValue() < 18f) {
-                            Float beforeAdjusted = 17f+ (1f-((entry.getValue()-17f)/0.6f)); // ... > this is getting  the minutes valued, scaled.
-                            entry.setValue(beforeAdjusted -12f); //this is the offset,
-                            afterAdjusted= entry.getValue();
+                            Float beforeAdjusted = 17f + (1f - ((entry.getValue() - 17f) / 0.6f)); // ... > this is getting  the minutes valued, scaled.
+                            entry.setValue(beforeAdjusted - 12f); //this is the offset,
+                            afterAdjusted = entry.getValue();
                         }
 
                         if (entry.getValue() >= 18f && entry.getValue() < 19f) {
-                            Float beforeAdjusted = 18f+ (1f-((entry.getValue()-18f)/0.6f)); // ... > this is getting  the minutes valued, scaled.
-                            entry.setValue(beforeAdjusted -14f); //this is the offset,
-                            afterAdjusted= entry.getValue();
+                            Float beforeAdjusted = 18f + (1f - ((entry.getValue() - 18f) / 0.6f)); // ... > this is getting  the minutes valued, scaled.
+                            entry.setValue(beforeAdjusted - 14f); //this is the offset,
+                            afterAdjusted = entry.getValue();
                         }
 
                         if (entry.getValue() >= 19f && entry.getValue() < 20f) {
-                            Float beforeAdjusted = 19f+ (1f-((entry.getValue()-19f)/0.6f)); // ... > this is getting  the minutes valued, scaled.
-                            entry.setValue(beforeAdjusted -16f); //this is the offset,
-                            afterAdjusted= entry.getValue();
+                            Float beforeAdjusted = 19f + (1f - ((entry.getValue() - 19f) / 0.6f)); // ... > this is getting  the minutes valued, scaled.
+                            entry.setValue(beforeAdjusted - 16f); //this is the offset,
+                            afterAdjusted = entry.getValue();
 
                         }
 
                         if (entry.getValue() >= 20f && entry.getValue() < 21f) {
-                            Float beforeAdjusted = 20f+ (1f-((entry.getValue()-20f)/0.6f)); // ... > this is getting  the minutes valued, scaled.
-                            entry.setValue(beforeAdjusted -18f); //this is the offset,
-                            afterAdjusted= entry.getValue();
+                            Float beforeAdjusted = 20f + (1f - ((entry.getValue() - 20f) / 0.6f)); // ... > this is getting  the minutes valued, scaled.
+                            entry.setValue(beforeAdjusted - 18f); //this is the offset,
+                            afterAdjusted = entry.getValue();
                         }
 
                         if (entry.getValue() >= 21f && entry.getValue() < 22f) {
-                            Float beforeAdjusted = 21f+ (1f-((entry.getValue()-21f)/0.6f)); // ... > this is getting  the minutes valued, scaled.
-                            entry.setValue(beforeAdjusted -20f); //this is the offset,
-                            afterAdjusted= entry.getValue();
+                            Float beforeAdjusted = 21f + (1f - ((entry.getValue() - 21f) / 0.6f)); // ... > this is getting  the minutes valued, scaled.
+                            entry.setValue(beforeAdjusted - 20f); //this is the offset,
+                            afterAdjusted = entry.getValue();
                         }
 
-                        remapAfter.put("fri_evening",afterAdjusted);
+                        remapAfter.put("fri_evening", afterAdjusted);
 
                     }
 
@@ -1072,26 +1078,26 @@ public class FragmentTimeStamp extends Fragment implements Observer, View.OnClic
 
                 int sizemap = remap.size();
 
-                    entryArrayList.add(new Entry(0, remapAfter.get("mon_morning")));
-                    entryArrayList.add(new Entry(1, remapAfter.get("tue_morning")));
-                    entryArrayList.add(new Entry(2, remapAfter.get("wed_morning")));
-                    entryArrayList.add(new Entry(3, remapAfter.get("thu_morning")));
-                    entryArrayList.add(new Entry(4, remapAfter.get("fri_morning")));
+                entryArrayList.add(new Entry(0, remapAfter.get("mon_morning")));
+                entryArrayList.add(new Entry(1, remapAfter.get("tue_morning")));
+                entryArrayList.add(new Entry(2, remapAfter.get("wed_morning")));
+                entryArrayList.add(new Entry(3, remapAfter.get("thu_morning")));
+                entryArrayList.add(new Entry(4, remapAfter.get("fri_morning")));
 
-                    for (int i = 0; i < entryArrayList.size(); i++) {
+                for (int i = 0; i < entryArrayList.size(); i++) {
 
-                        Float checkConstraintTime = entryArrayList.get(i).getY();
+                    Float checkConstraintTime = entryArrayList.get(i).getY();
 
-                        if (checkConstraintTime <= 15f) {
-                            entryArrayList.get(i).setIcon(ContextCompat.getDrawable(getContext(), R.drawable.ic_error_small_16dp));
-
-                        }
-
+                    if (checkConstraintTime <= 15f) {
+                        entryArrayList.get(i).setIcon(ContextCompat.getDrawable(getContext(), R.drawable.ic_error_small_16dp));
 
                     }
 
-                    entryMorningArrayList.add(new EntryMorning(testTimeStamp.getName(), entryArrayList)); // hence this list, will always correspond to how big our document/employee is
-                    //settle morning
+
+                }
+
+                entryMorningArrayList.add(new EntryMorning(testTimeStamp.getName(), entryArrayList)); // hence this list, will always correspond to how big our document/employee is
+                //settle morning
 
 
                 // .>> 10.30AM settle 8 april here,
@@ -1103,7 +1109,6 @@ public class FragmentTimeStamp extends Fragment implements Observer, View.OnClic
                 entryArrayList2.add(new Entry(2, remapAfter.get("wed_evening")));
                 entryArrayList2.add(new Entry(3, remapAfter.get("thu_evening")));
                 entryArrayList2.add(new Entry(4, remapAfter.get("fri_evening")));
-
 
 
                 for (int i = 0; i < entryArrayList2.size(); i++) {
@@ -1120,76 +1125,72 @@ public class FragmentTimeStamp extends Fragment implements Observer, View.OnClic
                 entryEveningArrayList.add(new EntryEvening(testTimeStamp.getName(), entryArrayList2));
 //
 
-                }
+                Log.i("20_june", "[FragTimeStamp UPDATE 3] , name: " + testTimeStamp.getName() + ", phone:" + testTimeStamp.getPhone());
 
 
+            }
 
 
-                //evening
-                ////////////>>>>>>>>>>>>>>>>
+            //evening
+            ////////////>>>>>>>>>>>>>>>>
 
-                // >> >>>>>>>>
+            // >> >>>>>>>>
 
-                chart.clearValues();
-
-
-                for (int listDataSet = 0; listDataSet < entryMorningArrayList.size(); listDataSet++) {
+            chart.clearValues();
 
 
-                    dataSetArrayList_Final.add(new LineDataSet(entryMorningArrayList.get(listDataSet).getEntryArrayList(), entryMorningArrayList.get(listDataSet).getName()));
+            for (int listDataSet = 0; listDataSet < entryMorningArrayList.size(); listDataSet++) {
 
 
-                }
-
-                //
-
-                for (int listDataSet2 = 0; listDataSet2 < entryEveningArrayList.size(); listDataSet2++) {
-
-                    //adding to the same list of data set
-                    dataSetArrayList_Final.add(new LineDataSet(entryEveningArrayList.get(listDataSet2).getEntryArrayList(), entryEveningArrayList.get(listDataSet2).getName()));
+                dataSetArrayList_Final.add(new LineDataSet(entryMorningArrayList.get(listDataSet).getEntryArrayList(), entryMorningArrayList.get(listDataSet).getName()));
 
 
-                }
+            }
 
-                dataSetArrayList_Final.get(0).setValueTextSize(0f);
+            //
 
-                //set up icon for null value, and mc , check morning first
+            for (int listDataSet2 = 0; listDataSet2 < entryEveningArrayList.size(); listDataSet2++) {
 
-
-
-
-                for(TestTimeStamp testTimeStamp: finalListRemap) {
+                //adding to the same list of data set
+                dataSetArrayList_Final.add(new LineDataSet(entryEveningArrayList.get(listDataSet2).getEntryArrayList(), entryEveningArrayList.get(listDataSet2).getName()));
 
 
+            }
 
-                    //for(EntryMorning entryMorning: entryMorningArrayList){
-                    // we not sure entry represent which. , so better use index since, 0 always mean monday, and so on
-                    for (int k = 0; k < entryMorningArrayList.size(); k++) {
+            dataSetArrayList_Final.get(0).setValueTextSize(0f);
 
-                        if (testTimeStamp.getName() == entryMorningArrayList.get(k).getName()) {
+            //set up icon for null value, and mc , check morning first
 
-                            if (testTimeStamp.isProb_mon_morning()) {
-                                //entryMorning.getEntry().setIcon(); // something wrong ,, we not sure which entry , is
 
-                                entryMorningArrayList.get(k).getEntryArrayList().get(0).setIcon(ContextCompat.getDrawable(getContext(), R.drawable.ic_error_small_16dp));
+            for (TestTimeStamp testTimeStamp : finalListRemap) {
 
-                            }
-                            if (testTimeStamp.isProb_tue_morning()) {
-                                entryMorningArrayList.get(k).getEntryArrayList().get(1).setIcon(ContextCompat.getDrawable(getContext(), R.drawable.ic_error_small_16dp));
 
-                            }
-                            if (testTimeStamp.isProb_wed_morning()) {
-                                entryMorningArrayList.get(k).getEntryArrayList().get(2).setIcon(ContextCompat.getDrawable(getContext(), R.drawable.ic_error_small_16dp));
+                //for(EntryMorning entryMorning: entryMorningArrayList){
+                // we not sure entry represent which. , so better use index since, 0 always mean monday, and so on
+                for (int k = 0; k < entryMorningArrayList.size(); k++) {
 
-                            }
-                            if (testTimeStamp.isProb_thu_morning()) {
-                                entryMorningArrayList.get(k).getEntryArrayList().get(3).setIcon(ContextCompat.getDrawable(getContext(), R.drawable.ic_error_small_16dp));
+                    if (testTimeStamp.getName() == entryMorningArrayList.get(k).getName()) {
 
-                            }
-                            if (testTimeStamp.isProb_fri_morning()) {
-                                entryMorningArrayList.get(k).getEntryArrayList().get(4).setIcon(ContextCompat.getDrawable(getContext(), R.drawable.ic_error_small_16dp));
+                        if (testTimeStamp.isProb_mon_morning()) {
+                            //entryMorning.getEntry().setIcon(); // something wrong ,, we not sure which entry , is
 
-                            }
+                            entryMorningArrayList.get(k).getEntryArrayList().get(0).setIcon(ContextCompat.getDrawable(getContext(), R.drawable.ic_error_small_16dp));
+
+                        }
+                        if (testTimeStamp.isProb_tue_morning()) {
+                            entryMorningArrayList.get(k).getEntryArrayList().get(1).setIcon(ContextCompat.getDrawable(getContext(), R.drawable.ic_error_small_16dp));
+
+                        }
+                        if (testTimeStamp.isProb_wed_morning()) {
+                            entryMorningArrayList.get(k).getEntryArrayList().get(2).setIcon(ContextCompat.getDrawable(getContext(), R.drawable.ic_error_small_16dp));
+
+                        }
+                        if (testTimeStamp.isProb_thu_morning()) {
+                            entryMorningArrayList.get(k).getEntryArrayList().get(3).setIcon(ContextCompat.getDrawable(getContext(), R.drawable.ic_error_small_16dp));
+
+                        }
+                        if (testTimeStamp.isProb_fri_morning()) {
+                            entryMorningArrayList.get(k).getEntryArrayList().get(4).setIcon(ContextCompat.getDrawable(getContext(), R.drawable.ic_error_small_16dp));
 
                         }
 
@@ -1197,37 +1198,37 @@ public class FragmentTimeStamp extends Fragment implements Observer, View.OnClic
 
                 }
 
-            for(TestTimeStamp testTimeStamp: finalListRemap) {
+            }
+
+            for (TestTimeStamp testTimeStamp : finalListRemap) {
 
 
                 //now set evening MC or null
 
-                    for(int k =0; k< entryEveningArrayList.size();k++){
+                for (int k = 0; k < entryEveningArrayList.size(); k++) {
 
-                        if(testTimeStamp.getName()==entryEveningArrayList.get(k).getName()){
+                    if (testTimeStamp.getName() == entryEveningArrayList.get(k).getName()) {
 
-                            if(testTimeStamp.isProb_mon_evening()){
-                                //entryMorning.getEntry().setIcon(); // something wrong ,, we not sure which entry , is
+                        if (testTimeStamp.isProb_mon_evening()) {
+                            //entryMorning.getEntry().setIcon(); // something wrong ,, we not sure which entry , is
 
-                                entryEveningArrayList.get(k).getEntryArrayList().get(0).setIcon(ContextCompat.getDrawable(getContext(), R.drawable.ic_error_small_16dp));
+                            entryEveningArrayList.get(k).getEntryArrayList().get(0).setIcon(ContextCompat.getDrawable(getContext(), R.drawable.ic_error_small_16dp));
 
-                            }
-                            if(testTimeStamp.isProb_tue_evening()){
-                                entryEveningArrayList.get(k).getEntryArrayList().get(1).setIcon(ContextCompat.getDrawable(getContext(), R.drawable.ic_error_small_16dp));
+                        }
+                        if (testTimeStamp.isProb_tue_evening()) {
+                            entryEveningArrayList.get(k).getEntryArrayList().get(1).setIcon(ContextCompat.getDrawable(getContext(), R.drawable.ic_error_small_16dp));
 
-                            }
-                            if(testTimeStamp.isProb_wed_evening()){
-                                entryEveningArrayList.get(k).getEntryArrayList().get(2).setIcon(ContextCompat.getDrawable(getContext(), R.drawable.ic_error_small_16dp));
+                        }
+                        if (testTimeStamp.isProb_wed_evening()) {
+                            entryEveningArrayList.get(k).getEntryArrayList().get(2).setIcon(ContextCompat.getDrawable(getContext(), R.drawable.ic_error_small_16dp));
 
-                            }
-                            if(testTimeStamp.isProb_thu_evening()){
-                                entryEveningArrayList.get(k).getEntryArrayList().get(3).setIcon(ContextCompat.getDrawable(getContext(), R.drawable.ic_error_small_16dp));
+                        }
+                        if (testTimeStamp.isProb_thu_evening()) {
+                            entryEveningArrayList.get(k).getEntryArrayList().get(3).setIcon(ContextCompat.getDrawable(getContext(), R.drawable.ic_error_small_16dp));
 
-                            }
-                            if(testTimeStamp.isProb_fri_evening()){
-                                entryEveningArrayList.get(k).getEntryArrayList().get(4).setIcon(ContextCompat.getDrawable(getContext(), R.drawable.ic_error_small_16dp));
-
-                            }
+                        }
+                        if (testTimeStamp.isProb_fri_evening()) {
+                            entryEveningArrayList.get(k).getEntryArrayList().get(4).setIcon(ContextCompat.getDrawable(getContext(), R.drawable.ic_error_small_16dp));
 
                         }
 
@@ -1235,145 +1236,147 @@ public class FragmentTimeStamp extends Fragment implements Observer, View.OnClic
 
                 }
 
+            }
 
 
-                //then add to the data.
+            //then add to the data.
 
-                //add all
-                for (int dataCount = 0; dataCount < (entryEveningArrayList.size() * 2); dataCount++) {
+            //add all
+            for (int dataCount = 0; dataCount < (entryEveningArrayList.size() * 2); dataCount++) {
 
-                    data.addDataSet(dataSetArrayList_Final.get(dataCount));
-                }
+                data.addDataSet(dataSetArrayList_Final.get(dataCount));
+            }
 
-                dataSet.notifyDataSetChanged();
+            dataSet.notifyDataSetChanged();
 
-                data.notifyDataChanged();
-                chart.notifyDataSetChanged();
-
-
-                //chart.notifyDataSetChanged(); // THIS ONE FUKIN LINE
-
-                Legend legend = chart.getLegend();
-
-                List<LegendEntry> entrieList = new ArrayList<>();
-
-                RandomColor randomColor = new RandomColor();
-
-                int[] colors = randomColor.randomColor(entryMorningArrayList.size()); //only need color correspond to number of users
+            data.notifyDataChanged();
+            chart.notifyDataSetChanged();
 
 
-                ////// >> color setup below
+            //chart.notifyDataSetChanged(); // THIS ONE FUKIN LINE
 
-                //go through colors, if detect red variant generate again., can improve by editing [ randomColor() library ]
+            Legend legend = chart.getLegend();
 
-                for (int i = 0; i < colors.length; i++) {
+            List<LegendEntry> entrieList = new ArrayList<>();
 
-                    Log.i("checkColor now: ", " flow : 2" + "  >> i:" + i);
+            RandomColor randomColor = new RandomColor();
 
-                    //while((colors[i]<-90000 && colors[i]>-180000 )|| colors[i]>-5000 || (colors[i]>-67000 && colors[i]<-40000)||(colors[i]>-1838656 && colors[i]<-1238656) ) {  // non of the while loop gets triggered
-
-                    while ((colors[i] > -67000 && colors[i] < -40000)) {  // non of the while loop gets triggered
-
-                        Log.i("checkColor now: ", " flow : 3" + "  >> i:" + i);
-
-                        colors[i] = randomColor.randomColor(); //making sure color not too bright.
-
-                        Log.i("checkColor now: ", " flow : 3" + " random color generated: " + colors[i] + "  >> i:" + i);
+            int[] colors = randomColor.randomColor(entryMorningArrayList.size()); //only need color correspond to number of users
 
 
-                        if (i < (colors.length - 1)) {
+            ////// >> color setup below
 
-                            Log.i("checkColor now: ", " flow : 5");
+            //go through colors, if detect red variant generate again., can improve by editing [ randomColor() library ]
 
-                            int check = -(colors[i]) + colors[i + 1];
+            for (int i = 0; i < colors.length; i++) {
 
-                            Log.i("checkColor diff: ", "check difference 1 : " + colors[i] + "  >> i:" + i);
-                            Log.i("checkColor diff: ", "check difference 2 : " + colors[i + 1] + "  >> i:" + i);
-                            Log.i("checkColor diff: ", "check difference color : " + check + "  >> i:" + i);
+                Log.i("checkColor now: ", " flow : 2" + "  >> i:" + i);
 
-                            if (colors[i] < -900035) { //for other variant
+                //while((colors[i]<-90000 && colors[i]>-180000 )|| colors[i]>-5000 || (colors[i]>-67000 && colors[i]<-40000)||(colors[i]>-1838656 && colors[i]<-1238656) ) {  // non of the while loop gets triggered
 
-                                int check2 = -(colors[i]) + colors[i + 1];
+                while ((colors[i] > -67000 && colors[i] < -40000)) {  // non of the while loop gets triggered
 
-                                while (check2 <= 100000 && check2 >= -100000) { // numbers could be
-                                    colors[i] = randomColor.randomColor();
+                    Log.i("checkColor now: ", " flow : 3" + "  >> i:" + i);
 
+                    colors[i] = randomColor.randomColor(); //making sure color not too bright.
 
-                                    check2 = -colors[i] + colors[i + 1]; //everytime we create we check this
-
-                                    Log.i("checkColor now: ", " flow : 6" + "  >> i:" + i);
-                                }
-
-                            }
+                    Log.i("checkColor now: ", " flow : 3" + " random color generated: " + colors[i] + "  >> i:" + i);
 
 
-                            while (check <= 10000 && check >= -10000) {
+                    if (i < (colors.length - 1)) {
+
+                        Log.i("checkColor now: ", " flow : 5");
+
+                        int check = -(colors[i]) + colors[i + 1];
+
+                        Log.i("checkColor diff: ", "check difference 1 : " + colors[i] + "  >> i:" + i);
+                        Log.i("checkColor diff: ", "check difference 2 : " + colors[i + 1] + "  >> i:" + i);
+                        Log.i("checkColor diff: ", "check difference color : " + check + "  >> i:" + i);
+
+                        if (colors[i] < -900035) { //for other variant
+
+                            int check2 = -(colors[i]) + colors[i + 1];
+
+                            while (check2 <= 100000 && check2 >= -100000) { // numbers could be
                                 colors[i] = randomColor.randomColor();
-                                check = -colors[i] + colors[i + 1]; //everytime we create we check this
+
+
+                                check2 = -colors[i] + colors[i + 1]; //everytime we create we check this
 
                                 Log.i("checkColor now: ", " flow : 6" + "  >> i:" + i);
                             }
 
                         }
-                        //   } //still check if color[i] within red
-
-                    } // still check if color[i] too bright
-
-                }
 
 
-                //finish making sure no red, recored
+                        while (check <= 10000 && check >= -10000) {
+                            colors[i] = randomColor.randomColor();
+                            check = -colors[i] + colors[i + 1]; //everytime we create we check this
 
-                //adding setup
+                            Log.i("checkColor now: ", " flow : 6" + "  >> i:" + i);
+                        }
 
-                for (int i = 0; i < dataSetArrayList_Final.size(); i++) {
+                    }
+                    //   } //still check if color[i] within red
 
-                    dataSetArrayList_Final.get(i).setAxisDependency(YAxis.AxisDependency.LEFT);
-                }
+                } // still check if color[i] too bright
 
-                for (int j = 0; j < entryMorningArrayList.size(); j++) {
-
-                    LegendEntry legendEntry_Morning = new LegendEntry();
-
-                    legendEntry_Morning.formColor = colors[j];
-                    dataSetArrayList_Final.get(j).setColor(colors[j]);
-                    dataSetArrayList_Final.get(j).notifyDataSetChanged();
-                    legendEntry_Morning.label = entryMorningArrayList.get(j).getName();
-                    entrieList.add(legendEntry_Morning);
-                }
-
-                int offset = dataSetArrayList_Final.size() - entryMorningArrayList.size();
-
-                for (int j = 0; j < entryEveningArrayList.size(); j++) {
-
-                    LegendEntry legendEntry_Evening = new LegendEntry();
-
-                    // legendEntry_Evening.formColor = colors[j];
-                    dataSetArrayList_Final.get(j + offset).setColor(colors[j]);
-                    dataSetArrayList_Final.get(j + offset).notifyDataSetChanged();
-                    //legendEntry_Morning.label = entryMorningArrayList.get(j).getName();
-                    // legendEntry_Evening.label = "NONE";
-
-                    entrieList.add(legendEntry_Evening);
-
-                    //label
-                }
+            }
 
 
-                //for some data which exceeds pre-defined constraint time stamp, will be coloured red.
+            //finish making sure no red, recored
 
-                // dataSetArrayList_Final.get(4).setLabel();
+            //adding setup
 
-                legend.setCustom(entrieList);
+            for (int i = 0; i < dataSetArrayList_Final.size(); i++) {
+
+                dataSetArrayList_Final.get(i).setAxisDependency(YAxis.AxisDependency.LEFT);
+            }
+
+            for (int j = 0; j < entryMorningArrayList.size(); j++) {
+
+                LegendEntry legendEntry_Morning = new LegendEntry();
+
+                legendEntry_Morning.formColor = colors[j];
+                dataSetArrayList_Final.get(j).setColor(colors[j]);
+                dataSetArrayList_Final.get(j).notifyDataSetChanged();
+                legendEntry_Morning.label = entryMorningArrayList.get(j).getName();
+                entrieList.add(legendEntry_Morning);
+            }
+
+            int offset = dataSetArrayList_Final.size() - entryMorningArrayList.size();
+
+            for (int j = 0; j < entryEveningArrayList.size(); j++) {
+
+                LegendEntry legendEntry_Evening = new LegendEntry();
+
+                // legendEntry_Evening.formColor = colors[j];
+                dataSetArrayList_Final.get(j + offset).setColor(colors[j]);
+                dataSetArrayList_Final.get(j + offset).notifyDataSetChanged();
+                //legendEntry_Morning.label = entryMorningArrayList.get(j).getName();
+                // legendEntry_Evening.label = "NONE";
+
+                entrieList.add(legendEntry_Evening);
+
+                //label
+            }
 
 
-                data.notifyDataChanged();
-                chart.notifyDataSetChanged();
+            //for some data which exceeds pre-defined constraint time stamp, will be coloured red.
 
-                chart.invalidate();
+            // dataSetArrayList_Final.get(4).setLabel();
 
-                return;
+            legend.setCustom(entrieList);
 
+
+            data.notifyDataChanged();
+            chart.notifyDataSetChanged();
+
+            chart.invalidate();
+
+            return;
+
+        }
 
         }
 

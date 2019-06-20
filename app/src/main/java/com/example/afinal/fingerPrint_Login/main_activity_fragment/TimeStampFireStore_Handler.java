@@ -328,6 +328,8 @@ public class TimeStampFireStore_Handler  extends Observable {
 
 
 
+                        testTimeStampsList.add(object);
+
                         StorageReference storage = FirebaseStorage.getInstance().getReference().child("uploads").child("picture"+object.getName()+object.getPhone());
 
 
@@ -451,13 +453,18 @@ public class TimeStampFireStore_Handler  extends Observable {
 
             Log.i("20_june", "[Handler] > set to return. sizeDoc:"+sizeDoc +" , list:"+testTimeStampsList+" >> SAME");
 
+            //testTimeStampsList
 
+       //     this.testTimeStampsList = testTimeStampsList;
             setChanged();
             notifyObservers();
-            return;
+
+            //return;
 
         }
         else {
+
+
 
             Log.i("20_june", "[Handler] > set to return. sizeDoc:"+sizeDoc +" , list:"+testTimeStampsList+" >> NOT SAME");
         }
