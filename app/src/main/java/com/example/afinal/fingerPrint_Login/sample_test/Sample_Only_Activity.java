@@ -71,7 +71,7 @@ public class Sample_Only_Activity extends AppCompatActivity {
 
 
 
-        storageReference = FirebaseStorage.getInstance().getReference().child("upload_test").child("111");
+        storageReference = FirebaseStorage.getInstance().getReference().child("uploads").child("picturerynanep+60177777777");
 
         imageView1.setOnClickListener(new View.OnClickListener() {
             @Override

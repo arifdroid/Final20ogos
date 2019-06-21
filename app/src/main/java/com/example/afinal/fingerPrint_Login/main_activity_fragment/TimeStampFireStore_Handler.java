@@ -68,6 +68,7 @@ public class TimeStampFireStore_Handler  extends Observable {
     private Uri urlImage;
     private TestTimeStamp object;
     private int i;
+    private int j;
 
 
     public TimeStampFireStore_Handler(Context context,LineDataSet dataSet, LineData data, LineChart chart) {
@@ -327,66 +328,82 @@ public class TimeStampFireStore_Handler  extends Observable {
                         Log.i("20_june", "[Loop Handler] , i :"+i+" name:"+object.getName()+" , phone:"+object.getPhone());
 
 
+                        //21 june , //wait for all object to be setup first, then we process to get the value of the image url
+
 
                         testTimeStampsList.add(object);
 
-                        StorageReference storage = FirebaseStorage.getInstance().getReference().child("uploads").child("picture"+object.getName()+object.getPhone());
 
 
-                        //as expected, not finish loading in time.
-
-                        //urlImage = storage.getDownloadUrl().getResult();
-
-
-                        // >>>>>>>>>> 20 june
+//                        //  testTimeStampsList.add(object);
 //
-                        storage.getDownloadUrl().addOnCompleteListener(new OnCompleteListener<Uri>() {
-                            @Override
-                            public void onComplete(@NonNull Task<Uri> task) {
-                          //      try get uri here.
-
-                                if(task.isSuccessful()){
-
-                                        urlImage = task.getResult();
-
-                                        object.setUrlCreation(urlImage);
-
-                                        testTimeStampsList.add(object); //after finish getting all data, then we add to array
-
-                                    if(sizeDoc==i){ //meaning, finish loop all document, then we can update returned result, return true with result.
-
-                                        Log.i("checkChartFlowFinal ", "handler, 5");
-
-                                        // setReturnData();
-
-                                        // setReturnEntry();
-
-                                        problem this never true
-
-                                        setReturnListOfEntry(testTimeStampsList);
-
-
-                                    }
-
-
-
-                                }
-                                else {
-
-
-
-                                }
-                            }
-                        }).addOnCanceledListener(new OnCanceledListener() {
-                            @Override
-                            public void onCanceled() {
-
-                            }
-                        });
-
-
-                        // >>>>>>>>>> 20 june UPP
-
+//                        StorageReference storage = FirebaseStorage.getInstance().getReference().child("uploads").child("picture"+object.getName()+object.getPhone());
+//
+//
+//                        //as expected, not finish loading in time.
+//
+//                        //urlImage = storage.getDownloadUrl().getResult();
+//
+//
+//                        // >>>>>>>>>> 20 june
+////
+//                        storage.getDownloadUrl().addOnCompleteListener(new OnCompleteListener<Uri>() {
+//                            @Override
+//                            public void onComplete(@NonNull Task<Uri> task) {
+//                          //      try get uri here.
+//
+//                                if(task.isSuccessful()){
+//
+//                                        urlImage = task.getResult();
+//
+//                                        object.setUrlCreation(urlImage);
+//
+//                                        testTimeStampsList.add(object); //after finish getting all data, then we add to array
+//
+//                                    if(testTimeStampsList.size()==3) {
+//                                        Log.i("20_june", "[Handler] > INSIDE DOWNLOAD" + " ,, name 1) " + testTimeStampsList.get(0).getName()
+//
+//                                                + " ,, name 2) " + testTimeStampsList.get(1).getName() + " ,, name 3) " + testTimeStampsList.get(2).getName());
+//
+//                                    }
+//
+//                                    if(sizeDoc==i) { //meaning, finish loop all document, then we can update returned result, return true with result.
+//
+//                                        Log.i("checkChartFlowFinal ", "handler, 5");
+//
+//                                        // setReturnData();
+//
+//                                        // setReturnEntry();
+//
+//                                        // problem this never true
+//
+//                                        if (sizeDoc == testTimeStampsList.size()) {
+//
+//                                        setReturnListOfEntry(testTimeStampsList);
+//
+//                                    }
+//
+//                                    }
+//
+//
+//
+//                                }
+//                                else {
+//
+//
+//
+//                                }
+//                            }
+//                        }).addOnCanceledListener(new OnCanceledListener() {
+//                            @Override
+//                            public void onCanceled() {
+//
+//                            }
+//                        });
+//
+//
+//                        // >>>>>>>>>> 20 june UPP
+//
 
 
                         Log.i("checkTimeStamp ", "flow: 10");
@@ -395,6 +412,22 @@ public class TimeStampFireStore_Handler  extends Observable {
 
 
                     } //document loop
+
+
+
+                    //21 june, get the
+
+
+                    if (sizeDoc == testTimeStampsList.size()) {
+
+                        //this means, we finish get all data, but no image just yet, now we get the image url
+
+
+                        getThemPicture(testTimeStampsList);
+
+                    }
+
+
 //
 
 //
@@ -442,16 +475,88 @@ public class TimeStampFireStore_Handler  extends Observable {
 
 } // end method
 
+    // 21 june.
+
+    private void getThemPicture(final ArrayList<TestTimeStamp> testTimeStampsList2) {
+
+            StorageReference storageReference = FirebaseStorage.getInstance().getReference().child("uploads");
+
+        Log.i("21_june","[ OUTSIDE LOOP ] > list size: "+ testTimeStampsList2.size()+" name 1:"+testTimeStampsList2.get(0).getName()+ ", name 2:" + testTimeStampsList2.get(1).getName());
+
+            for(j =0; j<testTimeStampsList2.size();j++){
+
+                storageReference= storageReference.child("picture"+testTimeStampsList2.get(j).getName()+testTimeStampsList2.get(j).getPhone());
+
+                Log.i("21_june","[ INSIDE LOOP ] > list size: "+ testTimeStampsList2.size()+" name 1:"+testTimeStampsList2.get(0).getName()+ ", name 2:" + testTimeStampsList2.get(1).getName());
+
+                if(j==1){
+
+                    Log.i("21_june","[ INSIDE J ] > list size: "+ testTimeStampsList2.size()+" name j 1:"+testTimeStampsList2.get(0).getName()+ ", name j 2:" + testTimeStampsList2.get(j).getName());
+                }
+
+
+                //storageReference.getDownloadUrl().
+
+                storageReference.getDownloadUrl().addOnCompleteListener(new OnCompleteListener<Uri>() {
+                    @Override
+                    public void onComplete(@NonNull Task<Uri> task) {
+
+                        if(task.isSuccessful()){
+
+                            Log.i("21_june","[ INSIDE TASK SUCCESS ] > list size: "+ testTimeStampsList2.size()+" name j 1:"+testTimeStampsList2.get(0).getName());
+
+
+                            //testTimeStampsList2.get(j).setUrlCreation(task.getResult());
+
+                            testTimeStampsList2.get(j).getName();
+
+
+                        }
+
+                        if(task.isComplete()){
+
+
+                            if(j==testTimeStampsList.size()){
+
+                                setChanged();
+                                notifyObservers();
+                            }
+
+                        }
+
+
+                    }
+                });
+
+
+
+            }
+
+
+
+
+
+
+    }
+
     private void setReturnListOfEntry(ArrayList<TestTimeStamp> testTimeStampsList) {
 
         //then we want to populate entry.
         //int k=0;
 
 
+        //sizeDoc == document amount found in collection, equal to number or employee or user registered to the admin.
+        // testtimestamplist.
+
         if(testTimeStampsList.size()==sizeDoc){
 
 
-            Log.i("20_june", "[Handler] > set to return. sizeDoc:"+sizeDoc +" , list:"+testTimeStampsList+" >> SAME");
+            Log.i("20_june", "[Handler] > set to return. sizeDoc: "+sizeDoc +" , list: "+testTimeStampsList.size()+" >> SAME");
+
+            Log.i("20_june", "[Handler] > SAME" +" ,, name 1) "+testTimeStampsList.get(0).getName()
+
+            +" ,, name 2) "+testTimeStampsList.get(1).getName()+" ,, name 3) "+testTimeStampsList.get(2).getName());
+
 
             //testTimeStampsList
 
@@ -466,7 +571,12 @@ public class TimeStampFireStore_Handler  extends Observable {
 
 
 
-            Log.i("20_june", "[Handler] > set to return. sizeDoc:"+sizeDoc +" , list:"+testTimeStampsList+" >> NOT SAME");
+            Log.i("20_june", "[Handler] > set to return. sizeDoc: "+sizeDoc +" , list: "+testTimeStampsList.size()+" >> NOT SAME");
+
+            Log.i("20_june", "[Handler] 99 >  NOT SAME : "+ testTimeStampsList.get(i));
+
+
+            //Log.i("20_june", "[Handler] > NOT SAME sizeDoc & timestamplist , timestamplist : "+ testTimeStampsList.get(0).getName() );
         }
 
 

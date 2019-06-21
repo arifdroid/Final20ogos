@@ -642,6 +642,7 @@ public class FingerPrint_LogIn_Final_Activity extends AppCompatActivity implemen
         wifiInfo = wifiManager.getConnectionInfo();
 
         userSSID = wifiInfo.getSSID();
+        userSSID = userSSID.replace("\"","");
         userBSSID = wifiInfo.getBSSID();
 
         //pull constraint by admin, like, time constraint, location or bssid,, we do this below.
