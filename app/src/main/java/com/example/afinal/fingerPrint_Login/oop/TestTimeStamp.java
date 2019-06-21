@@ -2,6 +2,8 @@ package com.example.afinal.fingerPrint_Login.oop;
 
 import android.net.Uri;
 
+import com.google.firebase.storage.StorageReference;
+
 public class TestTimeStamp {
 
     //recorded data, missing, means, got mc. also need to point out, which data was it?
@@ -228,6 +230,7 @@ public class TestTimeStamp {
 
     private Uri urlCreation;
 
+    private StorageReference storageReference;
 
 
     public TestTimeStamp(int referenceiD) {
@@ -305,5 +308,13 @@ public class TestTimeStamp {
 
     public void setUrlCreation(Uri urlCreation) {
         this.urlCreation = urlCreation;
+    }
+
+    public StorageReference getStorageReference() {
+        return storageReference;
+    }
+
+    public void setStorageReference(StorageReference storageReference) {
+        this.storageReference = storageReference;
     }
 }

@@ -24,6 +24,7 @@ import com.google.firebase.storage.FirebaseStorage;
 import com.google.firebase.storage.StorageReference;
 
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.Collection;
 import java.util.List;
 import java.util.Map;
@@ -69,6 +70,7 @@ public class TimeStampFireStore_Handler  extends Observable {
     private TestTimeStamp object;
     private int i;
     private int j;
+    private ArrayList<TestTimeStamp> testTimeStampsList3;
 
 
     public TimeStampFireStore_Handler(Context context,LineDataSet dataSet, LineData data, LineChart chart) {
@@ -84,6 +86,8 @@ public class TimeStampFireStore_Handler  extends Observable {
 
         entriesV2 = new ArrayList<>();
         entriesV3 = new ArrayList<>();
+
+        testTimeStampsList3 = new ArrayList<>();
 
         testTimeStampsList = new ArrayList<>();
 
@@ -487,53 +491,75 @@ public class TimeStampFireStore_Handler  extends Observable {
 
                 storageReference= storageReference.child("picture"+testTimeStampsList2.get(j).getName()+testTimeStampsList2.get(j).getPhone());
 
-                Log.i("21_june","[ INSIDE LOOP ] > list size: "+ testTimeStampsList2.size()+" name 1:"+testTimeStampsList2.get(0).getName()+ ", name 2:" + testTimeStampsList2.get(1).getName());
+                testTimeStampsList2.get(j).setStorageReference(storageReference);
 
-                if(j==1){
 
-                    Log.i("21_june","[ INSIDE J ] > list size: "+ testTimeStampsList2.size()+" name j 1:"+testTimeStampsList2.get(0).getName()+ ", name j 2:" + testTimeStampsList2.get(j).getName());
-                }
-
+//                Log.i("21_june","[ INSIDE LOOP ] > list size: "+ testTimeStampsList2.size()+" name 1:"+testTimeStampsList2.get(0).getName()+ ", name 2:" + testTimeStampsList2.get(1).getName());
+//
+//                if(j==1){
+//
+//                    Log.i("21_june","[ INSIDE J ] > list size: "+ testTimeStampsList2.size()+" name j 1:"+testTimeStampsList2.get(0).getName()+ ", name j 2:" + testTimeStampsList2.get(j).getName());
+//                }
+//
 
                 //storageReference.getDownloadUrl().
 
-                storageReference.getDownloadUrl().addOnCompleteListener(new OnCompleteListener<Uri>() {
-                    @Override
-                    public void onComplete(@NonNull Task<Uri> task) {
-
-                        if(task.isSuccessful()){
-
-                            Log.i("21_june","[ INSIDE TASK SUCCESS ] > list size: "+ testTimeStampsList2.size()+" name j 1:"+testTimeStampsList2.get(0).getName());
-
-
-                            //testTimeStampsList2.get(j).setUrlCreation(task.getResult());
-
-                            testTimeStampsList2.get(j).getName();
-
-
-                        }
-
-                        if(task.isComplete()){
-
-
-                            if(j==testTimeStampsList.size()){
-
-                                setChanged();
-                                notifyObservers();
-                            }
-
-                        }
-
-
-                    }
-                });
-
-
+//                storageReference.getDownloadUrl().addOnCompleteListener(new OnCompleteListener<Uri>() {
+//                    @Override
+//                    public void onComplete(@NonNull Task<Uri> task) {
+//
+//                        if(task.isSuccessful()){
+//
+//                            Log.i("21_june","[ INSIDE TASK SUCCESS ] > list size: "+ testTimeStampsList2.size()+" name j 1:"+testTimeStampsList2.get(0).getName());
+//
+//
+//                            //testTimeStampsList2.get(j).setUrlCreation(task.getResult());
+//
+//                            testTimeStampsList2.get(j).getName();
+//
+//
+//                        }
+//
+//                        if(task.isComplete()){
+//
+//
+//                            if(j==testTimeStampsList.size()){
+//
+//                                setChanged();
+//                                notifyObservers();
+//                            }
+//
+//                        }
+//
+//
+//                    }
+//                });
 
             }
 
 
+            //while loop
 
+//            while(testTimeStampsList3.size()!=testTimeStampsList2.size()){
+//
+//
+//
+//
+//
+//
+//
+//            }
+
+
+            if(testTimeStampsList2.size()==testTimeStampsList.size()){
+
+                this.testTimeStampsList=testTimeStampsList2;
+
+                setChanged();
+
+                notifyObservers();
+
+            }
 
 
 
