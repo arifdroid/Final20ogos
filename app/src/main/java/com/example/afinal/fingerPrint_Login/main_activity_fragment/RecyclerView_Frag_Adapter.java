@@ -53,12 +53,22 @@ public class RecyclerView_Frag_Adapter extends RecyclerView.Adapter<RecyclerView
         //Picasso.with(RegAdmin_asAdmin_Profile_Activity.this).load(urihere).into(circleImageView);
 
         //holder.circleImageView.
+//
+//        Picasso.with(mContext).load(hereList.get(position).getImageUri())
+//                .fit()
+//                .centerCrop()
+//                .into(holder.circleImageView);
 
-        Picasso.with(mContext).load(hereList.get(position).getImageUri())
-                .fit()
-                .centerCrop()
+
+        //20 june
+
+//        GlideApp.with(mContext).load(hereList.get(position).getStorageReference())
+//                .centerCrop().fitCenter().into(holder.circleImageView);
+//
+
+
+        Picasso.with(mContext).load(hereList.get(position).getImage_url()).fit().centerCrop()
                 .into(holder.circleImageView);
-
 
         String date_date = hereList.get(position).getDate().substring(0,2);
         String date_month = hereList.get(position).getDate().substring(3,6);

@@ -136,11 +136,15 @@ public class RegAdmin_AsAdmin_Activity extends AppCompatActivity implements Obse
     private Bitmap btMapImage;
     private File image_File;
 
+    private String image_download_url;
+
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_reg_admin__as_admin_);
+
+        image_download_url= "";
 
         boolean_admin_count=false;
 
@@ -1035,28 +1039,71 @@ public class RegAdmin_AsAdmin_Activity extends AppCompatActivity implements Obse
 //
 //                        reference.set(imm, SetOptions.merge());
 
-
-
-                        Toast.makeText(RegAdmin_AsAdmin_Activity.this,"picture successfully uploaded",Toast.LENGTH_SHORT).show();
-
-                        //11june
-
-                        runOnUiThread(new Runnable() {
+                        this_image_ref.getDownloadUrl().addOnCompleteListener(new OnCompleteListener<Uri>() {
                             @Override
-                            public void run() {
+                            public void onComplete(@NonNull Task<Uri> task) {
 
-                                //sharedprefs.
+                                if(task.isSuccessful()){
 
-                                Intent intent = new Intent(RegAdmin_AsAdmin_Activity.this,RegAdmin_asAdmin_Profile_Activity.class);
-                                intent.putExtra("adminName_asAdmin",userName);
-                                intent.putExtra("adminPhone_asAdmin",userPhone);
-                                intent.putExtra("image_ref_asAdmin",this_image_ref.toString());
-                                //intent.addFlags(Intent.)
+                                    image_download_url = task.getResult().toString();
 
-                                startActivity(intent);
+
+                                    if(!image_download_url.equals("")){
+
+
+                                        Toast.makeText(RegAdmin_AsAdmin_Activity.this,"picture successfully uploaded",Toast.LENGTH_SHORT).show();
+
+                                        //11june
+
+                                        runOnUiThread(new Runnable() {
+                                            @Override
+                                            public void run() {
+
+                                                //sharedprefs.
+
+                                                Intent intent = new Intent(RegAdmin_AsAdmin_Activity.this,RegAdmin_asAdmin_Profile_Activity.class);
+                                                intent.putExtra("adminName_asAdmin",userName);
+                                                intent.putExtra("adminPhone_asAdmin",userPhone);
+                                                intent.putExtra("image_ref_asAdmin",this_image_ref.toString());
+                                                intent.putExtra("image_url",image_download_url);
+                                                //intent.addFlags(Intent.)
+
+                                                startActivity(intent);
+
+                                            }
+                                        });
+
+
+
+                                    }else {     // task getting download url not success
+
+                                        Toast.makeText(RegAdmin_AsAdmin_Activity.this,"picture successfully uploaded but problem getting url",Toast.LENGTH_SHORT).show();
+
+
+
+                                    }
+
+
+
+
+                                }else {
+
+                                    Toast.makeText(RegAdmin_AsAdmin_Activity.this,"picture successfully uploaded but problem getting url",Toast.LENGTH_SHORT).show();
+
+
+
+                                }
+                            }
+                        }).addOnCanceledListener(new OnCanceledListener() {
+                            @Override
+                            public void onCanceled() {
+
+                                Toast.makeText(RegAdmin_AsAdmin_Activity.this,"picture successfully uploaded but problem getting url",Toast.LENGTH_SHORT).show();
+
 
                             }
                         });
+
 
 
                     }else {

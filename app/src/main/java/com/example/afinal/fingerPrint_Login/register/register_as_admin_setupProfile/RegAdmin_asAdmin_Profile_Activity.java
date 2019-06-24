@@ -14,7 +14,7 @@ import android.net.wifi.WifiManager;
 import androidx.annotation.NonNull;
 
 
-import com.bumptech.glide.Glide;
+
 import com.example.afinal.fingerPrint_Login.PassResult;
 import com.example.afinal.fingerPrint_Login.register.PassResultMap;
 import com.example.afinal.fingerPrint_Login.register.TimePickerFragment;
@@ -71,6 +71,7 @@ public class RegAdmin_asAdmin_Profile_Activity extends AppCompatActivity impleme
     private boolean imagetest;
     private Uri urihere;
     private String count_admin;
+    private String image_url;
 
     public void setPassResult(PassResult passResult){
         this.passResult = passResult;
@@ -176,6 +177,8 @@ public class RegAdmin_asAdmin_Profile_Activity extends AppCompatActivity impleme
         user_phone_asAdmin = intent.getStringExtra("adminPhone_asAdmin");
 
         count_admin = intent.getStringExtra("admin_count");
+
+        image_url = intent.getStringExtra("image_url");
 
 
         Log.i("downloadimagehere,", "name :"+user_name_asAdmin+ " , phone :"+user_phone_asAdmin);
@@ -436,6 +439,8 @@ public class RegAdmin_asAdmin_Profile_Activity extends AppCompatActivity impleme
                                 mapAdminAsUser.put("wed_date","");
                                 mapAdminAsUser.put("thu_date","");
                                 mapAdminAsUser.put("fri_date","");
+
+                                mapAdminAsUser.put("image_url",image_url);
 
 
                                 documentReferenceAdmin_asUser.set(mapAdminAsUser).addOnCompleteListener(new OnCompleteListener<Void>() {

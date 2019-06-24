@@ -132,6 +132,11 @@ public class TestTimeStamp {
     private String thu_date;
     private String fri_date;
 
+    //24june
+
+    private String image_url;
+
+
     public String getMon_date() {
         return mon_date;
     }
@@ -249,6 +254,8 @@ public class TestTimeStamp {
 
     }
 
+
+
     public int getReferenceiD() {
         return referenceiD;
     }
@@ -316,5 +323,13 @@ public class TestTimeStamp {
 
     public void setStorageReference(StorageReference storageReference) {
         this.storageReference = storageReference;
+    }
+
+    public String getImage_url() {
+        return image_url;
+    }
+
+    public void setImage_url(String image_url) {
+        this.image_url = image_url;
     }
 }

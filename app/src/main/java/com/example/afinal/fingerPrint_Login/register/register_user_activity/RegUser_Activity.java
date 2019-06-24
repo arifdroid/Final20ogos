@@ -138,12 +138,19 @@ public class RegUser_Activity extends AppCompatActivity implements View.OnClickL
     private CollectionReference cR_AllUser;
     private DocumentReference dR_User_Top;
     private File image_File;
+    private String image_url_downloaded;
+    private boolean boolean_image_setup;
+    private DocumentReference documentReference_intoUser_Doc;
+    private DocumentReference documentReference_intoUserDoc_2;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.reg_user);
 
+        boolean_image_setup = false;
+
+        image_url_downloaded = "";
 
         boolean_admin_count = false;
 
@@ -800,7 +807,7 @@ public class RegUser_Activity extends AppCompatActivity implements View.OnClickL
 
                         if(task.isSuccessful()){
 
-                            DocumentReference documentReference = FirebaseFirestore.getInstance().collection("all_admin_doc_collections")
+                             documentReference_intoUser_Doc = FirebaseFirestore.getInstance().collection("all_admin_doc_collections")
                                     .document(adminName+adminPhone+"doc").collection("all_employee_thisAdmin_collection")
                                     .document(userName+userPhone+"doc");
 
@@ -839,7 +846,7 @@ public class RegUser_Activity extends AppCompatActivity implements View.OnClickL
 
                             //documentReference
 
-                            documentReference.set(userprofile_data).addOnCompleteListener(new OnCompleteListener<Void>() {
+                            documentReference_intoUser_Doc.set(userprofile_data).addOnCompleteListener(new OnCompleteListener<Void>() {
                                 @Override
                                 public void onComplete(@NonNull Task<Void> task) {
                                     if(task.isSuccessful()){
@@ -855,7 +862,64 @@ public class RegUser_Activity extends AppCompatActivity implements View.OnClickL
                                                     if(task.isSuccessful()){
                                                       //      image boolean
 
-                                                        Toast.makeText(RegUser_Activity.this,"your data successfully uploaded", Toast.LENGTH_SHORT).show();
+
+                                                        storageReference.getDownloadUrl().addOnCompleteListener(new OnCompleteListener<Uri>() {
+                                                            @Override
+                                                            public void onComplete(@NonNull Task<Uri> task) {
+
+                                                                if(task.isSuccessful()){
+
+                                                                    image_url_downloaded = task.getResult().toString();
+
+
+
+                                                                    if(!image_url_downloaded.equals("")){
+
+                                                                        Toast.makeText(RegUser_Activity.this,"your image is successfully uploaded", Toast.LENGTH_SHORT).show();
+
+                                                                        Map<String,Object> putIntoUserDoc = new HashMap<>();
+
+                                                                        putIntoUserDoc.put("image_url",image_url_downloaded);
+
+                                                                        documentReference_intoUser_Doc.set(putIntoUserDoc,SetOptions.merge()).addOnCompleteListener(new OnCompleteListener<Void>() {
+                                                                            @Override
+                                                                            public void onComplete(@NonNull Task<Void> task) {
+
+                                                                            }
+                                                                        });
+
+                                                                    }else {
+
+
+                                                                        Toast.makeText(RegUser_Activity.this,"image is uploaded but url not created", Toast.LENGTH_SHORT).show();
+
+                                                                    }
+
+
+
+                                                                }else {
+
+
+                                                                    Toast.makeText(RegUser_Activity.this,"image is uploaded but url not created", Toast.LENGTH_SHORT).show();
+
+
+                                                                }
+
+                                                            }
+                                                        }).addOnCanceledListener(new OnCanceledListener() {
+                                                            @Override
+                                                            public void onCanceled() {
+
+                                                                Toast.makeText(RegUser_Activity.this,"image is uploaded but url not created", Toast.LENGTH_SHORT).show();
+
+
+                                                            }
+                                                        });
+
+
+
+                                                        boolean_image_setup=true;
+
 
 
                                                     }else {
@@ -1034,7 +1098,7 @@ public class RegUser_Activity extends AppCompatActivity implements View.OnClickL
 
                         if(task.isSuccessful()){
 
-                            DocumentReference documentReference = FirebaseFirestore.getInstance().collection("all_admin_doc_collections")
+                            documentReference_intoUserDoc_2 = FirebaseFirestore.getInstance().collection("all_admin_doc_collections")
                                     .document(adminName+adminPhone+"doc").collection("all_employee_thisAdmin_collection")
                                     .document(userName+userPhone+"doc");
 
@@ -1042,14 +1106,17 @@ public class RegUser_Activity extends AppCompatActivity implements View.OnClickL
 
                             userprofile_data.put("name",userName);
                             userprofile_data.put("phone",userPhone);
-                            userprofile_data.put("image",documentReference.toString());
+
+                            //24 june
+
+                            userprofile_data.put("image_url",image_url_downloaded);
                             //userprofile_data.put("");
 
                             //   textViewMessage.setText("success.. setting up account");
 
                             //documentReference
 
-                            documentReference.set(userprofile_data).addOnCompleteListener(new OnCompleteListener<Void>() {
+                            documentReference_intoUserDoc_2.set(userprofile_data).addOnCompleteListener(new OnCompleteListener<Void>() {
                                 @Override
                                 public void onComplete(@NonNull Task<Void> task) {
                                     if(task.isSuccessful()){
@@ -1066,9 +1133,60 @@ public class RegUser_Activity extends AppCompatActivity implements View.OnClickL
 
                                                     if(task.isSuccessful()){
 
-                                                        Log.i("checkImageUploaded", "1");
 
-                                                        Log.i("checkSharedPreferences ", "before image upload success");
+                                                        storageReference.getDownloadUrl().addOnCompleteListener(new OnCompleteListener<Uri>() {
+                                                            @Override
+                                                            public void onComplete(@NonNull Task<Uri> task) {
+
+                                                                if(task.isSuccessful()){
+
+                                                                    image_url_downloaded = task.getResult().toString();
+
+
+
+                                                                    if(!image_url_downloaded.equals("")){
+
+                                                                        Toast.makeText(RegUser_Activity.this,"your image is successfully uploaded", Toast.LENGTH_SHORT).show();
+
+
+                                                                        Map<String,Object> putIntoUserDoc = new HashMap<>();
+
+                                                                        putIntoUserDoc.put("image_url",image_url_downloaded);
+
+                                                                        documentReference_intoUserDoc_2.set(putIntoUserDoc,SetOptions.merge());
+
+                                                                    }else {
+
+
+                                                                        Toast.makeText(RegUser_Activity.this,"image is uploaded but url not created", Toast.LENGTH_SHORT).show();
+
+                                                                    }
+
+
+
+                                                                }else {
+
+
+                                                                    Toast.makeText(RegUser_Activity.this,"image is uploaded but url not created", Toast.LENGTH_SHORT).show();
+
+
+                                                                }
+
+                                                            }
+                                                        }).addOnCanceledListener(new OnCanceledListener() {
+                                                            @Override
+                                                            public void onCanceled() {
+
+                                                                Toast.makeText(RegUser_Activity.this,"image is uploaded but url not created", Toast.LENGTH_SHORT).show();
+
+
+                                                            }
+                                                        });
+
+
+
+                                                        boolean_image_setup=true;
+
 
                                                     }else {
                                                         //task not successful
@@ -1611,6 +1729,9 @@ public class RegUser_Activity extends AppCompatActivity implements View.OnClickL
 
             Query query1 = collectionReference.whereEqualTo("name",userName);   //check if it is written.
 
+
+            //24 june, change to check url
+
             query1.addSnapshotListener(new EventListener<QuerySnapshot>() {
 
                 @Override
@@ -1626,10 +1747,28 @@ public class RegUser_Activity extends AppCompatActivity implements View.OnClickL
                         int size =  queryDocumentSnapshots.size();
                         Log.i("checkSnapShotListener", "2 not null");
 //                                for(DocumentSnapshot documentSnapshot: queryDocumentSnapshots){
-//
+
 //                                }
+                        String testurl = "";
+
+                        for(DocumentSnapshot documentSnapshot:queryDocumentSnapshots.getDocuments()){
+
+
+
+                            for(Map.Entry<String,Object> remap : documentSnapshot.getData().entrySet()){
+
+                                if(remap.getKey().equals("image_url")){
+
+                                    testurl = remap.getValue().toString();
+
+                                }
+
+                            }
+
+                        }
+
 //
-                        if (size>=1){
+                        if (!testurl.equals("")){
 
                             //move to next activity?
 

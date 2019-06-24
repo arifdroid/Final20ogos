@@ -152,6 +152,11 @@ public class TimeStampFireStore_Handler  extends Observable {
 
                             //17 june >>>>>>>>>>>>>>
 
+                            if(kk.getKey().equals("image_url")){
+
+                                object.setImage_url(kk.getValue().toString());
+                            }
+
                             if (kk.getKey().equals("mon_date")) {
 
                                 String mondate = kk.getValue().toString();
@@ -427,7 +432,10 @@ public class TimeStampFireStore_Handler  extends Observable {
                         //this means, we finish get all data, but no image just yet, now we get the image url
 
 
-                        getThemPicture(testTimeStampsList);
+                       // getThemPicture(testTimeStampsList);
+
+
+                        setReturnListOfEntry(testTimeStampsList);
 
                     }
 
@@ -493,7 +501,6 @@ public class TimeStampFireStore_Handler  extends Observable {
 
                 testTimeStampsList2.get(j).setStorageReference(storageReference);
 
-
 //                Log.i("21_june","[ INSIDE LOOP ] > list size: "+ testTimeStampsList2.size()+" name 1:"+testTimeStampsList2.get(0).getName()+ ", name 2:" + testTimeStampsList2.get(1).getName());
 //
 //                if(j==1){
@@ -534,7 +541,6 @@ public class TimeStampFireStore_Handler  extends Observable {
 //
 //                    }
 //                });
-
             }
 
 
