@@ -66,19 +66,42 @@ public class RecyclerView_Frag_Adapter extends RecyclerView.Adapter<RecyclerView
 //                .centerCrop().fitCenter().into(holder.circleImageView);
 //
 
+        if(hereList.get(position).getImage_url()!=null) {
 
-        Picasso.with(mContext).load(hereList.get(position).getImage_url()).fit().centerCrop()
-                .into(holder.circleImageView);
+            Picasso.with(mContext).load(hereList.get(position).getImage_url()).fit().centerCrop()
+                    .into(holder.circleImageView);
 
-        String date_date = hereList.get(position).getDate().substring(0,2);
-        String date_month = hereList.get(position).getDate().substring(3,6);
+        }
+
+        if(hereList.get(position).getDate()!=null) {
+
+            //String checkfirstDate = hereList.get(position).getDate().substring(0, 1);
+
+            //if (Integer.valueOf(checkfirstDate) >= 1 && Integer.valueOf(checkfirstDate) <= 9) {
+
+             if(!hereList.get(position).getDate().equals("")){
+
+                //since date can be 1 april, 4 april , 20 april, 12 april, 30 april, not 40 april, or 0 april
+
+            String date_date = hereList.get(position).getDate().substring(0, 2);
+            String date_month = hereList.get(position).getDate().substring(3, 6);
 
 
-        holder.textViewDate_month_input.setText(date_month);
+            holder.textViewDate_month_input.setText(date_month);
 
-        holder.textViewDate_input.setText(date_date);
-        holder.textViewStatus_input.setText(hereList.get(position).getStatus());
-        holder.textViewTime_input.setText(hereList.get(position).getTime());
+
+            holder.textViewDate_input.setText(date_date);
+
+        }
+        }
+
+        if(hereList.get(position).getStatus()!=null) {
+            holder.textViewStatus_input.setText(hereList.get(position).getStatus());
+        }
+
+        if(hereList.get(position).getTime()!=null) {
+            holder.textViewTime_input.setText(hereList.get(position).getTime());
+        }
 
 
     }

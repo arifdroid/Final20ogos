@@ -155,6 +155,7 @@ public class TimeStampFireStore_Handler  extends Observable {
                             if(kk.getKey().equals("image_url")){
 
                                 object.setImage_url(kk.getValue().toString());
+
                             }
 
                             if (kk.getKey().equals("mon_date")) {
