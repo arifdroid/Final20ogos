@@ -100,6 +100,17 @@ public class RecyclerView_Frag_Adapter extends RecyclerView.Adapter<RecyclerView
         }
 
         if(hereList.get(position).getTime()!=null) {
+
+            if(hereList.get(position).getTime().equals("8")){
+
+                holder.textViewTime_input.setText("8:00");
+
+
+            }else if(hereList.get(position).getTime().equals("17")){
+
+                holder.textViewTime_input.setText("17:00");
+
+            }
             holder.textViewTime_input.setText(hereList.get(position).getTime());
         }
 

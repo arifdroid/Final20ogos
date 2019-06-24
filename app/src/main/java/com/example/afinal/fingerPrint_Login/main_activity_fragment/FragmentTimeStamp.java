@@ -366,6 +366,10 @@ public class FragmentTimeStamp extends Fragment implements Observer, View.OnClic
 
         dataSet.setColor(ContextCompat.getColor(getContext(), R.color.colorPrimary));
 
+        chart.setBorderColor(ContextCompat.getColor(getContext(), R.color.material_white));
+
+
+
 
         dataSet.getEntryForIndex(1).setIcon(ContextCompat.getDrawable(getContext(), R.drawable.ic_error_outline_black_24dp));
         //dataSet.getEntryForIndex(1).
@@ -1335,6 +1339,10 @@ public class FragmentTimeStamp extends Fragment implements Observer, View.OnClic
 
             //adding setup
 
+            //chart.setBorderColor(Color.w);
+
+
+
             for (int i = 0; i < dataSetArrayList_Final.size(); i++) {
 
                 dataSetArrayList_Final.get(i).setAxisDependency(YAxis.AxisDependency.LEFT);
@@ -1346,6 +1354,9 @@ public class FragmentTimeStamp extends Fragment implements Observer, View.OnClic
 
                 legendEntry_Morning.formColor = colors[j];
                 dataSetArrayList_Final.get(j).setColor(colors[j]);
+
+               // dataSetArrayList_Final.get(j).setValueTextColor(ContextCompat.getColor(getContext(), R.color.material_white_blue));
+
                 dataSetArrayList_Final.get(j).notifyDataSetChanged();
                 legendEntry_Morning.label = entryMorningArrayList.get(j).getName();
                 entrieList.add(legendEntry_Morning);
@@ -1359,6 +1370,9 @@ public class FragmentTimeStamp extends Fragment implements Observer, View.OnClic
 
                 // legendEntry_Evening.formColor = colors[j];
                 dataSetArrayList_Final.get(j + offset).setColor(colors[j]);
+
+             //   dataSetArrayList_Final.get(j).setValueTextColor(ContextCompat.getColor(getContext(), R.color.material_white_blue));
+
                 dataSetArrayList_Final.get(j + offset).notifyDataSetChanged();
                 //legendEntry_Morning.label = entryMorningArrayList.get(j).getName();
                 // legendEntry_Evening.label = "NONE";
@@ -1374,6 +1388,16 @@ public class FragmentTimeStamp extends Fragment implements Observer, View.OnClic
             // dataSetArrayList_Final.get(4).setLabel();
 
             legend.setCustom(entrieList);
+
+            legend.setTextColor(ContextCompat.getColor(getContext(), R.color.material_white_blue));
+
+
+
+            //data.color
+
+            //24junecolor
+            chart.setGridBackgroundColor(ContextCompat.getColor(getContext(), R.color.material_white));
+
 
 
             data.notifyDataChanged();
