@@ -1784,12 +1784,23 @@ public class FragmentTimeStamp extends Fragment implements Observer, View.OnClic
 
 
 
-                            if(before_show_boolean) {
-                                showButton();
-                            }
+//                            if(before_show_boolean) {
+//                                showButton();
+//                            }
                         }
 
                         //if(timer.)
+
+                        if(before_show_boolean){
+
+                            getActivity().runOnUiThread(new Runnable() {
+                                @Override
+                                public void run() {
+                                    showButton();
+                                }
+                            });
+
+                        }
 
 
                     }
@@ -1875,17 +1886,23 @@ public class FragmentTimeStamp extends Fragment implements Observer, View.OnClic
                             Log.i("flowShowbutton", "2");
 
 
-                            if(before_show_boolean){
-                                showButton();
-                            }
+
                         }
 
 
                         if(before_show_boolean){
-                            showButton();
+
+                            getActivity().runOnUiThread(new Runnable() {
+                                @Override
+                                public void run() {
+                                    showButton();
+                                }
+                            });
+
                         }
                         Log.i("flowShowbutton", "3");
                     }
+
                 },0,4000);
 
                 Log.i("flowShowbutton", "4");
@@ -2000,19 +2017,17 @@ public class FragmentTimeStamp extends Fragment implements Observer, View.OnClic
 //        }
 
 //
-        ObjectAnimator animator = ObjectAnimator.ofFloat(fButtonToday,"translationY",70f);
+        ObjectAnimator animator = ObjectAnimator.ofFloat(fButtonToday,"translationY",0f);
 
-        fButtonToday.animate()
-                .alpha(1f)
-                .setDuration(200)
-                .setListener(null);
+        Animation fadeIn2 = AnimationUtils.loadAnimation(getContext(),R.anim.fadein);
+        fButtonToday.startAnimation(fadeIn2);
 
         animator.setDuration(200);
         animator.start();
 
         //// button week
 
-        ObjectAnimator animator2 = ObjectAnimator.ofFloat(fButtonWeeek,"translationY",70f);
+        ObjectAnimator animator2 = ObjectAnimator.ofFloat(fButtonWeeek,"translationY",0f);
 
         animator2.setDuration(200);
         animator2.start();
@@ -2022,7 +2037,7 @@ public class FragmentTimeStamp extends Fragment implements Observer, View.OnClic
 
         //// button rse
 
-        ObjectAnimator animator3 = ObjectAnimator.ofFloat(fButtonReset,"translationY",70f);
+        ObjectAnimator animator3 = ObjectAnimator.ofFloat(fButtonReset,"translationY",0f);
 
         animator3.setDuration(200);
         animator3.start();
@@ -2032,7 +2047,7 @@ public class FragmentTimeStamp extends Fragment implements Observer, View.OnClic
 
         //text view today
 
-        ObjectAnimator animator_text_today = ObjectAnimator.ofFloat(textView_today,"translationY",70f);
+        ObjectAnimator animator_text_today = ObjectAnimator.ofFloat(textView_today,"translationY",0f);
 
         animator_text_today.setDuration(200);
         animator_text_today.start();
@@ -2043,7 +2058,7 @@ public class FragmentTimeStamp extends Fragment implements Observer, View.OnClic
 
         //text view today
 
-        ObjectAnimator animator_text_week = ObjectAnimator.ofFloat(textView_week,"translationY",70f);
+        ObjectAnimator animator_text_week = ObjectAnimator.ofFloat(textView_week,"translationY",0f);
 
         animator_text_week.setDuration(200);
         animator_text_week.start();
@@ -2053,7 +2068,7 @@ public class FragmentTimeStamp extends Fragment implements Observer, View.OnClic
 
         //text view resrt
 
-        ObjectAnimator animator_text_reset = ObjectAnimator.ofFloat(textView_clear_chart,"translationY",70f);
+        ObjectAnimator animator_text_reset = ObjectAnimator.ofFloat(textView_clear_chart,"translationY",0f);
 
         animator_text_reset.setDuration(200);
         animator_text_reset.start();
@@ -2073,19 +2088,23 @@ public class FragmentTimeStamp extends Fragment implements Observer, View.OnClic
         //// button today
 
 
-        ObjectAnimator animator = ObjectAnimator.ofFloat(fButtonToday,"translationY",-70f);
+        ObjectAnimator animator = ObjectAnimator.ofFloat(fButtonToday,"translationY",70f);
 
-        fButtonToday.animate()
-                .alpha(0f)
-                .setDuration(200)
-                .setListener(null);
-
+//        fButtonToday.animate()
+//                .alpha(0f)
+//                .setDuration(200)
+//                .setListener(null);
+//
         animator.setDuration(200);
         animator.start();
 
+        Animation fadeOutToday = AnimationUtils.loadAnimation(getContext(),R.anim.fadeout);
+        fButtonToday.startAnimation(fadeOutToday);
+
+
         //// button week
 
-        ObjectAnimator animator2 = ObjectAnimator.ofFloat(fButtonWeeek,"translationY",-70f);
+        ObjectAnimator animator2 = ObjectAnimator.ofFloat(fButtonWeeek,"translationY",70f);
 
         animator2.setDuration(200);
         animator2.start();
@@ -2095,7 +2114,7 @@ public class FragmentTimeStamp extends Fragment implements Observer, View.OnClic
 
         //// button rse
 
-        ObjectAnimator animator3 = ObjectAnimator.ofFloat(fButtonReset,"translationY",-70f);
+        ObjectAnimator animator3 = ObjectAnimator.ofFloat(fButtonReset,"translationY",70f);
 
         animator3.setDuration(200);
         animator3.start();
@@ -2105,7 +2124,7 @@ public class FragmentTimeStamp extends Fragment implements Observer, View.OnClic
 
        //text view today
 
-        ObjectAnimator animator_text_today = ObjectAnimator.ofFloat(textView_today,"translationY",-70f);
+        ObjectAnimator animator_text_today = ObjectAnimator.ofFloat(textView_today,"translationY",70f);
 
         animator_text_today.setDuration(200);
         animator_text_today.start();
@@ -2116,7 +2135,7 @@ public class FragmentTimeStamp extends Fragment implements Observer, View.OnClic
 
         //text view today
 
-        ObjectAnimator animator_text_week = ObjectAnimator.ofFloat(textView_week,"translationY",-70f);
+        ObjectAnimator animator_text_week = ObjectAnimator.ofFloat(textView_week,"translationY",70f);
 
         animator_text_week.setDuration(200);
         animator_text_week.start();
@@ -2126,7 +2145,7 @@ public class FragmentTimeStamp extends Fragment implements Observer, View.OnClic
 
         //text view resrt
 
-        ObjectAnimator animator_text_reset = ObjectAnimator.ofFloat(textView_clear_chart,"translationY",-70f);
+        ObjectAnimator animator_text_reset = ObjectAnimator.ofFloat(textView_clear_chart,"translationY",70f);
 
         animator_text_reset.setDuration(200);
         animator_text_reset.start();
@@ -2160,10 +2179,12 @@ public class FragmentTimeStamp extends Fragment implements Observer, View.OnClic
         Log.i("flowShowbutton", "6");
 
         if(timer_today!=null) {
+            timer_today.cancel();
             timer_today.purge();
         }
 
         if(timer!=null) {
+            timer.cancel();
             timer.purge();
         }
 
