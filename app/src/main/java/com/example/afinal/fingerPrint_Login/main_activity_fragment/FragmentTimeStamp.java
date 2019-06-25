@@ -1,5 +1,6 @@
 package com.example.afinal.fingerPrint_Login.main_activity_fragment;
 
+import android.animation.ObjectAnimator;
 import android.content.Intent;
 import android.graphics.Color;
 import android.os.Bundle;
@@ -15,7 +16,10 @@ import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.view.animation.Animation;
+import android.view.animation.AnimationUtils;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import com.example.afinal.R;
 import com.example.afinal.fingerPrint_Login.customclass.OurLayoutManager;
@@ -61,6 +65,12 @@ public class FragmentTimeStamp extends Fragment implements Observer, View.OnClic
     private String date;
     private Handler mTimerHandler_today;
     private Timer timer_today;
+
+    //25june
+
+    private TextView textView_today, textView_week,textView_clear_chart;
+    private boolean boolean_halt_back;
+    private boolean before_show_boolean;
 
     //interface pass result.
 
@@ -208,9 +218,20 @@ public class FragmentTimeStamp extends Fragment implements Observer, View.OnClic
         //textView = rootView.findViewById(R.id.bottom_nav_fragment_timeStamp_textView);
 
 
+        textView_today = rootView.findViewById(R.id.textView_who_late_week_id);
+        textView_week = rootView.findViewById(R.id.textView_who_late_today_id);
+        textView_clear_chart = rootView.findViewById(R.id.textView_clear_chart_id);
+
+
+        boolean_halt_back = false;
+
+        ///
+
         today = Main_BottomNav_Activity.dayToday;
         date = Main_BottomNav_Activity.dateToday;
 
+
+        before_show_boolean =false;
 
        // need to use timestamp, then process it later. in retrieving part.
 
@@ -1414,7 +1435,7 @@ public class FragmentTimeStamp extends Fragment implements Observer, View.OnClic
     }
 
 
-    private void setupWhosLate(){
+    private void setupWhosLate_todayReal(){
 
         //for(LineDataSet dataSet: dataSetArrayList_Final){
         int todayHere=0;
@@ -1562,7 +1583,7 @@ public class FragmentTimeStamp extends Fragment implements Observer, View.OnClic
 
     }
 
-    private void setupWhosLate_Today(){
+    private void setupWhosLate_Week(){
 
         //for(LineDataSet dataSet: dataSetArrayList_Final){
 
@@ -1696,15 +1717,26 @@ public class FragmentTimeStamp extends Fragment implements Observer, View.OnClic
 
                 chart.fitScreen();
 
+                //banish button
+
+                //banishButton();
+
+                //
+
                 break;
 
             case R.id.bottomNav_floatButtonShowLateWeeklyiD:
+
+                //boolean halt to back until finish animation
+
+
+                boolean_halt_back = true;
 
                 loopCount=0;
 
                 //logic for who we want to view. , so we need an array record, which entry is late. , correspond to who is late.
 
-                setupWhosLate(); //setup data first.
+                setupWhosLate_Week(); //setup data first.
 
 
 
@@ -1749,22 +1781,50 @@ public class FragmentTimeStamp extends Fragment implements Observer, View.OnClic
                         }else {
 
                             resizechart_andStopLoop();
+
+
+
+                            if(before_show_boolean) {
+                                showButton();
+                            }
                         }
+
+                        //if(timer.)
+
+
                     }
+
                 },0,4000);
                 //problem with this method, will increase exponentially everytime executed.
                 //for small number, no problem, when number gets bigger, we will run into problem.
                 Log.i("checkLate ", " name :" + dataSetArrayList_Final.get(4).getLabel() + " , x: " + dataSetArrayList_Final.get(4).getEntryForIndex(2).getX() + " , y: " + dataSetArrayList_Final.get(4).getEntryForIndex(2).getY());
 
 
+                //banish button
+
+                banishButton();
+
+                //
+
                 break;
 
 
             case R.id.bottomNav_floatButtonShowLateToday2iD:
 
+                //animate all these buttons out of frame.
+
+                boolean_halt_back = true;
+
+                Log.i("flowShowbutton", "99 button pushed");
+
+                //  ObjectAnimator animator = ObjectAnimator.ofFloat(fButtonToday)
+
+
+                ////
+
                 loopCount=0;
 
-                setupWhosLate_Today(); //setup data first.
+                setupWhosLate_todayReal(); //setup data first.
 
                 mTimerHandler_today = new Handler();
 
@@ -1783,7 +1843,12 @@ public class FragmentTimeStamp extends Fragment implements Observer, View.OnClic
                     public void run() {
 
 
+                        Log.i("flowShowbutton", "99._1 timer_task");
+
+
                         if(loopCount<finalPointerArrayList.size()) {
+
+                            Log.i("flowShowbutton", "99._2 timer_task");
 
                             loopWhosLate();
                             // this will not work, because, ,,
@@ -1794,47 +1859,322 @@ public class FragmentTimeStamp extends Fragment implements Observer, View.OnClic
                                 @Override
                                 public void run() {
                                     textView.setText(loopCount+"");
+
+                                    Log.i("flowShowbutton", "99._4 timer_task");
                                 }
                             });
 
+                            Log.i("flowShowbutton", "99._3 timer_task");
 
                         }else {
 
+                            Log.i("flowShowbutton", "1");
+
                             resizechart_andStopLoop();
+
+                            Log.i("flowShowbutton", "2");
+
+
+                            if(before_show_boolean){
+                                showButton();
+                            }
                         }
+
+
+                        if(before_show_boolean){
+                            showButton();
+                        }
+                        Log.i("flowShowbutton", "3");
                     }
                 },0,4000);
+
+                Log.i("flowShowbutton", "4");
+                //banish button
+
+                banishButton();
+
+                if(before_show_boolean){
+                    showButton();
+                }
+
+                //
 
                 break;
 
 
             case R.id.bottomNav_floatButtonBackiD:
 
+                //boolean_halt_back = true;
 
-                Intent intent = new Intent(getActivity(), FingerPrint_LogIn_Final_Activity.class);
-                //finish();
-                startActivity(intent);
+                if(!boolean_halt_back) {
+
+                    Intent intent = new Intent(getActivity(), FingerPrint_LogIn_Final_Activity.class);
+                    //finish();
+                    startActivity(intent);
+
+                }else {
+
+                    Toast.makeText(getContext(),"please wait until animation finish", Toast.LENGTH_SHORT).show();
+
+                }
                 break;
 
         }
     }
 
+    //showButton()
+
+    private void showButton(){
+
+
+        //// button today
+
+//        try {
+//            wait(1500);
+//
+//
+//            ObjectAnimator animator = ObjectAnimator.ofFloat(fButtonToday,"translationY",70f);
+//
+//            fButtonToday.animate()
+//                    .alpha(1f)
+//                    .setDuration(200)
+//                    .setListener(null);
+//
+//            animator.setDuration(200);
+//            animator.start();
+//
+//            //// button week
+//
+//            ObjectAnimator animator2 = ObjectAnimator.ofFloat(fButtonWeeek,"translationY",70f);
+//
+//            animator2.setDuration(200);
+//            animator2.start();
+//
+//            Animation fadeIn = AnimationUtils.loadAnimation(getContext(),R.anim.fadein);
+//            fButtonWeeek.startAnimation(fadeIn);
+//
+//            //// button rse
+//
+//            ObjectAnimator animator3 = ObjectAnimator.ofFloat(fButtonReset,"translationY",70f);
+//
+//            animator3.setDuration(200);
+//            animator3.start();
+//
+//            Animation fadeOut2 = AnimationUtils.loadAnimation(getContext(),R.anim.fadein);
+//            fButtonReset.startAnimation(fadeOut2);
+//
+//            //text view today
+//
+//            ObjectAnimator animator_text_today = ObjectAnimator.ofFloat(textView_today,"translationY",70f);
+//
+//            animator_text_today.setDuration(200);
+//            animator_text_today.start();
+//
+//            Animation fadeOut_text_today = AnimationUtils.loadAnimation(getContext(),R.anim.fadein);
+//            textView_today.startAnimation(fadeOut_text_today);
+//
+//
+//            //text view today
+//
+//            ObjectAnimator animator_text_week = ObjectAnimator.ofFloat(textView_week,"translationY",70f);
+//
+//            animator_text_week.setDuration(200);
+//            animator_text_week.start();
+//
+//            Animation fadeOut_text_week = AnimationUtils.loadAnimation(getContext(),R.anim.fadein);
+//            textView_week.startAnimation(fadeOut_text_week);
+//
+//            //text view resrt
+//
+//            ObjectAnimator animator_text_reset = ObjectAnimator.ofFloat(textView_clear_chart,"translationY",70f);
+//
+//            animator_text_reset.setDuration(200);
+//            animator_text_reset.start();
+//
+//            Animation fadeOut_text_reset = AnimationUtils.loadAnimation(getContext(),R.anim.fadein);
+//            textView_clear_chart.startAnimation(fadeOut_text_reset);
+//
+//            before_show_boolean =false;
+//        } catch (InterruptedException e) {
+//            e.printStackTrace();
+//        }
+
+//
+        ObjectAnimator animator = ObjectAnimator.ofFloat(fButtonToday,"translationY",70f);
+
+        fButtonToday.animate()
+                .alpha(1f)
+                .setDuration(200)
+                .setListener(null);
+
+        animator.setDuration(200);
+        animator.start();
+
+        //// button week
+
+        ObjectAnimator animator2 = ObjectAnimator.ofFloat(fButtonWeeek,"translationY",70f);
+
+        animator2.setDuration(200);
+        animator2.start();
+
+        Animation fadeIn = AnimationUtils.loadAnimation(getContext(),R.anim.fadein);
+        fButtonWeeek.startAnimation(fadeIn);
+
+        //// button rse
+
+        ObjectAnimator animator3 = ObjectAnimator.ofFloat(fButtonReset,"translationY",70f);
+
+        animator3.setDuration(200);
+        animator3.start();
+
+        Animation fadeOut2 = AnimationUtils.loadAnimation(getContext(),R.anim.fadein);
+        fButtonReset.startAnimation(fadeOut2);
+
+        //text view today
+
+        ObjectAnimator animator_text_today = ObjectAnimator.ofFloat(textView_today,"translationY",70f);
+
+        animator_text_today.setDuration(200);
+        animator_text_today.start();
+
+        Animation fadeOut_text_today = AnimationUtils.loadAnimation(getContext(),R.anim.fadein);
+        textView_today.startAnimation(fadeOut_text_today);
+
+
+        //text view today
+
+        ObjectAnimator animator_text_week = ObjectAnimator.ofFloat(textView_week,"translationY",70f);
+
+        animator_text_week.setDuration(200);
+        animator_text_week.start();
+
+        Animation fadeOut_text_week = AnimationUtils.loadAnimation(getContext(),R.anim.fadein);
+        textView_week.startAnimation(fadeOut_text_week);
+
+        //text view resrt
+
+        ObjectAnimator animator_text_reset = ObjectAnimator.ofFloat(textView_clear_chart,"translationY",70f);
+
+        animator_text_reset.setDuration(200);
+        animator_text_reset.start();
+
+        Animation fadeOut_text_reset = AnimationUtils.loadAnimation(getContext(),R.anim.fadein);
+        textView_clear_chart.startAnimation(fadeOut_text_reset);
+
+        before_show_boolean =false;
+
+    }
+
+
+    //banish button
+    private void banishButton() {
+
+
+        //// button today
+
+
+        ObjectAnimator animator = ObjectAnimator.ofFloat(fButtonToday,"translationY",-70f);
+
+        fButtonToday.animate()
+                .alpha(0f)
+                .setDuration(200)
+                .setListener(null);
+
+        animator.setDuration(200);
+        animator.start();
+
+        //// button week
+
+        ObjectAnimator animator2 = ObjectAnimator.ofFloat(fButtonWeeek,"translationY",-70f);
+
+        animator2.setDuration(200);
+        animator2.start();
+
+        Animation fadeOut = AnimationUtils.loadAnimation(getContext(),R.anim.fadeout);
+        fButtonWeeek.startAnimation(fadeOut);
+
+        //// button rse
+
+        ObjectAnimator animator3 = ObjectAnimator.ofFloat(fButtonReset,"translationY",-70f);
+
+        animator3.setDuration(200);
+        animator3.start();
+
+        Animation fadeOut2 = AnimationUtils.loadAnimation(getContext(),R.anim.fadeout);
+        fButtonReset.startAnimation(fadeOut2);
+
+       //text view today
+
+        ObjectAnimator animator_text_today = ObjectAnimator.ofFloat(textView_today,"translationY",-70f);
+
+        animator_text_today.setDuration(200);
+        animator_text_today.start();
+
+        Animation fadeOut_text_today = AnimationUtils.loadAnimation(getContext(),R.anim.fadeout);
+        textView_today.startAnimation(fadeOut_text_today);
+
+
+        //text view today
+
+        ObjectAnimator animator_text_week = ObjectAnimator.ofFloat(textView_week,"translationY",-70f);
+
+        animator_text_week.setDuration(200);
+        animator_text_week.start();
+
+        Animation fadeOut_text_week = AnimationUtils.loadAnimation(getContext(),R.anim.fadeout);
+        textView_week.startAnimation(fadeOut_text_week);
+
+        //text view resrt
+
+        ObjectAnimator animator_text_reset = ObjectAnimator.ofFloat(textView_clear_chart,"translationY",-70f);
+
+        animator_text_reset.setDuration(200);
+        animator_text_reset.start();
+
+        Animation fadeOut_text_reset = AnimationUtils.loadAnimation(getContext(),R.anim.fadeout);
+        textView_clear_chart.startAnimation(fadeOut_text_reset);
+
+
+
+
+    }
 
 
     private void resizechart_andStopLoop() {
+
+        //showButton();
+
+        Log.i("flowShowbutton", "5");
+
+
+        boolean_halt_back = false;
 
         chart.centerViewToAnimated(4f, 18f, dataSetArrayList_Final.get(4).getAxisDependency(), 900);
         chart.zoomOut();
         chart.setVisibleXRange(0f, 4f);
         chart.setVisibleYRange(0f, dataSetArrayList_Final.get(1).getYMax(), dataSetArrayList_Final.get(1).getAxisDependency());
 
+        before_show_boolean=true;
 
-        // chart.fitScreen();
-            timer.cancel();
+        // chart.fitScreen();6
+        Log.i("flowShowbutton", "6");
+
+        if(timer_today!=null) {
+            timer_today.purge();
+        }
+
+        if(timer!=null) {
+            timer.purge();
+        }
+
+        Log.i("flowShowbutton", "7");
+
 
     }
 
     private void loopWhosLate(){
+
+        Log.i("flowShowbutton", "99._5 loopwhoslate");
         recyclerView.smoothScrollToPosition(loopCount);
         chart.centerViewToAnimated(dataSetArrayList_Final.get(finalPointerArrayList.get(loopCount).getPointer_1()).getEntryForIndex(finalPointerArrayList.get(loopCount).getPointer_2()).getX(), dataSetArrayList_Final.get(finalPointerArrayList.get(loopCount).getPointer_1()).getEntryForIndex(finalPointerArrayList.get(loopCount).getPointer_2()).getY(), dataSetArrayList_Final.get(4).getAxisDependency(), 1500);
         //chart.centerViewToAnimated(dataSetArrayList_Final.get(finalPointerArrayList.get(loopCount).getPointer_1()));

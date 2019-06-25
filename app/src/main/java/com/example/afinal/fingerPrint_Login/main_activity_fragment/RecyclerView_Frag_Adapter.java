@@ -1,6 +1,7 @@
 package com.example.afinal.fingerPrint_Login.main_activity_fragment;
 
 import android.content.Context;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -98,6 +99,15 @@ public class RecyclerView_Frag_Adapter extends RecyclerView.Adapter<RecyclerView
         if(hereList.get(position).getStatus()!=null) {
             holder.textViewStatus_input.setText(hereList.get(position).getStatus());
         }
+//
+//        if(hereList.get(position).getTime().equals("8")){
+//
+//            holder.textViewTime_input.setText(R.string.morning_default);
+//
+//            Log.i("checkMorning", "value : "+ hereList.get(position).getTime());
+//
+//        }
+
 
         if(hereList.get(position).getTime()!=null) {
 
@@ -110,8 +120,10 @@ public class RecyclerView_Frag_Adapter extends RecyclerView.Adapter<RecyclerView
 
                 holder.textViewTime_input.setText("17:00");
 
+            }else {
+                holder.textViewTime_input.setText(hereList.get(position).getTime());
+
             }
-            holder.textViewTime_input.setText(hereList.get(position).getTime());
         }
 
 

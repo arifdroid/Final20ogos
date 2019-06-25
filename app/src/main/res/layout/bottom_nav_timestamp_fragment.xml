@@ -138,39 +138,39 @@
         app:srcCompat="@drawable/ic_plus_only_final" />
 
     <TextView
-        android:id="@+id/textView24"
+        android:id="@+id/textView_clear_chart_id"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginEnd="24dp"
         android:background="#5CFFFFFF"
         android:elevation="5dp"
-        android:text="TextView"
+        android:text="clear chart"
         android:textColor="@android:color/white"
         app:layout_constraintBottom_toBottomOf="@+id/bottomNav_floatButtonShowLateResetiD"
         app:layout_constraintEnd_toStartOf="@+id/bottomNav_floatButtonShowLateResetiD"
         app:layout_constraintTop_toTopOf="@+id/bottomNav_floatButtonShowLateResetiD" />
 
     <TextView
-        android:id="@+id/textView26"
+        android:id="@+id/textView_who_late_today_id"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginEnd="24dp"
         android:background="#5CFFFFFF"
         android:elevation="5dp"
-        android:text="TextView"
+        android:text="late this week"
         android:textColor="@android:color/white"
         app:layout_constraintBottom_toBottomOf="@+id/bottomNav_floatButtonShowLateWeeklyiD"
         app:layout_constraintEnd_toStartOf="@+id/bottomNav_floatButtonShowLateWeeklyiD"
         app:layout_constraintTop_toTopOf="@+id/bottomNav_floatButtonShowLateWeeklyiD" />
 
     <TextView
-        android:id="@+id/textView25"
+        android:id="@+id/textView_who_late_week_id"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginEnd="24dp"
         android:background="#5CFFFFFF"
         android:elevation="5dp"
-        android:text="TextView"
+        android:text="late today"
         android:textColor="@android:color/white"
         app:layout_constraintBottom_toBottomOf="@+id/bottomNav_floatButtonShowLateToday2iD"
         app:layout_constraintEnd_toStartOf="@+id/bottomNav_floatButtonShowLateToday2iD"
