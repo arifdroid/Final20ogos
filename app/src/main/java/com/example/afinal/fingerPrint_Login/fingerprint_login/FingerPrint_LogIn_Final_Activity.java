@@ -1,6 +1,5 @@
 package com.example.afinal.fingerPrint_Login.fingerprint_login;
 
-import android.Manifest;
 import android.annotation.SuppressLint;
 import android.app.Activity;
 import android.content.Context;
@@ -9,35 +8,34 @@ import androidx.annotation.NonNull;
 import androidx.cardview.widget.CardView;
 import androidx.constraintlayout.widget.ConstraintLayout;
 
+import android.graphics.drawable.Animatable2;
+import android.view.animation.Animation;
+
+
 
 import com.example.afinal.fingerPrint_Login.oop.OnServerTime_Interface;
 
-import com.example.afinal.fingerPrint_Login.sample_test.Sample_Only_Activity;
 import com.google.android.material.bottomnavigation.BottomNavigationView;
 import com.google.android.material.floatingactionbutton.FloatingActionButton;
 
 import androidx.fragment.app.FragmentManager;
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.vectordrawable.graphics.drawable.Animatable2Compat;
 import androidx.vectordrawable.graphics.drawable.AnimatedVectorDrawableCompat;
 
-import android.content.Intent;
-import android.content.pm.PackageManager;
 import android.graphics.drawable.AnimatedVectorDrawable;
 import android.graphics.drawable.Drawable;
 import android.location.Location;
 import android.location.LocationManager;
-import android.media.Image;
 import android.net.wifi.WifiInfo;
 import android.net.wifi.WifiManager;
 import android.os.Build;
 import android.os.Bundle;
 import android.os.Handler;
-import android.text.Editable;
-import android.text.TextWatcher;
 import android.util.Log;
 import android.view.MenuItem;
 import android.view.View;
-import android.widget.Button;
+import android.view.animation.AnimationUtils;
 import android.widget.ImageView;
 import android.widget.TextView;
 import android.widget.Toast;
@@ -453,6 +451,10 @@ public class FingerPrint_LogIn_Final_Activity extends AppCompatActivity implemen
     private Timer timer_finger_animate;
     private Handler timer_handler;
     private int fingerCounter;
+    private ConstraintLayout constrainBox;
+    private TextView textInBox;
+    private ConstraintLayout box_success2;
+    private ConstraintLayout constrainBoxError;
 
 
     //19 june
@@ -463,6 +465,14 @@ public class FingerPrint_LogIn_Final_Activity extends AppCompatActivity implemen
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_finger_print__log_in__final_);
+
+        constrainBox = findViewById(R.id.box_success_id);
+
+        constrainBoxError = findViewById(R.id.box_error3_id);
+
+        textInBox = findViewById(R.id.fingerPrintFinal_textView_MessageInBox2_id);
+
+        box_success2 = findViewById(R.id.box_success2_id);
 
         fingerCounter=0;
 
@@ -774,7 +784,7 @@ public class FingerPrint_LogIn_Final_Activity extends AppCompatActivity implemen
 
                 countUserverified++;
 
-                boxMessageDisplay.setText("fingerprint verified");
+                //boxMessageDisplay.setText("fingerprint verified");
 
                 Log.i("wherelocationRegister :", "FLOW 1, countVerified:" + countUserverified + " , userLatitude: " + userLatitude);
 
@@ -783,7 +793,16 @@ public class FingerPrint_LogIn_Final_Activity extends AppCompatActivity implemen
             } else if (s.equals("try again")) {
                 // userLongitude=null;
 
-                boxMessageDisplay.setText("fingerprint not verified");
+                //boxMessageDisplay.setText("fingerprint not verified");
+
+                Animation fadeOut = AnimationUtils.loadAnimation(FingerPrint_LogIn_Final_Activity.this,R.anim.fadeout);
+                constrainBox.startAnimation(fadeOut);
+
+
+                Animation fadeInError = AnimationUtils.loadAnimation(FingerPrint_LogIn_Final_Activity.this,R.anim.fadein);
+                constrainBoxError.startAnimation(fadeInError);
+
+
 
                 Log.i("checkFinalFlow : ", " 7 backFragment(), try again fingerprint ");
 
@@ -1052,6 +1071,20 @@ public class FingerPrint_LogIn_Final_Activity extends AppCompatActivity implemen
     private void animateFingerPrint(ImageView fingerprint_imageViewhere) {
 
 
+    //    constrainBox.
+
+
+        Animation fadeOut = AnimationUtils.loadAnimation(FingerPrint_LogIn_Final_Activity.this,R.anim.fadeout);
+         constrainBox.startAnimation(fadeOut);
+         //constrainBox.setVisibility(View.INVISIBLE);
+
+         //26 june
+        //box_success2.setVisibility(View.VISIBLE);
+
+        Animation fadeIn = AnimationUtils.loadAnimation(FingerPrint_LogIn_Final_Activity.this,R.anim.fadein);
+        box_success2.startAnimation(fadeIn);
+
+
         boolean_fingerprint_animate=true;
 
         timer_finger_animate= new Timer();
@@ -1076,14 +1109,40 @@ public class FingerPrint_LogIn_Final_Activity extends AppCompatActivity implemen
 
         if(drawable instanceof AnimatedVectorDrawableCompat){
 
-            AnimatedVectorDrawableCompat avd = (AnimatedVectorDrawableCompat) drawable;
+            final AnimatedVectorDrawableCompat avd = (AnimatedVectorDrawableCompat) drawable;
 
             avd.start();
+            avd.registerAnimationCallback(new Animatable2Compat.AnimationCallback() {
+                @Override
+                public void onAnimationEnd(Drawable drawable) {
+                    super.onAnimationEnd(drawable);
+
+                    //outMessageDisplay.setText("");
+                    textInBox.setText("fecthing data..");
+                    avd.clearAnimationCallbacks();
+                }
+            });
+
         }else if (drawable instanceof AnimatedVectorDrawable){
 
-            AnimatedVectorDrawable avd = (AnimatedVectorDrawable) drawable;
+            final AnimatedVectorDrawable avd = (AnimatedVectorDrawable) drawable;
 
             avd.start();
+
+            avd.registerAnimationCallback(new Animatable2.AnimationCallback() {
+                @Override
+                public void onAnimationEnd(Drawable drawable) {
+                    super.onAnimationEnd(drawable);
+
+                    runOnUiThread(new Runnable() {
+                        @Override
+                        public void run() {
+                            textInBox.setText("fecthing data..");
+                            avd.clearAnimationCallbacks();
+                        }
+                    });
+                }
+            });
         }
     }
 

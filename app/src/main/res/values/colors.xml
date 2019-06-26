@@ -28,4 +28,9 @@
     <color name="orang_center">#EF7F56</color>
     <color name="yellow_end">#FAD81A</color>
 
+    <color name="red_error">#B40000</color>
+    <color name="red_error_2">#D95F5F</color>
+    <color name="red_error_3">#E4B9B9</color>
+
+
 </resources>
