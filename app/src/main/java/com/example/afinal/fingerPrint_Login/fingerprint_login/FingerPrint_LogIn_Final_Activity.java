@@ -455,6 +455,8 @@ public class FingerPrint_LogIn_Final_Activity extends AppCompatActivity implemen
     private TextView textInBox;
     private ConstraintLayout box_success2;
     private ConstraintLayout constrainBoxError;
+    private boolean boolean_fingerprint_first;
+    private int fingerprint_count;
 
 
     //19 june
@@ -467,6 +469,10 @@ public class FingerPrint_LogIn_Final_Activity extends AppCompatActivity implemen
         setContentView(R.layout.activity_finger_print__log_in__final_);
 
         constrainBox = findViewById(R.id.box_success_id);
+
+        boolean_fingerprint_first=false;
+
+        fingerprint_count=0;
 
         constrainBoxError = findViewById(R.id.box_error3_id);
 
@@ -776,12 +782,17 @@ public class FingerPrint_LogIn_Final_Activity extends AppCompatActivity implemen
 
             if (s.equals("success verified")) {
 
+                boolean_fingerprint_first=true;
+
+                fingerprint_count++;
+
                // fingerprint_imageView.setImageDrawable(R.drawable.fingerprint_anim);
 
                 fingerprint_imageView.setImageDrawable(getDrawable(R.drawable.fingerprint_anim));
 
-                animateFingerPrint(fingerprint_imageView);
-
+                if(fingerprint_count==1) { //so only called once.
+                    animateFingerPrint(fingerprint_imageView);
+                }
                 countUserverified++;
 
                 //boxMessageDisplay.setText("fingerprint verified");
@@ -790,10 +801,17 @@ public class FingerPrint_LogIn_Final_Activity extends AppCompatActivity implemen
 
                 presenter.getCurrent_User_Admin_Server_Value(nameUser, phoneUser, globalAdminNameHere, globalAdminPhoneHere);
 
+                presenter.stopListetingFingerprint();
+
+                boolean_fingerprint_first=false;
+
             } else if (s.equals("try again")) {
                 // userLongitude=null;
 
                 //boxMessageDisplay.setText("fingerprint not verified");
+
+                boolean_fingerprint_first=false;
+                presenter.stopListetingFingerprint();
 
                 Animation fadeOut = AnimationUtils.loadAnimation(FingerPrint_LogIn_Final_Activity.this,R.anim.fadeout);
                 constrainBox.startAnimation(fadeOut);
@@ -1003,7 +1021,7 @@ public class FingerPrint_LogIn_Final_Activity extends AppCompatActivity implemen
                              }
 
                              }
-                             },0,2000);
+                             },0,2700);
 
 
                             //26 june
@@ -1071,25 +1089,26 @@ public class FingerPrint_LogIn_Final_Activity extends AppCompatActivity implemen
     private void animateFingerPrint(ImageView fingerprint_imageViewhere) {
 
 
-    //    constrainBox.
+        //    constrainBox.
 
+        if (boolean_fingerprint_first) {
 
-        Animation fadeOut = AnimationUtils.loadAnimation(FingerPrint_LogIn_Final_Activity.this,R.anim.fadeout);
-         constrainBox.startAnimation(fadeOut);
-         //constrainBox.setVisibility(View.INVISIBLE);
+        Animation fadeOut = AnimationUtils.loadAnimation(FingerPrint_LogIn_Final_Activity.this, R.anim.fadeout);
+        constrainBox.startAnimation(fadeOut);
+        //constrainBox.setVisibility(View.INVISIBLE);
 
-         //26 june
+        //26 june
         //box_success2.setVisibility(View.VISIBLE);
-
-        Animation fadeIn = AnimationUtils.loadAnimation(FingerPrint_LogIn_Final_Activity.this,R.anim.fadein);
+//
+        Animation fadeIn = AnimationUtils.loadAnimation(FingerPrint_LogIn_Final_Activity.this, R.anim.fadein);
         box_success2.startAnimation(fadeIn);
 
 
-        boolean_fingerprint_animate=true;
+        boolean_fingerprint_animate = true;
 
-        timer_finger_animate= new Timer();
+        timer_finger_animate = new Timer();
 
-      //  timer_handler = new Handler();
+        //  timer_handler = new Handler();
 //        timer_finger_animate.scheduleAtFixedRate(new TimerTask() {
 //            @Override
 //            public void run() {
@@ -1107,43 +1126,45 @@ public class FingerPrint_LogIn_Final_Activity extends AppCompatActivity implemen
         ImageView view = fingerprint_imageViewhere;
         Drawable drawable = view.getDrawable();
 
-        if(drawable instanceof AnimatedVectorDrawableCompat){
+        if (drawable instanceof AnimatedVectorDrawableCompat) {
 
             final AnimatedVectorDrawableCompat avd = (AnimatedVectorDrawableCompat) drawable;
 
             avd.start();
-            avd.registerAnimationCallback(new Animatable2Compat.AnimationCallback() {
-                @Override
-                public void onAnimationEnd(Drawable drawable) {
-                    super.onAnimationEnd(drawable);
+//            avd.registerAnimationCallback(new Animatable2Compat.AnimationCallback() {
+//                @Override
+//                public void onAnimationEnd(Drawable drawable) {
+//                    super.onAnimationEnd(drawable);
+//
+//                    //outMessageDisplay.setText("");
+//                    // textInBox.setText("fecthing data..");
+//                    avd.clearAnimationCallbacks();
+//                }
+//            });
 
-                    //outMessageDisplay.setText("");
-                    textInBox.setText("fecthing data..");
-                    avd.clearAnimationCallbacks();
-                }
-            });
-
-        }else if (drawable instanceof AnimatedVectorDrawable){
+        } else if (drawable instanceof AnimatedVectorDrawable) {
 
             final AnimatedVectorDrawable avd = (AnimatedVectorDrawable) drawable;
 
             avd.start();
 
-            avd.registerAnimationCallback(new Animatable2.AnimationCallback() {
-                @Override
-                public void onAnimationEnd(Drawable drawable) {
-                    super.onAnimationEnd(drawable);
-
-                    runOnUiThread(new Runnable() {
-                        @Override
-                        public void run() {
-                            textInBox.setText("fecthing data..");
-                            avd.clearAnimationCallbacks();
-                        }
-                    });
-                }
-            });
+//            avd.registerAnimationCallback(new Animatable2.AnimationCallback() {
+//                @Override
+//                public void onAnimationEnd(Drawable drawable) {
+//                    super.onAnimationEnd(drawable);
+//
+//                    runOnUiThread(new Runnable() {
+//                        @Override
+//                        public void run() {
+//                            // textInBox.setText("fecthing data..");
+//                            avd.clearAnimationCallbacks();
+//                        }
+//                    });
+//                }
+//            });
         }
+
+    }
     }
 
     private void loginWithLocation(){
@@ -1298,7 +1319,7 @@ public class FingerPrint_LogIn_Final_Activity extends AppCompatActivity implemen
                         }
 
                     }
-                },0,2000);
+                },0,2700);
 
 //                setUserTimeStamp(globalAdminNameHere,globalAdminPhoneHere,nameUser,phoneUser,dateAndTimeNow,userLatitude,userLongitude,morningConstraint,eveningConstraint);
 
@@ -1332,7 +1353,7 @@ public class FingerPrint_LogIn_Final_Activity extends AppCompatActivity implemen
                         }
 
                     }
-                },0,2000);
+                },0,2700);
 
 
                 //26 june
