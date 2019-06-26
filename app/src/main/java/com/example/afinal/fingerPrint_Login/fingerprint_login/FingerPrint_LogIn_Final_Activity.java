@@ -18,11 +18,15 @@ import com.google.android.material.floatingactionbutton.FloatingActionButton;
 
 import androidx.fragment.app.FragmentManager;
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.vectordrawable.graphics.drawable.AnimatedVectorDrawableCompat;
 
 import android.content.Intent;
 import android.content.pm.PackageManager;
+import android.graphics.drawable.AnimatedVectorDrawable;
+import android.graphics.drawable.Drawable;
 import android.location.Location;
 import android.location.LocationManager;
+import android.media.Image;
 import android.net.wifi.WifiInfo;
 import android.net.wifi.WifiManager;
 import android.os.Build;
@@ -52,6 +56,8 @@ import java.util.Date;
 import java.util.Map;
 import java.util.Observable;
 import java.util.Observer;
+import java.util.Timer;
+import java.util.TimerTask;
 
 // https://stackoverflow.com/questions/8077728/how-to-prevent-the-activity-from-loading-twice-on-pressing-the-button
 
@@ -441,28 +447,28 @@ public class FingerPrint_LogIn_Final_Activity extends AppCompatActivity implemen
     private String dateFromPhone="";
     private String amOrPmFromPhone="";
 
+    //26 june
+    private ImageView fingerprint_imageView;
+    private boolean boolean_fingerprint_animate;
+    private Timer timer_finger_animate;
+    private Handler timer_handler;
+    private int fingerCounter;
+
 
     //19 june
 
-    private Button buttontestImage;
+
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_finger_print__log_in__final_);
 
-        buttontestImage = findViewById(R.id.buttonTestImageID);
+        fingerCounter=0;
 
-        buttontestImage.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
+        boolean_fingerprint_animate=false;
 
-                Intent intent33 = new Intent(FingerPrint_LogIn_Final_Activity.this, Sample_Only_Activity.class);
-                startActivity(intent33);
-
-            }
-        });
-
+        fingerprint_imageView = findViewById(R.id.imageView_fingerPrint_id);
         booleanResultExtracted = false;
 
         bottomNavigationView = findViewById(R.id.bottomNavigationView_fingerprint);
@@ -760,6 +766,12 @@ public class FingerPrint_LogIn_Final_Activity extends AppCompatActivity implemen
 
             if (s.equals("success verified")) {
 
+               // fingerprint_imageView.setImageDrawable(R.drawable.fingerprint_anim);
+
+                fingerprint_imageView.setImageDrawable(getDrawable(R.drawable.fingerprint_anim));
+
+                animateFingerPrint(fingerprint_imageView);
+
                 countUserverified++;
 
                 boxMessageDisplay.setText("fingerprint verified");
@@ -923,7 +935,7 @@ public class FingerPrint_LogIn_Final_Activity extends AppCompatActivity implemen
             //here we process
 
 
-            if (checkAdminConstraintProcess == true && checkLocationProcess == true && dateAndTimeNow != null && !dateAndTimeNow.equals("") && s.equals("success verified")) { //meaning all data being fetch
+            if (checkAdminConstraintProcess == true && checkLocationProcess == true && dateAndTimeNow != null && !dateAndTimeNow.equals("") && boolean_fingerprint_animate) { //meaning all data being fetch
 
 //            if(morningConstraint!=null &&eveningConstraint!=null && dateAndTimeNow!=null && userLongitude!=null && userLatitude!=null
 //        && latitudeConstraint!=null && longitudeConstraint!=null && userBSSID!=null && userSSID!=null
@@ -957,7 +969,26 @@ public class FingerPrint_LogIn_Final_Activity extends AppCompatActivity implemen
 
                             presenter.deleteObserver(this);
 
+                            timer_finger_animate.scheduleAtFixedRate(new TimerTask() {
+                             @Override
+                             public void run() {
+                             fingerCounter++;
+
+
+
+                             if(fingerCounter>=2){
+
                             setUserTimeStamp(globalAdminNameHere, globalAdminPhoneHere, nameUser, phoneUser, dateAndTimeNow, userLatitude, userLongitude, morningConstraint, eveningConstraint);
+                             timer_finger_animate.cancel();
+                             timer_finger_animate.purge();
+                             }
+
+                             }
+                             },0,2000);
+
+
+                            //26 june
+//                            setUserTimeStamp(globalAdminNameHere, globalAdminPhoneHere, nameUser, phoneUser, dateAndTimeNow, userLatitude, userLongitude, morningConstraint, eveningConstraint);
 
 
                         } else { //if bssid different might need to check other bssid available by admin.
@@ -1016,6 +1047,44 @@ public class FingerPrint_LogIn_Final_Activity extends AppCompatActivity implemen
         presenter.deleteObserver(this);
     }
 
+    }
+
+    private void animateFingerPrint(ImageView fingerprint_imageViewhere) {
+
+
+        boolean_fingerprint_animate=true;
+
+        timer_finger_animate= new Timer();
+
+      //  timer_handler = new Handler();
+//        timer_finger_animate.scheduleAtFixedRate(new TimerTask() {
+//            @Override
+//            public void run() {
+//                fingerCounter++;
+//                boolean_fingerprint_animate=true;
+//                if(fingerCounter>=2){
+//
+//                    timer_finger_animate.cancel();
+//                    timer_finger_animate.purge();
+//
+//                }
+//            }
+//        },0,4000);
+
+        ImageView view = fingerprint_imageViewhere;
+        Drawable drawable = view.getDrawable();
+
+        if(drawable instanceof AnimatedVectorDrawableCompat){
+
+            AnimatedVectorDrawableCompat avd = (AnimatedVectorDrawableCompat) drawable;
+
+            avd.start();
+        }else if (drawable instanceof AnimatedVectorDrawable){
+
+            AnimatedVectorDrawable avd = (AnimatedVectorDrawable) drawable;
+
+            avd.start();
+        }
     }
 
     private void loginWithLocation(){
@@ -1151,7 +1220,28 @@ public class FingerPrint_LogIn_Final_Activity extends AppCompatActivity implemen
 
                 Toast.makeText(this,"distance within provided, distance: "+ distanceOffset,Toast.LENGTH_LONG).show();
 
-                setUserTimeStamp(globalAdminNameHere,globalAdminPhoneHere,nameUser,phoneUser,dateAndTimeNow,userLatitude,userLongitude,morningConstraint,eveningConstraint);
+
+                //26 june
+
+
+                timer_finger_animate.scheduleAtFixedRate(new TimerTask() {
+                    @Override
+                    public void run() {
+                        fingerCounter++;
+
+
+
+                        if(fingerCounter>=2){
+
+                          //  setUserTimeStamp(globalAdminNameHere,globalAdminPhoneHere,nameUser,phoneUser,dateAndTimeNow,userLatitude,userLongitude,morningConstraint,eveningConstraint);
+                            timer_finger_animate.cancel();
+                            timer_finger_animate.purge();
+                        }
+
+                    }
+                },0,2000);
+
+//                setUserTimeStamp(globalAdminNameHere,globalAdminPhoneHere,nameUser,phoneUser,dateAndTimeNow,userLatitude,userLongitude,morningConstraint,eveningConstraint);
 
                 userLatitude=null;
 
@@ -1168,7 +1258,27 @@ public class FingerPrint_LogIn_Final_Activity extends AppCompatActivity implemen
 
                 Toast.makeText(this,"distance outside provided "+ distanceOffset,Toast.LENGTH_LONG).show();
 
-                setUserTimeStamp(globalAdminNameHere,globalAdminPhoneHere,nameUser,phoneUser,dateAndTimeNow,userLatitude,userLongitude,morningConstraint,eveningConstraint);
+                timer_finger_animate.scheduleAtFixedRate(new TimerTask() {
+                    @Override
+                    public void run() {
+                        fingerCounter++;
+
+
+
+                        if(fingerCounter>=2){
+
+                            setUserTimeStamp(globalAdminNameHere,globalAdminPhoneHere,nameUser,phoneUser,dateAndTimeNow,userLatitude,userLongitude,morningConstraint,eveningConstraint);
+                            timer_finger_animate.cancel();
+                            timer_finger_animate.purge();
+                        }
+
+                    }
+                },0,2000);
+
+
+                //26 june
+
+             //   setUserTimeStamp(globalAdminNameHere,globalAdminPhoneHere,nameUser,phoneUser,dateAndTimeNow,userLatitude,userLongitude,morningConstraint,eveningConstraint);
 
 
                 //recorded location to admin, and send notification to admin.
