@@ -457,6 +457,7 @@ public class FingerPrint_LogIn_Final_Activity extends AppCompatActivity implemen
     private ConstraintLayout constrainBoxError;
     private boolean boolean_fingerprint_first;
     private int fingerprint_count;
+    private boolean animation_fingerprint_ended_boolean;
 
 
     //19 june
@@ -467,6 +468,8 @@ public class FingerPrint_LogIn_Final_Activity extends AppCompatActivity implemen
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_finger_print__log_in__final_);
+
+        animation_fingerprint_ended_boolean=false;
 
         constrainBox = findViewById(R.id.box_success_id);
 
@@ -764,6 +767,11 @@ public class FingerPrint_LogIn_Final_Activity extends AppCompatActivity implemen
 
     }
 
+    //27june, we need to set, another thread timer, to check if wifi, location existed, dont count
+    //depended on update method, being updated.
+
+
+
     @Override
     public void update(Observable o, Object arg) {
 
@@ -1013,9 +1021,11 @@ public class FingerPrint_LogIn_Final_Activity extends AppCompatActivity implemen
 
 
 
-                             if(fingerCounter>=2){
+                             //if(fingerCounter>=2 && animation_fingerprint_ended_boolean){
 
-                            setUserTimeStamp(globalAdminNameHere, globalAdminPhoneHere, nameUser, phoneUser, dateAndTimeNow, userLatitude, userLongitude, morningConstraint, eveningConstraint);
+                             if(fingerCounter>=2 ){
+
+                             setUserTimeStamp(globalAdminNameHere, globalAdminPhoneHere, nameUser, phoneUser, dateAndTimeNow, userLatitude, userLongitude, morningConstraint, eveningConstraint);
                              timer_finger_animate.cancel();
                              timer_finger_animate.purge();
                              }
@@ -1128,17 +1138,19 @@ public class FingerPrint_LogIn_Final_Activity extends AppCompatActivity implemen
 
         if (drawable instanceof AnimatedVectorDrawableCompat) {
 
-            final AnimatedVectorDrawableCompat avd = (AnimatedVectorDrawableCompat) drawable;
+            final AnimatedVectorDrawableCompat avd1 = (AnimatedVectorDrawableCompat) drawable;
 
-            avd.start();
-//            avd.registerAnimationCallback(new Animatable2Compat.AnimationCallback() {
+            avd1.start();
+//            avd1.registerAnimationCallback(new Animatable2Compat.AnimationCallback() {
 //                @Override
 //                public void onAnimationEnd(Drawable drawable) {
 //                    super.onAnimationEnd(drawable);
 //
 //                    //outMessageDisplay.setText("");
 //                    // textInBox.setText("fecthing data..");
-//                    avd.clearAnimationCallbacks();
+//
+//                    animation_fingerprint_ended_boolean=true;
+//                    avd1.clearAnimationCallbacks();
 //                }
 //            });
 
@@ -1153,13 +1165,17 @@ public class FingerPrint_LogIn_Final_Activity extends AppCompatActivity implemen
 //                public void onAnimationEnd(Drawable drawable) {
 //                    super.onAnimationEnd(drawable);
 //
-//                    runOnUiThread(new Runnable() {
-//                        @Override
-//                        public void run() {
-//                            // textInBox.setText("fecthing data..");
-//                            avd.clearAnimationCallbacks();
-//                        }
-//                    });
+//                    animation_fingerprint_ended_boolean=true;
+//
+//                    avd.clearAnimationCallbacks();
+////
+////                    runOnUiThread(new Runnable() {
+////                        @Override
+////                        public void run() {
+////                            // textInBox.setText("fecthing data..");
+////                            avd.clearAnimationCallbacks();
+////                        }
+////                    });
 //                }
 //            });
         }
@@ -1311,9 +1327,11 @@ public class FingerPrint_LogIn_Final_Activity extends AppCompatActivity implemen
 
 
 
-                        if(fingerCounter>=2){
+                        //if(fingerCounter>=2 && animation_fingerprint_ended_boolean){
 
-                          //  setUserTimeStamp(globalAdminNameHere,globalAdminPhoneHere,nameUser,phoneUser,dateAndTimeNow,userLatitude,userLongitude,morningConstraint,eveningConstraint);
+                        if(fingerCounter>=2 ){
+
+                             setUserTimeStamp(globalAdminNameHere,globalAdminPhoneHere,nameUser,phoneUser,dateAndTimeNow,userLatitude,userLongitude,morningConstraint,eveningConstraint);
                             timer_finger_animate.cancel();
                             timer_finger_animate.purge();
                         }
@@ -1345,8 +1363,9 @@ public class FingerPrint_LogIn_Final_Activity extends AppCompatActivity implemen
 
 
 
-                        if(fingerCounter>=2){
+                        //if(fingerCounter>=2 && animation_fingerprint_ended_boolean){
 
+                        if(fingerCounter>=2){
                             setUserTimeStamp(globalAdminNameHere,globalAdminPhoneHere,nameUser,phoneUser,dateAndTimeNow,userLatitude,userLongitude,morningConstraint,eveningConstraint);
                             timer_finger_animate.cancel();
                             timer_finger_animate.purge();
@@ -1397,6 +1416,8 @@ public class FingerPrint_LogIn_Final_Activity extends AppCompatActivity implemen
         //we passed all data, then reset all back to null. to avoid manipulation.
 
         Log.i("wherelocationRegister :","FLOW 15, countVerified:"+countUserverified+" , userLatitude: "+userLatitude);
+
+        animation_fingerprint_ended_boolean=false;
 
         documentReference = FirebaseFirestore.getInstance().collection("all_admin_doc_collections")
                 .document(adminName+adminPhone+"doc").collection("all_employee_thisAdmin_collection")
