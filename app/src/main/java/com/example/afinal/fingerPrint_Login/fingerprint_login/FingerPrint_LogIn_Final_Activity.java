@@ -9,6 +9,7 @@ import androidx.cardview.widget.CardView;
 import androidx.constraintlayout.widget.ConstraintLayout;
 
 import android.graphics.drawable.Animatable2;
+import android.view.ViewGroup;
 import android.view.animation.Animation;
 
 
@@ -46,6 +47,7 @@ import com.google.firebase.firestore.DocumentReference;
 import com.google.firebase.firestore.FirebaseFirestore;
 import com.yy.mobile.rollingtextview.RollingTextView;
 
+import java.io.File;
 import java.lang.reflect.InvocationTargetException;
 import java.lang.reflect.Method;
 import java.text.DateFormat;
@@ -463,6 +465,10 @@ public class FingerPrint_LogIn_Final_Activity extends AppCompatActivity implemen
     private AnimatedVectorDrawableCompat avd1;
     private AnimatedVectorDrawable avd;
 
+    //27 june
+    private ConstraintLayout constraintbaccck;
+    private FloatingActionButton firsttime_floatButton;
+
 
     //19 june
 
@@ -472,6 +478,42 @@ public class FingerPrint_LogIn_Final_Activity extends AppCompatActivity implemen
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_finger_print__log_in__final_);
+
+        constraintbaccck = findViewById(R.id.constraint_baccckkkID);
+        backColor = findViewById(R.id.backLayoutColourID);
+
+
+        File f = new File("/data/data/com.example.afinal/shared_prefs/com.example.finalV8_punchCard.MAIN_POOL.xml");
+
+        if(f.exists()){
+
+            constraintbaccck.setVisibility(View.GONE);
+
+        }else {
+
+
+            enableDisableViewGroup(backColor,false);
+
+
+        }
+
+
+        firsttime_floatButton =  findViewById(R.id.floatingActionButton3);
+
+        firsttime_floatButton.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+
+                enableDisableViewGroup(backColor,true);
+
+                constraintbaccck.setVisibility(View.GONE);
+
+
+            }
+
+
+        });
+
 
 
         checkAdminConstraintProcess =false;
@@ -697,7 +739,6 @@ public class FingerPrint_LogIn_Final_Activity extends AppCompatActivity implemen
 //        textView = findViewById(R.id.login_final_textViewHereID);
 //        imageView = findViewById(R.id.login_final_imageViewID);
 //        textView.setText("click button below to log in");
-        backColor = findViewById(R.id.backLayoutColourID);
 
 
         fragment = new Login_Select_Action_Fragment();
@@ -746,6 +787,17 @@ public class FingerPrint_LogIn_Final_Activity extends AppCompatActivity implemen
         });
 
 
+    }
+
+    public static void enableDisableViewGroup(ViewGroup viewGroup, boolean enabled) {
+        int childCount = viewGroup.getChildCount();
+        for (int i = 0; i < childCount; i++) {
+            View view = viewGroup.getChildAt(i);
+            view.setEnabled(enabled);
+            if (view instanceof ViewGroup) {
+                enableDisableViewGroup((ViewGroup) view, enabled);
+            }
+        }
     }
 
 
