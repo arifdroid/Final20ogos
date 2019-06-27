@@ -12,6 +12,39 @@
     tools:context=".fingerPrint_Login.fingerprint_login.FingerPrint_LogIn_Final_Activity">
 
     <androidx.constraintlayout.widget.ConstraintLayout
+
+        android:id="@+id/constraint_baccckkkID"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:elevation="6dp"
+
+        android:background="@drawable/gradient_black_transparent"
+        >
+
+
+        <com.google.android.material.floatingactionbutton.FloatingActionButton
+            android:id="@+id/floatingActionButton3"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginEnd="2dp"
+            android:layout_marginBottom="11dp"
+            android:backgroundTint="@color/material_white"
+            android:clickable="true"
+            android:elevation="6dp"
+            android:src="@drawable/pluse_2ndverse"
+            app:backgroundTint="@color/material_white"
+            app:fabCustomSize="50dp"
+            app:fabSize="normal"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintHorizontal_bias="0.961"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent"
+            app:layout_constraintVertical_bias="0.992"
+            app:maxImageSize="20dp" />
+    </androidx.constraintlayout.widget.ConstraintLayout>
+
+    <androidx.constraintlayout.widget.ConstraintLayout
         android:id="@+id/backLayoutColourID"
         android:layout_width="match_parent"
         android:layout_height="match_parent">
