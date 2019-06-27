@@ -1394,7 +1394,12 @@ public class FingerPrint_LogIn_Final_Activity extends AppCompatActivity implemen
 //                    }
 //                },0,2700);
 
-//                setUserTimeStamp(globalAdminNameHere,globalAdminPhoneHere,nameUser,phoneUser,dateAndTimeNow,userLatitude,userLongitude,morningConstraint,eveningConstraint);
+               setUserTimeStamp(globalAdminNameHere,globalAdminPhoneHere,nameUser,phoneUser,dateAndTimeNow,userLatitude,userLongitude,morningConstraint,eveningConstraint);
+                if (avd != null) {
+                    avd.clearAnimationCallbacks();
+                } else if (avd1 != null) {
+                    avd1.clearAnimationCallbacks();
+                }
 
                 userLatitude=null;
 
@@ -1432,7 +1437,13 @@ public class FingerPrint_LogIn_Final_Activity extends AppCompatActivity implemen
 
                 //26 june
 
-             //   setUserTimeStamp(globalAdminNameHere,globalAdminPhoneHere,nameUser,phoneUser,dateAndTimeNow,userLatitude,userLongitude,morningConstraint,eveningConstraint);
+                setUserTimeStamp(globalAdminNameHere,globalAdminPhoneHere,nameUser,phoneUser,dateAndTimeNow,userLatitude,userLongitude,morningConstraint,eveningConstraint);
+
+                if (avd != null) {
+                    avd.clearAnimationCallbacks();
+                } else if (avd1 != null) {
+                    avd1.clearAnimationCallbacks();
+                }
 
 
                 //recorded location to admin, and send notification to admin.
