@@ -13,6 +13,7 @@ import androidx.recyclerview.widget.RecyclerView;
 import android.os.CountDownTimer;
 import android.os.Handler;
 import android.util.Log;
+import android.view.KeyEvent;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -217,6 +218,23 @@ public class FragmentTimeStamp extends Fragment implements Observer, View.OnClic
         View rootView = inflater.inflate(R.layout.bottom_nav_timestamp_fragment, container, false);
         //textView = rootView.findViewById(R.id.bottom_nav_fragment_timeStamp_textView);
 
+
+        rootView.setFocusableInTouchMode(true);
+        rootView.requestFocus();
+        rootView.setOnKeyListener(new View.OnKeyListener() {
+            @Override
+            public boolean onKey(View v, int keyCode, KeyEvent event) {
+                if (event.getAction() == KeyEvent.ACTION_DOWN) {
+                    if (keyCode == KeyEvent.KEYCODE_BACK) {
+
+                        Toast.makeText(getContext(),"please use button to go back", Toast.LENGTH_SHORT).show();
+
+                        return true;
+                    }
+                }
+                return false;
+            }
+        });
 
         textView_today = rootView.findViewById(R.id.textView_who_late_week_id);
         textView_week = rootView.findViewById(R.id.textView_who_late_today_id);
@@ -1927,7 +1945,11 @@ public class FragmentTimeStamp extends Fragment implements Observer, View.OnClic
 
                     Intent intent = new Intent(getActivity(), FingerPrint_LogIn_Final_Activity.class);
                     //finish();
+
+                    intent.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
                     startActivity(intent);
+
+
 
                 }else {
 
@@ -1937,9 +1959,17 @@ public class FragmentTimeStamp extends Fragment implements Observer, View.OnClic
                 break;
 
         }
+
+
     }
 
     //showButton()
+
+    public void callParent(){
+
+        getActivity().onBackPressed();
+    }
+
 
     private void showButton(){
 
@@ -2078,12 +2108,17 @@ public class FragmentTimeStamp extends Fragment implements Observer, View.OnClic
 
         before_show_boolean =false;
 
+
+
+        recyclerView.setAlpha(0.3f);
+
     }
 
 
     //banish button
     private void banishButton() {
 
+        recyclerView.setAlpha(1f);
 
         //// button today
 

@@ -109,4 +109,13 @@ public class Main_BottomNav_Activity extends AppCompatActivity {
 
     }
 
+    @Override
+    public void onBackPressed() {
+        super.onBackPressed();
+
+        moveTaskToBack(false);
+
+    }
+
+
 }

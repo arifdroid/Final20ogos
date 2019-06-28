@@ -79,7 +79,9 @@ public class Setup_Pin_Activity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_setup__pin_);
         autoNext = false;
+
         countFlow=0;
+
         editText1 = findViewById(R.id.regUser_editNumber_1_iD);
         editText2 = findViewById(R.id.regUser_editNumber_2_iD);
         editText3 = findViewById(R.id.regUser_editNumber_3_iD);
