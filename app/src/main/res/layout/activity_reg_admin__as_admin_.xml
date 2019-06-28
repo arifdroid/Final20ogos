@@ -23,8 +23,6 @@
     android:background="@drawable/main_bg"
     >
 
-
-
     <androidx.constraintlayout.widget.ConstraintLayout
         android:id="@+id/constraintLayout3"
         android:layout_width="match_parent"
@@ -118,7 +116,17 @@
             android:autoSizeTextType="uniform"
             android:background="@drawable/ic_pin_ring"
             android:ems="10"
+            android:hint="1"
+            android:digits="0123456789"
             android:inputType="number"
+            android:imeOptions="actionNext"
+
+            android:paddingBottom="8dp"
+
+            android:maxLength="1"
+            android:textColor="@color/material_white_blue"
+            android:textColorHighlight="@color/pink_main"
+            android:textColorHint="@color/yellow_hint"
             android:textAlignment="center"
             android:visibility="gone"
             app:layout_constraintBottom_toTopOf="@+id/guideline167"
@@ -146,12 +154,23 @@
             android:layout_height="55dp"
             android:background="@drawable/ic_pin_ring"
             android:ems="10"
+            android:hint="1"
+            android:digits="0123456789"
             android:inputType="number"
+            android:imeOptions="actionNext"
+
+            android:paddingBottom="8dp"
+
+            android:maxLength="1"
+            android:textAlignment="center"
+            android:textColor="@color/material_white_blue"
+            android:textColorHighlight="@color/pink_main"
+            android:textColorHint="@color/yellow_hint"
             android:visibility="gone"
             app:layout_constraintBottom_toTopOf="@+id/guideline167"
             app:layout_constraintEnd_toStartOf="@+id/reg_Admin_asAdmin_editText_ring3_id"
             app:layout_constraintTop_toTopOf="@+id/guideline166"
-            tools:visibility="gone" />
+             />
 
         <androidx.constraintlayout.widget.Guideline
             android:id="@+id/guideline172"
@@ -166,7 +185,18 @@
             android:layout_height="55dp"
             android:background="@drawable/ic_pin_ring"
             android:ems="10"
+            android:hint="1"
+            android:digits="0123456789"
             android:inputType="number"
+            android:imeOptions="actionNext"
+
+            android:paddingBottom="8dp"
+
+            android:maxLength="1"
+            android:textAlignment="center"
+            android:textColor="@color/material_white_blue"
+            android:textColorHighlight="@color/pink_main"
+            android:textColorHint="@color/yellow_hint"
             android:visibility="gone"
             app:layout_constraintBottom_toTopOf="@+id/guideline167"
             app:layout_constraintEnd_toStartOf="@+id/reg_Admin_asAdmin_editText_ring2_id"
@@ -186,7 +216,18 @@
             android:layout_height="55dp"
             android:background="@drawable/ic_pin_ring"
             android:ems="10"
+            android:hint="1"
+            android:digits="0123456789"
             android:inputType="number"
+            android:imeOptions="actionNext"
+
+            android:paddingBottom="8dp"
+
+            android:maxLength="1"
+            android:textAlignment="center"
+            android:textColor="@color/material_white_blue"
+            android:textColorHighlight="@color/pink_main"
+            android:textColorHint="@color/yellow_hint"
             android:visibility="gone"
             app:layout_constraintBottom_toTopOf="@+id/guideline167"
             app:layout_constraintStart_toStartOf="@+id/guideline170"
@@ -206,7 +247,18 @@
             android:layout_height="55dp"
             android:background="@drawable/ic_pin_ring"
             android:ems="10"
+            android:hint="1"
+            android:digits="0123456789"
             android:inputType="number"
+            android:imeOptions="actionNext"
+
+            android:paddingBottom="8dp"
+
+            android:maxLength="1"
+            android:textAlignment="center"
+            android:textColor="@color/material_white_blue"
+            android:textColorHighlight="@color/pink_main"
+            android:textColorHint="@color/yellow_hint"
             android:visibility="gone"
             app:layout_constraintBottom_toTopOf="@+id/guideline167"
             app:layout_constraintStart_toEndOf="@+id/reg_Admin_asAdmin_editText_ring4_id"
@@ -226,7 +278,18 @@
             android:layout_height="55dp"
             android:background="@drawable/ic_pin_ring"
             android:ems="10"
+            android:hint="1"
+            android:digits="0123456789"
             android:inputType="number"
+            android:imeOptions="actionNext"
+
+            android:paddingBottom="8dp"
+
+            android:maxLength="1"
+            android:textAlignment="center"
+            android:textColor="@color/material_white_blue"
+            android:textColorHighlight="@color/pink_main"
+            android:textColorHint="@color/yellow_hint"
             android:visibility="gone"
             app:layout_constraintBottom_toTopOf="@+id/guideline167"
             app:layout_constraintStart_toEndOf="@+id/reg_Admin_asAdmin_editText_ring5_id"
@@ -286,17 +349,6 @@
             tools:visibility="gone" />
 
     </androidx.constraintlayout.widget.ConstraintLayout>
-
-    <Button
-        android:id="@+id/buttontest28mayid"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginStart="80dp"
-        android:layout_marginBottom="16dp"
-        android:text="Button"
-        android:visibility="visible"
-        app:layout_constraintBottom_toBottomOf="@+id/constraintLayout3"
-        app:layout_constraintStart_toStartOf="@+id/constraintLayout3" />
 
     <de.hdodenhof.circleimageview.CircleImageView
         android:id="@+id/reg_Admin_asAdmin_circlerImageView"

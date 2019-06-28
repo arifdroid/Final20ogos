@@ -129,7 +129,7 @@ public class RegUser_Activity extends AppCompatActivity implements View.OnClickL
 
     // 7 june
 
-    private Button testbutton;
+    //private Button testbutton;
 
     // 14 june
 
@@ -156,9 +156,9 @@ public class RegUser_Activity extends AppCompatActivity implements View.OnClickL
 
         admin_count_extracted = "";
 
-        testbutton = findViewById(R.id.reg_user_buttonTest);
+        //testbutton = findViewById(R.id.reg_user_buttonTest);
 
-        testbutton.setOnClickListener(this);
+        //testbutton.setOnClickListener(this);
 
         imageSetup =false;
 
@@ -606,9 +606,9 @@ public class RegUser_Activity extends AppCompatActivity implements View.OnClickL
                 //7 june
 
 
-                case R.id.reg_user_buttonTest:
-
-                    break;
+//                case R.id.reg_user_buttonTest:
+//
+//                    break;
 
                 //case R.id.regUser_Button_GetCodeID:
 

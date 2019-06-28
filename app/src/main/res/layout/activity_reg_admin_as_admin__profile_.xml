@@ -270,14 +270,4 @@
         android:orientation="vertical"
         app:layout_constraintGuide_percent="0.7277778" />
 
-    <Button
-        android:id="@+id/buttontest_atProfile_id"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginStart="48dp"
-        android:layout_marginTop="8dp"
-        android:text="Button"
-        app:layout_constraintStart_toStartOf="@+id/guideline72"
-        app:layout_constraintTop_toTopOf="@+id/guideline60" />
-
 </androidx.constraintlayout.widget.ConstraintLayout>

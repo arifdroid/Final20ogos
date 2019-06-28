@@ -115,7 +115,18 @@
 
             android:background="@drawable/ic_pin_ring"
             android:ems="10"
+            android:hint="1"
+            android:digits="0123456789"
             android:inputType="number"
+            android:imeOptions="actionNext"
+
+            android:paddingBottom="8dp"
+
+            android:maxLength="1"
+            android:textAlignment="center"
+            android:textColor="@color/material_white_blue"
+            android:textColorHighlight="@color/pink_main"
+            android:textColorHint="@color/yellow_hint"
             android:visibility="gone"
             app:layout_constraintBottom_toTopOf="@+id/guideline167"
             app:layout_constraintEnd_toStartOf="@+id/guideline170"
@@ -142,7 +153,18 @@
             android:layout_height="55dp"
             android:background="@drawable/ic_pin_ring"
             android:ems="10"
+            android:hint="1"
+            android:digits="0123456789"
             android:inputType="number"
+            android:imeOptions="actionNext"
+
+            android:paddingBottom="8dp"
+
+            android:maxLength="1"
+            android:textAlignment="center"
+            android:textColor="@color/material_white_blue"
+            android:textColorHighlight="@color/pink_main"
+            android:textColorHint="@color/yellow_hint"
             android:visibility="gone"
             app:layout_constraintBottom_toTopOf="@+id/guideline167"
             app:layout_constraintEnd_toStartOf="@+id/reg_User_editText_ring3_id"
@@ -162,7 +184,18 @@
             android:layout_height="55dp"
             android:background="@drawable/ic_pin_ring"
             android:ems="10"
+            android:hint="1"
+            android:digits="0123456789"
             android:inputType="number"
+            android:imeOptions="actionNext"
+
+            android:paddingBottom="8dp"
+
+            android:maxLength="1"
+            android:textAlignment="center"
+            android:textColor="@color/material_white_blue"
+            android:textColorHighlight="@color/pink_main"
+            android:textColorHint="@color/yellow_hint"
             android:visibility="gone"
             app:layout_constraintBottom_toTopOf="@+id/guideline167"
             app:layout_constraintEnd_toStartOf="@+id/reg_User_editText_ring2_id"
@@ -182,7 +215,18 @@
             android:layout_height="55dp"
             android:background="@drawable/ic_pin_ring"
             android:ems="10"
+            android:hint="1"
+            android:digits="0123456789"
             android:inputType="number"
+            android:imeOptions="actionNext"
+
+            android:paddingBottom="8dp"
+
+            android:maxLength="1"
+            android:textAlignment="center"
+            android:textColor="@color/material_white_blue"
+            android:textColorHighlight="@color/pink_main"
+            android:textColorHint="@color/yellow_hint"
             android:visibility="gone"
             app:layout_constraintBottom_toTopOf="@+id/guideline167"
             app:layout_constraintStart_toStartOf="@+id/guideline170"
@@ -202,7 +246,18 @@
             android:layout_height="55dp"
             android:background="@drawable/ic_pin_ring"
             android:ems="10"
+            android:hint="1"
+            android:digits="0123456789"
             android:inputType="number"
+            android:imeOptions="actionNext"
+
+            android:paddingBottom="8dp"
+
+            android:maxLength="1"
+            android:textAlignment="center"
+            android:textColor="@color/material_white_blue"
+            android:textColorHighlight="@color/pink_main"
+            android:textColorHint="@color/yellow_hint"
             android:visibility="gone"
             app:layout_constraintBottom_toTopOf="@+id/guideline167"
             app:layout_constraintStart_toStartOf="@+id/guideline173"
@@ -222,7 +277,18 @@
             android:layout_height="55dp"
             android:background="@drawable/ic_pin_ring"
             android:ems="10"
+            android:hint="1"
+            android:digits="0123456789"
             android:inputType="number"
+            android:imeOptions="actionNext"
+
+            android:paddingBottom="8dp"
+
+            android:maxLength="1"
+            android:textAlignment="center"
+            android:textColor="@color/material_white_blue"
+            android:textColorHighlight="@color/pink_main"
+            android:textColorHint="@color/yellow_hint"
             android:visibility="gone"
             app:layout_constraintBottom_toTopOf="@+id/guideline167"
             app:layout_constraintStart_toStartOf="@+id/guideline174"
@@ -282,15 +348,6 @@
             app:srcCompat="@drawable/ic_moving_4th_verse"
             tools:visibility="gone" />
 
-        <Button
-            android:id="@+id/reg_user_buttonTest"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_marginStart="88dp"
-            android:layout_marginBottom="24dp"
-            android:text="Button"
-            app:layout_constraintBottom_toBottomOf="parent"
-            app:layout_constraintStart_toStartOf="parent" />
     </androidx.constraintlayout.widget.ConstraintLayout>
 
     <de.hdodenhof.circleimageview.CircleImageView

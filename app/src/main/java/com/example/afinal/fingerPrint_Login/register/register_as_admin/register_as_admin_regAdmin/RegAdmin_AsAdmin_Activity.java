@@ -128,7 +128,7 @@ public class RegAdmin_AsAdmin_Activity extends AppCompatActivity implements Obse
     private Button buttonTest;
 
     //28 may
-    private Button button28may;
+  //  private Button button28may;
 
     //14 june
     private String admin_count;
@@ -152,7 +152,7 @@ public class RegAdmin_AsAdmin_Activity extends AppCompatActivity implements Obse
 //
         //buttonTest = findViewById(R.id.reg_admin_asAdmin_buttonTest);
 
-        button28may = findViewById(R.id.buttontest28mayid);
+       // button28may = findViewById(R.id.buttontest28mayid);
 
         //buttonTest.setOnClickListener(this);
 
@@ -441,7 +441,7 @@ public class RegAdmin_AsAdmin_Activity extends AppCompatActivity implements Obse
 
         //28 may
 
-         button28may.setOnClickListener(this);
+        // button28may.setOnClickListener(this);
 
 
         //phone auth call back
@@ -1131,22 +1131,22 @@ public class RegAdmin_AsAdmin_Activity extends AppCompatActivity implements Obse
 
         switch (v.getId()){
 
-            case R.id.buttontest28mayid:
-
-                uploadFile();
-
-                Intent intent = new Intent(RegAdmin_AsAdmin_Activity.this,RegAdmin_asAdmin_Profile_Activity.class);
-                intent.putExtra("adminName_asAdmin",userName);
-                intent.putExtra("adminPhone_asAdmin",userPhone);
-                //intent.putExtra("image_ref_asAdmin",this_image_ref.toString());
-
-                startActivity(intent);
-
-
-                Log.i("checkClickWhy", "1");
-
-
-                break;
+//            case R.id.buttontest28mayid:
+//
+//                uploadFile();
+//
+//                Intent intent = new Intent(RegAdmin_AsAdmin_Activity.this,RegAdmin_asAdmin_Profile_Activity.class);
+//                intent.putExtra("adminName_asAdmin",userName);
+//                intent.putExtra("adminPhone_asAdmin",userPhone);
+//                //intent.putExtra("image_ref_asAdmin",this_image_ref.toString());
+//
+//                startActivity(intent);
+//
+//
+//                Log.i("checkClickWhy", "1");
+//
+//
+//                break;
         }
 
 

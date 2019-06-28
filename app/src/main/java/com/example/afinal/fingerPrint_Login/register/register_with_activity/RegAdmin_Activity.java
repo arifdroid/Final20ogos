@@ -100,7 +100,7 @@ public class RegAdmin_Activity extends AppCompatActivity implements View.OnClick
     private Button buttonTest;
 
     //27 may
-    private Button why_buttonTest;
+//    private Button why_buttonTest;
 
     //9 june
 
@@ -149,9 +149,9 @@ public class RegAdmin_Activity extends AppCompatActivity implements View.OnClick
 
         //buttonTest = findViewById(R.id.reg_admin_buttonTest);
 
-        why_buttonTest = findViewById(R.id.why_button_test_id);
-
-        why_buttonTest.setOnClickListener(this);
+//        why_buttonTest = findViewById(R.id.why_button_test_id);
+//
+//        why_buttonTest.setOnClickListener(this);
 
         //buttonTest.setOnClickListener(this);
 
@@ -815,29 +815,29 @@ public class RegAdmin_Activity extends AppCompatActivity implements View.OnClick
 
                 break;
 
-            case R.id.why_button_test_id:
-
-                // maybe presenter not destroyed. since activity is not destroyed, it is put in stack only.
-                //28 may test.
-
-                presenter.deleteObserver(this);
-
-                //
-
-                Log.i("checkFlowDestroy", "1 reg_admin");
-
-                Intent intent = new Intent(RegAdmin_Activity.this, RegAdmin_AsAdmin_Activity.class);
-
-                intent.putExtra("adminName_asAdmin_2", "arifzamri");
-                intent.putExtra("adminPhone_asAdmin_2", "+60184670568");
-
-                intent.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
-
-                startActivity(intent);
-
-
-
-                break;
+//            case R.id.why_button_test_id:
+//
+//                // maybe presenter not destroyed. since activity is not destroyed, it is put in stack only.
+//                //28 may test.
+//
+//                presenter.deleteObserver(this);
+//
+//                //
+//
+//                Log.i("checkFlowDestroy", "1 reg_admin");
+//
+//                Intent intent = new Intent(RegAdmin_Activity.this, RegAdmin_AsAdmin_Activity.class);
+//
+//                intent.putExtra("adminName_asAdmin_2", "arifzamri");
+//                intent.putExtra("adminPhone_asAdmin_2", "+60184670568");
+//
+//                intent.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
+//
+//                startActivity(intent);
+//
+//
+//
+//                break;
 
 
             case R.id.regAdmin_button_admin_id:
