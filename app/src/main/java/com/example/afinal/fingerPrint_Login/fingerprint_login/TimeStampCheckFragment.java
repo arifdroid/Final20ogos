@@ -38,6 +38,7 @@ public class TimeStampCheckFragment extends DialogFragment {
     private String day;
     private String date2;
     private String amOrPM;
+    private Map<String, Object> kk = new HashMap<>(); //careful dont want to ducplicate
 
 
     public TimeStampCheckFragment() {
@@ -194,9 +195,12 @@ public class TimeStampCheckFragment extends DialogFragment {
             @Override
             public void onClick(View view) {
                 //we need data like, admin name , admin phone, user name, user phone, undoubtly time stamp. and day.
-
+//                Map<String, Object> kk = new HashMap<>();
 
                 if (streetOutside != null || !streetOutside.equals("") && (date2.equals("") || date2 == null)) {
+
+
+                    kk.put("outsideLocation", streetOutside);
 
                     date2 = getArguments().getString("date2", "");
 
@@ -225,7 +229,7 @@ public class TimeStampCheckFragment extends DialogFragment {
 
                 Log.i("onclickFinal", "1");
 
-                Map<String, Object> kk = new HashMap<>();
+               // Map<String, Object> kk = new HashMap<>();
 
                 if (morOrEveNow.equals("morning")) {
 

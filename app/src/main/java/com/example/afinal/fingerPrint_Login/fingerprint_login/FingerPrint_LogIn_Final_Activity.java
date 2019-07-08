@@ -8,6 +8,8 @@ import androidx.annotation.NonNull;
 import androidx.cardview.widget.CardView;
 import androidx.constraintlayout.widget.ConstraintLayout;
 
+import android.content.Intent;
+import android.content.SharedPreferences;
 import android.graphics.drawable.Animatable2;
 import android.location.Address;
 import android.location.Geocoder;
@@ -18,6 +20,9 @@ import android.view.animation.Animation;
 
 import com.example.afinal.fingerPrint_Login.oop.OnServerTime_Interface;
 
+import com.google.android.gms.tasks.OnCanceledListener;
+import com.google.android.gms.tasks.OnCompleteListener;
+import com.google.android.gms.tasks.Task;
 import com.google.android.material.bottomnavigation.BottomNavigationView;
 import com.google.android.material.floatingactionbutton.FloatingActionButton;
 
@@ -46,6 +51,7 @@ import android.widget.Toast;
 import com.example.afinal.R;
 import com.google.firebase.firestore.CollectionReference;
 import com.google.firebase.firestore.DocumentReference;
+import com.google.firebase.firestore.DocumentSnapshot;
 import com.google.firebase.firestore.FirebaseFirestore;
 import com.yy.mobile.rollingtextview.RollingTextView;
 
@@ -59,6 +65,7 @@ import java.util.Date;
 import java.util.List;
 import java.util.Locale;
 import java.util.Map;
+import java.util.Objects;
 import java.util.Observable;
 import java.util.Observer;
 import java.util.Timer;
@@ -476,6 +483,22 @@ public class FingerPrint_LogIn_Final_Activity extends AppCompatActivity implemen
 
     //7 july, only if location is used, when user out of location 50m from admin
     private String streetname;
+    private String myphone_extracted;
+
+    //7 july, check if admin, display button to get report.
+
+    private String nameHere_ifadmin;
+    private String nameHere_2_ifadmin;
+    private String phoneHere_ifadmin;
+
+    private String adminName_ifadmin;
+    private String adminName_2_ifadmin;
+    private String adminPhone_ifadmin;
+    private String adminPhone_2_ifadmin;
+
+    //7 july
+    private FloatingActionButton buttonGetReport;
+    private TextView textGetReport;
 
 
     //19 june
@@ -491,11 +514,216 @@ public class FingerPrint_LogIn_Final_Activity extends AppCompatActivity implemen
         backColor = findViewById(R.id.backLayoutColourID);
 
 
+        buttonGetReport = findViewById(R.id.getreportButton_id);
+        textGetReport = findViewById(R.id.textView_getReportID);
+
+
         File f = new File("/data/data/com.example.afinal/shared_prefs/com.example.finalV8_punchCard.MAIN_POOL.xml");
 
         if(f.exists()){
 
+            //7 july
+
             constraintbaccck.setVisibility(View.GONE);
+
+
+            //here we fetch if user is admin. ,
+
+            SharedPreferences prefs_Main_Pool = Objects.requireNonNull(FingerPrint_LogIn_Final_Activity.this).getSharedPreferences("com.example.finalV8_punchCard.MAIN_POOL", Context.MODE_PRIVATE);
+
+            myphone_extracted = prefs_Main_Pool.getString("my_phone_number","");
+
+            if(!myphone_extracted.equals("") && myphone_extracted!=null&& !myphone_extracted.isEmpty()) {
+
+
+                CollectionReference cR_topUserCollection =  FirebaseFirestore.getInstance().collection("users_top_detail");
+
+
+                DocumentReference dR_topUserCollection = cR_topUserCollection.document(myphone_extracted + "imauser");
+
+                dR_topUserCollection.get().addOnCompleteListener(new OnCompleteListener<DocumentSnapshot>() {
+                    @Override
+                    public void onComplete(@NonNull Task<DocumentSnapshot> task) {
+
+                        if(task.getResult().exists()){
+
+                            if (task.isSuccessful()) {
+
+//                            if(task.getResult().exists()){
+//
+//                            }
+
+                                Map<String, Object> remap = Objects.requireNonNull(task.getResult()).getData();
+
+                                for (Map.Entry<String, Object> mapHere : remap.entrySet()) {
+
+                                    //admin name, and admin phone. , relative user name, user phone.
+                                    //admin count,
+
+                                    //this is not needed since we have it in sharedprefs
+
+                                    if (mapHere.getKey().equals("user_name_1")) {
+                                        nameHere_ifadmin = mapHere.getValue().toString();
+
+                                        //handle null, or not registered, or wrong data input
+
+                                        if (nameHere_ifadmin.isEmpty() || nameHere_ifadmin == null) {
+
+                                            nameHere_ifadmin = "";
+                                        }
+                                    }
+
+
+                                    if (mapHere.getKey().equals("user_name_2")) {
+                                        nameHere_2_ifadmin = mapHere.getValue().toString();
+
+
+                                        if (nameHere_2_ifadmin.isEmpty() || nameHere_2_ifadmin == null) {
+
+                                            nameHere_2_ifadmin = "";
+                                        }
+                                    }
+
+
+                                    if (mapHere.getKey().equals("phone")) {
+                                        phoneHere_ifadmin = mapHere.getValue().toString();
+
+
+                                        if (phoneHere_ifadmin.isEmpty() || phoneHere_ifadmin == null) {
+
+                                            phoneHere_ifadmin = "";
+                                        }
+                                    }
+//
+//                                if(mapHere.getKey().equals("admin_count")){
+//                                    admin_count = mapHere.getValue().toString();
+//                                }
+//
+                                    if (mapHere.getKey().equals("admin_name_1")) {
+                                        adminName_ifadmin = mapHere.getValue().toString();
+
+
+                                        if (adminName_ifadmin.isEmpty() || adminName_ifadmin == null) {
+
+                                            adminName_ifadmin = "";
+                                        }
+
+
+                                    }
+
+
+                                    if (mapHere.getKey().equals("admin_name_2")) {
+                                        adminName_2_ifadmin = mapHere.getValue().toString();
+
+
+                                        if (adminName_2_ifadmin.isEmpty() || adminName_2_ifadmin == null) {
+
+                                            adminName_2_ifadmin = "";
+                                        }
+                                    }
+
+
+                                    if (mapHere.getKey().equals("admin_phone_1")) {
+                                        adminPhone_ifadmin = mapHere.getValue().toString();
+
+
+                                        if (adminPhone_ifadmin.isEmpty() || adminPhone_ifadmin == null) {
+
+                                            adminPhone_ifadmin = "";
+                                        }
+
+                                    }
+
+
+                                    if (mapHere.getKey().equals("admin_phone_2")) {
+                                        adminPhone_2_ifadmin = mapHere.getValue().toString();
+
+
+                                        if (adminPhone_2_ifadmin.isEmpty() || adminPhone_2_ifadmin == null) {
+
+                                            adminPhone_2_ifadmin = "";
+                                        }
+                                    }
+
+                                }
+
+//                                nameHere_boolean = true;
+//
+//                                Toast.makeText(getContext(), "Success getting admin detail", Toast.LENGTH_SHORT).show();
+
+
+                            //buttonGetReport.setVisibility(View.VISIBLE);
+
+                            if(phoneHere_ifadmin.equals(adminPhone_ifadmin)|| phoneHere_ifadmin.equals(adminPhone_2_ifadmin)){
+
+                                runOnUiThread(new Runnable() {
+                                    @Override
+                                    public void run() {
+
+                                        buttonGetReport.setVisibility(View.VISIBLE);
+                                        textGetReport.setVisibility(View.VISIBLE);
+
+                                        buttonGetReport.setOnClickListener(new View.OnClickListener() {
+                                            @Override
+                                            public void onClick(View view) {
+
+                                                if(phoneHere_ifadmin.equals(adminPhone_ifadmin)){
+                                                    //it belongs to admin 1
+
+                                                    Intent getReportIntent = new Intent(FingerPrint_LogIn_Final_Activity.this, Report_Activity.class);
+
+
+
+                                                }else if(phoneHere_ifadmin.equals(adminPhone_2_ifadmin)){
+                                                    //it belongs to admin 2
+
+                                                    Intent getReportIntent2 = new Intent(FingerPrint_LogIn_Final_Activity.this, Report_Activity.class);
+
+
+                                                }
+
+
+
+                                            }
+                                        });
+
+                                    }
+                                });
+
+                            }
+
+
+
+                            } else {
+
+                              //  nameHere_boolean = false;
+
+
+                              //  Toast.makeText(getContext(), "Fail getting admin detail", Toast.LENGTH_SHORT).show();
+
+                            }
+
+                        }
+
+                    }
+                }).addOnCanceledListener(new OnCanceledListener() {
+                    @Override
+                    public void onCanceled() {
+
+                        //Toast.makeText(getContext(), "Fail getting admin detail", Toast.LENGTH_SHORT).show();
+
+                    }
+                });
+
+
+
+            }
+
+
+
+
+
+            //pull status if admin
 
         }else {
 

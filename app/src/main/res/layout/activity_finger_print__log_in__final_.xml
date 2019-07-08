@@ -17,7 +17,6 @@
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:elevation="6dp"
-
         android:background="@drawable/gradient_black_transparent"
         >
 
@@ -519,6 +518,45 @@
                 android:layout_height="wrap_content"
                 android:orientation="vertical"
                 app:layout_constraintGuide_percent="0.82848835" />
+
+            <com.google.android.material.floatingactionbutton.FloatingActionButton
+                android:id="@+id/getreportButton_id"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginBottom="16dp"
+
+                android:backgroundTint="@color/material_white"
+                android:clickable="true"
+                android:elevation="6dp"
+
+                android:visibility="gone"
+
+
+                android:src="@drawable/leave_icon_image"
+                app:backgroundTint="@color/material_white"
+                app:fabCustomSize="40dp"
+                app:fabSize="normal"
+
+
+                app:layout_constraintBottom_toTopOf="@+id/logn_Final_floatingActionButtonID"
+                app:layout_constraintEnd_toEndOf="@+id/logn_Final_floatingActionButtonID"
+                app:layout_constraintStart_toStartOf="@+id/guideline13"
+                app:maxImageSize="30dp" />
+
+            <TextView
+                android:id="@+id/textView_getReportID"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginEnd="18dp"
+                android:text="get weekly report"
+                android:visibility="gone"
+
+
+                android:textColor="@color/material_white"
+
+                app:layout_constraintBottom_toBottomOf="@+id/getreportButton_id"
+                app:layout_constraintEnd_toStartOf="@+id/getreportButton_id"
+                app:layout_constraintTop_toTopOf="@+id/getreportButton_id" />
 
 
         </androidx.constraintlayout.widget.ConstraintLayout>
