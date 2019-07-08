@@ -9,6 +9,8 @@ import androidx.cardview.widget.CardView;
 import androidx.constraintlayout.widget.ConstraintLayout;
 
 import android.graphics.drawable.Animatable2;
+import android.location.Address;
+import android.location.Geocoder;
 import android.view.ViewGroup;
 import android.view.animation.Animation;
 
@@ -48,11 +50,14 @@ import com.google.firebase.firestore.FirebaseFirestore;
 import com.yy.mobile.rollingtextview.RollingTextView;
 
 import java.io.File;
+import java.io.IOException;
 import java.lang.reflect.InvocationTargetException;
 import java.lang.reflect.Method;
 import java.text.DateFormat;
 import java.text.SimpleDateFormat;
 import java.util.Date;
+import java.util.List;
+import java.util.Locale;
 import java.util.Map;
 import java.util.Observable;
 import java.util.Observer;
@@ -468,6 +473,9 @@ public class FingerPrint_LogIn_Final_Activity extends AppCompatActivity implemen
     //27 june
     private ConstraintLayout constraintbaccck;
     private FloatingActionButton firsttime_floatButton;
+
+    //7 july, only if location is used, when user out of location 50m from admin
+    private String streetname;
 
 
     //19 june
@@ -1087,9 +1095,9 @@ public class FingerPrint_LogIn_Final_Activity extends AppCompatActivity implemen
                     //first check if within network.
                     if (userSSID.equals(ssidConstraint)) {
 
-                        Log.i("wherelocationRegister :", "FLOW 7, countVerified:" + countUserverified + " , userLatitude: " + userLatitude);
-
-                        Log.i("finalCheckFlowHere", "2, admin ssid:" + ssidConstraint + " , user ssid" + userSSID);
+//                        Log.i("wherelocationRegister :", "FLOW 7, countVerified:" + countUserverified + " , userLatitude: " + userLatitude);
+//
+//                        Log.i("finalCheckFlowHere", "2, admin ssid:" + ssidConstraint + " , user ssid" + userSSID);
 
                         //Toast.makeText(this,"bssid different" ,Toast.LENGTH_LONG).show();
 
@@ -1292,16 +1300,17 @@ public class FingerPrint_LogIn_Final_Activity extends AppCompatActivity implemen
 
     private void loginWithLocation(){
 
-        Log.i("wherelocationRegister :","FLOW 9, countVerified:"+countUserverified+" , userLatitude: "+userLatitude);
+   //     Log.i("wherelocationRegister :","FLOW 9, countVerified:"+countUserverified+" , userLatitude: "+userLatitude);
 
         if(userLatitude==null || userLongitude==null||latitudeConstraint==null || longitudeConstraint==null
                 ||userLatitude.equals("")||userLongitude.equals("")||latitudeConstraint.equals("")||longitudeConstraint.equals("")||userLatitude.equals("0"))
         {
 
             counterFlowHere2++;
-            Log.i("finalCheckFlowHere", "4, ssid different, location NULL, latitude admin:"
-                    + latitudeConstraint+" , user latitude"+ userLatitude);
-          //
+
+//            Log.i("finalCheckFlowHere", "4, ssid different, location NULL, latitude admin:"
+//                    + latitudeConstraint+" , user latitude"+ userLatitude);
+//          //
             // textViewDataLocation.setText("basic flow:"+ counterFlowHere+ " , turn on GPS:"+counterFlowHere2+" , GPS ON:"+ counterFlowHere3);
             // Toast.makeText(this,"please turn on GPS",Toast.LENGTH_LONG).show();
             //this is always excuted.
@@ -1369,13 +1378,13 @@ public class FingerPrint_LogIn_Final_Activity extends AppCompatActivity implemen
 
             counterFlowHere3++;
 
-            Log.i("wherelocationRegister :","FLOW 10, countVerified:"+countUserverified+" , userLatitude: "+userLatitude);
-
-         //   textViewDataLocation.setText("basic flow:"+ counterFlowHere+ " , turn on GPS:"+counterFlowHere2+" , GPS ON:"+ counterFlowHere3);
-
-            Log.i("finalCheckFlowHere", "5, ssid different, location CHECK, latitude admin:"
-                    + latitudeConstraint+" , user latitude"+ userLatitude);
-
+//            Log.i("wherelocationRegister :","FLOW 10, countVerified:"+countUserverified+" , userLatitude: "+userLatitude);
+//
+//         //   textViewDataLocation.setText("basic flow:"+ counterFlowHere+ " , turn on GPS:"+counterFlowHere2+" , GPS ON:"+ counterFlowHere3);
+//
+//            Log.i("finalCheckFlowHere", "5, ssid different, location CHECK, latitude admin:"
+//                    + latitudeConstraint+" , user latitude"+ userLatitude);
+//
 
 
 
@@ -1414,7 +1423,7 @@ public class FingerPrint_LogIn_Final_Activity extends AppCompatActivity implemen
 
             float distanceOffset = user.distanceTo(admin);
 
-            if(distanceOffset<=150){  //assume 50 is 50 meter.
+            if(distanceOffset<=50){  //assume 50 is 50 meter.
                 //here can process ask to stamp.
 
                 Log.i("wherelocationRegister :","FLOW 12, countVerified:"+countUserverified+" , userLatitude: "+userLatitude);
@@ -1489,7 +1498,7 @@ public class FingerPrint_LogIn_Final_Activity extends AppCompatActivity implemen
 
                 //26 june
 
-                setUserTimeStamp(globalAdminNameHere,globalAdminPhoneHere,nameUser,phoneUser,dateAndTimeNow,userLatitude,userLongitude,morningConstraint,eveningConstraint);
+                setUserTimeStamp(globalAdminNameHere,globalAdminPhoneHere,nameUser,phoneUser,dateAndTimeNow,userLatitude,userLongitude,morningConstraint,eveningConstraint,true);
 
                 if (avd != null) {
                     avd.clearAnimationCallbacks();
@@ -1623,6 +1632,232 @@ public class FingerPrint_LogIn_Final_Activity extends AppCompatActivity implemen
         //before return, set back to false,
         setEveningTimeStamp =false;
         setMorningTimeStamp = false;
+
+        return;
+    }
+
+
+    //7 july
+
+    private void setUserTimeStamp(String adminName,String adminPhone,String userName,String userPhone,String dateAndTimeNow2, String userLatitude2,String userLongitude2, String morningConstraint,String eveningConstraint, boolean outsideLocation){
+
+        //need to check morning constraint.
+        //with fragment?
+
+        //we passed all data, then reset all back to null. to avoid manipulation.
+
+        //Log.i("wherelocationRegister :","FLOW 15, countVerified:"+countUserverified+" , userLatitude: "+userLatitude);
+
+        if(outsideLocation==false){
+
+            Geocoder coder = new Geocoder(FingerPrint_LogIn_Final_Activity.this, Locale.getDefault());
+
+            List<Address> addresses;
+
+            try {
+                addresses = coder.getFromLocation(Double.valueOf(userLatitude2),Double.valueOf(userLongitude2),1);
+
+                streetname="";
+
+                streetname = addresses.get(0).getAddressLine(0);
+
+                if(streetname==null || streetname.equals("")){
+                    streetname= addresses.get(0).getThoroughfare();
+                }
+
+
+
+                animation_fingerprint_ended_boolean=false;
+
+                documentReference = FirebaseFirestore.getInstance().collection("all_admin_doc_collections")
+                        .document(adminName+adminPhone+"doc").collection("all_employee_thisAdmin_collection")
+                        .document(userName+userPhone+"doc");
+
+                dayNow = dateAndTimeNow2.substring(0,3);
+                timeCurrent = dateAndTimeNow2.substring(11, 13);      //process time current first, by server
+                timeCurrent2 = dateAndTimeNow2.substring(14, 16);
+                dateNow = dateAndTimeNow2.substring(8,10)+" "+dateAndTimeNow2.substring(4,7);
+                timeCurrent = timeCurrent + "." + timeCurrent2; //this output current time.
+
+                //process time stamp and constraint
+                Float adminMorning = Float.valueOf(morningConstraint);
+                Float adminEvening = Float.valueOf(eveningConstraint);
+
+                Float userCurrentTimeStamp = Float.valueOf(timeCurrent);
+
+                Float offsetMorning = userCurrentTimeStamp -adminMorning;
+
+
+                Log.i("checkDiaglogFragment", "1, time:"+timeCurrent+" , dayNow:"+dayNow+" , date today:"+dateNow);
+
+                Log.i("checkDiaglogFragment", "2, offsetMorning: "+ offsetMorning);
+
+
+                globalUserPhone=userPhone;
+                globalUserName=userName;
+                globalAdminName=globalAdminNameHere;
+                globalAdminPhone=globalAdminPhoneHere;
+
+                if(offsetMorning>=-3f&&offsetMorning<=3f){ //meaning withing 3 hourse or morning constraint
+
+                    String morning = "morning";
+                    FragmentManager fragmentManager = getSupportFragmentManager();
+                    // TimeStampCheckFragment frag = TimeStampCheckFragment.newInstance(dayNow+","+dateNow+" : "+"punch card morning time now?",dateNow+", "+timeCurrent+" AM");
+                    TimeStampCheckFragment frag = TimeStampCheckFragment.newInstance(dayNow,dateNow,timeCurrent,userName,userPhone,adminName,adminPhone, morning,streetname);
+
+                    frag.show(fragmentManager,"frag_name");
+
+
+                    setMorningTimeStamp=true;
+                }
+
+                Float offsetEvening = userCurrentTimeStamp-adminEvening;
+
+                Log.i("checkDiaglogFragment", "3, time:"+timeCurrent+" , dayNow:"+dayNow+" , date today:"+dateNow);
+
+                Log.i("checkDiaglogFragment", "4, offsetEvening: "+offsetEvening);
+
+
+                if(offsetEvening>=-3f && offsetEvening<=3f){//pass as evening timestamp
+//
+                    String evening = "evening";
+                    FragmentManager fragmentManager = getSupportFragmentManager();
+                    TimeStampCheckFragment frag = TimeStampCheckFragment.newInstance(dayNow,dateNow,timeCurrent,userName,userPhone,adminName,adminPhone,evening, streetname);
+
+                    frag.show(fragmentManager,"frag_name");
+
+
+                    setEveningTimeStamp=true;
+                }
+
+
+
+                if(!setEveningTimeStamp && !setMorningTimeStamp){ //outside both constraint , MC or stuff like that
+
+                    String outsideConstraint = "outsideConstraint";
+                    Boolean zeroOutTimeStamp = true;
+                    FragmentManager fragmentManager = getSupportFragmentManager();
+                    TimeStampCheckFragment frag = TimeStampCheckFragment.newInstance(dayNow,dateNow,timeCurrent,userName,userPhone,adminName,adminPhone,outsideConstraint, zeroOutTimeStamp, streetname);
+
+                    frag.show(fragmentManager,"frag_name");
+
+
+                }
+
+                //if()
+
+
+
+
+                userLatitude=null;
+                userLongitude=null;
+
+                //before return, set back to false,
+                setEveningTimeStamp =false;
+                setMorningTimeStamp = false;
+
+
+
+
+
+
+
+
+            } catch (IOException e) {
+                e.printStackTrace();
+            }
+
+
+        }
+
+//        animation_fingerprint_ended_boolean=false;
+//
+//        documentReference = FirebaseFirestore.getInstance().collection("all_admin_doc_collections")
+//                .document(adminName+adminPhone+"doc").collection("all_employee_thisAdmin_collection")
+//                .document(userName+userPhone+"doc");
+//
+//        dayNow = dateAndTimeNow2.substring(0,3);
+//        timeCurrent = dateAndTimeNow2.substring(11, 13);      //process time current first, by server
+//        timeCurrent2 = dateAndTimeNow2.substring(14, 16);
+//        dateNow = dateAndTimeNow2.substring(8,10)+" "+dateAndTimeNow2.substring(4,7);
+//        timeCurrent = timeCurrent + "." + timeCurrent2; //this output current time.
+//
+//        //process time stamp and constraint
+//        Float adminMorning = Float.valueOf(morningConstraint);
+//        Float adminEvening = Float.valueOf(eveningConstraint);
+//
+//        Float userCurrentTimeStamp = Float.valueOf(timeCurrent);
+//
+//        Float offsetMorning = userCurrentTimeStamp -adminMorning;
+//
+//
+//        Log.i("checkDiaglogFragment", "1, time:"+timeCurrent+" , dayNow:"+dayNow+" , date today:"+dateNow);
+//
+//        Log.i("checkDiaglogFragment", "2, offsetMorning: "+ offsetMorning);
+//
+//
+//        globalUserPhone=userPhone;
+//        globalUserName=userName;
+//        globalAdminName=globalAdminNameHere;
+//        globalAdminPhone=globalAdminPhoneHere;
+//
+//        if(offsetMorning>=-3f&&offsetMorning<=3f){ //meaning withing 3 hourse or morning constraint
+//
+//            String morning = "morning";
+//            FragmentManager fragmentManager = getSupportFragmentManager();
+//            // TimeStampCheckFragment frag = TimeStampCheckFragment.newInstance(dayNow+","+dateNow+" : "+"punch card morning time now?",dateNow+", "+timeCurrent+" AM");
+//            TimeStampCheckFragment frag = TimeStampCheckFragment.newInstance(dayNow,dateNow,timeCurrent,userName,userPhone,adminName,adminPhone, morning);
+//
+//            frag.show(fragmentManager,"frag_name");
+//
+//
+//            setMorningTimeStamp=true;
+//        }
+//
+//        Float offsetEvening = userCurrentTimeStamp-adminEvening;
+//
+//        Log.i("checkDiaglogFragment", "3, time:"+timeCurrent+" , dayNow:"+dayNow+" , date today:"+dateNow);
+//
+//        Log.i("checkDiaglogFragment", "4, offsetEvening: "+offsetEvening);
+//
+//
+//        if(offsetEvening>=-3f && offsetEvening<=3f){//pass as evening timestamp
+////
+//            String evening = "evening";
+//            FragmentManager fragmentManager = getSupportFragmentManager();
+//            TimeStampCheckFragment frag = TimeStampCheckFragment.newInstance(dayNow,dateNow,timeCurrent,userName,userPhone,adminName,adminPhone,evening);
+//
+//            frag.show(fragmentManager,"frag_name");
+//
+//
+//            setEveningTimeStamp=true;
+//        }
+//
+//
+//
+//        if(!setEveningTimeStamp && !setMorningTimeStamp){ //outside both constraint , MC or stuff like that
+//
+//            String outsideConstraint = "outsideConstraint";
+//            Boolean zeroOutTimeStamp = true;
+//            FragmentManager fragmentManager = getSupportFragmentManager();
+//            TimeStampCheckFragment frag = TimeStampCheckFragment.newInstance(dayNow,dateNow,timeCurrent,userName,userPhone,adminName,adminPhone,outsideConstraint, zeroOutTimeStamp);
+//
+//            frag.show(fragmentManager,"frag_name");
+//
+//
+//        }
+//
+//        //if()
+//
+//
+//
+//
+//        userLatitude=null;
+//        userLongitude=null;
+//
+//        //before return, set back to false,
+//        setEveningTimeStamp =false;
+//        setMorningTimeStamp = false;
 
         return;
     }

@@ -6,7 +6,6 @@ import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.view.WindowManager;
 import android.widget.Button;
 import android.widget.TextView;
 import android.widget.Toast;
@@ -37,6 +36,8 @@ public class TimeStampCheckFragment extends DialogFragment {
     private String morOrEveNow;
     private boolean zeroOut;
     private String day;
+    private String date2;
+    private String amOrPM;
 
 
     public TimeStampCheckFragment() {
@@ -47,7 +48,7 @@ public class TimeStampCheckFragment extends DialogFragment {
         TimeStampCheckFragment timeStampCheckFragment = new TimeStampCheckFragment();
         Bundle args = new Bundle();
         args.putString("day",day);
-        args.putString("date",date);
+        args.putString("date2",date);
         args.putString("timestamp",timeStamp);
         args.putString("monOrEve",monOrEve);
         args.putBoolean("zeroOut",zeroOut);
@@ -62,11 +63,58 @@ public class TimeStampCheckFragment extends DialogFragment {
         return timeStampCheckFragment;
     }
 
+
+    //7 july
+
+    public static TimeStampCheckFragment newInstance(String day, String date,String timeStamp,String userName, String userPhone,String adminName,String adminPhone,String morOrEve, String streetNameOutside){
+        TimeStampCheckFragment timeStampCheckFragment = new TimeStampCheckFragment();
+        Bundle args = new Bundle();
+        args.putString("day",day);
+        args.putString("date2",date);
+        args.putString("timestamp",timeStamp);
+        args.putString("morOrEve",morOrEve);
+        args.putString("streetname", streetNameOutside);
+
+        documentReference = FirebaseFirestore.getInstance().collection("all_admin_doc_collections")
+                .document(adminName+adminPhone+"doc").collection("all_employee_thisAdmin_collection")
+                .document(userName+userPhone+"doc");
+
+
+        timeStampCheckFragment.setArguments(args);
+
+        return timeStampCheckFragment;
+    }
+
+
+    //7 july, outside timestamp, and outside location
+    public static TimeStampCheckFragment newInstance(String day, String date,String timeStamp,String userName, String userPhone,String adminName,String adminPhone,String morOrEve, Boolean zeroOut, String streetnameOutside){
+        TimeStampCheckFragment timeStampCheckFragment = new TimeStampCheckFragment();
+        Bundle args = new Bundle();
+        args.putString("day",day);
+        args.putString("date2",date);
+        args.putString("timestamp",timeStamp);
+        args.putString("morOrEve",morOrEve);
+        args.putBoolean("zeroOut",zeroOut);
+        args.putString("streetname",streetnameOutside);
+
+        documentReference = FirebaseFirestore.getInstance().collection("all_admin_doc_collections")
+                .document(adminName+adminPhone+"doc").collection("all_employee_thisAdmin_collection")
+                .document(userName+userPhone+"doc");
+
+
+        timeStampCheckFragment.setArguments(args);
+
+        return timeStampCheckFragment;
+    }
+
+
+
+
     public static TimeStampCheckFragment newInstance(String day, String date,String timeStamp,String userName, String userPhone,String adminName,String adminPhone,String morOrEve){
         TimeStampCheckFragment timeStampCheckFragment = new TimeStampCheckFragment();
         Bundle args = new Bundle();
         args.putString("day",day);
-        args.putString("date",date);
+        args.putString("date2",date);
         args.putString("timestamp",timeStamp);
         args.putString("morOrEve",morOrEve);
 
@@ -92,7 +140,8 @@ public class TimeStampCheckFragment extends DialogFragment {
     public void onViewCreated(@NonNull View view, @Nullable Bundle savedInstanceState) {
         super.onViewCreated(view, savedInstanceState);
 
-        String amOrPM ="";
+
+         amOrPM = "";
 
         textViewAsk = view.findViewById(R.id.textView2);
         buttonCheckin = view.findViewById(R.id.cardview_PunchIntiD);
@@ -100,28 +149,44 @@ public class TimeStampCheckFragment extends DialogFragment {
         textViewTime = view.findViewById(R.id.textViewCardView_TimeFragmentiD);
 
         day = getArguments().getString("day", "");
-       // getDialog().setTitle(question);
+        // getDialog().setTitle(question);
+
+        //7 july
+
+        final String streetOutside = getArguments().getString("streetname", "");
+
+        if (streetOutside != null || !streetOutside.equals("")) {
+
+            textViewAsk.setText("is this your location ? " + streetOutside);
+
+        } else {
+
+
+
+
 //a
-        final String date = getArguments().getString("date","");
+         date2 = getArguments().getString("date2", "");
 
-        timestampnow = getArguments().getString("timestamp","");
+        timestampnow = getArguments().getString("timestamp", "");
 
-        morOrEveNow = getArguments().getString("morOrEve","");
+        morOrEveNow = getArguments().getString("morOrEve", "");
 
-        if(morOrEveNow.equals("morning")){
-             amOrPM = "AM";
-        }else {
-            amOrPM="PM";
+        if (morOrEveNow.equals("morning")) {
+            amOrPM = "AM";
+        } else {
+            amOrPM = "PM";
         }
 
-        zeroOut = getArguments().getBoolean("zeroOut",false);
+        zeroOut = getArguments().getBoolean("zeroOut", false);
 
-        textViewAsk.setText(day+","+date+": Do you want to punch card this "+morOrEveNow+",");
-        textViewTime.setText("at "+timestampnow+" "+amOrPM+" ?");
+        textViewAsk.setText(day + "," + date2 + ": Do you want to punch card this " + morOrEveNow + ",");
+        textViewTime.setText("at " + timestampnow + " " + amOrPM + " ?");
 
 
         textViewAsk.requestFocus(); //what is this?
         textViewTime.requestFocus();
+
+    }
 
         //getDialog().getWindow().setSoftInputMode(WindowManager.LayoutParams.SOFT_INPUT_STATE_VISIBLE);
 
@@ -130,113 +195,141 @@ public class TimeStampCheckFragment extends DialogFragment {
             public void onClick(View view) {
                 //we need data like, admin name , admin phone, user name, user phone, undoubtly time stamp. and day.
 
-                Log.i("onclickFinal","1");
 
-                Map<String,Object> kk = new HashMap<>();
+                if (streetOutside != null || !streetOutside.equals("") && (date2.equals("") || date2 == null)) {
 
-                if(morOrEveNow.equals("morning")) {
+                    date2 = getArguments().getString("date2", "");
 
-                    Log.i("onclickFinal","2");
+                    timestampnow = getArguments().getString("timestamp", "");
+
+                    morOrEveNow = getArguments().getString("morOrEve", "");
+
+                    if (morOrEveNow.equals("morning")) {
+                        amOrPM = "AM";
+                    } else {
+                        amOrPM = "PM";
+                    }
+
+                    zeroOut = getArguments().getBoolean("zeroOut", false);
+
+                    textViewAsk.setText(day + "," + date2 + ": Do you want to punch card this " + morOrEveNow + ",");
+                    textViewTime.setText("at " + timestampnow + " " + amOrPM + " ?");
+
+
+                    textViewAsk.requestFocus(); //what is this?
+                    textViewTime.requestFocus();
+                } else {
+
+
+           //     }
+
+                Log.i("onclickFinal", "1");
+
+                Map<String, Object> kk = new HashMap<>();
+
+                if (morOrEveNow.equals("morning")) {
+
+                    Log.i("onclickFinal", "2");
 
                     if (day != null) {
 
-                        Log.i("onclickFinal","3");
-                        if(zeroOut) {
+                        Log.i("onclickFinal", "3");
+                        if (zeroOut) {
                             timestampnow = "0";
                         }
 
-                            if (day.equals("Mon")) {
+                        if (day.equals("Mon")) {
 
-                                kk.put("ts_mon_morning", timestampnow);
-
-
-                            } else if (day.equals("Tue")) {
-
-                                kk.put("ts_tue_morning", timestampnow);
+                            kk.put("ts_mon_morning", timestampnow);
 
 
-                            } else if (day.equals("Wed")) {
+                        } else if (day.equals("Tue")) {
 
-                                kk.put("ts_wed_morning", timestampnow);
-
-
-                            } else if (day.equals("Thu")) {
-
-                                kk.put("ts_thu_morning", timestampnow);
+                            kk.put("ts_tue_morning", timestampnow);
 
 
-                            } else if (day.equals("Fri")) {
+                        } else if (day.equals("Wed")) {
 
-                                kk.put("ts_fri_morning", timestampnow);
+                            kk.put("ts_wed_morning", timestampnow);
 
 
-                            }
+                        } else if (day.equals("Thu")) {
+
+                            kk.put("ts_thu_morning", timestampnow);
+
+
+                        } else if (day.equals("Fri")) {
+
+                            kk.put("ts_fri_morning", timestampnow);
+
+
+                        }
 
                     }
 
-                }else if(morOrEveNow.equals("evening")) { //evening time stamp.
+                } else if (morOrEveNow.equals("evening")) { //evening time stamp.
 
-                    if(zeroOut) {
+                    if (zeroOut) {
 
                         timestampnow = "0";
                     }
 
-                        if (day != null) {
+                    if (day != null) {
 
-                            if (day.equals("Mon")) {
+                        if (day.equals("Mon")) {
 
-                                kk.put("ts_mon_evening", timestampnow);
+                            kk.put("ts_mon_evening", timestampnow);
 
-                            } else if (day.equals("Tue")) {
+                        } else if (day.equals("Tue")) {
 
-                                kk.put("ts_tue_evening", timestampnow);
+                            kk.put("ts_tue_evening", timestampnow);
 
-                            } else if (day.equals("Wed")) {
+                        } else if (day.equals("Wed")) {
 
-                                kk.put("ts_wed_evening", timestampnow);
+                            kk.put("ts_wed_evening", timestampnow);
 
-                            } else if (day.equals("Thu")) {
+                        } else if (day.equals("Thu")) {
 
-                                kk.put("ts_thu_evening", timestampnow);
+                            kk.put("ts_thu_evening", timestampnow);
 
-                            } else if (day.equals("Fri")) {
+                        } else if (day.equals("Fri")) {
 
-                                kk.put("ts_fri_evening", timestampnow);
+                            kk.put("ts_fri_evening", timestampnow);
 
-                            }
                         }
+                    }
 
 
                 }
 
-                if(kk!=null){
+                if (kk != null) {
 
                     documentReference.set(kk, SetOptions.merge()).addOnCompleteListener(new OnCompleteListener<Void>() {
                         @Override
                         public void onComplete(@NonNull Task<Void> task) {
 
-                            if(task.isSuccessful()){
+                            if (task.isSuccessful()) {
 
 
-                                Toast.makeText(getActivity(),"punch card recorded succesfully",Toast.LENGTH_SHORT).show();
+                                Toast.makeText(getActivity(), "punch card recorded succesfully", Toast.LENGTH_SHORT).show();
                                 //intent to next activity,
 
                                 Intent intent = new Intent(getActivity(), Main_BottomNav_Activity.class);
 
                                 //17 june
 
-                                intent.putExtra("today",day);
-                                intent.putExtra("date", date);
+                                intent.putExtra("today", day);
+                                intent.putExtra("date2", date2);
                                 //intent.putExtra()
                                 //intent.getStringExtra("username",)
 
-                                intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP|Intent.FLAG_ACTIVITY_NEW_TASK);
+                                intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP | Intent.FLAG_ACTIVITY_NEW_TASK);
                                 startActivity(intent);
 
 
-                            }else { //task not succesfull, ask user to try time stamp again.
+                            } else { //task not succesfull, ask user to try time stamp again.
 
-                                Toast.makeText(getActivity(),"punch card failed attempt, please try again",Toast.LENGTH_LONG).show();
+                                Toast.makeText(getActivity(), "punch card failed attempt, please try again", Toast.LENGTH_LONG).show();
 
                                 Intent intent = new Intent(getActivity(), FingerPrint_LogIn_Final_Activity.class); //can we call same activity,
                                 intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
@@ -249,6 +342,8 @@ public class TimeStampCheckFragment extends DialogFragment {
                     });
                 }
             }
+
+        }
         });
 
         buttonCheckOut.setOnClickListener(new View.OnClickListener() {

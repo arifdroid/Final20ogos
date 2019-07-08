@@ -1951,6 +1951,8 @@ public class FragmentTimeStamp extends Fragment implements Observer, View.OnClic
 
 
 
+
+
                 }else {
 
                     Toast.makeText(getContext(),"please wait until animation finish", Toast.LENGTH_SHORT).show();

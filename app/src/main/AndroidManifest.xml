@@ -38,7 +38,7 @@
         <activity android:name=".fingerPrint_Login.test_mvp.Test_Activity" />
         <activity
             android:name=".fingerPrint_Login.fingerprint_login.FingerPrint_LogIn_Final_Activity"
-            android:launchMode="singleTask">
+            >
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 
