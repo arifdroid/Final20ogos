@@ -672,12 +672,21 @@ public class FingerPrint_LogIn_Final_Activity extends AppCompatActivity implemen
 
                                                     Intent getReportIntent = new Intent(FingerPrint_LogIn_Final_Activity.this, Report_Activity.class);
 
+                                                    getReportIntent.putExtra("phone",phoneHere_ifadmin);
+                                                    getReportIntent.putExtra("name",nameHere_ifadmin);
+                                                    getReportIntent.putExtra("adminname", adminName_ifadmin);
+
 
 
                                                 }else if(phoneHere_ifadmin.equals(adminPhone_2_ifadmin)){
                                                     //it belongs to admin 2
 
                                                     Intent getReportIntent2 = new Intent(FingerPrint_LogIn_Final_Activity.this, Report_Activity.class);
+
+
+                                                    getReportIntent2.putExtra("phone",phoneHere_ifadmin);
+                                                    getReportIntent2.putExtra("name",nameHere_ifadmin);
+                                                    getReportIntent2.putExtra("adminname", adminName_2_ifadmin);
 
 
                                                 }
