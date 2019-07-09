@@ -255,6 +255,32 @@ public class TestTimeStamp {
     }
 
 
+    //8 july
+
+    public TestTimeStamp(int referenceiD, String mon_morning, String tue_morning, String wed_morning, String thu_morning, String fri_morning, String name , String locationStreet) {
+
+        this.name = name;
+        this.mon_morning = mon_morning;
+        this.tue_morning = tue_morning;
+        this.wed_morning = wed_morning;
+        this.thu_morning = thu_morning;
+        this.fri_morning = fri_morning;
+        this.referenceiD = referenceiD;
+
+        this.locationStreet = locationStreet;
+
+    }
+
+    public String getLocationStreet() {
+        return locationStreet;
+    }
+
+    public void setLocationStreet(String locationStreet) {
+        this.locationStreet = locationStreet;
+    }
+
+    public String locationStreet;
+
 
     public int getReferenceiD() {
         return referenceiD;
