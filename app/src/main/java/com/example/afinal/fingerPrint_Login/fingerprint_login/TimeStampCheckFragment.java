@@ -233,6 +233,8 @@ public class TimeStampCheckFragment extends DialogFragment {
 
                 if (morOrEveNow.equals("morning")) {
 
+
+
                     Log.i("onclickFinal", "2");
 
                     if (day != null) {
@@ -245,26 +247,34 @@ public class TimeStampCheckFragment extends DialogFragment {
                         if (day.equals("Mon")) {
 
                             kk.put("ts_mon_morning", timestampnow);
-
+                            kk.put("mon_date",date2);
+                            kk.put("loc_mon_morning", streetOutside);
 
                         } else if (day.equals("Tue")) {
 
                             kk.put("ts_tue_morning", timestampnow);
+                            kk.put("tue_date",date2);
+                            kk.put("loc_tue_morning", streetOutside);
 
 
                         } else if (day.equals("Wed")) {
 
                             kk.put("ts_wed_morning", timestampnow);
-
+                            kk.put("wed_date",date2);
+                            kk.put("loc_wed_morning", streetOutside);
 
                         } else if (day.equals("Thu")) {
 
                             kk.put("ts_thu_morning", timestampnow);
+                            kk.put("thu_date",date2);
+                            kk.put("loc_thu_morning", streetOutside);
 
 
                         } else if (day.equals("Fri")) {
 
                             kk.put("ts_fri_morning", timestampnow);
+                            kk.put("fri_date",date2);
+                            kk.put("loc_fri_morning", streetOutside);
 
 
                         }
@@ -283,22 +293,32 @@ public class TimeStampCheckFragment extends DialogFragment {
                         if (day.equals("Mon")) {
 
                             kk.put("ts_mon_evening", timestampnow);
+                            kk.put("mon_date",date2);
+                            kk.put("loc_mon_evening", streetOutside);
 
                         } else if (day.equals("Tue")) {
 
                             kk.put("ts_tue_evening", timestampnow);
+                            kk.put("tue_date",date2);
+                            kk.put("loc_tue_evening", streetOutside);
 
                         } else if (day.equals("Wed")) {
 
                             kk.put("ts_wed_evening", timestampnow);
+                            kk.put("wed_date",date2);
+                            kk.put("loc_wed_evening", streetOutside);
 
                         } else if (day.equals("Thu")) {
 
                             kk.put("ts_thu_evening", timestampnow);
+                            kk.put("thu_date",date2);
+                            kk.put("loc_thu_evening", streetOutside);
 
                         } else if (day.equals("Fri")) {
 
                             kk.put("ts_fri_evening", timestampnow);
+                            kk.put("fri_date",date2);
+                            kk.put("loc_fri_evening", streetOutside);
 
                         }
                     }
