@@ -107,6 +107,7 @@ public class Report_Activity extends AppCompatActivity {
                                     String mon_morning =  kk.getValue().toString();
 
                                     object_to_add.setMon_morning(mon_morning);
+                                    object_to_add.setProb_mon_morning(true);
 
                                     Log.i("checkTimeStamp ", "flow: 6" + mon_morning);
 
@@ -122,6 +123,8 @@ public class Report_Activity extends AppCompatActivity {
                                     String tue_morning =  kk.getValue().toString();
 
                                     object_to_add.setTue_morning(tue_morning);
+                                    object_to_add.setProb_tue_morning(true);
+
 
                                     Log.i("checkTimeStamp ", "flow: 7" + tue_morning);
 
@@ -137,6 +140,8 @@ public class Report_Activity extends AppCompatActivity {
                                     String wed_morning =kk.getValue().toString();
 
                                     object_to_add.setWed_morning(wed_morning);
+                                    object_to_add.setProb_wed_morning(true);
+
 
                                 }
 
@@ -150,12 +155,16 @@ public class Report_Activity extends AppCompatActivity {
 
 
                                     object_to_add.setThu_morning(thu_morning);
+                                    object_to_add.setProb_thu_morning(true);
+
                                 }
 
                                 if (kk.getKey().equals("ts_fri_morning")) {
 
                                     String fri_morning = kk.getValue().toString();
                                     object_to_add.setFri_morning(fri_morning);
+                                    object_to_add.setProb_fri_morning(true);
+
 
                                 }
 
@@ -166,6 +175,8 @@ public class Report_Activity extends AppCompatActivity {
                                     String mon_evening = kk.getValue().toString();
                                     //object
                                     object_to_add.setMon_evening(mon_evening);
+                                    object_to_add.setProb_mon_evening(true);
+
                                 }
 
                                 if(kk.getKey().equals("ts_tue_evening")){
@@ -173,26 +184,118 @@ public class Report_Activity extends AppCompatActivity {
                                     String tue_evening = kk.getValue().toString();
                                     //object
                                     object_to_add.setTue_evening(tue_evening);
+                                    object_to_add.setProb_tue_evening(true);
                                 }
                                 if(kk.getKey().equals("ts_wed_evening")){
 
                                     String wed_evening = kk.getValue().toString();
                                     //object
                                     object_to_add.setWed_evening(wed_evening);
+                                    object_to_add.setProb_wed_evening(true);
                                 }
                                 if(kk.getKey().equals("ts_thu_evening")){
 
                                     String thu_evening = kk.getValue().toString();
                                     //object
                                     object_to_add.setThu_evening(thu_evening);
+                                    object_to_add.setProb_thu_evening(true);
                                 }
                                 if(kk.getKey().equals("ts_fri_evening")){
 
                                     String fri_evening = kk.getValue().toString();
                                     //object
                                     object_to_add.setFri_evening(fri_evening);
+                                    object_to_add.setProb_fri_evening(true);
                                 }
 
+                                if(kk.getKey().equals("mon_date")){
+
+                                    object_to_add.setMon_date(kk.getValue().toString());
+
+                                }
+
+
+                                if(kk.getKey().equals("tue_date")){
+
+                                    object_to_add.setTue_date(kk.getValue().toString());
+
+                                }
+
+
+                                if(kk.getKey().equals("wed_date")){
+
+                                    object_to_add.setWed_date(kk.getValue().toString());
+
+                                }
+
+                                if(kk.getKey().equals("thu_date")){
+
+                                    object_to_add.setThu_date(kk.getValue().toString());
+
+                                }
+
+                                if(kk.getKey().equals("fri_date")){
+
+                                    object_to_add.setFri_date(kk.getValue().toString());
+
+                                }
+
+
+                                //location
+
+                                if(kk.getKey().equals("loc_mon_morning")){
+                                    //this could be empty. or zero
+                                    object_to_add.setLocationMon(kk.getValue().toString());
+                                }
+
+
+                                if(kk.getKey().equals("loc_tue_morning")){
+                                    //this could be empty. or zero
+                                    object_to_add.setLocationTue(kk.getValue().toString());
+                                }
+
+
+                                if(kk.getKey().equals("loc_wed_morning")){
+                                    //this could be empty. or zero
+                                    object_to_add.setLocationWed(kk.getValue().toString());
+                                }
+
+                                if(kk.getKey().equals("loc_thu_morning")){
+                                    //this could be empty. or zero
+                                    object_to_add.setLocationThu(kk.getValue().toString());
+                                }
+
+                                if(kk.getKey().equals("loc_fri_morning")){
+                                    //this could be empty. or zero
+                                    object_to_add.setLocationFri(kk.getValue().toString());
+                                }
+
+                                if(kk.getKey().equals("loc_mon_evening")){
+                                    //this could be empty. or zero
+                                    object_to_add.setLocationMon_evening(kk.getValue().toString());
+                                }
+
+
+                                if(kk.getKey().equals("loc_tue_evening")){
+                                    //this could be empty. or zero
+                                    object_to_add.setLocationTue_evening(kk.getValue().toString());
+                                }
+
+
+                                if(kk.getKey().equals("loc_wed_evening")){
+                                    //this could be empty. or zero
+                                    object_to_add.setLocationWed_evening(kk.getValue().toString());
+                                }
+
+                                if(kk.getKey().equals("loc_thu_evening")){
+                                    //this could be empty. or zero
+                                    object_to_add.setLocationThu_evening(kk.getValue().toString());
+                                }
+
+                                if(kk.getKey().equals("loc_fri_evening")){
+                                    //this could be empty. or zero
+                                    object_to_add.setLocationFri_evening(kk.getValue().toString());
+                                }
 
 
 
@@ -237,5 +340,18 @@ public class Report_Activity extends AppCompatActivity {
         recyclerView.setAdapter(recyclerAdapter);
 
 
+    }
+
+
+    private String getDateToday(){
+
+        //need to process date, but, will it finish in time, need to check.
+
+
+
+
+
+
+        return "";
     }
 }

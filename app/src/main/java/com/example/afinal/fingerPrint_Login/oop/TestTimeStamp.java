@@ -15,6 +15,116 @@ public class TestTimeStamp {
 
     /// new solution >> 11.23AM 8 April
 
+    private String locationMon;
+    private String locationTue;
+    private String locationWed;
+    private String locationThu;
+    private String locationFri;
+
+
+    public String getLocationMon() {
+        return locationMon;
+    }
+
+    public void setLocationMon(String locationMon) {
+        this.locationMon = locationMon;
+    }
+
+    public String getLocationTue() {
+        return locationTue;
+    }
+
+    public void setLocationTue(String locationTue) {
+        this.locationTue = locationTue;
+    }
+
+    public String getLocationWed() {
+        return locationWed;
+    }
+
+    public void setLocationWed(String locationWed) {
+        this.locationWed = locationWed;
+    }
+
+    public String getLocationThu() {
+        return locationThu;
+    }
+
+    public void setLocationThu(String locationThu) {
+        this.locationThu = locationThu;
+    }
+
+    public String getLocationFri() {
+        return locationFri;
+    }
+
+    public void setLocationFri(String locationFri) {
+        this.locationFri = locationFri;
+    }
+
+    //location evening
+
+    private String locationMon_evening;
+    private String locationTue_evening;
+    private String locationWed_evening;
+    private String locationThu_evening;
+
+    public String getLocationMon_evening() {
+        return locationMon_evening;
+    }
+
+    public void setLocationMon_evening(String locationMon_evening) {
+        this.locationMon_evening = locationMon_evening;
+    }
+
+    public String getLocationTue_evening() {
+        return locationTue_evening;
+    }
+
+    public void setLocationTue_evening(String locationTue_evening) {
+        this.locationTue_evening = locationTue_evening;
+    }
+
+    public String getLocationWed_evening() {
+        return locationWed_evening;
+    }
+
+    public void setLocationWed_evening(String locationWed_evening) {
+        this.locationWed_evening = locationWed_evening;
+    }
+
+    public String getLocationThu_evening() {
+        return locationThu_evening;
+    }
+
+    public void setLocationThu_evening(String locationThu_evening) {
+        this.locationThu_evening = locationThu_evening;
+    }
+
+    public String getLocationFri_evening() {
+        return locationFri_evening;
+    }
+
+    public void setLocationFri_evening(String locationFri_evening) {
+        this.locationFri_evening = locationFri_evening;
+    }
+
+    private String locationFri_evening;
+
+
+
+    // 8 july , add date ,
+
+    private String date;
+
+    public String getDate() {
+        return date;
+    }
+
+    public void setDate(String date) {
+        this.date = date;
+    }
+
     private boolean prob_mon_morning;
     private boolean prob_tue_morning;
     private boolean prob_wed_morning;
@@ -25,6 +135,8 @@ public class TestTimeStamp {
     private boolean prob_tue_evening;
     private boolean prob_wed_evening;
     private boolean prob_thu_evening;
+
+
 
     public boolean isProb_mon_morning() {
         return prob_mon_morning;
@@ -135,6 +247,8 @@ public class TestTimeStamp {
     //24june
 
     private String image_url;
+
+
 
 
     public String getMon_date() {
