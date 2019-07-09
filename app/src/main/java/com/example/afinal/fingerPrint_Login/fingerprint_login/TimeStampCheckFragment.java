@@ -39,6 +39,7 @@ public class TimeStampCheckFragment extends DialogFragment {
     private String date2;
     private String amOrPM;
     private Map<String, Object> kk = new HashMap<>(); //careful dont want to ducplicate
+    private String streetOutside;
 
 
     public TimeStampCheckFragment() {
@@ -154,7 +155,7 @@ public class TimeStampCheckFragment extends DialogFragment {
 
         //7 july
 
-        final String streetOutside = getArguments().getString("streetname", "");
+        streetOutside = getArguments().getString("streetname", "");
 
         if (streetOutside != null || !streetOutside.equals("")) {
 
@@ -163,7 +164,7 @@ public class TimeStampCheckFragment extends DialogFragment {
         } else {
 
 
-
+        streetOutside="location within perimeter";
 
 //a
          date2 = getArguments().getString("date2", "");

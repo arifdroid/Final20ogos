@@ -301,7 +301,22 @@ public class Report_Activity extends AppCompatActivity {
 
                             }
 
+                            lateList.add(object_to_add);
+
+
                         }
+
+                        runOnUiThread(new Runnable() {
+                            @Override
+                            public void run() {
+
+                                recyclerAdapter.notifyDataSetChanged();
+
+
+
+                            }
+                        });
+
 
                     }else {
 
@@ -334,6 +349,8 @@ public class Report_Activity extends AppCompatActivity {
         recyclerView.setLayoutManager(layoutManager);
 
         lateList = new ArrayList<>();
+
+        lateList.add(new TestTimeStamp());
 
         recyclerAdapter = new RecyclerAdapterReport(Report_Activity.this,lateList);
 
