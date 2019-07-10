@@ -53,7 +53,7 @@ public class RecyclerAdapterReport extends RecyclerView.Adapter<RecyclerAdapterR
 
             holder.textViewDate.setText(listss.get(position).getMon_date());
             holder.textViewClock.setText(listss.get(position).getMon_morning());
-            holder.textViewMorOrEve.setText("Morning");
+            holder.textViewMorOrEve.setText("AM");
             holder.textViewLocation.setText(listss.get(position).getLocationMon());
 
 
@@ -62,7 +62,7 @@ public class RecyclerAdapterReport extends RecyclerView.Adapter<RecyclerAdapterR
 
             holder.textViewDate.setText(listss.get(position).getTue_date());
             holder.textViewClock.setText(listss.get(position).getTue_morning());
-            holder.textViewMorOrEve.setText("Morning");
+            holder.textViewMorOrEve.setText("AM");
             holder.textViewLocation.setText(listss.get(position).getLocationTue());
 
 
@@ -71,7 +71,7 @@ public class RecyclerAdapterReport extends RecyclerView.Adapter<RecyclerAdapterR
 
             holder.textViewDate.setText(listss.get(position).getWed_date());
             holder.textViewClock.setText(listss.get(position).getWed_morning());
-            holder.textViewMorOrEve.setText("Morning");
+            holder.textViewMorOrEve.setText("AM");
             holder.textViewLocation.setText(listss.get(position).getLocationWed());
 
 
@@ -80,7 +80,7 @@ public class RecyclerAdapterReport extends RecyclerView.Adapter<RecyclerAdapterR
 
             holder.textViewDate.setText(listss.get(position).getThu_date());
             holder.textViewClock.setText(listss.get(position).getThu_morning());
-            holder.textViewMorOrEve.setText("Morning");
+            holder.textViewMorOrEve.setText("AM");
             holder.textViewLocation.setText(listss.get(position).getLocationThu());
 
         } else if (listss.get(position).isProb_fri_morning()) {
@@ -88,7 +88,7 @@ public class RecyclerAdapterReport extends RecyclerView.Adapter<RecyclerAdapterR
 
             holder.textViewDate.setText(listss.get(position).getFri_date());
             holder.textViewClock.setText(listss.get(position).getFri_morning());
-            holder.textViewMorOrEve.setText("Morning");
+            holder.textViewMorOrEve.setText("AM");
             holder.textViewLocation.setText(listss.get(position).getLocationFri());
 
         } else if (listss.get(position).isProb_mon_evening()) { //we can get date, assuming, pull this week data,
@@ -96,7 +96,7 @@ public class RecyclerAdapterReport extends RecyclerView.Adapter<RecyclerAdapterR
 
             holder.textViewDate.setText(listss.get(position).getMon_date());
             holder.textViewClock.setText(listss.get(position).getMon_evening());
-            holder.textViewMorOrEve.setText("Evening");
+            holder.textViewMorOrEve.setText("PM");
             holder.textViewLocation.setText(listss.get(position).getLocationMon_evening());
 
 
@@ -105,7 +105,7 @@ public class RecyclerAdapterReport extends RecyclerView.Adapter<RecyclerAdapterR
 
             holder.textViewDate.setText(listss.get(position).getTue_date());
             holder.textViewClock.setText(listss.get(position).getTue_evening());
-            holder.textViewMorOrEve.setText("Evening");
+            holder.textViewMorOrEve.setText("PM");
             holder.textViewLocation.setText(listss.get(position).getLocationTue_evening());
 
         } else if (listss.get(position).isProb_wed_evening()) {
@@ -113,7 +113,7 @@ public class RecyclerAdapterReport extends RecyclerView.Adapter<RecyclerAdapterR
 
             holder.textViewDate.setText(listss.get(position).getWed_date());
             holder.textViewClock.setText(listss.get(position).getWed_evening());
-            holder.textViewMorOrEve.setText("Evening");
+            holder.textViewMorOrEve.setText("PM");
             holder.textViewLocation.setText(listss.get(position).getLocationWed_evening());
 
 
@@ -122,7 +122,7 @@ public class RecyclerAdapterReport extends RecyclerView.Adapter<RecyclerAdapterR
 
             holder.textViewDate.setText(listss.get(position).getThu_date());
             holder.textViewClock.setText(listss.get(position).getThu_evening());
-            holder.textViewMorOrEve.setText("Evening");
+            holder.textViewMorOrEve.setText("PM");
             holder.textViewLocation.setText(listss.get(position).getLocationThu_evening());
 
         } else if (listss.get(position).isProb_fri_evening()) {
@@ -130,7 +130,7 @@ public class RecyclerAdapterReport extends RecyclerView.Adapter<RecyclerAdapterR
 
             holder.textViewDate.setText(listss.get(position).getFri_date());
             holder.textViewClock.setText(listss.get(position).getFri_evening());
-            holder.textViewMorOrEve.setText("Evening");
+            holder.textViewMorOrEve.setText("PM");
             holder.textViewLocation.setText(listss.get(position).getLocationFri_evening());
 
         }

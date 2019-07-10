@@ -5,6 +5,7 @@ import androidx.appcompat.app.AppCompatActivity;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
+import android.annotation.SuppressLint;
 import android.content.Intent;
 import android.os.Bundle;
 import android.util.Log;
@@ -20,7 +21,10 @@ import com.google.firebase.firestore.DocumentSnapshot;
 import com.google.firebase.firestore.FirebaseFirestore;
 import com.google.firebase.firestore.QuerySnapshot;
 
+import java.text.DateFormat;
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
+import java.util.Date;
 import java.util.Map;
 
 public class Report_Activity extends AppCompatActivity {
@@ -42,6 +46,7 @@ public class Report_Activity extends AppCompatActivity {
 
     //to add to lateList
     private TestTimeStamp object_to_add;
+    private String dateFromPhone;
 
 
     @Override
@@ -67,16 +72,24 @@ public class Report_Activity extends AppCompatActivity {
         if(intent!=null){
 
 
+            @SuppressLint("SimpleDateFormat") final DateFormat format2 = new SimpleDateFormat("dd MMM yyyy hh:mm:ss zzz");
+
+            dateFromPhone = format2.format(new Date());
+
+            dateFromPhone = dateFromPhone.substring(0,6);
+
+
+
             nameHere = intent.getStringExtra("name");
             phoneHere = intent.getStringExtra("phone");
             adminname = intent.getStringExtra("adminname");
-            String date = intent.getStringExtra("datee");
+        //    String date = intent.getStringExtra("datee");
 
             textViewNamePhone.setText("Admin: "+ adminname+ " Phone: "+phoneHere);
 
-            textViewDate.setText(date);
+            textViewDate.setText(dateFromPhone + " 2019");
 
-            Log.i("checkReport ","date : "+ date);
+            Log.i("checkReport ","date : "+ dateFromPhone);
 
 
 

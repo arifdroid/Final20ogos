@@ -844,6 +844,7 @@ public class FingerPrint_LogIn_Final_Activity extends AppCompatActivity implemen
                                         @Override
                                         public void onClick(View view) {
 
+
                                             if(phoneHere_ifadmin.equals(adminPhone_ifadmin)){
                                                 //it belongs to admin 1
 
