@@ -518,6 +518,8 @@ public class FingerPrint_LogIn_Final_Activity extends AppCompatActivity implemen
 
         outState.putFloat("distanceOffset",distanceOffset);
 
+
+        outState.putString("bssidConstraint",bssidConstraint);
         outState.putString("fingerprint_result",s);
         outState.putString("morningConstraint",morningConstraint);
         outState.putString("eveningConstraint",eveningConstraint);
@@ -592,7 +594,114 @@ public class FingerPrint_LogIn_Final_Activity extends AppCompatActivity implemen
         setContentView(R.layout.activity_finger_print__log_in__final_);
 
 
+        if(savedInstanceState!=null){
 
+
+            //outState.putFloat("distanceOffset",distanceOffset);
+            distanceOffset = savedInstanceState.getFloat("distanceOffset");
+            s = savedInstanceState.getString("fingerprint_result");
+            //outState.putString("fingerprint_result",s);
+            morningConstraint = savedInstanceState.getString("morningConstraint");
+            eveningConstraint= savedInstanceState.getString("eveningConstraint");
+            ssidConstraint= savedInstanceState.getString("ssidConstraint");
+            locationConstraint= savedInstanceState.getString("locationConstraint");
+            bssidConstraint= savedInstanceState.getString("bssidConstraint");
+//
+//            outState.putString("morningConstraint",morningConstraint);
+//            outState.putString("eveningConstraint",eveningConstraint);
+//            outState.putString("eveningConstraint",ssidConstraint);
+//            outState.putString("locationConstraint",locationConstraint);
+
+            globalAdminNameHere= savedInstanceState.getString("globalAdminNameHere");
+            globalAdminPhoneHere= savedInstanceState.getString("globalAdminPhoneHere");
+            //outState.putString("globalAdminNameHere",globalAdminNameHere);
+            //outState.putString("globalAdminPhoneHere",globalAdminPhoneHere);
+
+            timeCurrent= savedInstanceState.getString("timeCurrent");
+            dateNow= savedInstanceState.getString("dateNow");
+            dayNow= savedInstanceState.getString("dayNow");
+//
+//            outState.putString("timeCurrent",timeCurrent);
+//            outState.putString("dateNow",dateNow);
+
+            //outState.putString("dayNow",dayNow);
+
+
+            globalUserName= savedInstanceState.getString("globalUserName");
+            globalUserPhone= savedInstanceState.getString("globalUserPhone");
+            userSSID= savedInstanceState.getString("userSSID");
+            userBSSID= savedInstanceState.getString("userBSSID");
+
+//
+//            outState.putString("globalUserName", globalUserName);
+//            outState.putString("globalUserPhone", globalUserPhone);
+//
+//            outState.putString("userSSID",userSSID);
+//            outState.putString("userBSSID",userBSSID);
+//
+
+            lastSSIDrecorded= savedInstanceState.getString("lastSSIDrecorded");
+            //outState.putString("lastSSIDrecorded",lastSSIDrecorded);
+
+
+            globalUserName= savedInstanceState.getString("globalUserName");
+            globalUserPhone= savedInstanceState.getString("globalUserPhone");
+            userSSID= savedInstanceState.getString("userSSID");
+            userBSSID= savedInstanceState.getString("userBSSID");
+
+
+            lastLocationRecorded= savedInstanceState.getString("lastLocationRecorded");
+            userLatitude= savedInstanceState.getString("userLatitude");
+            userLongitude= savedInstanceState.getString("userLongitude");
+
+
+            nameUser= savedInstanceState.getString("nameUser");
+            phoneUser= savedInstanceState.getString("phoneUser");
+
+            dateAndTimeNow= savedInstanceState.getString("dateAndTimeNow");
+
+
+
+            //outState.putString("lastLocationRecorded",lastLocationRecorded);
+//            outState.putString("userLatitude",userLatitude);
+//            outState.putString("userLongitude",userLongitude);
+//
+//            outState.putString("nameUser",nameUser);
+//            outState.putString("phoneUser",phoneUser);
+
+
+
+
+            //outState.putString("dateAndTimeNow",dateAndTimeNow);
+
+
+            counterFlowHere= savedInstanceState.getInt("counterFlowHere");
+
+            counterFlowHere2= savedInstanceState.getInt("counterFlowHere2");
+            fingerprint_count= savedInstanceState.getInt("fingerprint_count");
+            countUserverified= savedInstanceState.getInt("countUserverified");
+            statusBarWeSet= savedInstanceState.getInt("statusBarWeSet");
+
+
+            //outState.putInt("counterFlowHere", counterFlowHere);
+//            outState.putInt("counterFlowHere2", counterFlowHere2);
+//            outState.putInt("fingerprint_count", fingerprint_count);
+//            outState.putInt("countUserverified",countUserverified);
+//            outState.putInt("statusBarWeSet", statusBarWeSet);
+
+            booleanResultExtracted = savedInstanceState.getBoolean("booleanResultExtracted");
+            boolean_fingerprint_first= savedInstanceState.getBoolean("boolean_fingerprint_first");
+            checkLocationProcess= savedInstanceState.getBoolean("checkLocationProcess");
+            checkAdminConstraintProcess= savedInstanceState.getBoolean("checkAdminConstraintProcess");
+
+//            outState.putBoolean("booleanResultExtracted",booleanResultExtracted);
+//            outState.putBoolean("boolean_fingerprint_first",boolean_fingerprint_first);
+//            outState.putBoolean("checkLocationProcess",checkLocationProcess);
+//            outState.putBoolean("checkAdminConstraintProcess",checkAdminConstraintProcess);
+
+
+
+        }
 
         constraintbaccck = findViewById(R.id.constraint_baccckkkID);
         backColor = findViewById(R.id.backLayoutColourID);
