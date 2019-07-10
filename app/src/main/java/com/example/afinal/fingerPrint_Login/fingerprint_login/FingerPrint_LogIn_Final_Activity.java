@@ -502,6 +502,7 @@ public class FingerPrint_LogIn_Final_Activity extends AppCompatActivity implemen
     private FloatingActionButton buttonGetReport;
     private TextView textGetReport;
     private String s;
+    private float distanceOffset;
 
 
     //19 june
@@ -514,6 +515,9 @@ public class FingerPrint_LogIn_Final_Activity extends AppCompatActivity implemen
     public void onSaveInstanceState(Bundle outState, PersistableBundle outPersistentState) {
         super.onSaveInstanceState(outState, outPersistentState);
 
+
+        outState.putFloat("distanceOffset",distanceOffset);
+
         outState.putString("fingerprint_result",s);
         outState.putString("morningConstraint",morningConstraint);
         outState.putString("eveningConstraint",eveningConstraint);
@@ -521,6 +525,18 @@ public class FingerPrint_LogIn_Final_Activity extends AppCompatActivity implemen
         outState.putString("locationConstraint",locationConstraint);
         outState.putString("globalAdminNameHere",globalAdminNameHere);
         outState.putString("globalAdminPhoneHere",globalAdminPhoneHere);
+
+        outState.putString("timeCurrent",timeCurrent);
+        outState.putString("dateNow",dateNow);
+
+        outState.putString("dayNow",dayNow);
+
+
+
+
+
+        outState.putString("globalUserName", globalUserName);
+        outState.putString("globalUserPhone", globalUserPhone);
 
         outState.putString("userSSID",userSSID);
         outState.putString("userBSSID",userBSSID);
@@ -549,8 +565,16 @@ public class FingerPrint_LogIn_Final_Activity extends AppCompatActivity implemen
         outState.putInt("counterFlowHere2", counterFlowHere2);
         outState.putInt("fingerprint_count", fingerprint_count);
 
+        outState.putInt("countUserverified",countUserverified);
+
+        outState.putInt("statusBarWeSet", statusBarWeSet);
+
         outState.putBoolean("booleanResultExtracted",booleanResultExtracted);
         outState.putBoolean("boolean_fingerprint_first",boolean_fingerprint_first);
+        outState.putBoolean("checkLocationProcess",checkLocationProcess);
+        outState.putBoolean("checkAdminConstraintProcess",checkAdminConstraintProcess);
+
+
 
 
 
@@ -1371,6 +1395,7 @@ public class FingerPrint_LogIn_Final_Activity extends AppCompatActivity implemen
 
    //         if(avd!=null || avd1!=null){
 
+
             if (checkAdminConstraintProcess == true && checkLocationProcess == true && dateAndTimeNow != null && !dateAndTimeNow.equals("") && (avd1!=null || avd!=null)) {
 //            if(morningConstraint!=null &&eveningConstraint!=null && dateAndTimeNow!=null && userLongitude!=null && userLatitude!=null
 //        && latitudeConstraint!=null && longitudeConstraint!=null && userBSSID!=null && userSSID!=null
@@ -1724,7 +1749,7 @@ public class FingerPrint_LogIn_Final_Activity extends AppCompatActivity implemen
             Log.i("finalCheckFlowHere", "6, ssid different, location CHECK, latitude admin:"
                     + latitudeConstraint+" , user latitude"+ userLatitude);
 
-            float distanceOffset = user.distanceTo(admin);
+            distanceOffset = user.distanceTo(admin);
 
             if(distanceOffset<=50){  //assume 50 is 50 meter.
                 //here can process ask to stamp.
