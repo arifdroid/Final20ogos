@@ -186,6 +186,8 @@ public class Report_Activity extends AppCompatActivity {
                                                             String tue_morning =  kk.getValue().toString();
 
                                                             object_to_add.setTue_morning(tue_morning);
+                                                            objectMap.put("ts_tue_morning",kk.getValue().toString());
+
                                                             object_to_add.setProb_tue_morning(true);
 
 
@@ -200,7 +202,10 @@ public class Report_Activity extends AppCompatActivity {
                                                             //remap into single array of object.
                                                             //Float wed_morning = (Float) kk.getValue();
 
+                                                            objectMap.put("ts_wed_morning",kk.getValue().toString());
+
                                                             String wed_morning =kk.getValue().toString();
+
 
                                                             object_to_add.setWed_morning(wed_morning);
                                                             object_to_add.setProb_wed_morning(true);
@@ -214,6 +219,9 @@ public class Report_Activity extends AppCompatActivity {
 
                                                             //remap into single array of object.
                                                             //Float thu_morning = (Float) kk.getValue();
+
+                                                            objectMap.put("ts_thu_morning",kk.getValue().toString());
+
                                                             String thu_morning = kk.getValue().toString();
 
 
@@ -223,6 +231,8 @@ public class Report_Activity extends AppCompatActivity {
                                                         }
 
                                                         if (kk.getKey().equals("ts_fri_morning")) {
+
+                                                            objectMap.put("ts_fri_morning",kk.getValue().toString());
 
                                                             String fri_morning = kk.getValue().toString();
                                                             object_to_add.setFri_morning(fri_morning);
@@ -235,6 +245,8 @@ public class Report_Activity extends AppCompatActivity {
 
                                                         if(kk.getKey().equals("ts_mon_evening")){
 
+                                                            objectMap.put("ts_mon_evening",kk.getValue().toString());
+
                                                             String mon_evening = kk.getValue().toString();
                                                             //object
                                                             object_to_add.setMon_evening(mon_evening);
@@ -244,12 +256,16 @@ public class Report_Activity extends AppCompatActivity {
 
                                                         if(kk.getKey().equals("ts_tue_evening")){
 
+                                                            objectMap.put("ts_tue_evening",kk.getValue().toString());
+
                                                             String tue_evening = kk.getValue().toString();
                                                             //object
                                                             object_to_add.setTue_evening(tue_evening);
                                                             object_to_add.setProb_tue_evening(true);
                                                         }
                                                         if(kk.getKey().equals("ts_wed_evening")){
+
+                                                            objectMap.put("ts_wed_evening",kk.getValue().toString());
 
                                                             String wed_evening = kk.getValue().toString();
                                                             //object
@@ -258,12 +274,16 @@ public class Report_Activity extends AppCompatActivity {
                                                         }
                                                         if(kk.getKey().equals("ts_thu_evening")){
 
+                                                            objectMap.put("ts_thu_evening",kk.getValue().toString());
+
                                                             String thu_evening = kk.getValue().toString();
                                                             //object
                                                             object_to_add.setThu_evening(thu_evening);
                                                             object_to_add.setProb_thu_evening(true);
                                                         }
                                                         if(kk.getKey().equals("ts_fri_evening")){
+
+                                                            objectMap.put("ts_fri_evening",kk.getValue().toString());
 
                                                             String fri_evening = kk.getValue().toString();
                                                             //object
@@ -273,12 +293,16 @@ public class Report_Activity extends AppCompatActivity {
 
                                                         if(kk.getKey().equals("mon_date")){
 
+                                                            objectMap.put("mon_date",kk.getValue().toString());
+
                                                             object_to_add.setMon_date(kk.getValue().toString());
 
                                                         }
 
 
                                                         if(kk.getKey().equals("tue_date")){
+
+                                                            objectMap.put("tue_date",kk.getValue().toString());
 
                                                             object_to_add.setTue_date(kk.getValue().toString());
 
@@ -287,17 +311,24 @@ public class Report_Activity extends AppCompatActivity {
 
                                                         if(kk.getKey().equals("wed_date")){
 
+                                                            objectMap.put("wed_date",kk.getValue().toString());
+
                                                             object_to_add.setWed_date(kk.getValue().toString());
 
                                                         }
 
                                                         if(kk.getKey().equals("thu_date")){
 
+
+                                                            objectMap.put("thu_date",kk.getValue().toString());
+
                                                             object_to_add.setThu_date(kk.getValue().toString());
 
                                                         }
 
                                                         if(kk.getKey().equals("fri_date")){
+
+                                                            objectMap.put("fri_date",kk.getValue().toString());
 
                                                             object_to_add.setFri_date(kk.getValue().toString());
 
@@ -308,38 +339,49 @@ public class Report_Activity extends AppCompatActivity {
 
                                                         if(kk.getKey().equals("loc_mon_morning")){
                                                             //this could be empty. or zero
+
+                                                            objectMap.put("loc_mon_morning",kk.getValue().toString());
                                                             object_to_add.setLocationMon(kk.getValue().toString());
                                                         }
 
 
                                                         if(kk.getKey().equals("loc_tue_morning")){
                                                             //this could be empty. or zero
+                                                            objectMap.put("loc_tue_morning",kk.getValue().toString());
                                                             object_to_add.setLocationTue(kk.getValue().toString());
                                                         }
 
 
                                                         if(kk.getKey().equals("loc_wed_morning")){
                                                             //this could be empty. or zero
+
+                                                            objectMap.put("loc_wed_morning",kk.getValue().toString());
                                                             object_to_add.setLocationWed(kk.getValue().toString());
                                                         }
 
                                                         if(kk.getKey().equals("loc_thu_morning")){
                                                             //this could be empty. or zero
+
+                                                            objectMap.put("loc_thu_morning",kk.getValue().toString());
                                                             object_to_add.setLocationThu(kk.getValue().toString());
                                                         }
 
                                                         if(kk.getKey().equals("loc_fri_morning")){
                                                             //this could be empty. or zero
+                                                            objectMap.put("loc_fri_morning",kk.getValue().toString());
                                                             object_to_add.setLocationFri(kk.getValue().toString());
                                                         }
 
                                                         if(kk.getKey().equals("loc_mon_evening")){
                                                             //this could be empty. or zero
+                                                            objectMap.put("loc_mon_evening",kk.getValue().toString());
                                                             object_to_add.setLocationMon_evening(kk.getValue().toString());
                                                         }
 
 
                                                         if(kk.getKey().equals("loc_tue_evening")){
+
+                                                            objectMap.put("loc_tue_evening",kk.getValue().toString());
                                                             //this could be empty. or zero
                                                             object_to_add.setLocationTue_evening(kk.getValue().toString());
                                                         }
@@ -347,16 +389,20 @@ public class Report_Activity extends AppCompatActivity {
 
                                                         if(kk.getKey().equals("loc_wed_evening")){
                                                             //this could be empty. or zero
+                                                            objectMap.put("loc_wed_evening",kk.getValue().toString());
                                                             object_to_add.setLocationWed_evening(kk.getValue().toString());
                                                         }
 
                                                         if(kk.getKey().equals("loc_thu_evening")){
                                                             //this could be empty. or zero
+
+                                                            objectMap.put("loc_thu_evening",kk.getValue().toString());
                                                             object_to_add.setLocationThu_evening(kk.getValue().toString());
                                                         }
 
                                                         if(kk.getKey().equals("loc_fri_evening")){
                                                             //this could be empty. or zero
+                                                            objectMap.put("loc_fri_evening",kk.getValue().toString());
                                                             object_to_add.setLocationFri_evening(kk.getValue().toString());
                                                         }
 
@@ -390,12 +436,23 @@ public class Report_Activity extends AppCompatActivity {
                                                 for(i=0;i<=lateList.size();i++){
 
                                                     SingleTimeStamp singleTimeStamp = new SingleTimeStamp();
+
                                                     SingleTimeStamp singleTimeStampMonday = new SingleTimeStamp();
                                                     SingleTimeStamp singleTimeStampMonday_evening = new SingleTimeStamp();
 
-
-
                                                     SingleTimeStamp singleTimeStampTuesday = new SingleTimeStamp();
+                                                    SingleTimeStamp singleTimeStampTuesday_evening = new SingleTimeStamp();
+
+                                                    SingleTimeStamp singleTimeStampWednesday = new SingleTimeStamp();
+                                                    SingleTimeStamp singleTimeStampWednesday_evening = new SingleTimeStamp();
+
+
+                                                    SingleTimeStamp singleTimeStampThursday = new SingleTimeStamp();
+                                                    SingleTimeStamp singleTimeStampThursday_evening = new SingleTimeStamp();
+
+
+                                                    SingleTimeStamp singleTimeStampFriday = new SingleTimeStamp();
+                                                    SingleTimeStamp singleTimeStampFriday_evening = new SingleTimeStamp();
 
                                                     singleTimeStampMonday.setName(lateList.get(i).getName());
 
@@ -437,22 +494,170 @@ public class Report_Activity extends AppCompatActivity {
 
                                                         }
 
-
-
+                                                        //////////
 
                                                         if(jj.getKey().equals("ts_tue_morning")){
                                                             singleTimeStampTuesday.setClock(jj.getValue().toString());
 
+                                                            singleTimeStampTuesday.setAmOrPm("AM");
+
+                                                        }
+
+                                                        if(jj.getKey().equals("loc_tue_morning")){
+
+                                                            singleTimeStampTuesday.setStreet(jj.getValue().toString());
+
+                                                        }
+
+                                                        if(jj.getKey().equals("tue_date")){
+                                                            singleTimeStampTuesday.setDate(jj.getValue().toString());
+                                                            singleTimeStampTuesday_evening.setDate(jj.getValue().toString());
                                                         }
 
 
+
+                                                        if(jj.getKey().equals("ts_tue_evening")){
+                                                            singleTimeStampTuesday_evening.setClock(jj.getValue().toString());
+
+                                                            singleTimeStampTuesday_evening.setAmOrPm("PM");
+
+                                                        }
+
+                                                        if(jj.getKey().equals("loc_tue_evening")){
+
+                                                            singleTimeStampTuesday_evening.setStreet(jj.getValue().toString());
+
+                                                        }
+
+                                                        ///////
+                                                        //////////
+
+                                                        if(jj.getKey().equals("ts_wed_morning")){
+                                                            singleTimeStampWednesday.setClock(jj.getValue().toString());
+
+                                                            singleTimeStampWednesday.setAmOrPm("AM");
+
+                                                        }
+
+                                                        if(jj.getKey().equals("loc_wed_morning")){
+
+                                                            singleTimeStampWednesday.setStreet(jj.getValue().toString());
+
+                                                        }
+
+                                                        if(jj.getKey().equals("wed_date")){
+                                                            singleTimeStampWednesday.setDate(jj.getValue().toString());
+                                                            singleTimeStampWednesday_evening.setDate(jj.getValue().toString());
+                                                        }
+
+
+
+                                                        if(jj.getKey().equals("ts_wed_evening")){
+                                                            singleTimeStampWednesday_evening.setClock(jj.getValue().toString());
+
+                                                            singleTimeStampWednesday_evening.setAmOrPm("PM");
+
+                                                        }
+
+                                                        if(jj.getKey().equals("loc_wed_evening")){
+
+                                                            singleTimeStampWednesday_evening.setStreet(jj.getValue().toString());
+
+                                                        }
+
+                                                        ///////
+                                                        //////////
+
+                                                        if(jj.getKey().equals("ts_thu_morning")){
+                                                            singleTimeStampThursday.setClock(jj.getValue().toString());
+
+                                                            singleTimeStampThursday.setAmOrPm("AM");
+
+                                                        }
+
+                                                        if(jj.getKey().equals("loc_thu_morning")){
+
+                                                            singleTimeStampThursday.setStreet(jj.getValue().toString());
+
+                                                        }
+
+                                                        if(jj.getKey().equals("thu_date")){
+                                                            singleTimeStampThursday.setDate(jj.getValue().toString());
+                                                            singleTimeStampThursday_evening.setDate(jj.getValue().toString());
+                                                        }
+
+
+
+                                                        if(jj.getKey().equals("ts_thu_evening")){
+                                                            singleTimeStampThursday_evening.setClock(jj.getValue().toString());
+
+                                                            singleTimeStampThursday_evening.setAmOrPm("PM");
+
+                                                        }
+
+                                                        if(jj.getKey().equals("loc_thu_evening")){
+
+                                                            singleTimeStampThursday_evening.setStreet(jj.getValue().toString());
+
+                                                        }
+
+                                                        ///////
+                                                        //////////
+
+                                                        if(jj.getKey().equals("ts_fri_morning")){
+                                                            singleTimeStampFriday.setClock(jj.getValue().toString());
+
+                                                            singleTimeStampFriday.setAmOrPm("AM");
+
+                                                        }
+
+                                                        if(jj.getKey().equals("loc_fri_morning")){
+
+                                                            singleTimeStampFriday.setStreet(jj.getValue().toString());
+
+                                                        }
+
+                                                        if(jj.getKey().equals("fri_date")){
+                                                            singleTimeStampFriday.setDate(jj.getValue().toString());
+                                                            singleTimeStampFriday_evening.setDate(jj.getValue().toString());
+                                                        }
+
+
+
+                                                        if(jj.getKey().equals("ts_fri_evening")){
+                                                            singleTimeStampFriday_evening.setClock(jj.getValue().toString());
+
+                                                            singleTimeStampFriday_evening.setAmOrPm("PM");
+
+                                                        }
+
+                                                        if(jj.getKey().equals("loc_fri_evening")){
+
+                                                            singleTimeStampFriday_evening.setStreet(jj.getValue().toString());
+
+                                                        }
+
+                                                        ///////
 
                                                     }
 
                                                     lissFinal = new ArrayList<>();
 
                                                     lissFinal.add(singleTimeStampMonday);
+                                                    lissFinal.add(singleTimeStampMonday_evening);
 
+                                                    lissFinal.add(singleTimeStampTuesday);
+                                                    lissFinal.add(singleTimeStampTuesday_evening);
+
+                                                    lissFinal.add(singleTimeStampWednesday);
+                                                    lissFinal.add(singleTimeStampWednesday_evening);
+
+                                                    lissFinal.add(singleTimeStampThursday);
+                                                    lissFinal.add(singleTimeStampThursday_evening);
+
+
+                                                    lissFinal.add(singleTimeStampFriday);
+                                                    lissFinal.add(singleTimeStampFriday_evening);
 
 //                                                    for(j=0;j<=sizeObject;j++){
 //
