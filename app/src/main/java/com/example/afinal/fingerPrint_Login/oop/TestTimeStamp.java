@@ -375,7 +375,12 @@ public class TestTimeStamp {
 
     }
 
+    private int sizeHere;
 
+    public int size(){ //tricky part is we dont have parameter.
+
+        return sizeHere;
+    }
 
     public TestTimeStamp(int referenceiD, String mon_morning, String tue_morning, String wed_morning, String thu_morning, String fri_morning, String name , String locationStreet) {
 

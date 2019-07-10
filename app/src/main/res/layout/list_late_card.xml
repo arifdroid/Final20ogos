@@ -4,7 +4,9 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
-    app:contentPadding="1dp">
+    app:cardElevation="5dp"
+    app:cardMaxElevation="5dp"
+    app:contentPadding="0dp">
 
     <androidx.constraintlayout.widget.ConstraintLayout
         android:layout_width="match_parent"
@@ -16,7 +18,7 @@
             android:layout_height="wrap_content"
             android:layout_marginStart="4dp"
             android:layout_marginTop="8dp"
-            android:layout_marginEnd="4dp"
+            android:layout_marginEnd="8dp"
             android:layout_marginBottom="8dp"
             android:text="1"
             app:layout_constraintBottom_toBottomOf="parent"
@@ -31,7 +33,7 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:orientation="vertical"
-            app:layout_constraintGuide_percent="0.08" />
+            app:layout_constraintGuide_percent="0.1" />
 
         <TextView
             android:id="@+id/textView_report_nameID"
@@ -83,7 +85,7 @@
             android:layout_marginStart="8dp"
             android:layout_marginTop="8dp"
             android:layout_marginEnd="8dp"
-            android:text="Morning "
+            android:text="AM"
             app:layout_constraintBottom_toTopOf="@+id/textView_report_clock"
             app:layout_constraintEnd_toStartOf="@+id/guideline189"
             app:layout_constraintHorizontal_bias="0.5"
@@ -115,6 +117,7 @@
             android:layout_marginEnd="4dp"
             android:layout_marginBottom="8dp"
             android:text="Location"
+            android:maxLines="3"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toStartOf="@+id/guideline187"
             app:layout_constraintStart_toStartOf="@+id/guideline189"
@@ -133,14 +136,14 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:orientation="vertical"
-            app:layout_constraintGuide_percent="0.25" />
+            app:layout_constraintGuide_percent="0.36" />
 
         <androidx.constraintlayout.widget.Guideline
             android:id="@+id/guideline189"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:orientation="vertical"
-            app:layout_constraintGuide_percent="0.41" />
+            app:layout_constraintGuide_percent="0.5" />
 
     </androidx.constraintlayout.widget.ConstraintLayout>
 </androidx.cardview.widget.CardView>
