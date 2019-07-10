@@ -454,10 +454,26 @@ public class Report_Activity extends AppCompatActivity {
                                                     SingleTimeStamp singleTimeStampFriday = new SingleTimeStamp();
                                                     SingleTimeStamp singleTimeStampFriday_evening = new SingleTimeStamp();
 
+                                                    //set name
+
                                                     singleTimeStampMonday.setName(lateList.get(i).getName());
+                                                    singleTimeStampMonday_evening.setName(lateList.get(i).getName());
+
+                                                    singleTimeStampTuesday.setName(lateList.get(i).getName());
+                                                    singleTimeStampTuesday_evening.setName(lateList.get(i).getName());
+
+
+                                                    singleTimeStampWednesday.setName(lateList.get(i).getName());
+                                                    singleTimeStampWednesday_evening.setName(lateList.get(i).getName());
+
+                                                    singleTimeStampThursday.setName(lateList.get(i).getName());
+                                                    singleTimeStampThursday_evening.setName(lateList.get(i).getName());
+
+                                                    singleTimeStampFriday.setName(lateList.get(i).getName());
+                                                    singleTimeStampFriday_evening.setName(lateList.get(i).getName());
+
 
                                                     for(Map.Entry<String,Object> jj : objectMap.entrySet()){
-
 
 
 
@@ -751,9 +767,13 @@ public class Report_Activity extends AppCompatActivity {
 
         lateList = new ArrayList<>();
 
-        lateList.add(new TestTimeStamp());
 
-        recyclerAdapter = new RecyclerAdapterReport(Report_Activity.this,lateList);
+
+        //lateList.add(new TestTimeStamp());
+
+        lissFinal.add(new SingleTimeStamp());
+
+        recyclerAdapter = new RecyclerAdapterReport(Report_Activity.this,lissFinal);
 
         recyclerView.setAdapter(recyclerAdapter);
 

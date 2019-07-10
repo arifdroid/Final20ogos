@@ -18,9 +18,9 @@ public class RecyclerAdapterReport extends RecyclerView.Adapter<RecyclerAdapterR
 
 
     private Context mContext;
-    private ArrayList<TestTimeStamp> listss;
+    private ArrayList<SingleTimeStamp> listss;
 
-    public RecyclerAdapterReport(Context context, ArrayList<TestTimeStamp> lateList) {
+    public RecyclerAdapterReport(Context context, ArrayList<SingleTimeStamp> lateList) {
 
         this.mContext = context;
         this.listss = lateList;
@@ -48,105 +48,12 @@ public class RecyclerAdapterReport extends RecyclerView.Adapter<RecyclerAdapterR
         } else {
 
 
-        if (listss.get(position).isProb_mon_morning()) { //we can get date, assuming, pull this week data,
-
-
-            holder.textViewDate.setText(listss.get(position).getMon_date());
-            holder.textViewClock.setText(listss.get(position).getMon_morning());
-            holder.textViewMorOrEve.setText("AM");
-            holder.textViewLocation.setText(listss.get(position).getLocationMon());
-
-
-        } else if (listss.get(position).isProb_tue_morning()) {
-
-
-            holder.textViewDate.setText(listss.get(position).getTue_date());
-            holder.textViewClock.setText(listss.get(position).getTue_morning());
-            holder.textViewMorOrEve.setText("AM");
-            holder.textViewLocation.setText(listss.get(position).getLocationTue());
-
-
-        } else if (listss.get(position).isProb_wed_morning()) {
-
-
-            holder.textViewDate.setText(listss.get(position).getWed_date());
-            holder.textViewClock.setText(listss.get(position).getWed_morning());
-            holder.textViewMorOrEve.setText("AM");
-            holder.textViewLocation.setText(listss.get(position).getLocationWed());
-
-
-        } else if (listss.get(position).isProb_thu_morning()) {
-
-
-            holder.textViewDate.setText(listss.get(position).getThu_date());
-            holder.textViewClock.setText(listss.get(position).getThu_morning());
-            holder.textViewMorOrEve.setText("AM");
-            holder.textViewLocation.setText(listss.get(position).getLocationThu());
-
-        } else if (listss.get(position).isProb_fri_morning()) {
-
-
-            holder.textViewDate.setText(listss.get(position).getFri_date());
-            holder.textViewClock.setText(listss.get(position).getFri_morning());
-            holder.textViewMorOrEve.setText("AM");
-            holder.textViewLocation.setText(listss.get(position).getLocationFri());
-
-        } else if (listss.get(position).isProb_mon_evening()) { //we can get date, assuming, pull this week data,
-
-
-            holder.textViewDate.setText(listss.get(position).getMon_date());
-            holder.textViewClock.setText(listss.get(position).getMon_evening());
-            holder.textViewMorOrEve.setText("PM");
-            holder.textViewLocation.setText(listss.get(position).getLocationMon_evening());
-
-
-        } else if (listss.get(position).isProb_tue_evening()) {
-
-
-            holder.textViewDate.setText(listss.get(position).getTue_date());
-            holder.textViewClock.setText(listss.get(position).getTue_evening());
-            holder.textViewMorOrEve.setText("PM");
-            holder.textViewLocation.setText(listss.get(position).getLocationTue_evening());
-
-        } else if (listss.get(position).isProb_wed_evening()) {
-
-
-            holder.textViewDate.setText(listss.get(position).getWed_date());
-            holder.textViewClock.setText(listss.get(position).getWed_evening());
-            holder.textViewMorOrEve.setText("PM");
-            holder.textViewLocation.setText(listss.get(position).getLocationWed_evening());
-
-
-        } else if (listss.get(position).isProb_thu_evening()) {
-
-
-            holder.textViewDate.setText(listss.get(position).getThu_date());
-            holder.textViewClock.setText(listss.get(position).getThu_evening());
-            holder.textViewMorOrEve.setText("PM");
-            holder.textViewLocation.setText(listss.get(position).getLocationThu_evening());
-
-        } else if (listss.get(position).isProb_fri_evening()) {
-
-
-            holder.textViewDate.setText(listss.get(position).getFri_date());
-            holder.textViewClock.setText(listss.get(position).getFri_evening());
-            holder.textViewMorOrEve.setText("PM");
-            holder.textViewLocation.setText(listss.get(position).getLocationFri_evening());
-
-        }
-
-
-        holder.textViewNumber.setText(String.valueOf(position));
         holder.textViewName.setText(listss.get(position).getName());
+        holder.textViewMorOrEve.setText(listss.get(position).getAmOrPm());
+        holder.textViewClock.setText(listss.get(position).getClock());
+        holder.textViewDate.setText(listss.get(position).getDate());
 
-        if (!listss.get(position).getMon_morning().equals("")) {
-            holder.textViewClock.setText(listss.get(position).getMon_morning());
-        }
-        //also if
-        holder.textViewDate.setText(listss.get(position).getMon_date());
-
-
-        holder.textViewLocation.setText(listss.get(position).getLocationStreet());
+        holder.textViewLocation.setText(listss.get(position).getStreet());
 
         //depends on data.
         //holder.textViewMorOrEve
