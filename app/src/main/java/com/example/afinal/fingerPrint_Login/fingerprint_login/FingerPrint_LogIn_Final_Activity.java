@@ -5,6 +5,7 @@ import android.app.Activity;
 import android.content.Context;
 
 import androidx.annotation.NonNull;
+import androidx.annotation.Nullable;
 import androidx.cardview.widget.CardView;
 import androidx.constraintlayout.widget.ConstraintLayout;
 
@@ -13,6 +14,7 @@ import android.content.SharedPreferences;
 import android.graphics.drawable.Animatable2;
 import android.location.Address;
 import android.location.Geocoder;
+import android.os.PersistableBundle;
 import android.view.ViewGroup;
 import android.view.animation.Animation;
 
@@ -499,16 +501,74 @@ public class FingerPrint_LogIn_Final_Activity extends AppCompatActivity implemen
     //7 july
     private FloatingActionButton buttonGetReport;
     private TextView textGetReport;
+    private String s;
 
 
     //19 june
 
 
+    //
+
+
+    @Override
+    public void onSaveInstanceState(Bundle outState, PersistableBundle outPersistentState) {
+        super.onSaveInstanceState(outState, outPersistentState);
+
+        outState.putString("fingerprint_result",s);
+        outState.putString("morningConstraint",morningConstraint);
+        outState.putString("eveningConstraint",eveningConstraint);
+        outState.putString("eveningConstraint",ssidConstraint);
+        outState.putString("locationConstraint",locationConstraint);
+        outState.putString("globalAdminNameHere",globalAdminNameHere);
+        outState.putString("globalAdminPhoneHere",globalAdminPhoneHere);
+
+        outState.putString("userSSID",userSSID);
+        outState.putString("userBSSID",userBSSID);
+
+
+
+        outState.putString("lastSSIDrecorded",lastSSIDrecorded);
+
+
+
+        outState.putString("lastLocationRecorded",lastLocationRecorded);
+        outState.putString("userLatitude",userLatitude);
+        outState.putString("userLongitude",userLongitude);
+
+        outState.putString("nameUser",nameUser);
+        outState.putString("phoneUser",phoneUser);
+
+
+
+
+        outState.putString("dateAndTimeNow",dateAndTimeNow);
+
+
+
+        outState.putInt("counterFlowHere", counterFlowHere);
+        outState.putInt("counterFlowHere2", counterFlowHere2);
+        outState.putInt("fingerprint_count", fingerprint_count);
+
+        outState.putBoolean("booleanResultExtracted",booleanResultExtracted);
+        outState.putBoolean("boolean_fingerprint_first",boolean_fingerprint_first);
+
+
+
+
+
+        //outState.putBundle("dateAndTIme", dateAndTimeNow);
+
+
+
+    }
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_finger_print__log_in__final_);
+
+
+
 
         constraintbaccck = findViewById(R.id.constraint_baccckkkID);
         backColor = findViewById(R.id.backLayoutColourID);
@@ -657,6 +717,7 @@ public class FingerPrint_LogIn_Final_Activity extends AppCompatActivity implemen
                             if(phoneHere_ifadmin.equals(adminPhone_ifadmin)|| phoneHere_ifadmin.equals(adminPhone_2_ifadmin)){
 
                                 runOnUiThread(new Runnable() {
+                                    @SuppressLint("RestrictedApi")
                                     @Override
                                     public void run() {
 
@@ -676,6 +737,8 @@ public class FingerPrint_LogIn_Final_Activity extends AppCompatActivity implemen
                                                     getReportIntent.putExtra("name",nameHere_ifadmin);
                                                     getReportIntent.putExtra("adminname", adminName_ifadmin);
 
+                                                    startActivity(getReportIntent);
+
 
 
                                                 }else if(phoneHere_ifadmin.equals(adminPhone_2_ifadmin)){
@@ -688,6 +751,7 @@ public class FingerPrint_LogIn_Final_Activity extends AppCompatActivity implemen
                                                     getReportIntent2.putExtra("name",nameHere_ifadmin);
                                                     getReportIntent2.putExtra("adminname", adminName_2_ifadmin);
 
+                                                    startActivity(getReportIntent2);
 
                                                 }
 
@@ -1096,7 +1160,7 @@ public class FingerPrint_LogIn_Final_Activity extends AppCompatActivity implemen
 
         if (o instanceof FingerPrintFinal_Presenter) {
 
-            String s = ((FingerPrintFinal_Presenter) o).getFinalStringResult();
+             s = ((FingerPrintFinal_Presenter) o).getFinalStringResult();
 
             if (s.equals("success verified")) {
 
@@ -1211,6 +1275,7 @@ public class FingerPrint_LogIn_Final_Activity extends AppCompatActivity implemen
 
                 checkAdminConstraintProcess = true;
 
+
                 morningDisplay.setText(morningConstraint);
                 eveningDisplay.setText(eveningConstraint);
                 wifiDisplay.setText(ssidConstraint);
@@ -1243,6 +1308,7 @@ public class FingerPrint_LogIn_Final_Activity extends AppCompatActivity implemen
 
                             userLatitude = "0"; //stop reading this.
                         }
+
 
 
                     }
