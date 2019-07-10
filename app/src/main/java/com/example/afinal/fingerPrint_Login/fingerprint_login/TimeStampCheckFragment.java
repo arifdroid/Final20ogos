@@ -40,6 +40,7 @@ public class TimeStampCheckFragment extends DialogFragment {
     private String amOrPM;
     private Map<String, Object> kk = new HashMap<>(); //careful dont want to ducplicate
     private String streetOutside;
+    private String streetFinally;
 
 
     public TimeStampCheckFragment() {
@@ -157,14 +158,24 @@ public class TimeStampCheckFragment extends DialogFragment {
 
         streetOutside = getArguments().getString("streetname", "");
 
-        if (streetOutside != null || !streetOutside.equals("")) {
+
+        Log.i("checkkkStressAda","street record : "+ streetOutside);
+
+        //if (streetOutside != null || !streetOutside.equals("") || !streetOutside.isEmpty() || !streetOutside.equals(" ")) {
+
+        if(!streetOutside.isEmpty()) {
 
             textViewAsk.setText("is this your location ? " + streetOutside);
 
         } else {
 
 
-        streetOutside="location within perimeter";
+
+
+
+            streetOutside="location within perimeter";
+
+            Log.i("checkkkStressAda","street record : "+ streetOutside);
 
 //a
          date2 = getArguments().getString("date2", "");
@@ -198,10 +209,15 @@ public class TimeStampCheckFragment extends DialogFragment {
                 //we need data like, admin name , admin phone, user name, user phone, undoubtly time stamp. and day.
 //                Map<String, Object> kk = new HashMap<>();
 
-                if (streetOutside != null || !streetOutside.equals("") && (date2.equals("") || date2 == null)) {
+               // if (streetOutside != null || !streetOutside.equals("") && (date2.equals("") || date2 == null)) {
 
+                if(!streetOutside.equals("location within perimeter")){
 
-                    kk.put("outsideLocation", streetOutside);
+                    //kk.put("outsideLocation", streetOutside);
+
+                    //dont put here, put individually, according to day.
+
+                    streetFinally = streetOutside;
 
                     date2 = getArguments().getString("date2", "");
 
@@ -223,6 +239,13 @@ public class TimeStampCheckFragment extends DialogFragment {
 
                     textViewAsk.requestFocus(); //what is this?
                     textViewTime.requestFocus();
+
+                    //9 july
+
+                    ///this to make onclick able to click to set.
+
+                    streetOutside="location within perimeter";
+
                 } else {
 
 
@@ -249,33 +272,33 @@ public class TimeStampCheckFragment extends DialogFragment {
 
                             kk.put("ts_mon_morning", timestampnow);
                             kk.put("mon_date",date2);
-                            kk.put("loc_mon_morning", streetOutside);
+                            kk.put("loc_mon_morning", streetFinally);
 
                         } else if (day.equals("Tue")) {
 
                             kk.put("ts_tue_morning", timestampnow);
                             kk.put("tue_date",date2);
-                            kk.put("loc_tue_morning", streetOutside);
+                            kk.put("loc_tue_morning", streetFinally);
 
 
                         } else if (day.equals("Wed")) {
 
                             kk.put("ts_wed_morning", timestampnow);
                             kk.put("wed_date",date2);
-                            kk.put("loc_wed_morning", streetOutside);
+                            kk.put("loc_wed_morning", streetFinally);
 
                         } else if (day.equals("Thu")) {
 
                             kk.put("ts_thu_morning", timestampnow);
                             kk.put("thu_date",date2);
-                            kk.put("loc_thu_morning", streetOutside);
+                            kk.put("loc_thu_morning", streetFinally);
 
 
                         } else if (day.equals("Fri")) {
 
                             kk.put("ts_fri_morning", timestampnow);
                             kk.put("fri_date",date2);
-                            kk.put("loc_fri_morning", streetOutside);
+                            kk.put("loc_fri_morning", streetFinally);
 
 
                         }
@@ -295,31 +318,31 @@ public class TimeStampCheckFragment extends DialogFragment {
 
                             kk.put("ts_mon_evening", timestampnow);
                             kk.put("mon_date",date2);
-                            kk.put("loc_mon_evening", streetOutside);
+                            kk.put("loc_mon_evening", streetFinally);
 
                         } else if (day.equals("Tue")) {
 
                             kk.put("ts_tue_evening", timestampnow);
                             kk.put("tue_date",date2);
-                            kk.put("loc_tue_evening", streetOutside);
+                            kk.put("loc_tue_evening", streetFinally);
 
                         } else if (day.equals("Wed")) {
 
                             kk.put("ts_wed_evening", timestampnow);
                             kk.put("wed_date",date2);
-                            kk.put("loc_wed_evening", streetOutside);
+                            kk.put("loc_wed_evening", streetFinally);
 
                         } else if (day.equals("Thu")) {
 
                             kk.put("ts_thu_evening", timestampnow);
                             kk.put("thu_date",date2);
-                            kk.put("loc_thu_evening", streetOutside);
+                            kk.put("loc_thu_evening", streetFinally);
 
                         } else if (day.equals("Fri")) {
 
                             kk.put("ts_fri_evening", timestampnow);
                             kk.put("fri_date",date2);
-                            kk.put("loc_fri_evening", streetOutside);
+                            kk.put("loc_fri_evening", streetFinally);
 
                         }
                     }

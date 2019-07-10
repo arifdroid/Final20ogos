@@ -70,6 +70,14 @@ public class Report_Activity extends AppCompatActivity {
             nameHere = intent.getStringExtra("name");
             phoneHere = intent.getStringExtra("phone");
             adminname = intent.getStringExtra("adminname");
+            String date = intent.getStringExtra("datee");
+
+            textViewNamePhone.setText("Admin: "+ adminname+ " Phone: "+phoneHere);
+
+            textViewDate.setText(date);
+
+            Log.i("checkReport ","date : "+ date);
+
 
 
             collectionReference = FirebaseFirestore.getInstance().collection("all_admin_doc_collections").document(adminname+phoneHere+"doc")
@@ -301,16 +309,26 @@ public class Report_Activity extends AppCompatActivity {
 
                             }
 
+                            if(lateList.get(0).getName()==null) {
+
+                             lateList.remove(0);
+                            }
+
                             lateList.add(object_to_add);
 
 
                         }
+
+                        Log.i("checkReport ","size : "+ lateList.size());
+                        Log.i("checkReport ","size : "+ lateList.get(0).getName());
 
                         runOnUiThread(new Runnable() {
                             @Override
                             public void run() {
 
                                 recyclerAdapter.notifyDataSetChanged();
+
+                                recyclerView.setAdapter(recyclerAdapter);
 
 
 
