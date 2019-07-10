@@ -315,6 +315,7 @@ public class Report_Activity extends AppCompatActivity {
                             }
 
                             lateList.add(object_to_add);
+          //                  recyclerAdapter.notifyDataSetChanged();
 
 
                         }
@@ -328,7 +329,10 @@ public class Report_Activity extends AppCompatActivity {
 
                                 recyclerAdapter.notifyDataSetChanged();
 
-                                recyclerView.setAdapter(recyclerAdapter);
+//                                recyclerView.setAdapter(recyclerAdapter);
+
+                                Log.i("checkReport ","after dataset change : "+ lateList.get(0).getName());
+//
 
 
 
