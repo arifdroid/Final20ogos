@@ -6,6 +6,7 @@ import android.content.ContentValues;
 import android.content.Context;
 import android.content.pm.PackageManager;
 import android.hardware.fingerprint.FingerprintManager;
+
 import android.location.Geocoder;
 import android.location.Location;
 import android.location.LocationListener;
@@ -15,6 +16,8 @@ import android.os.Build;
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.core.app.ActivityCompat;
+import androidx.core.hardware.fingerprint.FingerprintManagerCompat;
+
 import pub.devrel.easypermissions.AfterPermissionGranted;
 import pub.devrel.easypermissions.EasyPermissions;
 
@@ -48,6 +51,10 @@ class FingerPrintFinal_Presenter extends Observable {
     private String resultFinal;
 
     private FingerprintManager fingerprintManager;
+
+    //september
+
+    private FingerprintManagerCompat fingerprintManagerCompat;
 
     private FingerPrintFinal_Model model_fingerPrint;
 
@@ -95,27 +102,44 @@ class FingerPrintFinal_Presenter extends Observable {
 
     public void checkSupportedDevice() {
 
-        if(Build.VERSION.SDK_INT>=Build.VERSION_CODES.M){
+        if(Build.VERSION.SDK_INT>=Build.VERSION_CODES.M) {
             //run
             Log.i("checkFinalFlow : ", " 17 presenter, checkSupportedDevice() ");
-            fingerprintManager = (FingerprintManager) mContext.getSystemService(Context.FINGERPRINT_SERVICE);
 
-            model_fingerPrint =new FingerPrintFinal_Model(mContext);
+            if (Build.BRAND.equals("Xiaomi")||Build.BRAND.equals("OPPO")) {
 
-            if(model_fingerPrint!=null){
+                Log.i("masalahfingerprint","4");
+                returnToRequest("success verified");
+            }else {
+
+                Log.i("masalahfingerprint", "33 "+ Build.BRAND);
+                fingerprintManager = (FingerprintManager) mContext.getSystemService(Context.FINGERPRINT_SERVICE);
+
+                model_fingerPrint = new FingerPrintFinal_Model(mContext);
+
+                if (model_fingerPrint != null) {
 
 
-               startFingerPrintAuth();
+                    startFingerPrintAuth();
+                }
+
             }
-
-
+//             }else{ //if build is xiaomi
+//
+//                Log.i("masalahfingerprint","4");
+//                returnToRequest("success verified");
+//
+//
+//
+//            }
         }else {
             //abort operation return
 
 
             Log.i("checkFinal : ", " flow 7 ,presenter, checkSupporedDevice(), if null ");
-            // update UI here
-            //  getResult();
+
+            //fingerprintManagerCompat = (FingerprintManagerCompat) mContext.getSystemService(Context.FINGERPRINT_SERVICE);
+
 
         }
     }
@@ -176,7 +200,19 @@ class FingerPrintFinal_Presenter extends Observable {
 
     public void stopListetingFingerprint(){
 
-        model_fingerPrint.stopListening();
+
+        //if
+
+        if(Build.BRAND.equals("Xiaomi")|| !Build.BRAND.equals("OPP0")){
+
+            Log.i("masalahfingerprint","2");
+
+        }else {
+
+            Log.i("masalahfingerprint","1");
+
+            model_fingerPrint.stopListening();
+        }
         return;
     }
 
@@ -288,7 +324,7 @@ class FingerPrintFinal_Presenter extends Observable {
         //assume shared preferences got value. pass from fragment.
         if(nameUser!=null && phoneUser!=null && globalAdminPhoneHere!=null && globalAdminNameHere!=null ){
             //this still can fail. go to admin document.
-            DocumentReference documentReference = FirebaseFirestore.getInstance().collection("all_admin_doc_collections")
+                DocumentReference documentReference = FirebaseFirestore.getInstance().collection("all_admin_doc_collections")
                     .document(globalAdminNameHere+globalAdminPhoneHere+"doc");
 
             //Log.i("getCurrentConstraint: ", "3.1, task check" + );
@@ -374,6 +410,7 @@ class FingerPrintFinal_Presenter extends Observable {
                                     }
 
                                     if(kk.getKey().equals("morning_constraint")){
+                                        Log.i("checkDownloadDoc: ", "DOWNLOADING DATA, morning_constraint: "+ morningConstraint);
 
                                         morningConstraint = kk.getValue().toString();
                                         returnMap.put("morning_constraint",morningConstraint);
@@ -382,6 +419,7 @@ class FingerPrintFinal_Presenter extends Observable {
 
                                     if(kk.getKey().equals("evening_constraint")){
                                         eveningConstraint = kk.getValue().toString();
+                                        Log.i("checkDownloadDoc: ", "DOWNLOADING DATA, eveningConstraint: "+ eveningConstraint);
                                         returnMap.put("evening_constraint", eveningConstraint);
 
                                     }
@@ -480,7 +518,10 @@ class FingerPrintFinal_Presenter extends Observable {
 
     public void removeLocationNow(){
         if(mLocationManager!=null) {
-            mLocationManager.removeUpdates(locationLister);
+
+            if(locationLister!=null) {
+                mLocationManager.removeUpdates(locationLister);
+            }
 
 
         }
@@ -491,15 +532,9 @@ class FingerPrintFinal_Presenter extends Observable {
     @AfterPermissionGranted(REQUEST_LOCATION_PERMISSION)
     public void requestLocationPermission(LocationManager mLocationManager2) {
 
-//        HandlerThread handlerThread = new HandlerThread("myHandlerLocationThread");
-//
-//        handlerThread.start();
-//
-//        Looper looper = handlerThread.getLooper();
-//
-//
 
 
+        Log.i("checkPermission ", "1");
 
         this.mLocationManager = mLocationManager2;
 
@@ -515,9 +550,13 @@ class FingerPrintFinal_Presenter extends Observable {
                 //                                          int[] grantResults)
                 // to handle the case where the user grants the permission. See the documentation
                 // for ActivityCompat#requestPermissions for more details.
+
+                Log.i("checkPermission ", "2 : no permission");
+
                 return;
             }
 
+            Log.i("checkPermission ", "3 : got permission");
             //mLocationManager.requestSing
             mLocationManager.requestLocationUpdates(LocationManager.GPS_PROVIDER, 50,
                     1,locationLister = new LocationListener() {
@@ -544,32 +583,8 @@ class FingerPrintFinal_Presenter extends Observable {
                                 setChanged();
                                 notifyObservers();
                             }
-//
-//                            Double lat = location.getLatitude();
-//                            Double longitude = location.getLongitude();
-//
-//                            Log.i("checkkLocation", "3");
 
-//                            Geocoder geocoder = new Geocoder(mContext, Locale.getDefault());
-//
-//                            try {
-//
-//                                Log.i("checkkLocation", "4");
-//
-//                                user_StreetName = geocoder.getFromLocation(lat, longitude, 1).get(0).getThoroughfare();
-//
-//                                Log.i("checkkLocation", "5 " + user_StreetName);
-//
-//
-//
-//                                if(user_StreetName !=null|| user_StreetName !=""){
-//
-//                                    mLocationManager.removeUpdates(this);
-//                                }
-//
-//                            } catch (IOException e) {
-//                                e.printStackTrace();
-//                            }
+
 
                         }
 
@@ -601,7 +616,7 @@ class FingerPrintFinal_Presenter extends Observable {
             Log.i("checkkLocation", "5");
 
             //EasyPermissions.requestPermissions((Activity) mContext, "Please grant the location permission", REQUEST_LOCATION_PERMISSION, perms);
-            EasyPermissions.requestPermissions(mActivity , "Please grant the location permission", REQUEST_LOCATION_PERMISSION, perms);
+            EasyPermissions.requestPermissions(mActivity , "Please grant the location permission YO", REQUEST_LOCATION_PERMISSION, perms);
         }
 
         return;
