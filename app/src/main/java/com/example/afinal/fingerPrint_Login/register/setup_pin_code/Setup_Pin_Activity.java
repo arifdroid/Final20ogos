@@ -423,7 +423,9 @@ public class Setup_Pin_Activity extends AppCompatActivity {
 
                     editor.putString("my_phone_number", phoneHere);
 
-                    editor.commit();
+                    //editor.commit();
+
+                    editor.apply();
 
                     if(documentReference!=null){
 

@@ -1,5 +1,6 @@
 package com.example.afinal.fingerPrint_Login.fingerprint_login;
 
+import android.Manifest;
 import android.annotation.SuppressLint;
 import android.app.Activity;
 import android.content.Context;
@@ -11,12 +12,18 @@ import androidx.constraintlayout.widget.ConstraintLayout;
 
 import android.content.Intent;
 import android.content.SharedPreferences;
+import android.content.pm.PackageManager;
 import android.graphics.drawable.Animatable2;
 import android.location.Address;
 import android.location.Geocoder;
+import android.net.ConnectivityManager;
+import android.net.NetworkInfo;
 import android.os.PersistableBundle;
 import android.view.ViewGroup;
 import android.view.animation.Animation;
+
+//september update.
+
 
 
 
@@ -28,6 +35,7 @@ import com.google.android.gms.tasks.Task;
 import com.google.android.material.bottomnavigation.BottomNavigationView;
 import com.google.android.material.floatingactionbutton.FloatingActionButton;
 
+import androidx.core.content.ContextCompat;
 import androidx.fragment.app.FragmentManager;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.vectordrawable.graphics.drawable.Animatable2Compat;
@@ -82,6 +90,51 @@ import java.util.TimerTask;
 
 public class FingerPrint_LogIn_Final_Activity extends AppCompatActivity implements FingerPrintFinal_View_Interface, View.OnClickListener, Observer, OnServerTime_Interface {
 
+    //september update
+
+    public Handler handler_counter;
+
+    //private int iik;
+
+    private int counterUpdateCheck;
+
+    public Runnable runnableCode_counterFlow= new Runnable() {
+        @Override
+        public void run() {
+
+            //i++;
+            //textView.setText('a');
+            //Log.i("checkSecond :", "i : "+i);
+
+            counterFlowHere++;
+
+            Log.i("counterflowhere ", "counterFlowHere : "+counterFlowHere);
+            Log.i("counterflowhere2 ", "counterFlowHere2 : "+counterFlowHere2);
+            Log.i("counterflowhere3 ", "counterFlowHere3 : "+counterFlowHere3);
+
+            if(counterFlowHere==300){
+
+                Log.i("checksampai300","sampai");
+
+                wifiManager = (WifiManager) getApplicationContext().getSystemService(Context.WIFI_SERVICE);
+                Log.i("SSID_ni_main 99 ","wifimanage : "+wifiManager);
+
+                wifiInfo = wifiManager.getConnectionInfo();
+                Log.i("SSID_ni_main 99.1 ","wifiinfo : "+wifiInfo);
+
+                userSSID = wifiInfo.getSSID();
+                Log.i("SSID_ni_main 99.2 ","ssid : "+userSSID);
+            }
+
+            handler.postDelayed(runnableCode_counterFlow,50);
+
+
+        }
+    };
+
+    private Handler handler_to_count;
+    //private
+
     public static int userCount;
     public static boolean booleanResultExtracted;
 
@@ -99,6 +152,8 @@ public class FingerPrint_LogIn_Final_Activity extends AppCompatActivity implemen
     public String phoneUser;
 
     ConstraintLayout backColor;
+
+
 
     //after log in register user data timestamp directly.
 
@@ -196,19 +251,28 @@ public class FingerPrint_LogIn_Final_Activity extends AppCompatActivity implemen
 
     //bottom navigation listener
 
+    @Override
+    public void onRequestPermissionsResult(int requestCode, @NonNull String[] permissions, @NonNull int[] grantResults) {
+        super.onRequestPermissionsResult(requestCode, permissions, grantResults);
 
-//    private Integer lastCheckId(int resourceIDLastChecked){
-//
-//
-//
-//        if(resourceIDLastChecked!=0){
-//
-//            return resourceIDLastChecked;
-//        }
-//
-//        else {
-//            return 0;
-//        }
+        if (ContextCompat.checkSelfPermission(this, Manifest.permission.ACCESS_FINE_LOCATION)
+                == PackageManager.PERMISSION_GRANTED) {
+            // Do something ...
+
+            Log.i("ada_ke_permission", "request granted");
+        }else {
+
+            Log.i("ada_ke_permission", "request not granted");
+        }
+    }
+
+
+    // SEPTEMBER-19
+//    public boolean isNetworkAvailable() {
+//        ConnectivityManager connectivityManager
+//                = (ConnectivityManager) getSystemService(Context.CONNECTIVITY_SERVICE);
+//        NetworkInfo activeNetworkInfo = connectivityManager.getActiveNetworkInfo();
+//        return activeNetworkInfo != null && activeNetworkInfo.isConnected();
 //    }
 
 
@@ -507,6 +571,10 @@ public class FingerPrint_LogIn_Final_Activity extends AppCompatActivity implemen
 
     //19 june
 
+    //september 20
+
+    private TextView checklocationText, checkConstraintText, checkCounterFlow;
+
 
     //
 
@@ -593,8 +661,19 @@ public class FingerPrint_LogIn_Final_Activity extends AppCompatActivity implemen
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_finger_print__log_in__final_);
 
+        handler_counter = new Handler();
 
-        if(savedInstanceState!=null){
+        counterUpdateCheck = 0;
+        handler_counter.post(runnableCode_counterFlow);
+
+        globalUserPhone="";
+
+        checklocationText = findViewById(R.id.textViewMain_location_latitude_id); // 20 sep
+        checkConstraintText = findViewById(R.id.textViewMain_checkConstraint_id); //20 sep
+        checkCounterFlow = findViewById(R.id.textViewMain_checkCounterFlow_id); //20 sep
+
+
+        if (savedInstanceState != null) {
 
 
             //outState.putFloat("distanceOffset",distanceOffset);
@@ -602,24 +681,24 @@ public class FingerPrint_LogIn_Final_Activity extends AppCompatActivity implemen
             s = savedInstanceState.getString("fingerprint_result");
             //outState.putString("fingerprint_result",s);
             morningConstraint = savedInstanceState.getString("morningConstraint");
-            eveningConstraint= savedInstanceState.getString("eveningConstraint");
-            ssidConstraint= savedInstanceState.getString("ssidConstraint");
-            locationConstraint= savedInstanceState.getString("locationConstraint");
-            bssidConstraint= savedInstanceState.getString("bssidConstraint");
+            eveningConstraint = savedInstanceState.getString("eveningConstraint");
+            ssidConstraint = savedInstanceState.getString("ssidConstraint");
+            locationConstraint = savedInstanceState.getString("locationConstraint");
+            bssidConstraint = savedInstanceState.getString("bssidConstraint");
 //
 //            outState.putString("morningConstraint",morningConstraint);
 //            outState.putString("eveningConstraint",eveningConstraint);
 //            outState.putString("eveningConstraint",ssidConstraint);
 //            outState.putString("locationConstraint",locationConstraint);
 
-            globalAdminNameHere= savedInstanceState.getString("globalAdminNameHere");
-            globalAdminPhoneHere= savedInstanceState.getString("globalAdminPhoneHere");
+            globalAdminNameHere = savedInstanceState.getString("globalAdminNameHere");
+            globalAdminPhoneHere = savedInstanceState.getString("globalAdminPhoneHere");
             //outState.putString("globalAdminNameHere",globalAdminNameHere);
             //outState.putString("globalAdminPhoneHere",globalAdminPhoneHere);
 
-            timeCurrent= savedInstanceState.getString("timeCurrent");
-            dateNow= savedInstanceState.getString("dateNow");
-            dayNow= savedInstanceState.getString("dayNow");
+            timeCurrent = savedInstanceState.getString("timeCurrent");
+            dateNow = savedInstanceState.getString("dateNow");
+            dayNow = savedInstanceState.getString("dayNow");
 //
 //            outState.putString("timeCurrent",timeCurrent);
 //            outState.putString("dateNow",dateNow);
@@ -627,10 +706,10 @@ public class FingerPrint_LogIn_Final_Activity extends AppCompatActivity implemen
             //outState.putString("dayNow",dayNow);
 
 
-            globalUserName= savedInstanceState.getString("globalUserName");
-            globalUserPhone= savedInstanceState.getString("globalUserPhone");
-            userSSID= savedInstanceState.getString("userSSID");
-            userBSSID= savedInstanceState.getString("userBSSID");
+            globalUserName = savedInstanceState.getString("globalUserName");
+            globalUserPhone = savedInstanceState.getString("globalUserPhone");
+            userSSID = savedInstanceState.getString("userSSID");
+            userBSSID = savedInstanceState.getString("userBSSID");
 
 //
 //            outState.putString("globalUserName", globalUserName);
@@ -640,26 +719,25 @@ public class FingerPrint_LogIn_Final_Activity extends AppCompatActivity implemen
 //            outState.putString("userBSSID",userBSSID);
 //
 
-            lastSSIDrecorded= savedInstanceState.getString("lastSSIDrecorded");
+            lastSSIDrecorded = savedInstanceState.getString("lastSSIDrecorded");
             //outState.putString("lastSSIDrecorded",lastSSIDrecorded);
 
 
-            globalUserName= savedInstanceState.getString("globalUserName");
-            globalUserPhone= savedInstanceState.getString("globalUserPhone");
-            userSSID= savedInstanceState.getString("userSSID");
-            userBSSID= savedInstanceState.getString("userBSSID");
+            globalUserName = savedInstanceState.getString("globalUserName");
+            globalUserPhone = savedInstanceState.getString("globalUserPhone");
+            userSSID = savedInstanceState.getString("userSSID");
+            userBSSID = savedInstanceState.getString("userBSSID");
 
 
-            lastLocationRecorded= savedInstanceState.getString("lastLocationRecorded");
-            userLatitude= savedInstanceState.getString("userLatitude");
-            userLongitude= savedInstanceState.getString("userLongitude");
+            lastLocationRecorded = savedInstanceState.getString("lastLocationRecorded");
+            userLatitude = savedInstanceState.getString("userLatitude");
+            userLongitude = savedInstanceState.getString("userLongitude");
 
 
-            nameUser= savedInstanceState.getString("nameUser");
-            phoneUser= savedInstanceState.getString("phoneUser");
+            nameUser = savedInstanceState.getString("nameUser");
+            phoneUser = savedInstanceState.getString("phoneUser");
 
-            dateAndTimeNow= savedInstanceState.getString("dateAndTimeNow");
-
+            dateAndTimeNow = savedInstanceState.getString("dateAndTimeNow");
 
 
             //outState.putString("lastLocationRecorded",lastLocationRecorded);
@@ -670,17 +748,15 @@ public class FingerPrint_LogIn_Final_Activity extends AppCompatActivity implemen
 //            outState.putString("phoneUser",phoneUser);
 
 
-
-
             //outState.putString("dateAndTimeNow",dateAndTimeNow);
 
 
-            counterFlowHere= savedInstanceState.getInt("counterFlowHere");
+            counterFlowHere = savedInstanceState.getInt("counterFlowHere");
 
-            counterFlowHere2= savedInstanceState.getInt("counterFlowHere2");
-            fingerprint_count= savedInstanceState.getInt("fingerprint_count");
-            countUserverified= savedInstanceState.getInt("countUserverified");
-            statusBarWeSet= savedInstanceState.getInt("statusBarWeSet");
+            counterFlowHere2 = savedInstanceState.getInt("counterFlowHere2");
+            fingerprint_count = savedInstanceState.getInt("fingerprint_count");
+            countUserverified = savedInstanceState.getInt("countUserverified");
+            statusBarWeSet = savedInstanceState.getInt("statusBarWeSet");
 
 
             //outState.putInt("counterFlowHere", counterFlowHere);
@@ -690,15 +766,14 @@ public class FingerPrint_LogIn_Final_Activity extends AppCompatActivity implemen
 //            outState.putInt("statusBarWeSet", statusBarWeSet);
 
             booleanResultExtracted = savedInstanceState.getBoolean("booleanResultExtracted");
-            boolean_fingerprint_first= savedInstanceState.getBoolean("boolean_fingerprint_first");
-            checkLocationProcess= savedInstanceState.getBoolean("checkLocationProcess");
-            checkAdminConstraintProcess= savedInstanceState.getBoolean("checkAdminConstraintProcess");
+            boolean_fingerprint_first = savedInstanceState.getBoolean("boolean_fingerprint_first");
+            checkLocationProcess = savedInstanceState.getBoolean("checkLocationProcess");
+            checkAdminConstraintProcess = savedInstanceState.getBoolean("checkAdminConstraintProcess");
 
 //            outState.putBoolean("booleanResultExtracted",booleanResultExtracted);
 //            outState.putBoolean("boolean_fingerprint_first",boolean_fingerprint_first);
 //            outState.putBoolean("checkLocationProcess",checkLocationProcess);
 //            outState.putBoolean("checkAdminConstraintProcess",checkAdminConstraintProcess);
-
 
 
         }
@@ -712,199 +787,218 @@ public class FingerPrint_LogIn_Final_Activity extends AppCompatActivity implemen
 
 /////////////////////////////////////////////////// 9 july
 
-        CollectionReference cR_topUserCollection2 =  FirebaseFirestore.getInstance().collection("users_top_detail");
+        //check network is presence
 
+        boolean networkavai = false;  //isNetworkAvailable();
 
-        DocumentReference dR_topUserCollection2 = cR_topUserCollection2.document("+60177777777" + "imauser");
+        if(networkavai) {
 
-        dR_topUserCollection2.get().addOnCompleteListener(new OnCompleteListener<DocumentSnapshot>() {
-            @Override
-            public void onComplete(@NonNull Task<DocumentSnapshot> task) {
+            CollectionReference cR_topUserCollection2 = FirebaseFirestore.getInstance().collection("users_top_detail");
 
-                if(task.getResult().exists()){
+            if ( globalUserPhone.equals(null)|| globalUserPhone.equals("")) {
 
-                    if (task.isSuccessful()) {
+            }else{
+            DocumentReference dR_topUserCollection2 = cR_topUserCollection2.document(globalUserPhone + "imauser");
+
+            dR_topUserCollection2.get().addOnCompleteListener(new OnCompleteListener<DocumentSnapshot>() {
+                @Override
+                public void onComplete(@NonNull Task<DocumentSnapshot> task) {
+
+                    if (task.getResult().exists()) {
+
+                        if (task.isSuccessful()) {
 
 //                            if(task.getResult().exists()){
 //
 //                            }
 
-                        Map<String, Object> remap = Objects.requireNonNull(task.getResult()).getData();
+                            Map<String, Object> remap = Objects.requireNonNull(task.getResult()).getData();
 
-                        for (Map.Entry<String, Object> mapHere : remap.entrySet()) {
+                            for (Map.Entry<String, Object> mapHere : remap.entrySet()) {
 
-                            //admin name, and admin phone. , relative user name, user phone.
-                            //admin count,
+                                //admin name, and admin phone. , relative user name, user phone.
+                                //admin count,
 
-                            //this is not needed since we have it in sharedprefs
+                                //this is not needed since we have it in sharedprefs
 
-                            if (mapHere.getKey().equals("user_name_1")) {
-                                nameHere_ifadmin = mapHere.getValue().toString();
+                                if (mapHere.getKey().equals("user_name_1")) {
+                                    nameHere_ifadmin = mapHere.getValue().toString();
 
-                                //handle null, or not registered, or wrong data input
+                                    //handle null, or not registered, or wrong data input
 
-                                if (nameHere_ifadmin.isEmpty() || nameHere_ifadmin == null) {
+                                    if (nameHere_ifadmin.isEmpty() || nameHere_ifadmin == null) {
 
-                                    nameHere_ifadmin = "";
+                                        nameHere_ifadmin = "";
+                                    }
                                 }
-                            }
 
 
-                            if (mapHere.getKey().equals("user_name_2")) {
-                                nameHere_2_ifadmin = mapHere.getValue().toString();
+                                if (mapHere.getKey().equals("user_name_2")) {
+                                    nameHere_2_ifadmin = mapHere.getValue().toString();
 
 
-                                if (nameHere_2_ifadmin.isEmpty() || nameHere_2_ifadmin == null) {
+                                    if (nameHere_2_ifadmin.isEmpty() || nameHere_2_ifadmin == null) {
 
-                                    nameHere_2_ifadmin = "";
+                                        nameHere_2_ifadmin = "";
+                                    }
                                 }
-                            }
 
 
-                            if (mapHere.getKey().equals("phone")) {
-                                phoneHere_ifadmin = mapHere.getValue().toString();
+                                if (mapHere.getKey().equals("phone")) {
+                                    phoneHere_ifadmin = mapHere.getValue().toString();
 
 
-                                if (phoneHere_ifadmin.isEmpty() || phoneHere_ifadmin == null) {
+                                    if (phoneHere_ifadmin.isEmpty() || phoneHere_ifadmin == null) {
 
-                                    phoneHere_ifadmin = "";
+                                        phoneHere_ifadmin = "";
+                                    }
                                 }
-                            }
 //
 //                                if(mapHere.getKey().equals("admin_count")){
 //                                    admin_count = mapHere.getValue().toString();
 //                                }
 //
-                            if (mapHere.getKey().equals("admin_name_1")) {
-                                adminName_ifadmin = mapHere.getValue().toString();
+                                if (mapHere.getKey().equals("admin_name_1")) {
+                                    adminName_ifadmin = mapHere.getValue().toString();
 
 
-                                if (adminName_ifadmin.isEmpty() || adminName_ifadmin == null) {
+                                    if (adminName_ifadmin.isEmpty() || adminName_ifadmin == null) {
 
-                                    adminName_ifadmin = "";
+                                        adminName_ifadmin = "";
+                                    }
+
+
                                 }
 
 
-                            }
+                                if (mapHere.getKey().equals("admin_name_2")) {
+                                    adminName_2_ifadmin = mapHere.getValue().toString();
 
 
-                            if (mapHere.getKey().equals("admin_name_2")) {
-                                adminName_2_ifadmin = mapHere.getValue().toString();
+                                    if (adminName_2_ifadmin.isEmpty() || adminName_2_ifadmin == null) {
 
-
-                                if (adminName_2_ifadmin.isEmpty() || adminName_2_ifadmin == null) {
-
-                                    adminName_2_ifadmin = "";
-                                }
-                            }
-
-
-                            if (mapHere.getKey().equals("admin_phone_1")) {
-                                adminPhone_ifadmin = mapHere.getValue().toString();
-
-
-                                if (adminPhone_ifadmin.isEmpty() || adminPhone_ifadmin == null) {
-
-                                    adminPhone_ifadmin = "";
+                                        adminName_2_ifadmin = "";
+                                    }
                                 }
 
-                            }
+
+                                if (mapHere.getKey().equals("admin_phone_1")) {
+                                    adminPhone_ifadmin = mapHere.getValue().toString();
 
 
-                            if (mapHere.getKey().equals("admin_phone_2")) {
-                                adminPhone_2_ifadmin = mapHere.getValue().toString();
+                                    if (adminPhone_ifadmin.isEmpty() || adminPhone_ifadmin == null) {
 
+                                        adminPhone_ifadmin = "";
+                                    }
 
-                                if (adminPhone_2_ifadmin.isEmpty() || adminPhone_2_ifadmin == null) {
-
-                                    adminPhone_2_ifadmin = "";
                                 }
-                            }
 
-                        }
+
+                                if (mapHere.getKey().equals("admin_phone_2")) {
+                                    adminPhone_2_ifadmin = mapHere.getValue().toString();
+
+
+                                    if (adminPhone_2_ifadmin.isEmpty() || adminPhone_2_ifadmin == null) {
+
+                                        adminPhone_2_ifadmin = "";
+                                    }
+                                }
+
+                            }
 
 //                                nameHere_boolean = true;
 //
 //                                Toast.makeText(getContext(), "Success getting admin detail", Toast.LENGTH_SHORT).show();
 
 
-                        //buttonGetReport.setVisibility(View.VISIBLE);
+                            //buttonGetReport.setVisibility(View.VISIBLE);
 
-                        if(phoneHere_ifadmin.equals(adminPhone_ifadmin)|| phoneHere_ifadmin.equals(adminPhone_2_ifadmin)){
+                            //20 september HALT
 
-                            runOnUiThread(new Runnable() {
-                                @SuppressLint("RestrictedApi")
-                                @Override
-                                public void run() {
+                            if (phoneHere_ifadmin.equals(adminPhone_ifadmin) || phoneHere_ifadmin.equals(adminPhone_2_ifadmin)) {
 
-                                    buttonGetReport.setVisibility(View.VISIBLE);
-                                    textGetReport.setVisibility(View.VISIBLE);
+                                runOnUiThread(new Runnable() {
+                                    @SuppressLint("RestrictedApi")
+                                    @Override
+                                    public void run() {
 
-                                    buttonGetReport.setOnClickListener(new View.OnClickListener() {
-                                        @Override
-                                        public void onClick(View view) {
+                                        buttonGetReport.setVisibility(View.VISIBLE);
+                                        textGetReport.setVisibility(View.VISIBLE);
 
+                                        buttonGetReport.setOnClickListener(new View.OnClickListener() {
+                                            @Override
+                                            public void onClick(View v) {
 
-                                            if(phoneHere_ifadmin.equals(adminPhone_ifadmin)){
-                                                //it belongs to admin 1
-
-                                                Intent getReportIntent = new Intent(FingerPrint_LogIn_Final_Activity.this, Report_Activity.class);
-
-                                                getReportIntent.putExtra("phone",phoneHere_ifadmin);
-                                                getReportIntent.putExtra("name",nameHere_ifadmin);
-                                                getReportIntent.putExtra("adminname", adminName_ifadmin);
-
-                                                startActivity(getReportIntent);
-
-
-
-                                            }else if(phoneHere_ifadmin.equals(adminPhone_2_ifadmin)){
-                                                //it belongs to admin 2
-
-                                                Intent getReportIntent2 = new Intent(FingerPrint_LogIn_Final_Activity.this, Report_Activity.class);
-
-
-                                                getReportIntent2.putExtra("phone",phoneHere_ifadmin);
-                                                getReportIntent2.putExtra("name",nameHere_ifadmin);
-                                                getReportIntent2.putExtra("adminname", adminName_2_ifadmin);
-
-                                                startActivity(getReportIntent2);
-
+                                                Toast.makeText(FingerPrint_LogIn_Final_Activity.this,"feature not availabe yet", Toast.LENGTH_SHORT).show();
                                             }
+                                        });
+
+                                //DONT DELETE HERE
+//                                        buttonGetReport.setOnClickListener(new View.OnClickListener() {
+//                                            @Override
+//                                            public void onClick(View view) {
+//
+//
+//                                                if (phoneHere_ifadmin.equals(adminPhone_ifadmin)) {
+//                                                    //it belongs to admin 1
+//
+//                                                    Intent getReportIntent = new Intent(FingerPrint_LogIn_Final_Activity.this, Report_Activity.class);
+//
+//                                                    getReportIntent.putExtra("phone", phoneHere_ifadmin);
+//                                                    getReportIntent.putExtra("name", nameHere_ifadmin);
+//                                                    getReportIntent.putExtra("adminname", adminName_ifadmin);
+//
+//                                                    startActivity(getReportIntent);
+//
+//
+//                                                } else if (phoneHere_ifadmin.equals(adminPhone_2_ifadmin)) {
+//                                                    //it belongs to admin 2
+//
+//                                                    Intent getReportIntent2 = new Intent(FingerPrint_LogIn_Final_Activity.this, Report_Activity.class);
+//
+//
+//                                                    getReportIntent2.putExtra("phone", phoneHere_ifadmin);
+//                                                    getReportIntent2.putExtra("name", nameHere_ifadmin);
+//                                                    getReportIntent2.putExtra("adminname", adminName_2_ifadmin);
+//
+//                                                    startActivity(getReportIntent2);
+//
+//                                                }
+//
+//
+//                                            }
+//                                        });
+
+                                    }
+                                });
+
+                            }
 
 
+                        } else {
 
-                                        }
-                                    });
+                            //  nameHere_boolean = false;
 
-                                }
-                            });
+
+                            //  Toast.makeText(getContext(), "Fail getting admin detail", Toast.LENGTH_SHORT).show();
 
                         }
-
-
-
-                    } else {
-
-                        //  nameHere_boolean = false;
-
-
-                        //  Toast.makeText(getContext(), "Fail getting admin detail", Toast.LENGTH_SHORT).show();
 
                     }
 
                 }
+            }).addOnCanceledListener(new OnCanceledListener() {
+                @Override
+                public void onCanceled() {
 
-            }
-        }).addOnCanceledListener(new OnCanceledListener() {
-            @Override
-            public void onCanceled() {
+                    //Toast.makeText(getContext(), "Fail getting admin detail", Toast.LENGTH_SHORT).show();
 
-                //Toast.makeText(getContext(), "Fail getting admin detail", Toast.LENGTH_SHORT).show();
+                }
+            });
 
-            }
-        });
+        }//check ada ke global user phone
 
+        }//check ada internet tak
 
 ////////////////////////////////
 
@@ -1201,7 +1295,7 @@ public class FingerPrint_LogIn_Final_Activity extends AppCompatActivity implemen
         //17 june
 
         globalUserName ="";
-        globalUserPhone="";
+//        globalUserPhone="";
         globalAdminName="";
         globalAdminPhone="";
 
@@ -1365,11 +1459,20 @@ public class FingerPrint_LogIn_Final_Activity extends AppCompatActivity implemen
         Log.i("checkFinalFlow : ", " 6 oncreate() activity, after request time ");
 
         wifiManager = (WifiManager) getApplicationContext().getSystemService(Context.WIFI_SERVICE);
+        Log.i("SSID_ni_main 0.0 ","wifimanage : "+wifiManager);
+
         wifiInfo = wifiManager.getConnectionInfo();
+        Log.i("SSID_ni_main 0.1 ","wifiinfo : "+wifiInfo);
+
+        //userSSID = wifiManager.getDhcpInfo().ipAddress
 
         userSSID = wifiInfo.getSSID();
+        Log.i("SSID_ni_main 0 ","ssid : "+userSSID);
+
         userSSID = userSSID.replace("\"","");
         userBSSID = wifiInfo.getBSSID();
+
+        Log.i("SSID_ni_main 1 ","ssid : "+userSSID);
 
         //pull constraint by admin, like, time constraint, location or bssid,, we do this below.
 
@@ -1453,28 +1556,38 @@ public class FingerPrint_LogIn_Final_Activity extends AppCompatActivity implemen
     @Override
     public void onClick(View v) {
 
-        if(!presenter.getRemapLocation().isEmpty()) {
-            presenter.removeLocationNow();
-        }
-        presenter.deleteObserver(this);
-        //reset back status
-        // nameUser="";
+        //september -> if wifi not detected/ dont allow clicking
+
+       // Log.i("checkssidada_ke", "ssid : "+userSSID);
+
+//        if(userSSID==""|| userSSID==null || userSSID.equals("")|| userSSID.equals(null) || userSSID.equals("<unknown ssid>")) {
+//
+//            Toast.makeText(FingerPrint_LogIn_Final_Activity.this, "please connect to admin wifi", Toast.LENGTH_SHORT).show();
+//
+//        }else {
+
+            if (!presenter.getRemapLocation().isEmpty()) {
+                presenter.removeLocationNow();
+            }
+            presenter.deleteObserver(this);
+            //reset back status
+            // nameUser="";
             nameUser = null;
             checkLocationProcess = false;
 
-        //phoneAdminConstraint=null;
-      // backColor.setAlpha(0.9f);
+            //phoneAdminConstraint=null;
+            // backColor.setAlpha(0.9f);
 
-        //25 may
+            //25 may
 
-        booleanResultExtracted =false;
+            booleanResultExtracted = false;
 
 
-        getSupportFragmentManager().beginTransaction()
-                .replace(R.id.frameID, fragment)
-                .addToBackStack("")
-                .commit();
-
+            getSupportFragmentManager().beginTransaction()
+                    .replace(R.id.frameID, fragment)
+                    .addToBackStack("")
+                    .commit();
+        //}
 
     }
 
@@ -1489,11 +1602,17 @@ public class FingerPrint_LogIn_Final_Activity extends AppCompatActivity implemen
         //18 june , what if fingerprint not working.?
 
 
+//        check supplicant state first, while for api 28, need to get permission first,
+//        then need to check how to trigger update without location enable
 
 
+        counterUpdateCheck++;
 
-        counterFlowHere++;
+        //counterFlowHere++;
         Log.i("checkUpdateFinal", "1");
+        Log.i("counterUpdateCheck", "counterUpdateCheck : "+counterUpdateCheck);
+
+        checkCounterFlow.setText("counter : "+ counterUpdateCheck);
 
         if (booleanResultExtracted) {
                 //ensure result extracted
@@ -1570,7 +1689,13 @@ public class FingerPrint_LogIn_Final_Activity extends AppCompatActivity implemen
             //getFireStore
             Map<String, Object> remapAdminConstraint = ((FingerPrintFinal_Presenter) o).getReturnMap();
 
+
+
             if (remapAdminConstraint != null) {
+
+                Log.i("check_here,","1 : constraint not null");
+
+
 
                 for (Map.Entry<String, Object> kk : remapAdminConstraint.entrySet()) {
 
@@ -1605,6 +1730,9 @@ public class FingerPrint_LogIn_Final_Activity extends AppCompatActivity implemen
                     }
                     if (kk.getKey().equals("ssid")) {
                         ssidConstraint = kk.getValue().toString();
+
+                        checkConstraintText.setText("constraint ssid downloaded : "+ ssidConstraint);
+
                     }
                     if (kk.getKey().equals("phone")) {
                         phoneAdminConstraint = kk.getValue().toString();
@@ -1630,6 +1758,8 @@ public class FingerPrint_LogIn_Final_Activity extends AppCompatActivity implemen
             //getLocation
 
             Map<String, Object> remapLocation = ((FingerPrintFinal_Presenter) o).getRemapLocation();
+
+            //this may not triggered in first loop
             Log.i("checkUpdateFinal", "5 remapLocation :" + remapLocation);
             if (remapLocation != null) {
 
@@ -1643,6 +1773,8 @@ public class FingerPrint_LogIn_Final_Activity extends AppCompatActivity implemen
                         //https://stackoverflow.com/questions/20438627/getlastknownlocation-returns-null
                         //if(mLocationManager.getLastKnownLocation())
                         userLatitude = kk.getValue().toString();
+
+                        checklocationText.setText("latitude : "+ userLatitude);
 
                         if (userLatitude.equals(lastLocationRecorded)) {
 
@@ -1676,6 +1808,11 @@ public class FingerPrint_LogIn_Final_Activity extends AppCompatActivity implemen
                 if (wifiInfo != null) {
                     Toast.makeText(this, "getting wifi network info", Toast.LENGTH_SHORT).show();
                     userSSID = wifiInfo.getSSID();
+
+                    Log.i("SSID_ni_main 2 ","ssid : "+userSSID);
+
+                    wifiDisplay.setText(userSSID);
+
                     userBSSID = wifiInfo.getBSSID();
                 } else {
                     userSSID = "--rerun";
@@ -1695,6 +1832,7 @@ public class FingerPrint_LogIn_Final_Activity extends AppCompatActivity implemen
                         Toast.makeText(this, "getting wifi network info again", Toast.LENGTH_SHORT).show();
                     }
                     userSSID = wifiInfo.getSSID();
+                    wifiDisplay.setText(userSSID);
                     userBSSID = wifiInfo.getBSSID();
 
                 }
@@ -1707,10 +1845,6 @@ public class FingerPrint_LogIn_Final_Activity extends AppCompatActivity implemen
             //here we process
 
 
-            //if (checkAdminConstraintProcess == true && checkLocationProcess == true && dateAndTimeNow != null && !dateAndTimeNow.equals("") && boolean_fingerprint_animate) { //meaning all data being fetch
-
-   //         if(avd!=null || avd1!=null){
-
 
             if (checkAdminConstraintProcess == true && checkLocationProcess == true && dateAndTimeNow != null && !dateAndTimeNow.equals("") && (avd1!=null || avd!=null)) {
 //            if(morningConstraint!=null &&eveningConstraint!=null && dateAndTimeNow!=null && userLongitude!=null && userLatitude!=null
@@ -1721,15 +1855,10 @@ public class FingerPrint_LogIn_Final_Activity extends AppCompatActivity implemen
 
                 Log.i("wherelocationRegister :", "FLOW 6, countVerified:" + countUserverified + " , userLatitude: " + userLatitude);
 
-                //Log.i("finalCheckFlowHere", " BEFORE avd running, avd = "+ avd.toString()+ ", avd1 = "+avd1.toString());
 
-                //Log.i("finalCheckFlowHere", " BEFORE avd running, avd = "+ avd.toString());
-
-              //  Log.i("finalCheckFlowHere", " BEFORE avd running, avd1 = "+ avd1.toString());
 
                 if(avd.isRunning()) {
 
-                  //  Log.i("finalCheckFlowHere", " avd running, avd = "+ avd.toString()+ ", avd1 = "+avd1.toString());
 
                 }else {
                 if (phoneAdminConstraint != null && !phoneAdminConstraint.equals("")) { //means the right admin have finish downloaded, but might some case, phone data retrieve, but not others?
@@ -1739,13 +1868,7 @@ public class FingerPrint_LogIn_Final_Activity extends AppCompatActivity implemen
                     //first check if within network.
                     if (userSSID.equals(ssidConstraint)) {
 
-//                        Log.i("wherelocationRegister :", "FLOW 7, countVerified:" + countUserverified + " , userLatitude: " + userLatitude);
-//
-//                        Log.i("finalCheckFlowHere", "2, admin ssid:" + ssidConstraint + " , user ssid" + userSSID);
 
-                        //Toast.makeText(this,"bssid different" ,Toast.LENGTH_LONG).show();
-
-                        //   presenter.deleteObserver(this); //here fingerprint wont work anymore
 
                         lastSSIDrecorded = userSSID;
 
@@ -1765,26 +1888,6 @@ public class FingerPrint_LogIn_Final_Activity extends AppCompatActivity implemen
                             }
 
                             // }
-
-//                            timer_finger_animate.scheduleAtFixedRate(new TimerTask() {
-//                             @Override
-//                             public void run() {
-//                             fingerCounter++;
-//
-//
-//
-//                             //if(fingerCounter>=2 && animation_fingerprint_ended_boolean){
-//
-//                             if(fingerCounter>=2 ){
-//
-//                             setUserTimeStamp(globalAdminNameHere, globalAdminPhoneHere, nameUser, phoneUser, dateAndTimeNow, userLatitude, userLongitude, morningConstraint, eveningConstraint);
-//                             timer_finger_animate.cancel();
-//                             timer_finger_animate.purge();
-//                             }
-//
-//                             }
-//                             },0,2700);
-
 
                             //26 june
 //                            setUserTimeStamp(globalAdminNameHere, globalAdminPhoneHere, nameUser, phoneUser, dateAndTimeNow, userLatitude, userLongitude, morningConstraint, eveningConstraint);
@@ -1875,18 +1978,7 @@ public class FingerPrint_LogIn_Final_Activity extends AppCompatActivity implemen
         timer_finger_animate = new Timer();
 
         //  timer_handler = new Handler();
-//        timer_finger_animate.scheduleAtFixedRate(new TimerTask() {
-//            @Override
-//            public void run() {
-//                fingerCounter++;
-//                boolean_fingerprint_animate=true;
-//                if(fingerCounter>=2){
-//
-//                    timer_finger_animate.cancel();
-//                    timer_finger_animate.purge();
-//
-//                }
-//            }
+
 //        },0,4000);
 
         ImageView view = fingerprint_imageViewhere;
@@ -1897,17 +1989,7 @@ public class FingerPrint_LogIn_Final_Activity extends AppCompatActivity implemen
              avd1 = (AnimatedVectorDrawableCompat) drawable;
 
             avd1.start();
-//            avd1.registerAnimationCallback(new Animatable2Compat.AnimationCallback() {
-//                @Override
-//                public void onAnimationEnd(Drawable drawable) {
-//                    super.onAnimationEnd(drawable);
-//
-//                    //outMessageDisplay.setText("");
-//                    // textInBox.setText("fecthing data..");
-//
-//                    animation_fingerprint_ended_boolean=true;
-//                }
-//            });
+
 
 
 
@@ -1918,25 +2000,6 @@ public class FingerPrint_LogIn_Final_Activity extends AppCompatActivity implemen
             avd.start();
 
 
-
-//            avd.registerAnimationCallback(new Animatable2.AnimationCallback() {
-//                @Override
-//                public void onAnimationEnd(Drawable drawable) {
-//                    super.onAnimationEnd(drawable);
-//
-//                    animation_fingerprint_ended_boolean=true;
-//
-//
-////
-////                    runOnUiThread(new Runnable() {
-////                        @Override
-////                        public void run() {
-////                            // textInBox.setText("fecthing data..");
-////                            avd.clearAnimationCallbacks();
-////                        }
-////                    });
-//                }
-//            });
         }
 
     }
@@ -2079,25 +2142,6 @@ public class FingerPrint_LogIn_Final_Activity extends AppCompatActivity implemen
 
                 //26 june
 
-//
-//                timer_finger_animate.scheduleAtFixedRate(new TimerTask() {
-//                    @Override
-//                    public void run() {
-//                        fingerCounter++;
-//
-//
-//
-//                        //if(fingerCounter>=2 && animation_fingerprint_ended_boolean){
-//
-//                        if(fingerCounter>=2 ){
-//
-//                             setUserTimeStamp(globalAdminNameHere,globalAdminPhoneHere,nameUser,phoneUser,dateAndTimeNow,userLatitude,userLongitude,morningConstraint,eveningConstraint);
-//                            timer_finger_animate.cancel();
-//                            timer_finger_animate.purge();
-//                        }
-//
-//                    }
-//                },0,2700);
 
                setUserTimeStamp(globalAdminNameHere,globalAdminPhoneHere,nameUser,phoneUser,dateAndTimeNow,userLatitude,userLongitude,morningConstraint,eveningConstraint);
                 if (avd != null) {
@@ -2186,7 +2230,7 @@ public class FingerPrint_LogIn_Final_Activity extends AppCompatActivity implemen
 
         //we passed all data, then reset all back to null. to avoid manipulation.
 
-        Log.i("wherelocationRegister :","FLOW 15, countVerified:"+countUserverified+" , userLatitude: "+userLatitude);
+        Log.i("wherelocationRegister :","FLOW 15, countVerified:"+countUserverified+" , userLatitude: "+userLatitude+" , > morningConstraint: "+morningConstraint+" , > eveningConstraint: "+eveningConstraint);
 
         animation_fingerprint_ended_boolean=false;
 
@@ -2194,11 +2238,14 @@ public class FingerPrint_LogIn_Final_Activity extends AppCompatActivity implemen
                 .document(adminName+adminPhone+"doc").collection("all_employee_thisAdmin_collection")
                 .document(userName+userPhone+"doc");
 
-        dayNow = dateAndTimeNow2.substring(0,3);
+        //dayNow = dateAndTimeNow2.substring(0,3);
+        dayNow="Mon";
         timeCurrent = dateAndTimeNow2.substring(11, 13);      //process time current first, by server
         timeCurrent2 = dateAndTimeNow2.substring(14, 16);
         dateNow = dateAndTimeNow2.substring(8,10)+" "+dateAndTimeNow2.substring(4,7);
         timeCurrent = timeCurrent + "." + timeCurrent2; //this output current time.
+
+        //Log.i()
 
         //process time stamp and constraint
         Float adminMorning = Float.valueOf(morningConstraint);
@@ -2321,7 +2368,8 @@ public class FingerPrint_LogIn_Final_Activity extends AppCompatActivity implemen
                         .document(adminName+adminPhone+"doc").collection("all_employee_thisAdmin_collection")
                         .document(userName+userPhone+"doc");
 
-                dayNow = dateAndTimeNow2.substring(0,3);
+                //dayNow = dateAndTimeNow2.substring(0,3);
+                dayNow="Mon";
                 timeCurrent = dateAndTimeNow2.substring(11, 13);      //process time current first, by server
                 timeCurrent2 = dateAndTimeNow2.substring(14, 16);
                 dateNow = dateAndTimeNow2.substring(8,10)+" "+dateAndTimeNow2.substring(4,7);

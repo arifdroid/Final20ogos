@@ -315,7 +315,7 @@ public class Presenter_RegAdmin_AsAdmin_Activity extends Observable {
 
                                                             DocumentReference reference = FirebaseFirestore.getInstance()
                                                                     .collection("all_admins_collections")
-                                                                    .document(nameUser_admin+phoneUser_admin+"collection");
+                                                                    .document(nameUser_admin+phoneUser_admin+"doc");
 
 
 
@@ -370,7 +370,7 @@ public class Presenter_RegAdmin_AsAdmin_Activity extends Observable {
 
                                                             DocumentReference reference = FirebaseFirestore.getInstance()
                                                                     .collection("all_admins_collections")
-                                                                    .document(nameUser_admin+phoneUser_admin+"collection");
+                                                                    .document(nameUser_admin+phoneUser_admin+"doc");
 
                                                             reference.set(kk).addOnCompleteListener(new OnCompleteListener<Void>() {
                                                                 @Override

@@ -999,6 +999,39 @@
             android:orientation="vertical"
             app:layout_constraintGuide_percent="0.73" />
 
+        <TextView
+            android:id="@+id/textViewMain_location_latitude_id"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="8dp"
+            android:layout_marginTop="8dp"
+            android:text="TextView"
+            android:textSize="8sp"
+            app:layout_constraintStart_toEndOf="@+id/fingerPrintFinal_circleImageView_Profile_id"
+            app:layout_constraintTop_toTopOf="@+id/guideline14" />
+
+        <TextView
+            android:id="@+id/textViewMain_checkConstraint_id"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="8dp"
+            android:layout_marginTop="8dp"
+            android:text="TextView"
+            android:textSize="8sp"
+            app:layout_constraintStart_toEndOf="@+id/fingerPrintFinal_circleImageView_Profile_id"
+            app:layout_constraintTop_toBottomOf="@+id/textViewMain_location_latitude_id" />
+
+        <TextView
+            android:id="@+id/textViewMain_checkCounterFlow_id"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="8dp"
+            android:layout_marginTop="8dp"
+            android:text="TextView"
+            android:textSize="8sp"
+            app:layout_constraintStart_toEndOf="@+id/fingerPrintFinal_circleImageView_Profile_id"
+            app:layout_constraintTop_toBottomOf="@+id/textViewMain_checkConstraint_id" />
+
 
     </androidx.constraintlayout.widget.ConstraintLayout>
 

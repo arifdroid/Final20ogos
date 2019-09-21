@@ -533,7 +533,7 @@ public class RegAdmin_AsAdmin_Activity extends AppCompatActivity implements Obse
 
             @Override
             public void onVerificationFailed(FirebaseException e) {
-
+                Log.i("fail_verify",": "+e.getMessage());
                 Toast.makeText(RegAdmin_AsAdmin_Activity.this,"verification fail: ",Toast.LENGTH_LONG).show();
                 textViewMessageCode.setText("fail verify");
 
@@ -815,84 +815,7 @@ public class RegAdmin_AsAdmin_Activity extends AppCompatActivity implements Obse
 
         if(adminDocumentCreated==1){ //mean we can create
 
-            //setup shared preferences.
 
-
-//            SharedPreferences prefs = getSharedPreferences(
-//                    "com.example.finalV8_punchCard"+userPhone, Context.MODE_PRIVATE);
-
-            // https://stackoverflow.com/questions/23635644/how-can-i-view-the-shared-preferences-file-using-android-studio
-
-            //first check with pool, need to update or create?
-
-            //11june this is just double check
-
-  //          File f_MainPool = new File("/data/data/com.example.afinal/shared_prefs/com.example.finalV8_punchCard.MAIN_POOL.xml");
-
- //           if(f_MainPool.exists()){ //if exist, should
-
-                //if exist, is already user to other admin, so counter should read 1.
-                //read count first if 2 or higher, send error.
-
-//                SharedPreferences prefs_Main_Pool = this.getSharedPreferences("com.example.finalV8_punchCard.MAIN_POOL", Context.MODE_PRIVATE);
-//
-//                String count_admin = prefs_Main_Pool.getString("count_admin","");
-//
-//                if(Integer.valueOf(count_admin)==1 | count_admin_asAdmin==2){ //meaning in perfect world, shared prefs exist, else, data pull
-//
-//             //update 13 june
-//
-//                //if(Integer.valueOf(count_admin)==1 && count_admin_asAdmin==2){
-//
-//                    SharedPreferences.Editor editor_Main_Pool = prefs_Main_Pool.edit();
-//
-//                    editor_Main_Pool.putString("count_admin","2"); //here we update the count. //we could just check earlier.
-//                    editor_Main_Pool.putString("final_Admin_Phone_MainPool_2",userPhone);
-//                    //editor_Main_Pool.putString("")
-//
-//                    editor_Main_Pool.commit();
-//
-//
-//                }if((Integer.valueOf(count_admin)>=2)){
-//
-//                    //this should be error. somehow, should not happen to have register to 2 admin.
-//
-//
-//                }
-//
-//
-//             // for case of registered but delete, then install, then register.
-//   //         }else if(count_admin_asAdmin==1){ //shared pres
-//
-//                //here we create, since it is not exist yet.
-//
-//
-//                //here we update the data in admins_offices data.
-//
-//
-//
-//
-//                SharedPreferences prefs_Main_Pool_one = this.getSharedPreferences("com.example.finalV8_punchCard.MAIN_POOL", Context.MODE_PRIVATE);
-//
-//                SharedPreferences.Editor editor_Main_Pool = prefs_Main_Pool_one.edit();
-//
-//                editor_Main_Pool.putString("count_admin","1");
-//                editor_Main_Pool.putString("final_Admin_Phone_MainPool",userPhone);
-//                //editor_Main_Pool.putString("final_Admin_Name_MainPool",userPhone);
-//
-//                //editor_Main_Pool.putString("")
-//
-//                editor_Main_Pool.commit();
-//
-//     //       }
-//
-//
-//            timer.cancel();
-//            Toast.makeText(this, "successfully registered", Toast.LENGTH_SHORT).show();
-//
-//            //storage reference upload here.
-//
-//            //uploadFile(uri);
 
             //28 may
 
@@ -900,53 +823,41 @@ public class RegAdmin_AsAdmin_Activity extends AppCompatActivity implements Obse
 
             // 11june
 
-            Intent intent = new Intent(RegAdmin_AsAdmin_Activity.this,RegAdmin_asAdmin_Profile_Activity.class);
-            intent.putExtra("adminName_asAdmin",userName);
-            intent.putExtra("adminPhone_asAdmin",userPhone);
-            intent.putExtra("image_ref_asAdmin",this_image_ref.toString());
-
-            intent.putExtra("admin_count", "1");
-
-           // check count admin right or not, check logic part. in presenter as well
-
-            //actually we could just assume, if 1, put 1. right?
+//            Intent intent = new Intent(RegAdmin_AsAdmin_Activity.this,RegAdmin_asAdmin_Profile_Activity.class);
+//            intent.putExtra("adminName_asAdmin",userName);
+//            intent.putExtra("adminPhone_asAdmin",userPhone);
+//            intent.putExtra("image_ref_asAdmin",this_image_ref.toString());
 //
-//            if(admin_count.equals("0")) {
+//            intent.putExtra("admin_count", "1");
 //
-//                intent.putExtra("admin_count", "1");
-//            }else if(admin_count.equals("1")){
 //
-//                intent.putExtra("admin_count", "2");
-//            }
-
-            //intent.addFlags(Intent.)
-
-            startActivity(intent);
+//
+//            startActivity(intent);
 
         }
 
             if(adminDocumentCreated==2){ //mean we can create
 
-                uploadFile(); //this might not finished in time.
+                uploadFile_2(); //this might not finished in time.
 
                 // 11june
 
-                Intent intent = new Intent(RegAdmin_AsAdmin_Activity.this,RegAdmin_asAdmin_Profile_Activity.class);
-                intent.putExtra("adminName_asAdmin",userName);
-                intent.putExtra("adminPhone_asAdmin",userPhone);
-                intent.putExtra("image_ref_asAdmin",this_image_ref.toString());
-
-                intent.putExtra("admin_count", "2");
-//                if(admin_count.equals("0")) {
+//                Intent intent = new Intent(RegAdmin_AsAdmin_Activity.this,RegAdmin_asAdmin_Profile_Activity.class);
+//                intent.putExtra("adminName_asAdmin",userName);
+//                intent.putExtra("adminPhone_asAdmin",userPhone);
+//                intent.putExtra("image_ref_asAdmin",this_image_ref.toString());
 //
-//                    intent.putExtra("admin_count", "1");
-//                }else if(admin_count.equals("1")){
+//                intent.putExtra("admin_count", "2");
+////                if(admin_count.equals("0")) {
+////
+////                    intent.putExtra("admin_count", "1");
+////                }else if(admin_count.equals("1")){
+////
+////                    intent.putExtra("admin_count", "2");
+////                }
 //
-//                    intent.putExtra("admin_count", "2");
-//                }
-
-                //intent.addFlags(Intent.)
-                startActivity(intent);
+//                //intent.addFlags(Intent.)
+//                startActivity(intent);
 
             }
         if(adminDocumentCreated==0){
@@ -1066,6 +977,126 @@ public class RegAdmin_AsAdmin_Activity extends AppCompatActivity implements Obse
                                                 intent.putExtra("adminPhone_asAdmin",userPhone);
                                                 intent.putExtra("image_ref_asAdmin",this_image_ref.toString());
                                                 intent.putExtra("image_url",image_download_url);
+                                                intent.putExtra("admin_count", "1");
+                                                //intent.addFlags(Intent.)
+
+                                                startActivity(intent);
+
+                                            }
+                                        });
+
+
+
+                                    }else {     // task getting download url not success
+
+                                        Toast.makeText(RegAdmin_AsAdmin_Activity.this,"picture successfully uploaded but problem getting url",Toast.LENGTH_SHORT).show();
+
+
+
+                                    }
+
+
+
+
+                                }else {
+
+                                    Toast.makeText(RegAdmin_AsAdmin_Activity.this,"picture successfully uploaded but problem getting url",Toast.LENGTH_SHORT).show();
+
+
+
+                                }
+                            }
+                        }).addOnCanceledListener(new OnCanceledListener() {
+                            @Override
+                            public void onCanceled() {
+
+                                Toast.makeText(RegAdmin_AsAdmin_Activity.this,"picture successfully uploaded but problem getting url",Toast.LENGTH_SHORT).show();
+
+
+                            }
+                        });
+
+
+
+                    }else {
+
+
+                        Toast.makeText(RegAdmin_AsAdmin_Activity.this,"picture failed to upload",Toast.LENGTH_SHORT).show();
+                    }
+
+                }
+            });
+
+
+
+
+
+        }else {
+
+            Toast.makeText(RegAdmin_AsAdmin_Activity.this,"please setup image", Toast.LENGTH_SHORT).show();
+        }
+
+    }
+
+    private void uploadFile_2(){
+
+        if(imageSetupTrue){
+
+
+            // uploads.adminnamephone.jpg etc.
+            //StorageReference this_image_ref = storageReference.child("admin"+userName+userPhone+"."+getFileExtentsion(uriImage));
+
+            //so it will looks like, uploads/admin/admin+6018467
+
+            this_image_ref = storageReference.child("picture"+userName+userPhone);
+
+            this_image_ref.putFile(uriImage).addOnCompleteListener(new OnCompleteListener<UploadTask.TaskSnapshot>() {
+                @Override
+                public void onComplete(@NonNull Task<UploadTask.TaskSnapshot> task) {
+
+                    if(task.isSuccessful()){
+
+                        //if success save picture inside storage, the we save the referenece inside admin, i think better
+                        //create user profile for this admin.
+
+//                        DocumentReference reference = FirebaseFirestore.getInstance()
+//                                .collection("employees_to_offices")
+//                                .document(userName+userPhone+"document");
+//
+//                        Map<String, Object> imm = new HashMap<>();
+//
+//                        imm.put("image",this_image_ref);
+//
+//                        reference.set(imm, SetOptions.merge());
+
+                        this_image_ref.getDownloadUrl().addOnCompleteListener(new OnCompleteListener<Uri>() {
+                            @Override
+                            public void onComplete(@NonNull Task<Uri> task) {
+
+                                if(task.isSuccessful()){
+
+                                    image_download_url = task.getResult().toString();
+
+
+                                    if(!image_download_url.equals("")){
+
+
+                                        Toast.makeText(RegAdmin_AsAdmin_Activity.this,"picture successfully uploaded",Toast.LENGTH_SHORT).show();
+
+                                        //11june
+
+                                        runOnUiThread(new Runnable() {
+                                            @Override
+                                            public void run() {
+
+                                                //sharedprefs.
+
+                                                Intent intent = new Intent(RegAdmin_AsAdmin_Activity.this,RegAdmin_asAdmin_Profile_Activity.class);
+                                                intent.putExtra("adminName_asAdmin",userName);
+                                                intent.putExtra("adminPhone_asAdmin",userPhone);
+                                                intent.putExtra("image_ref_asAdmin",this_image_ref.toString());
+                                                intent.putExtra("image_url",image_download_url);
+                                                intent.putExtra("admin_count", "2");
                                                 //intent.addFlags(Intent.)
 
                                                 startActivity(intent);

@@ -583,12 +583,12 @@ public class TimeStampFireStore_Handler  extends Observable {
 
         if(testTimeStampsList.size()==sizeDoc){
 
-
-            Log.i("20_june", "[Handler] > set to return. sizeDoc: "+sizeDoc +" , list: "+testTimeStampsList.size()+" >> SAME");
-
-            Log.i("20_june", "[Handler] > SAME" +" ,, name 1) "+testTimeStampsList.get(0).getName()
-
-            +" ,, name 2) "+testTimeStampsList.get(1).getName()+" ,, name 3) "+testTimeStampsList.get(2).getName());
+//
+//            Log.i("20_june", "[Handler] > set to return. sizeDoc: "+sizeDoc +" , list: "+testTimeStampsList.size()+" >> SAME");
+//
+//            Log.i("20_june", "[Handler] > SAME" +" ,, name 1) "+testTimeStampsList.get(0).getName()
+//
+//            +" ,, name 2) "+testTimeStampsList.get(1).getName()+" ,, name 3) "+testTimeStampsList.get(2).getName());
 
 
             //testTimeStampsList
@@ -617,7 +617,7 @@ public class TimeStampFireStore_Handler  extends Observable {
 
     public ArrayList<TestTimeStamp> reTURNFINAL(){
 
-        Log.i("20_june", "[Handler] > RETURN RESULT , name:"+ testTimeStampsList.get(0).getName()+ " ,, name 2"+ testTimeStampsList.get(1).getName());
+        //Log.i("20_june", "[Handler] > RETURN RESULT , name:"+ testTimeStampsList.get(0).getName()+ " ,, name 2"+ testTimeStampsList.get(1).getName());
 
 
         return testTimeStampsList;

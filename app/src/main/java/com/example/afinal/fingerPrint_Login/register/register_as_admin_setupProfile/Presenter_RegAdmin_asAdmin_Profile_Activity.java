@@ -84,38 +84,6 @@ public class Presenter_RegAdmin_asAdmin_Profile_Activity extends Observable {
                             setLocationReturn(location);
 
 
-//                            Geocoder geocoder = new Geocoder(mContext, Locale.getDefault());
-
-//                            try {
-//
-//                                Log.i("checkkLocation", "4");
-//
-//                               // streetName = geocoder.getFromLocation(lat, longitude, 1).get(0).getThoroughfare();
-//
-////                                Log.i("checkkLocation", "5 " + streetName);
-////
-////                                adminDetailsList.add(new AdminDetail(streetName, "drawable/ic_location_on_black_24dp"));
-////                                recyclerView_Admin_Profile_Adapter.notifyDataSetChanged();
-////                                recyclerView.setAdapter(recyclerView_Admin_Profile_Adapter);
-////                                recyclerView_Admin_Profile_Adapter.setPassResult_checkBox_interface(new PassResult_CheckBox_Interface() {
-////                                    @Override
-////                                    public void passingArray(ArrayList<AdminDetail> adminDetails) {
-////                                        //returned list.
-////
-////                                        returnAdminDetailList = adminDetails;
-////                                    }
-////                                });
-////
-////
-////                                if(streetName!=null|| streetName!=""){
-////
-////                                    mLocationManager.removeUpdates(this);
-////                                }
-//
-//                            } catch (IOException e) {
-//                                e.printStackTrace();
-//                            }
-
                         }
 
 

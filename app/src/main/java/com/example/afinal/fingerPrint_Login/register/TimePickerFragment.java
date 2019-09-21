@@ -98,37 +98,6 @@ public class TimePickerFragment extends DialogFragment {
     }
 
 
-//    public void setHourMinute(int hour, int minute) {
-//        this.hour = String.valueOf(hour);
-//        this.minute = String.valueOf(minute);
-//
-//        if(this.hour!=null) {
-//
-//            if(this.minute==null){
-//                this.minute="00";
-//            }
-//
-//
-//            Map<String, String> kk = new HashMap<>();
-//            kk.put("hour", this.hour);
-//            kk.put("minute",this.minute);
-//
-//            if(passResultMap!=null){
-//
-//                passResultMap.setPassResultMap(kk);
-//            }
-////
-////            if (this.hour != null) {
-////
-////                if (passResultMap != null) {
-////                    passResultMap.setPassResultMap(this.hour);
-////                }
-////            }
-//        }
-//
-//        return;
-//    }
-
 
 
 

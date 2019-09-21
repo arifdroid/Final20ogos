@@ -5,6 +5,7 @@ import android.content.Context;
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.cardview.widget.CardView;
+import androidx.core.content.ContextCompat;
 import androidx.fragment.app.DialogFragment;
 import androidx.recyclerview.widget.RecyclerView;
 import android.util.Log;
@@ -140,7 +141,10 @@ public class RecyclerView_Admin_Profile_Adapter extends RecyclerView.Adapter<Rec
 
         if(i==2) {
             Log.i("checkTime", "bindHolder, i is 2" );
-           final int jj =2;
+
+            insideHolder.textViewList.setTextColor(ContextCompat.getColor(mContext, R.color.material_our_blue));
+
+            final int jj =2;
             insideHolder.cardView.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View view) {
@@ -168,7 +172,10 @@ public class RecyclerView_Admin_Profile_Adapter extends RecyclerView.Adapter<Rec
         if(i==3) {
 
             Log.i("checkTime", "bindHolder, i is 3" );
-           final int kkj =3;
+
+            insideHolder.textViewList.setTextColor(ContextCompat.getColor(mContext, R.color.material_our_blue));
+
+            final int kkj =3;
             insideHolder.cardView.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View view) {
@@ -190,47 +197,6 @@ public class RecyclerView_Admin_Profile_Adapter extends RecyclerView.Adapter<Rec
         }
 
     }
-
-
-//    public static class FragMangageCompat extends AppCompatActivity implements TimePickerDialog.OnTimeSetListener{
-//
-//        String hour;
-//        String minute;
-//
-//        public FragMangageCompat(){
-//
-//        }
-//
-//        public static void getTime(Context context){
-//
-//            DialogFragment timepicker = new TimePickerFragment();
-//            timepicker.show(((AppCompatActivity)context).getSupportFragmentManager(),"time picker");
-//        }
-//
-//
-//        @Override
-//        public void onTimeSet(TimePicker timePicker, int i, int i1) {
-//            this.hour = String.valueOf(i);
-//
-//            this.minute=String.valueOf(i1);
-//
-//        }
-//
-//        public String getHour() {
-//
-//            if (hour!=null) {
-//                return hour;
-//            }
-//            return null;
-//        }
-//
-//        public String getMinute() {
-//            if(minute!=null) {
-//                return minute;
-//            }
-//            return null;
-//        }
-//    }
 
 
 
@@ -259,12 +225,7 @@ public class RecyclerView_Admin_Profile_Adapter extends RecyclerView.Adapter<Rec
 
             cardView = itemView.findViewById(R.id.admin_Profile_cardViewiD);
 
-//            cardView.setOnClickListener(new View.OnClickListener() {
-//                @Override
-//                public void onClick(View view) {
-//
-//                }
-//            });
+
 
         }
 

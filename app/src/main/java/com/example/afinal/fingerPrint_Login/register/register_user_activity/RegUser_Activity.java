@@ -278,7 +278,7 @@ public class RegUser_Activity extends AppCompatActivity implements View.OnClickL
 
                             if (remapHere.getKey().equals("admin_count")) {
 
-                                //we could extract 1 or 2
+                                //we could extract 1 or 2 ,
 
                                 admin_count_extracted = remapHere.getValue().toString();
                             }

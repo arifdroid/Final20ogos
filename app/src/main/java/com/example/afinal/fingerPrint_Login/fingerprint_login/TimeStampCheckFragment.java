@@ -60,6 +60,9 @@ public class TimeStampCheckFragment extends DialogFragment {
                 .document(adminName+adminPhone+"doc").collection("all_employee_thisAdmin_collection")
                 .document(userName+userPhone+"doc");
 
+        Log.i("timeStamp_flow","1 : day:"+day+", date:"+date+", timeStamp:"+timeStamp+", username:"+userName+", userphone:"+userPhone+", adminname:"+adminName+", adminPhone:"+adminPhone+", monOrEve:"+monOrEve+", zeroOut:"+zeroOut);
+
+        Log.i("timeStamp_flow", "2, doc ref : "+documentReference);
 
         timeStampCheckFragment.setArguments(args);
 
@@ -82,6 +85,9 @@ public class TimeStampCheckFragment extends DialogFragment {
                 .document(adminName+adminPhone+"doc").collection("all_employee_thisAdmin_collection")
                 .document(userName+userPhone+"doc");
 
+        Log.i("timeStamp_flow","3 : day:"+day+", date:"+date+", timeStamp:"+timeStamp+", username:"+userName+", userphone:"+userPhone+", adminname:"+adminName+", adminPhone:"+adminPhone+", monOrEve:"+morOrEve+", streetnameoutside:"+streetNameOutside);
+
+        Log.i("timeStamp_flow", "4, doc ref : "+documentReference);
 
         timeStampCheckFragment.setArguments(args);
 
@@ -104,6 +110,9 @@ public class TimeStampCheckFragment extends DialogFragment {
                 .document(adminName+adminPhone+"doc").collection("all_employee_thisAdmin_collection")
                 .document(userName+userPhone+"doc");
 
+        Log.i("timeStamp_flow","5 : day:"+day+", date:"+date+", timeStamp:"+timeStamp+", username:"+userName+", userphone:"+userPhone+", adminname:"+adminName+", adminPhone:"+adminPhone+", monOrEve:"+morOrEve+", zeroOut:"+zeroOut);
+
+        Log.i("timeStamp_flow", "6, doc ref : "+documentReference);
 
         timeStampCheckFragment.setArguments(args);
 
@@ -124,6 +133,10 @@ public class TimeStampCheckFragment extends DialogFragment {
         documentReference = FirebaseFirestore.getInstance().collection("all_admin_doc_collections")
                 .document(adminName+adminPhone+"doc").collection("all_employee_thisAdmin_collection")
                 .document(userName+userPhone+"doc");
+
+        Log.i("timeStamp_flow","7 : day:"+day+", date:"+date+", timeStamp:"+timeStamp+", username:"+userName+", userphone:"+userPhone+", adminname:"+adminName+", adminPhone:"+adminPhone+", monOrEve:"+morOrEve);
+
+        Log.i("timeStamp_flow", "8, doc ref : "+documentReference);
 
 
         timeStampCheckFragment.setArguments(args);
@@ -200,7 +213,9 @@ public class TimeStampCheckFragment extends DialogFragment {
         textViewTime.requestFocus();
 
     }
+        Log.i("timeStamp_flow","9 : day:"+day+", date:"+date2+", timeStamp:"+timestampnow+", monOrEve:"+morOrEveNow+", zeroOut:"+zeroOut);
 
+        //Log.i("timeStamp_flow", "2, doc ref : "+documentReference);
         //getDialog().getWindow().setSoftInputMode(WindowManager.LayoutParams.SOFT_INPUT_STATE_VISIBLE);
 
         buttonCheckin.setOnClickListener(new View.OnClickListener() {
@@ -266,6 +281,9 @@ public class TimeStampCheckFragment extends DialogFragment {
                         Log.i("onclickFinal", "3");
                         if (zeroOut) {
                             timestampnow = "0";
+
+                            Log.i("onclickFinal", "4");
+
                         }
 
                         if (day.equals("Mon")) {
@@ -306,6 +324,9 @@ public class TimeStampCheckFragment extends DialogFragment {
                     }
 
                 } else if (morOrEveNow.equals("evening")) { //evening time stamp.
+
+                    Log.i("onclickFinal", "5");
+
 
                     if (zeroOut) {
 
@@ -350,7 +371,13 @@ public class TimeStampCheckFragment extends DialogFragment {
 
                 }
 
-                if (kk != null) {
+                ///////a
+                    //check semua data
+
+                    Log.i("check_final_data","9 : day:"+day+", date:"+date2+", timeStamp:"+timestampnow+", monOrEve:"+morOrEveNow+", zeroOut:"+zeroOut);
+
+
+                    if (kk != null) {
 
                     documentReference.set(kk, SetOptions.merge()).addOnCompleteListener(new OnCompleteListener<Void>() {
                         @Override
@@ -358,7 +385,7 @@ public class TimeStampCheckFragment extends DialogFragment {
 
                             if (task.isSuccessful()) {
 
-
+                                Log.i("onclickFinal", "4 successful");
                                 Toast.makeText(getActivity(), "punch card recorded succesfully", Toast.LENGTH_SHORT).show();
                                 //intent to next activity,
 
@@ -376,7 +403,7 @@ public class TimeStampCheckFragment extends DialogFragment {
 
 
                             } else { //task not succesfull, ask user to try time stamp again.
-
+                                Log.i("onclickFinal", "4 not successful");
                                 Toast.makeText(getActivity(), "punch card failed attempt, please try again", Toast.LENGTH_LONG).show();
 
                                 Intent intent = new Intent(getActivity(), FingerPrint_LogIn_Final_Activity.class); //can we call same activity,

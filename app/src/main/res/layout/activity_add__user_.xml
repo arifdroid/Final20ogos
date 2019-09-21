@@ -305,6 +305,18 @@
             app:srcCompat="@drawable/ic_plus_only_final"
             tools:visibility="invisible" />
 
+        <TextView
+            android:id="@+id/textview_adduser_id"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="18dp"
+            android:layout_marginEnd="8dp"
+            android:text="click here to add user"
+            android:textAlignment="center"
+            android:textColor="@color/material_white_blue"
+            app:layout_constraintEnd_toStartOf="@+id/add_User_FloatButtoniD"
+            app:layout_constraintTop_toTopOf="@+id/add_User_FloatButtoniD" />
+
     </androidx.constraintlayout.widget.ConstraintLayout>
 
 

@@ -3,6 +3,8 @@ package com.example.afinal.fingerPrint_Login.fingerprint_login;
 import android.content.Context;
 import android.content.Intent;
 import android.content.SharedPreferences;
+import android.net.wifi.WifiInfo;
+import android.net.wifi.WifiManager;
 import android.os.Bundle;
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
@@ -75,6 +77,15 @@ public class Login_Select_Action_Fragment extends Fragment implements View.OnCli
     private String myphone_extracted;
 
 
+    /// september 2019
+
+    //this is data from current user.
+    private WifiManager wifiManager;
+    private WifiInfo wifiInfo;
+
+    private String userSSID;
+    private String userBSSID;
+
     //boom menu test
 
 //    private BoomMenuButton boomMenuButton;
@@ -117,6 +128,8 @@ public class Login_Select_Action_Fragment extends Fragment implements View.OnCli
         cR_topUserCollection = FirebaseFirestore.getInstance().collection("users_top_detail");
 
         nameHere_boolean = false;
+
+        Log.i("checkNewNow 1", "fragment");
 //
 //        countHere =0;
 //        boomMenuButton = rootView.findViewById(R.id.boomMenuiD);
@@ -146,6 +159,20 @@ public class Login_Select_Action_Fragment extends Fragment implements View.OnCli
         textViewAdmin_1 = rootView.findViewById(R.id.final_textView_fb_admin1_id);
         textViewAdmin_2 = rootView.findViewById(R.id.final_textView_fb_admin2_id);
         textView_RegUser = rootView.findViewById(R.id.final_textView_fb_register_id);
+
+
+//        check supplicant state first, while for api 28, need to get permission first,
+//        then need to check how to trigger update without location enable
+
+
+        wifiManager = (WifiManager)getActivity().getApplicationContext().getSystemService(Context.WIFI_SERVICE);
+        //this is getting the previous data. i suspect
+        wifiInfo = wifiManager.getConnectionInfo();
+
+        userSSID = wifiInfo.getSSID();
+        Log.i("SSID_ni 1", "ssid : "+ userSSID);
+        userSSID = userSSID.replace("\"","");
+        userBSSID = wifiInfo.getBSSID();
 
 //        textView_RegAdmin = rootView.findViewById(R.id.select_fragment_textView_regAdmin_1id);
 
@@ -186,8 +213,11 @@ public class Login_Select_Action_Fragment extends Fragment implements View.OnCli
 
             //problem is user might still extracting after button is pressed, so need to check.
 
+            Log.i("checkNewNow 2", "file exist : "+myphone_extracted);
+
             if(!myphone_extracted.equals("") && myphone_extracted!=null&& !myphone_extracted.isEmpty()) {
 
+                Log.i("checkNewNow 3", "file exist : "+myphone_extracted);
 
                 dR_topUserCollection = cR_topUserCollection.document(myphone_extracted + "imauser");
 
@@ -333,10 +363,12 @@ public class Login_Select_Action_Fragment extends Fragment implements View.OnCli
 
             //18 june, just to hack to check
 
+            Log.i("checkNewNow 3", "file NOT exist " );
+
             Toast.makeText(getContext(),"succes HACK ", Toast.LENGTH_SHORT).show();
 
 
-            myphone_extracted = "+60184670568";
+            //myphone_extracted = "+60184670568";
 
 
 
@@ -490,166 +522,6 @@ public class Login_Select_Action_Fragment extends Fragment implements View.OnCli
 
 
 
-//
-//        if(f.exists()){
-//
-//            SharedPreferences prefs_Main_Pool = getActivity().getSharedPreferences("com.example.finalV8_punchCard.MAIN_POOL", Context.MODE_PRIVATE);
-//            ///if this not exist, means user need to register to an admin first.
-//
-//            //here should contain
-//
-//            //can use string set, but we use simple counter, translate to string instead.
-//
-//            //in main pool, we will have "count_admin" value, 1 = 1 admin exists, 2 = 2 admins exist
-//
-//            //in main pool, also containt, "final_Admin_Phone_MainPool"
-//
-//
-//            String countAdmin = prefs_Main_Pool.getString("count_admin","");
-//            if(countAdmin!=null || !countAdmin.equals("")) {
-//
-//                if (Integer.valueOf(countAdmin) == 1) {  //this means only 1 admin exist.
-//
-//                    //hence pull the first value, ,, the admin phone, since we need the admin phone number to retrieve shared prefs
-//
-//                    String sharedPrefsCheck = prefs_Main_Pool.getString("final_Admin_Phone_MainPool",""); //this relevant if 1 admin only.
-//
-//                    //after pull admin phone, pull dedicated sharedpreferences to this admin, check exist? if not exist,
-//
-//                  //  String sharedPrefsCheck = adminPhoneHere;
-//
-//                    if(!sharedPrefsCheck.equals("")) { //means there
-//
-//                        File fileHere = new File("/data/data/com.example.afinal/shared_prefs/" + sharedPrefsCheck + ".xml"); //sharedPrefscheck == admin phone number
-//
-//                        if (fileHere.exists()) {
-//
-//                            SharedPreferences sharedPrefs_1 = getActivity().getSharedPreferences("com.example.finalV8_punchCard."+sharedPrefsCheck, Context.MODE_PRIVATE);
-//                            //will read sharedprefs of "com.example.finalV8_punchCard.+60184670568" ,, admin phone?
-//
-//                            nameHere_boolean= true;
-//
-//                            nameHere = sharedPrefs_1.getString("final_User_Name","");
-//                            phoneHere = sharedPrefs_1.getString("final_User_Phone","");
-//                            adminName = sharedPrefs_1.getString("final_Admin_Name","");
-//                            adminPhone = sharedPrefs_1.getString("final_Admin_Phone","");
-//
-//
-//
-//                        } else { //file not exist.
-//
-//                            Toast.makeText(getContext(),"issue: please contact admin.", Toast.LENGTH_LONG).show();
-//
-//
-//                        }
-//
-//                    }else{ //somehow pulling data from pull dont contain admin phone
-//
-//                        Toast.makeText(getContext(),"issue: please contact admin.", Toast.LENGTH_LONG).show();
-//
-//                    }
-//
-//                }if(Integer.valueOf(countAdmin) == 2){ //if admin is admin 2nd time registered.
-//
-//                    //so when we pull here, need special way to pull two shared prefs data.
-//
-//                    String sharedPrefsCheck_Admin_1 = prefs_Main_Pool.getString("final_Admin_Phone_MainPool",""); //this relevant if 1 admin only.
-//                    String sharedPrefsCheck_Admin_2 = prefs_Main_Pool.getString("final_Admin_Phone_MainPool_2",""); //this relevant if 2 admins only.
-//
-//                    //handle admin 1 first.
-//
-//                    if(!sharedPrefsCheck_Admin_1.equals("")){
-//
-//                        File fileHere = new File("/data/data/com.example.afinal/shared_prefs/" + sharedPrefsCheck_Admin_1 + ".xml");
-//
-//                        if(fileHere.exists()){
-//
-//
-//                            SharedPreferences sharedPrefs_1 = getActivity().getSharedPreferences("com.example.finalV8_punchCard."+sharedPrefsCheck_Admin_1, Context.MODE_PRIVATE);
-//                            //will be read sharedprefs of "com.example.finalV8_punchCard.+60184670568"
-//
-//                            nameHere_boolean= true;
-//
-//                            nameHere = sharedPrefs_1.getString("final_User_Name","");
-//                            phoneHere = sharedPrefs_1.getString("final_User_Phone","");
-//                            adminName = sharedPrefs_1.getString("final_Admin_Name","");
-//                            adminPhone = sharedPrefs_1.getString("final_Admin_Phone","");
-//
-//                        }else { //something wrong if not exist.
-//
-//                            Toast.makeText(getContext(),"issue: please contact admin.", Toast.LENGTH_LONG).show();
-//
-//
-//                        }
-//
-//
-//
-//
-//                    }
-//                    else { //somehow admin 1 phone number not written
-//
-//                        Toast.makeText(getContext(),"issue: please contact admin.", Toast.LENGTH_LONG).show();
-//
-//
-//
-//                    }
-//
-//                    //handle admin 2nd
-//
-//
-//                    if(!sharedPrefsCheck_Admin_2.equals("")){
-//
-//                        File fileHere = new File("/data/data/com.example.afinal/shared_prefs/" + sharedPrefsCheck_Admin_2 + ".xml");
-//
-//                        if(fileHere.exists()){
-//
-//
-//                            SharedPreferences sharedPrefs_2 = getActivity().getSharedPreferences("com.example.finalV8_punchCard."+sharedPrefsCheck_Admin_2, Context.MODE_PRIVATE);
-//                            //will be read sharedprefs of "com.example.finalV8_punchCard.+60184670568"
-//
-//                            nameHere_2 = sharedPrefs_2.getString("final_User_Name","");
-//                            phoneHere_2 = sharedPrefs_2.getString("final_User_Phone","");
-//                            adminName_2 = sharedPrefs_2.getString("final_Admin_Name","");
-//                            adminPhone_2 = sharedPrefs_2.getString("final_Admin_Phone","");
-//
-//                        }else { //something wrong if not exist.
-//
-//                            Toast.makeText(getContext(),"issue: please contact admin.", Toast.LENGTH_LONG).show();
-//
-//
-//                        }
-//
-//                    }
-//
-//                }else { //other than string 1 or 2
-//
-//                    Toast.makeText(getContext(),"issue: please contact admin.", Toast.LENGTH_LONG).show();
-//
-//                }
-//
-//            }
-//
-//        }else { //if main pool dont even exist.
-//
-//
-//            Toast.makeText(getContext(),"please register to an admin, or create admin", Toast.LENGTH_LONG).show();
-//
-//
-//        }
-
-        ///
-//
-//        if(!adminName.equals("")|| adminName!=null){
-//
-//            textViewAdmin_1.setText(" Admin 1 :"+adminName);
-//
-//        }
-//
-//        if(!adminName_2.equals("")|| adminName_2!=null){
-//
-//            textViewAdmin_2.setText("Admin 2 :"+adminName_2);
-//
-//        }
 
         floatButton_Admin_1.setOnClickListener(this);
         floatButton_Admin_2.setOnClickListener(this);
@@ -657,207 +529,6 @@ public class Login_Select_Action_Fragment extends Fragment implements View.OnCli
 //        floatButton_Reg_Admin.setOnClickListener(this);
         floatButton_Back.setOnClickListener(this);
         floatButton_Note_MC.setOnClickListener(this);
-
-        // must be done here , boom menu
-
-//        for(int j = 0; j < boomMenuButton.getPiecePlaceEnum().pieceNumber();j++){
-//
-//            boomMenuButton.addBuilder(BuilderManager.getTextOutsideCircleButtonBuilder(j));
-//            final long ss = boomMenuButton.getShowDuration();
-//
-//            //boomMenuButton.setButtonRadius(60);
-////            int size = boomMenuButton.getButtonRadius();
-//            //boomMenuButton.radius
-//
-//            if(j==4) {
-//                boomMenuButton.getBuilder(4).normalColor(Color.YELLOW);
-//
-//                //boomMenuButton.getBuilder(4).rad
-//                //boomMenuButton.getBuilder(4).
-//
-//            }
-//            if(j==2) {
-//
-////                GradientDrawable drawable = new GradientDrawable(GradientDrawable.Orientation.BOTTOM_TOP,
-////                        new int[] {0xFF616261,0xFF131313});
-////                drawable.setCornerRadius(0f);
-//
-//                //int trydraw = getResources().getDrawable(R.drawable.button_default, );
-//
-//               // int trydraw = getActivity().getResources().getIdentifier("drawable/button_default",null,getActivity().getPackageName());
-//
-////                int trydraw = getResId("R.drawable/button_default",R.drawable.button_default);
-//
-//
-//                int trydraw = R.drawable.button_default;
-//
-//                //boomMenuButton.getBuilder(2).normalColorRes(trydraw);
-//                boomMenuButton.getBuilder(2).imagePadding(new Rect(200,200,200,200));
-//                boomMenuButton.getBuilder(2).normalColor(trydraw);
-//                //boomMenuButton.getBuilder(2).
-//                //boomMenuButton.getBuilder(2).normalImageRes(trydraw);
-////
-////                Rect rect = new Rect();
-////                rect.bottom=1;
-////                rect.left=1;
-////                rect.right=1;
-////                rect.top=0;
-////
-////                boomMenuButton.getBuilder(4).imagePadding(rect);
-////
-//
-//            }
-//            boomMenuButton.setAutoBoom(true);
-//            boomMenuButton.setShadowEffect(true);
-//
-//
-//
-//            //    Toast.makeText(getContext(),"size is: "+String.valueOf(size),Toast.LENGTH_SHORT).show();
-//
-//
-//
-//            boomMenuButton.setOnBoomListener(new OnBoomListener() {
-//
-//
-//                @Override
-//                public void onClicked(int index, BoomButton boomButton) {
-//
-//                    if(index==0){ //register admin
-//
-//                       // boomButton.getLayoutAnimationListener().onAnimationEnd(this);
-//
-//                        registerAdminBoolean = true;
-//
-//
-//
-//                    }
-//
-//                    if(index==1){ // register user
-//
-//                        registerUserBoolean=true;
-//
-//                    }
-//
-//                    if(index==2){ // MC
-//
-//
-//                        Toast.makeText(getContext(),"duration is: "+String.valueOf(ss),Toast.LENGTH_SHORT).show();
-//                    }
-//
-//
-//                    if(index==3){ //log to admin 2
-//
-//                        popAdmin_2=true;
-//
-//
-//
-//
-//
-//                    }
-//
-//
-//                    if(index==4){ //log to admin 1
-//
-//
-//                    }
-//
-//
-//
-//
-//                }
-//
-//                @Override
-//                public void onBackgroundClick() {
-//
-//                    getFragmentManager().popBackStack();
-//
-//                }
-//
-//                @Override
-//                public void onBoomWillHide() {
-//
-//                }
-//
-//                @Override
-//                public void onBoomDidHide() {
-//
-//                    if(registerUserBoolean) {
-//
-//                        registerUserBoolean=false;
-//                        Intent intent = new Intent(getActivity(), RegAdmin_Activity.class);
-//                        intent.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK); //creating new task for registering,
-//                        //but we dont want user to be able to back.
-//                        startActivity(intent);
-//                    }
-//
-//                    if(registerAdminBoolean){
-//                        registerAdminBoolean=false;
-//
-//                        Intent intent2 = new Intent(getActivity(), RegAdmin_AsAdmin_Activity.class);
-//                        intent2.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
-//                        startActivity(intent2);
-//
-//
-//                    }
-//
-//                    if(popAdmin_1){
-//                        popAdmin_1=false;
-//
-//                        if(nameHere!=null) {
-//                            FingerPrint_LogIn_Final_Activity.timeFragmentBoolean=true;
-//                            ((FingerPrint_LogIn_Final_Activity) getActivity()).nameUser = nameHere; //
-//                            ((FingerPrint_LogIn_Final_Activity) getActivity()).phoneUser = phoneHere; //
-//                            ((FingerPrint_LogIn_Final_Activity) getActivity()).globalAdminNameHere = adminName; //
-//                            ((FingerPrint_LogIn_Final_Activity) getActivity()).globalAdminPhoneHere = adminPhone; //
-//
-//                            Log.i("finalSharePreDataCheck","Login_Select_Fragment 4, before return,name: "
-//                                    + nameHere+ ", phone: "+phoneHere+ ", adminName:"
-//                                    +adminName+" , adminPhone: "+adminPhone);
-//                        }
-//
-//                        //this is we setup shared prefe
-//                        getFragmentManager().popBackStack();
-//
-//
-//
-//
-//                    }
-//
-//                    if(popAdmin_2){
-//                        popAdmin_2=false;
-//
-//                        if(nameHere!=null) {
-//                            FingerPrint_LogIn_Final_Activity.timeFragmentBoolean=true;
-//                            ((FingerPrint_LogIn_Final_Activity) getActivity()).nameUser = nameHere_2; //
-//                            ((FingerPrint_LogIn_Final_Activity) getActivity()).phoneUser = phoneHere_2; //
-//                            ((FingerPrint_LogIn_Final_Activity) getActivity()).globalAdminNameHere = adminName_2; //
-//                            ((FingerPrint_LogIn_Final_Activity) getActivity()).globalAdminPhoneHere = adminPhone_2; //
-//
-//                            Log.i("finalSharePreDataCheck","Login_Select_Fragment 4, before return,name: "
-//                                    + nameHere_2+ ", phone: "+phoneHere_2+ ", adminName:"
-//                                    +adminName_2+" , adminPhone: "+adminPhone_2);
-//                        }
-//
-//                        getFragmentManager().popBackStack();
-//
-//
-//                    }
-//
-//                }
-//
-//                @Override
-//                public void onBoomWillShow() {
-//
-//                }
-//
-//                @Override
-//                public void onBoomDidShow() {
-//
-//
-//
-//                }
-//            });
-//        }
 
 
 
@@ -1000,11 +671,26 @@ public class Login_Select_Action_Fragment extends Fragment implements View.OnCli
 
             case R.id.final_fb_register_id:
 
-                Intent intent = new Intent(getActivity(), RegAdmin_Activity.class);
+                // september update, ensure wifi admin is connected.
 
-                intent.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK); //creating new task for registering,
-                //but we dont want user to be able to back.
-                startActivity(intent);
+
+                //ensure location is connected
+
+                if(userSSID==""||userSSID==null||userSSID.equals("<unknown ssid>")){
+
+                    Log.i("SSID_ni 2", "ssid : "+ userSSID);
+
+                    Toast.makeText(getContext(), "please connect to admin wifi first", Toast.LENGTH_LONG).show();
+
+                }else {
+
+
+                    Intent intent = new Intent(getActivity(), RegAdmin_Activity.class);
+
+                    intent.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK); //creating new task for registering,
+                    //but we dont want user to be able to back.
+                    startActivity(intent);
+                }
 
 
 

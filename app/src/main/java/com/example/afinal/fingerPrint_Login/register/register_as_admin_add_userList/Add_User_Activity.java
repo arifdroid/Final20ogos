@@ -17,6 +17,7 @@ import android.view.View;
 import android.view.animation.Animation;
 import android.view.animation.AnimationUtils;
 import android.widget.LinearLayout;
+import android.widget.TextView;
 import android.widget.Toast;
 
 import com.example.afinal.R;
@@ -59,12 +60,16 @@ public class Add_User_Activity extends AppCompatActivity implements View.OnClick
 
     //28 may
 
+    private TextView adduserText;
+
     private FloatingActionButton buttonAdd;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_add__user_);
+
+        adduserText = findViewById(R.id.textview_adduser_id);
 
         userListNumberOnly = new ArrayList<>();
 
@@ -102,7 +107,7 @@ public class Add_User_Activity extends AppCompatActivity implements View.OnClick
                     public void run() {
 
 
-                        ObjectAnimator animator = ObjectAnimator.ofFloat(buttonAdd,"translationY",-150f);
+                        ObjectAnimator animator = ObjectAnimator.ofFloat(buttonAdd,"translationY",-250f);
                         buttonAdd.animate()
                                 .alpha(1f)
                                 .setDuration(200)
@@ -110,8 +115,18 @@ public class Add_User_Activity extends AppCompatActivity implements View.OnClick
                         animator.setDuration(200);
                         animator.start();
 
+                        ObjectAnimator animator_text = ObjectAnimator.ofFloat(adduserText, "translationY", -250f);
+
+                        adduserText.animate()
+                                .alpha(1f)
+                                .setDuration(200)
+                                .setListener(null);
+                        animator_text.setDuration(200);
+                        animator_text.start();
 
                         Animation fadeIn = AnimationUtils.loadAnimation(Add_User_Activity.this,R.anim.fadein);
+                        Animation fadeInText = AnimationUtils.loadAnimation(Add_User_Activity.this,R.anim.fadein);
+                        adduserText.startAnimation(fadeInText);
                         buttonAdd.startAnimation(fadeIn);
 
 
@@ -161,7 +176,7 @@ public class Add_User_Activity extends AppCompatActivity implements View.OnClick
                 Toast.makeText(Add_User_Activity.this,"check ADD", Toast.LENGTH_SHORT).show();
 
                 DocumentReference documentReference = FirebaseFirestore.getInstance().collection("all_admins_collections")
-                        .document(user_name_asAdmin+user_phone_asAdmin+"collection");
+                        .document(user_name_asAdmin+user_phone_asAdmin+"doc"); //check either doc or oollection
 
 
 //

@@ -135,6 +135,10 @@ public class RegAdmin_asAdmin_Profile_Activity extends AppCompatActivity impleme
     public static String hour;
     public static String minute;
 
+    private TextView textTryAgain;
+
+    private TextView locationtesttextview;
+
     //28 may button test
 
    // private Button testButton;
@@ -147,22 +151,10 @@ public class RegAdmin_asAdmin_Profile_Activity extends AppCompatActivity impleme
         morningBooleanSet =false;
         eveningBooleanSet =false;
 
-//        testButton = findViewById(R.id.buttontest_atProfile_id);
-//
-//        testButton.setOnClickListener(new View.OnClickListener() {
-//            @Override
-//            public void onClick(View v) {
-//
-//                Intent intent = new Intent(RegAdmin_asAdmin_Profile_Activity.this, Add_User_Activity.class);
-//
-//                intent.putExtra("adminName_asAdmin",user_name_asAdmin);
-//                intent.putExtra("adminPhone_asAdmin",user_phone_asAdmin);
-//
-//                startActivity(intent);
-//
-//
-//            }
-//        });
+        locationtesttextview= findViewById(R.id.textView_location_setprofile);
+
+        textTryAgain = findViewById(R.id.textView_tryagain_setup_profile_id);
+
 
         imagetest = false;
 
@@ -176,8 +168,8 @@ public class RegAdmin_asAdmin_Profile_Activity extends AppCompatActivity impleme
         user_name_asAdmin = intent.getStringExtra("adminName_asAdmin");
         user_phone_asAdmin = intent.getStringExtra("adminPhone_asAdmin");
 
-        count_admin = intent.getStringExtra("admin_count");
-
+        count_admin = intent.getStringExtra("admin_count"); //who
+//
         image_url = intent.getStringExtra("image_url");
 
 
@@ -227,24 +219,6 @@ public class RegAdmin_asAdmin_Profile_Activity extends AppCompatActivity impleme
 
         //firebase reference
 
-        //storageReference = FirebaseStorage.getInstance().getReference("uploads");
-
-//        //setting up image
-//        circleImageView.setOnClickListener(new View.OnClickListener() {
-//            @Override
-//            public void onClick(View v) {
-//
-//                Intent intent = new Intent(Intent.ACTION_OPEN_DOCUMENT);
-//                intent.addCategory(Intent.CATEGORY_OPENABLE);
-//                intent.setType("image/*");
-//
-//                startActivityForResult(intent,READ_REQUEST_CODE);
-//
-//            }
-//        });
-
-//        //setting up wifi if not initially setup.
-//        presenter.getWifiNow(wifiManager);
 
         mLocationManager = (LocationManager) getSystemService(LOCATION_SERVICE);
 
@@ -262,6 +236,8 @@ public class RegAdmin_asAdmin_Profile_Activity extends AppCompatActivity impleme
         floatingActionButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
+
+                textTryAgain.setVisibility(View.INVISIBLE);
 
                 int count = 0;
 
@@ -298,36 +274,6 @@ public class RegAdmin_asAdmin_Profile_Activity extends AppCompatActivity impleme
                             if ((count) == adminDetailsList.size()) {
 
                                 Toast.makeText(RegAdmin_asAdmin_Profile_Activity.this, "all " + count + " boxes checked", Toast.LENGTH_SHORT).show();
-
-                                //here start a service save all this , create document for user.
-                                //and sharedpreferences as well.
-
-                                //here we saved all in sharedpreferences //create 4 pin id.
-
-
-                                //problem is when this admin want to register as user for other admin.
-                                //so we need to put label, then pull according to corresponding lable.
-
-                                //two tag,
-                                // tag ONE , mean user was admin, and added user under its tree
-                                // tag TWO , mean user was user , and want to become admin.
-                                //must be done at first phase.
-
-                                //create new shared pref pool
-
-//                                SharedPreferences prefs = getSharedPreferences(
-//                                        "com.example.finalV8_punchCard." + user_phone_asAdmin, Context.MODE_PRIVATE);
-//
-//                                SharedPreferences.Editor editor = prefs.edit(); // we need to know, which preferences belong to which admin,
-//                                //if user registered to another admin.
-//
-//                                editor.putString("final_User_Name", user_name_asAdmin);
-//                                editor.putString("final_User_Phone", user_phone_asAdmin);
-//                                editor.putString("final_Admin_Name", user_name_asAdmin);
-//                                editor.putString("final_Admin_Phone", user_phone_asAdmin);
-                                //editor.putString("final_User_Picture", storageReference.toString());
-
-//                                editor.commit();
 
 
 
@@ -371,7 +317,7 @@ public class RegAdmin_asAdmin_Profile_Activity extends AppCompatActivity impleme
                                 CollectionReference cR_admin_only= FirebaseFirestore.getInstance()
                                         .collection("all_admins_collections");
 
-                                DocumentReference dR_admin_only = cR_admin_only.document(user_name_asAdmin+user_phone_asAdmin+"collection");
+                                DocumentReference dR_admin_only = cR_admin_only.document(user_name_asAdmin+user_phone_asAdmin+"doc");
 
                                 mapForAdminOnly.put("phone",user_phone_asAdmin);
                                 mapForAdminOnly.put("name",user_name_asAdmin);
@@ -432,6 +378,21 @@ public class RegAdmin_asAdmin_Profile_Activity extends AppCompatActivity impleme
                                 mapAdminAsUser.put("ts_thu_evening", "");
                                 mapAdminAsUser.put("ts_fri_evening", "");
 
+                                //location
+
+                                mapAdminAsUser.put("loc_mon_morning", "");
+                                mapAdminAsUser.put("loc_tue_morning", "");
+                                mapAdminAsUser.put("loc_wed_morning", "");
+                                mapAdminAsUser.put("loc_thu_morning", "");
+                                mapAdminAsUser.put("loc_fri_morning", "");
+                                mapAdminAsUser.put("loc_mon_evening", "");
+                                mapAdminAsUser.put("loc_tue_evening", "");
+                                mapAdminAsUser.put("loc_wed_evening", "");
+                                mapAdminAsUser.put("loc_thu_evening", "");
+                                mapAdminAsUser.put("loc_fri_evening", "");
+
+                                //mapAdminAsUser.put("ts_mon_evening", "");
+
                                 mapAdminAsUser.put("status","admin");
 
                                 mapAdminAsUser.put("mon_date","");
@@ -458,6 +419,8 @@ public class RegAdmin_asAdmin_Profile_Activity extends AppCompatActivity impleme
 
                                           Toast.makeText(RegAdmin_asAdmin_Profile_Activity.this,"please wait 5 seconds and try again.", Toast.LENGTH_SHORT).show();
 
+                                          textTryAgain.setVisibility(View.VISIBLE);
+
                                         }
                                     }
                                 }).addOnCanceledListener(new OnCanceledListener() {
@@ -465,6 +428,8 @@ public class RegAdmin_asAdmin_Profile_Activity extends AppCompatActivity impleme
                                     public void onCanceled() {
 
                                         Toast.makeText(RegAdmin_asAdmin_Profile_Activity.this,"please wait 5 seconds and try again.", Toast.LENGTH_SHORT).show();
+
+                                        textTryAgain.setVisibility(View.VISIBLE);
 
                                     }
                                 });
@@ -502,18 +467,6 @@ public class RegAdmin_asAdmin_Profile_Activity extends AppCompatActivity impleme
         //initRecycler();
 
 
-        //wifi listener
-
-      //  storageReference.get
-
-
-//        Picasso.with(this).load(storageReference.getDownloadUrl().getResult()).into(circleImageView);
-//
-//        Glide.with(this)
-//                .load(storageReference)
-//                .into(circleImageView);
-
-
 
         Intent intentWifi = new Intent();
 
@@ -530,6 +483,8 @@ public class RegAdmin_asAdmin_Profile_Activity extends AppCompatActivity impleme
             public void onComplete(@NonNull Task<Uri> task) {
 
                 if(task.isSuccessful()){
+
+                    //image_url=task.getResult().getPath();
 
                     urihere = task.getResult();
 
@@ -560,36 +515,7 @@ public class RegAdmin_asAdmin_Profile_Activity extends AppCompatActivity impleme
         presenter.deleteObserver(this);
     }
 
-//    //for image loader.
-//
-//    @Override
-//    protected void onActivityResult(int requestCode, int resultCode, @Nullable Intent data) {
-//        super.onActivityResult(requestCode, resultCode, data);
-//
-//        if(requestCode == READ_REQUEST_CODE && resultCode == Activity.RESULT_OK){
-//
-//            Uri uri = null;
-//
-//            if(data!=null){
-//
-//                uri = data.getData();
-//
-//                showImage(uri);
-//
-//                imageSetupTrue=true;
-//
-//            }
-//        }
-//
-//    }
-//
-//    private void showImage(Uri uri) {
-//
-//        circleImageView.setImageURI(uri);
-//
-//        Toast.makeText(RegAdmin_asAdmin_Profile_Activity.this,"image setup", Toast.LENGTH_SHORT).show();
-//
-//    }
+
 
 
 //
@@ -671,15 +597,7 @@ public class RegAdmin_asAdmin_Profile_Activity extends AppCompatActivity impleme
 
         Log.i("checkFlowData ", "1");
 
-//        if(storageReference.getDownloadUrl().isComplete()){
-//            if(!imagetest){
-//
-//                Picasso.with(this).load(storageReference.getDownloadUrl().getResult()).into(circleImageView);
-//
-//                imagetest=true;
-//            }
-//
-//        }
+
 
         if(observable instanceof Presenter_RegAdmin_asAdmin_Profile_Activity){
             Log.i("checkFlowData ", "2");
@@ -700,6 +618,8 @@ public class RegAdmin_asAdmin_Profile_Activity extends AppCompatActivity impleme
 
                       //  locationMapFinal.put("latitudeFinal" ,kk.getValue());
                         latitudeHere = Double.valueOf(kk.getValue());
+
+                        locationtesttextview.setText("lat : "+latitudeHere);
                     }
                     if(kk.getKey().equals("longitudeHere")){
 
@@ -744,25 +664,7 @@ public class RegAdmin_asAdmin_Profile_Activity extends AppCompatActivity impleme
                         }
 
 //
-//
-//                        if(streetName!=null || streetName.equals("")) {
-//
-//                            if(adminDetailsList.size()<=4) {
-//                                adminDetailsList.add(new AdminDetail(streetName, "drawable/ic_location_on_black_24dp"));
-//                                recyclerView_Admin_Profile_Adapter.notifyDataSetChanged();
-//                                // recyclerView.setAdapter(recyclerView_Admin_Profile_Adapter);
-//                                recyclerView_Admin_Profile_Adapter.setPassResult_checkBox_interface(new PassResult_CheckBox_Interface() {
-//                                    @Override
-//                                    public void passingArray(ArrayList<AdminDetail> adminDetails) {
-//                                        //returned list.
-//
-//                                        returnAdminDetailList = adminDetails;
-//                                    }
-//                                });
-//                            }else {
-//                                presenter.stopListening(mLocationManager);
-//
-//                            }
+
 //                        }
                         presenter.stopListening(mLocationManager);
                     }
@@ -787,7 +689,14 @@ public class RegAdmin_asAdmin_Profile_Activity extends AppCompatActivity impleme
 
                     if(kk.getKey().equals("SSID")){
 
-                        wifiSSIDHere = kk.getValue();
+                        String wifi = kk.getValue();
+
+                        while (wifi.contains("\"")){
+
+                            wifi= wifi.replace("\"","");
+                        }
+
+                        wifiSSIDHere = wifi;
                         runOnUiThread(new Runnable() {
                             @Override
                             public void run() {
@@ -847,6 +756,10 @@ public class RegAdmin_asAdmin_Profile_Activity extends AppCompatActivity impleme
                 }
 
 
+            }else{ //wifi is not here
+
+
+
             }
 
 
@@ -884,8 +797,8 @@ public class RegAdmin_asAdmin_Profile_Activity extends AppCompatActivity impleme
 
                 Log.i("checkTime", "2");
 
-                adminDetailsList.get(2).setTextShow("morning time stamp is: "+hour+":"+minute);
-                morning_constraint=hour+minute;
+                adminDetailsList.get(2).setTextShow("AM checkin: "+hour+":"+minute);
+                morning_constraint=hour+"."+minute;
                 recyclerView_Admin_Profile_Adapter.notifyDataSetChanged();
 
                 morningBooleanSet=true;
@@ -900,36 +813,14 @@ public class RegAdmin_asAdmin_Profile_Activity extends AppCompatActivity impleme
 
             Log.i("checkTime", "3");
 
-            adminDetailsList.get(3).setTextShow("evening time stamp is: "+hour+":"+minute);
-            evening_constraint=hour+minute;
+            adminDetailsList.get(3).setTextShow("PM checkout: "+hour+":"+minute);
+            evening_constraint=hour+"."+minute;
             recyclerView_Admin_Profile_Adapter.notifyDataSetChanged();
             eveningBooleanSet=true;
 
         }
 
 
-//        if(this.hour!=null) {
-//
-//                if(this.minute==null){
-//                    this.minute="00";
-//                }
-//
-//
-//            Map<String, String> kk = new HashMap<>();
-//            kk.put("hour", this.hour);
-//            kk.put("minute",this.minute);
-//
-//            if(passResultMap!=null){
-//
-//                passResultMap.setPassResultMap(kk);
-//            }
-//
-
-
-          // recyclerView_Admin_Profile_Adapter
-           //recyclerView_Admin_Profile_Adapter.notifyDataSetChanged();
-
-   //     }
 
     }
 }

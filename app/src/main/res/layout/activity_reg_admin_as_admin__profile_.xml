@@ -270,4 +270,33 @@
         android:orientation="vertical"
         app:layout_constraintGuide_percent="0.7277778" />
 
+    <TextView
+        android:id="@+id/textView_tryagain_setup_profile_id"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="8dp"
+        android:layout_marginTop="24dp"
+        android:layout_marginEnd="8dp"
+        android:text="please try again after 10 seconds"
+        android:textAlignment="center"
+        android:textColor="@color/material_white"
+        android:textSize="10sp"
+        android:visibility="invisible"
+        app:layout_constraintEnd_toEndOf="@+id/admin_Profile_fButtoniD"
+        app:layout_constraintHorizontal_bias="0.522"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/cardView3" />
+
+    <TextView
+        android:id="@+id/textView_location_setprofile"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="8dp"
+        android:layout_marginTop="8dp"
+        android:text="TextView"
+        android:textColor="@color/material_white_blue"
+        android:textSize="10sp"
+        app:layout_constraintStart_toEndOf="@+id/admin_Profile_circleImageViewID"
+        app:layout_constraintTop_toTopOf="@+id/guideline70" />
+
 </androidx.constraintlayout.widget.ConstraintLayout>

@@ -6,6 +6,8 @@ import androidx.annotation.NonNull;
 import com.google.android.material.bottomnavigation.BottomNavigationView;
 import androidx.viewpager.widget.ViewPager;
 import androidx.appcompat.app.AppCompatActivity;
+
+import android.util.Log;
 import android.view.MenuItem;
 
 import com.example.afinal.R;
@@ -45,6 +47,8 @@ public class Main_BottomNav_Activity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main__bottom_nav_);
+
+        Log.i("mainbottomnav_our","1 : start");
 
         viewPager = findViewById(R.id.bottomNav_view_pager_frameID);
 

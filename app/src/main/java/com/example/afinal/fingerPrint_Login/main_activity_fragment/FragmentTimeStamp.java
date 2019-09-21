@@ -218,7 +218,7 @@ public class FragmentTimeStamp extends Fragment implements Observer, View.OnClic
         View rootView = inflater.inflate(R.layout.bottom_nav_timestamp_fragment, container, false);
         //textView = rootView.findViewById(R.id.bottom_nav_fragment_timeStamp_textView);
 
-
+        Log.i("mainbottomnav_our","2 : fragment");
         rootView.setFocusableInTouchMode(true);
         rootView.requestFocus();
         rootView.setOnKeyListener(new View.OnKeyListener() {
@@ -315,9 +315,11 @@ public class FragmentTimeStamp extends Fragment implements Observer, View.OnClic
 
         loopCount=0;
 
-        Log.i("checkTimeStamp ", "flow: 1");
+        Log.i("checkfragment ", "flow: 1");
 
         chart = rootView.findViewById(R.id.chartiD);
+
+
 
         collectionReferenceTest = FirebaseFirestore.getInstance().collection("all_admin_doc_collections")
                 .document("ariff+60190_doc")
@@ -1862,7 +1864,7 @@ public class FragmentTimeStamp extends Fragment implements Observer, View.OnClic
                 timer_today = new Timer();
 
                 chart.setVisibleXRange(0f, 2f);
-                chart.setVisibleYRange(0f, 2f, dataSetArrayList_Final.get(1).getAxisDependency());
+                chart.setVisibleYRange(0f, 2f, dataSetArrayList_Final.get(0).getAxisDependency());
 
 
 
