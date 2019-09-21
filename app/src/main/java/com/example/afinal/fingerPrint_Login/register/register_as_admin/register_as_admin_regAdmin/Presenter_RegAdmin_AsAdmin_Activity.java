@@ -167,7 +167,7 @@ public class Presenter_RegAdmin_AsAdmin_Activity extends Observable {
 
                                             //though still need checking, since
 
-                                            allowCreateAdmin = 2; //allow creating
+                                            allowCreateAdmin = 4; // do not allow if exist
                                             setChanged();
                                             notifyObservers();
                                         }

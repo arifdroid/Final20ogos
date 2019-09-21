@@ -304,7 +304,7 @@ public class RegAdmin_asAdmin_Profile_Activity extends AppCompatActivity impleme
 
                                 if(count_admin.equals("2")) {
 
-                                    dR_User_Top.set(mapUserTopDetail, SetOptions.merge());
+                                    //dR_User_Top.set(mapUserTopDetail, SetOptions.merge());
 
                                     //merge existing one.
 

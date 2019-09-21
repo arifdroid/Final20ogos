@@ -272,28 +272,31 @@ public class RegUser_Activity extends AppCompatActivity implements View.OnClickL
                     if (user_registered) { //we need to check count, if one or two.
 
 
-                        Map<String, Object> remap = task.getResult().getData();
+                        //21 sep, one phone user or admin only
 
-                        for (Map.Entry<String, Object> remapHere : remap.entrySet()) {
+//                        Map<String, Object> remap = task.getResult().getData();
+//
+//                        for (Map.Entry<String, Object> remapHere : remap.entrySet()) {
+//
+//                            if (remapHere.getKey().equals("admin_count")) {
+//
+//                                //we could extract 1 or 2 ,
+//
+//                                admin_count_extracted = remapHere.getValue().toString();
+//                            }
+//
+//                        }
+//
+//                        if(admin_count_extracted.equals("1")) {
+//                            boolean_admin_count = true;
+//                        }else {
+//
+//
+//                            Toast.makeText(RegUser_Activity.this,"maximum number of 2 users registered",Toast.LENGTH_SHORT).show();
+//                            boolean_admin_count=false;
+//                        }
 
-                            if (remapHere.getKey().equals("admin_count")) {
-
-                                //we could extract 1 or 2 ,
-
-                                admin_count_extracted = remapHere.getValue().toString();
-                            }
-
-                        }
-
-                        if(admin_count_extracted.equals("1")) {
-                            boolean_admin_count = true;
-                        }else {
-
-
-                            Toast.makeText(RegUser_Activity.this,"maximum number of 2 users registered",Toast.LENGTH_SHORT).show();
-                            boolean_admin_count=false;
-                        }
-
+                        boolean_admin_count=false;
 
 
                     } else { //if never existed we registered count as one.
@@ -628,7 +631,7 @@ public class RegUser_Activity extends AppCompatActivity implements View.OnClickL
 
                     if (boolean_admin_count) {
 
-                        if(admin_count_extracted.equals("1")|| admin_count_extracted.equals("0")) {
+                        if(admin_count_extracted.equals("0")) {
 
 
                             //  textViewMessage.setText("getting code..");

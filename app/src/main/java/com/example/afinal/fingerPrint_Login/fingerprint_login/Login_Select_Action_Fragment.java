@@ -253,16 +253,16 @@ public class Login_Select_Action_Fragment extends Fragment implements View.OnCli
                                     }
                                 }
 
-
-                                if (mapHere.getKey().equals("user_name_2")) {
-                                    nameHere_2 = mapHere.getValue().toString();
-
-
-                                    if (nameHere_2.isEmpty() || nameHere_2 == null) {
-
-                                        nameHere_2 = "";
-                                    }
-                                }
+//
+//                                if (mapHere.getKey().equals("user_name_2")) {
+//                                    nameHere_2 = mapHere.getValue().toString();
+//
+//
+//                                    if (nameHere_2.isEmpty() || nameHere_2 == null) {
+//
+//                                        nameHere_2 = "";
+//                                    }
+//                                }
 
 
                                 if (mapHere.getKey().equals("phone")) {
@@ -292,15 +292,15 @@ public class Login_Select_Action_Fragment extends Fragment implements View.OnCli
                                 }
 
 
-                                if (mapHere.getKey().equals("admin_name_2")) {
-                                    adminName_2 = mapHere.getValue().toString();
-
-
-                                    if (adminName_2.isEmpty() || adminName_2 == null) {
-
-                                        adminName_2 = "";
-                                    }
-                                }
+//                                if (mapHere.getKey().equals("admin_name_2")) {
+//                                    adminName_2 = mapHere.getValue().toString();
+//
+//
+//                                    if (adminName_2.isEmpty() || adminName_2 == null) {
+//
+//                                        adminName_2 = "";
+//                                    }
+//                                }
 
 
                                 if (mapHere.getKey().equals("admin_phone_1")) {
@@ -315,15 +315,15 @@ public class Login_Select_Action_Fragment extends Fragment implements View.OnCli
                                 }
 
 
-                                if (mapHere.getKey().equals("admin_phone_2")) {
-                                    adminPhone_2 = mapHere.getValue().toString();
-
-
-                                    if (adminPhone_2.isEmpty() || adminPhone_2 == null) {
-
-                                        adminPhone_2 = "";
-                                    }
-                                }
+//                                if (mapHere.getKey().equals("admin_phone_2")) {
+//                                    adminPhone_2 = mapHere.getValue().toString();
+//
+//
+//                                    if (adminPhone_2.isEmpty() || adminPhone_2 == null) {
+//
+//                                        adminPhone_2 = "";
+//                                    }
+//                                }
 
                             }
 
@@ -372,147 +372,147 @@ public class Login_Select_Action_Fragment extends Fragment implements View.OnCli
 
 
 
-
-            if(!myphone_extracted.equals("") && myphone_extracted!=null&& !myphone_extracted.isEmpty()) {
-
-
-                dR_topUserCollection = cR_topUserCollection.document(myphone_extracted + "imauser");
-
-                dR_topUserCollection.get().addOnCompleteListener(new OnCompleteListener<DocumentSnapshot>() {
-                    @Override
-                    public void onComplete(@NonNull Task<DocumentSnapshot> task) {
-
-                        if(task.getResult().exists()){
-
-                            if (task.isSuccessful()) {
-
-//                            if(task.getResult().exists()){
 //
-//                            }
-
-                                Map<String, Object> remap = Objects.requireNonNull(task.getResult()).getData();
-
-                                for (Map.Entry<String, Object> mapHere : remap.entrySet()) {
-
-                                    //admin name, and admin phone. , relative user name, user phone.
-                                    //admin count,
-
-                                    //this is not needed since we have it in sharedprefs
-
-                                    if (mapHere.getKey().equals("user_name_1")) {
-                                        nameHere = mapHere.getValue().toString();
-
-                                        //handle null, or not registered, or wrong data input
-
-                                        if (nameHere.isEmpty() || nameHere == null) {
-
-                                            nameHere = "";
-                                        }
-                                    }
-
-
-                                    if (mapHere.getKey().equals("user_name_2")) {
-                                        nameHere_2 = mapHere.getValue().toString();
-
-
-                                        if (nameHere_2.isEmpty() || nameHere_2 == null) {
-
-                                            nameHere_2 = "";
-                                        }
-                                    }
-
-
-                                    if (mapHere.getKey().equals("phone")) {
-                                        phoneHere = mapHere.getValue().toString();
-
-
-                                        if (phoneHere.isEmpty() || phoneHere == null) {
-
-                                            phoneHere = "";
-                                        }
-                                    }
+//            if(!myphone_extracted.equals("") && myphone_extracted!=null&& !myphone_extracted.isEmpty()) {
 //
-//                                if(mapHere.getKey().equals("admin_count")){
-//                                    admin_count = mapHere.getValue().toString();
+//
+//                dR_topUserCollection = cR_topUserCollection.document(myphone_extracted + "imauser");
+//
+//                dR_topUserCollection.get().addOnCompleteListener(new OnCompleteListener<DocumentSnapshot>() {
+//                    @Override
+//                    public void onComplete(@NonNull Task<DocumentSnapshot> task) {
+//
+//                        if(task.getResult().exists()){
+//
+//                            if (task.isSuccessful()) {
+//
+////                            if(task.getResult().exists()){
+////
+////                            }
+//
+//                                Map<String, Object> remap = Objects.requireNonNull(task.getResult()).getData();
+//
+//                                for (Map.Entry<String, Object> mapHere : remap.entrySet()) {
+//
+//                                    //admin name, and admin phone. , relative user name, user phone.
+//                                    //admin count,
+//
+//                                    //this is not needed since we have it in sharedprefs
+//
+//                                    if (mapHere.getKey().equals("user_name_1")) {
+//                                        nameHere = mapHere.getValue().toString();
+//
+//                                        //handle null, or not registered, or wrong data input
+//
+//                                        if (nameHere.isEmpty() || nameHere == null) {
+//
+//                                            nameHere = "";
+//                                        }
+//                                    }
+//
+//
+//                                    if (mapHere.getKey().equals("user_name_2")) {
+//                                        nameHere_2 = mapHere.getValue().toString();
+//
+//
+//                                        if (nameHere_2.isEmpty() || nameHere_2 == null) {
+//
+//                                            nameHere_2 = "";
+//                                        }
+//                                    }
+//
+//
+//                                    if (mapHere.getKey().equals("phone")) {
+//                                        phoneHere = mapHere.getValue().toString();
+//
+//
+//                                        if (phoneHere.isEmpty() || phoneHere == null) {
+//
+//                                            phoneHere = "";
+//                                        }
+//                                    }
+////
+////                                if(mapHere.getKey().equals("admin_count")){
+////                                    admin_count = mapHere.getValue().toString();
+////                                }
+////
+//                                    if (mapHere.getKey().equals("admin_name_1")) {
+//                                        adminName = mapHere.getValue().toString();
+//
+//
+//                                        if (adminName.isEmpty() || adminName == null) {
+//
+//                                            adminName = "";
+//                                        }
+//
+//
+//                                    }
+//
+//
+//                                    if (mapHere.getKey().equals("admin_name_2")) {
+//                                        adminName_2 = mapHere.getValue().toString();
+//
+//
+//                                        if (adminName_2.isEmpty() || adminName_2 == null) {
+//
+//                                            adminName_2 = "";
+//                                        }
+//                                    }
+//
+//
+//                                    if (mapHere.getKey().equals("admin_phone_1")) {
+//                                        adminPhone = mapHere.getValue().toString();
+//
+//
+//                                        if (adminPhone.isEmpty() || adminPhone == null) {
+//
+//                                            adminPhone = "";
+//                                        }
+//
+//                                    }
+//
+//
+//                                    if (mapHere.getKey().equals("admin_phone_2")) {
+//                                        adminPhone_2 = mapHere.getValue().toString();
+//
+//
+//                                        if (adminPhone_2.isEmpty() || adminPhone_2 == null) {
+//
+//                                            adminPhone_2 = "";
+//                                        }
+//                                    }
+//
 //                                }
 //
-                                    if (mapHere.getKey().equals("admin_name_1")) {
-                                        adminName = mapHere.getValue().toString();
-
-
-                                        if (adminName.isEmpty() || adminName == null) {
-
-                                            adminName = "";
-                                        }
-
-
-                                    }
-
-
-                                    if (mapHere.getKey().equals("admin_name_2")) {
-                                        adminName_2 = mapHere.getValue().toString();
-
-
-                                        if (adminName_2.isEmpty() || adminName_2 == null) {
-
-                                            adminName_2 = "";
-                                        }
-                                    }
-
-
-                                    if (mapHere.getKey().equals("admin_phone_1")) {
-                                        adminPhone = mapHere.getValue().toString();
-
-
-                                        if (adminPhone.isEmpty() || adminPhone == null) {
-
-                                            adminPhone = "";
-                                        }
-
-                                    }
-
-
-                                    if (mapHere.getKey().equals("admin_phone_2")) {
-                                        adminPhone_2 = mapHere.getValue().toString();
-
-
-                                        if (adminPhone_2.isEmpty() || adminPhone_2 == null) {
-
-                                            adminPhone_2 = "";
-                                        }
-                                    }
-
-                                }
-
-                                nameHere_boolean = true;
-
-                                Toast.makeText(getContext(), "Success getting admin detail HACK", Toast.LENGTH_SHORT).show();
-
-
-                            } else {
-
-                                nameHere_boolean = false;
-
-
-                                Toast.makeText(getContext(), "Fail getting admin detail HACK", Toast.LENGTH_SHORT).show();
-
-                            }
-
-                        }
-
-                    }
-                }).addOnCanceledListener(new OnCanceledListener() {
-                    @Override
-                    public void onCanceled() {
-
-                        Toast.makeText(getContext(), "Fail getting admin detail HACK", Toast.LENGTH_SHORT).show();
-
-                    }
-                });
-
-
-
-            }
+//                                nameHere_boolean = true;
+//
+//                                Toast.makeText(getContext(), "Success getting admin detail HACK", Toast.LENGTH_SHORT).show();
+//
+//
+//                            } else {
+//
+//                                nameHere_boolean = false;
+//
+//
+//                                Toast.makeText(getContext(), "Fail getting admin detail HACK", Toast.LENGTH_SHORT).show();
+//
+//                            }
+//
+//                        }
+//
+//                    }
+//                }).addOnCanceledListener(new OnCanceledListener() {
+//                    @Override
+//                    public void onCanceled() {
+//
+//                        Toast.makeText(getContext(), "Fail getting admin detail HACK", Toast.LENGTH_SHORT).show();
+//
+//                    }
+//                });
+//
+//
+//
+//            }
 
 
 
@@ -631,35 +631,35 @@ public class Login_Select_Action_Fragment extends Fragment implements View.OnCli
                 break;
             case R.id.final_fb_admin2:
 
-                if (nameHere_boolean) { //we dont even need this, if check for zero or not.
+//                if (nameHere_boolean) { //we dont even need this, if check for zero or not.
+//
+//                    if (!nameHere_2.equals("") && !nameHere_2.isEmpty() && nameHere_2 != null) {
+//
+//
+//                        FingerPrint_LogIn_Final_Activity.timeFragmentBoolean = true;
+//                        ((FingerPrint_LogIn_Final_Activity) Objects.requireNonNull(getActivity())).nameUser = nameHere_2; //
+//                        ((FingerPrint_LogIn_Final_Activity) getActivity()).phoneUser = phoneHere_2; //
+//                        ((FingerPrint_LogIn_Final_Activity) getActivity()).globalAdminNameHere = adminName_2; //
+//                        ((FingerPrint_LogIn_Final_Activity) getActivity()).globalAdminPhoneHere = adminPhone_2; //
+//
+//                        Toast.makeText(getContext(), "admin connected 2) [ " + nameHere_2 + " ]", Toast.LENGTH_SHORT).show();
+//
+//                        Log.i("checkFinal_18June ", "Login_Select_Fragment , before return,name: "
+//                                + nameHere_2 + ", phone: " + phoneHere_2 + ", adminName:"
+//                                + adminName_2 + " , adminPhone: " + adminPhone_2);
+//
+//                        Objects.requireNonNull(getFragmentManager()).popBackStack();
+//
+//                    }   else {
+//                        Log.i("checkFinal_18June", "admin 2 problem popstack");
+//                    }
+//
+//                } else {
 
-                    if (!nameHere_2.equals("") && !nameHere_2.isEmpty() && nameHere_2 != null) {
+                    Toast.makeText(getContext(), "feature not released yet", Toast.LENGTH_SHORT).show();
 
 
-                        FingerPrint_LogIn_Final_Activity.timeFragmentBoolean = true;
-                        ((FingerPrint_LogIn_Final_Activity) Objects.requireNonNull(getActivity())).nameUser = nameHere_2; //
-                        ((FingerPrint_LogIn_Final_Activity) getActivity()).phoneUser = phoneHere_2; //
-                        ((FingerPrint_LogIn_Final_Activity) getActivity()).globalAdminNameHere = adminName_2; //
-                        ((FingerPrint_LogIn_Final_Activity) getActivity()).globalAdminPhoneHere = adminPhone_2; //
-
-                        Toast.makeText(getContext(), "admin connected 2) [ " + nameHere_2 + " ]", Toast.LENGTH_SHORT).show();
-
-                        Log.i("checkFinal_18June ", "Login_Select_Fragment , before return,name: "
-                                + nameHere_2 + ", phone: " + phoneHere_2 + ", adminName:"
-                                + adminName_2 + " , adminPhone: " + adminPhone_2);
-
-                        Objects.requireNonNull(getFragmentManager()).popBackStack();
-
-                    }   else {
-                        Log.i("checkFinal_18June", "admin 2 problem popstack");
-                    }
-
-                } else {
-
-                    Toast.makeText(getContext(), "please ensure you are connected to internet", Toast.LENGTH_SHORT).show();
-
-
-                }
+             //   }
 
 
 
@@ -685,11 +685,22 @@ public class Login_Select_Action_Fragment extends Fragment implements View.OnCli
                 }else {
 
 
+                    if (nameHere_boolean) {
+
+                        Toast.makeText(getContext(), "already registered", Toast.LENGTH_SHORT).show();
+
+
+                    } else {
+
+
+
                     Intent intent = new Intent(getActivity(), RegAdmin_Activity.class);
 
                     intent.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK); //creating new task for registering,
                     //but we dont want user to be able to back.
                     startActivity(intent);
+
+                      }
                 }
 
 
@@ -709,23 +720,26 @@ public class Login_Select_Action_Fragment extends Fragment implements View.OnCli
 
             case R.id.final_fb_leave_id:
 
+                Toast.makeText(getContext(), "feature not released yet", Toast.LENGTH_SHORT).show();
 
-                Intent intent1 = new Intent(getActivity(), Setup_Pin_Activity.class);
 
-                intent1.putExtra("sentAdminName","arifhaniftest");
 
-                intent1.putExtra("sentAdminPhone","+60184670568");
+//                Intent intent1 = new Intent(getActivity(), Setup_Pin_Activity.class);
 //
-//                intentSaved.putExtra("sentAdminName", user_name_asAdmin);
-//                intentSaved.putExtra("sentAdminPhone", user_phone_asAdmin);
-                intent1.putExtra("checkadminOrUser","admin");
-
-//                startActivity(intentSaved);
-
-
-                intent1.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
-
-                startActivity(intent1);
+//                intent1.putExtra("sentAdminName","arifhaniftest");
+//
+//                intent1.putExtra("sentAdminPhone","+60184670568");
+////
+////                intentSaved.putExtra("sentAdminName", user_name_asAdmin);
+////                intentSaved.putExtra("sentAdminPhone", user_phone_asAdmin);
+//                intent1.putExtra("checkadminOrUser","admin");
+//
+////                startActivity(intentSaved);
+//
+//
+//                intent1.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
+//
+//                startActivity(intent1);
 
                 break;
 
