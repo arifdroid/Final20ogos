@@ -407,6 +407,7 @@ public class TimeStampCheckFragment extends DialogFragment {
                                 Toast.makeText(getActivity(), "punch card failed attempt, please try again", Toast.LENGTH_LONG).show();
 
                                 Intent intent = new Intent(getActivity(), FingerPrint_LogIn_Final_Activity.class); //can we call same activity,
+
                                 intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
                                 startActivity(intent);
 
@@ -429,6 +430,8 @@ public class TimeStampCheckFragment extends DialogFragment {
                 Toast.makeText(getActivity(),"No data recorded", Toast.LENGTH_SHORT).show();
 
                 Intent intent = new Intent(getActivity(), Main_BottomNav_Activity.class);
+                intent.putExtra("today", day);
+                intent.putExtra("date2", date2);
                 intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP| Intent.FLAG_ACTIVITY_NEW_TASK);
                 startActivity(intent);
 
