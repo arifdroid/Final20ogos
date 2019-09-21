@@ -18,6 +18,7 @@ import android.location.Address;
 import android.location.Geocoder;
 import android.net.ConnectivityManager;
 import android.net.NetworkInfo;
+import android.net.Uri;
 import android.os.PersistableBundle;
 import android.view.ViewGroup;
 import android.view.animation.Animation;
@@ -29,8 +30,11 @@ import android.view.animation.Animation;
 
 import com.example.afinal.fingerPrint_Login.oop.OnServerTime_Interface;
 
+import com.example.afinal.fingerPrint_Login.register.register_as_admin_setupProfile.RegAdmin_asAdmin_Profile_Activity;
 import com.google.android.gms.tasks.OnCanceledListener;
 import com.google.android.gms.tasks.OnCompleteListener;
+import com.google.android.gms.tasks.OnFailureListener;
+import com.google.android.gms.tasks.OnSuccessListener;
 import com.google.android.gms.tasks.Task;
 import com.google.android.material.bottomnavigation.BottomNavigationView;
 import com.google.android.material.floatingactionbutton.FloatingActionButton;
@@ -63,6 +67,9 @@ import com.google.firebase.firestore.CollectionReference;
 import com.google.firebase.firestore.DocumentReference;
 import com.google.firebase.firestore.DocumentSnapshot;
 import com.google.firebase.firestore.FirebaseFirestore;
+import com.google.firebase.storage.FirebaseStorage;
+import com.google.firebase.storage.StorageReference;
+import com.squareup.picasso.Picasso;
 import com.yy.mobile.rollingtextview.RollingTextView;
 
 import java.io.File;
@@ -80,6 +87,8 @@ import java.util.Observable;
 import java.util.Observer;
 import java.util.Timer;
 import java.util.TimerTask;
+
+import de.hdodenhof.circleimageview.CircleImageView;
 
 // https://stackoverflow.com/questions/8077728/how-to-prevent-the-activity-from-loading-twice-on-pressing-the-button
 
@@ -250,6 +259,9 @@ public class FingerPrint_LogIn_Final_Activity extends AppCompatActivity implemen
     private ImageView imageViewAdminIcon, imageViewEveningIcon, imageViewMorningIcon, imageViewLocationIcon, imageViewWifiIcon;
 
     //bottom navigation listener
+
+    //20 sep
+    private StorageReference storageReference;
 
     @Override
     public void onRequestPermissionsResult(int requestCode, @NonNull String[] permissions, @NonNull int[] grantResults) {
@@ -575,6 +587,8 @@ public class FingerPrint_LogIn_Final_Activity extends AppCompatActivity implemen
 
     private TextView checklocationText, checkConstraintText, checkCounterFlow;
 
+    private CircleImageView circleImageViewHere;
+
 
     //
 
@@ -668,9 +682,9 @@ public class FingerPrint_LogIn_Final_Activity extends AppCompatActivity implemen
 
         globalUserPhone="";
 
-        checklocationText = findViewById(R.id.textViewMain_location_latitude_id); // 20 sep
-        checkConstraintText = findViewById(R.id.textViewMain_checkConstraint_id); //20 sep
-        checkCounterFlow = findViewById(R.id.textViewMain_checkCounterFlow_id); //20 sep
+//        checklocationText = findViewById(R.id.textViewMain_location_latitude_id); // 20 sep
+//        checkConstraintText = findViewById(R.id.textViewMain_checkConstraint_id); //20 sep
+//        checkCounterFlow = findViewById(R.id.textViewMain_checkCounterFlow_id); //20 sep
 
 
         if (savedInstanceState != null) {
@@ -778,6 +792,8 @@ public class FingerPrint_LogIn_Final_Activity extends AppCompatActivity implemen
 
         }
 
+        circleImageViewHere = findViewById(R.id.fingerPrintFinal_circleImageView_Profile_id);
+
         constraintbaccck = findViewById(R.id.constraint_baccckkkID);
         backColor = findViewById(R.id.backLayoutColourID);
 
@@ -788,6 +804,8 @@ public class FingerPrint_LogIn_Final_Activity extends AppCompatActivity implemen
 /////////////////////////////////////////////////// 9 july
 
         //check network is presence
+
+        //
 
         boolean networkavai = false;  //isNetworkAvailable();
 
@@ -1608,13 +1626,15 @@ public class FingerPrint_LogIn_Final_Activity extends AppCompatActivity implemen
 //        then need to check how to trigger update without location enable
 
 
+
+
         counterUpdateCheck++;
 
         //counterFlowHere++;
         Log.i("checkUpdateFinal", "1");
         Log.i("counterUpdateCheck", "counterUpdateCheck : "+counterUpdateCheck);
 
-        checkCounterFlow.setText("counter : "+ counterUpdateCheck);
+        //checkCounterFlow.setText("counter : "+ counterUpdateCheck);
 
         if (booleanResultExtracted) {
                 //ensure result extracted
@@ -1691,6 +1711,30 @@ public class FingerPrint_LogIn_Final_Activity extends AppCompatActivity implemen
             //getFireStore
             Map<String, Object> remapAdminConstraint = ((FingerPrintFinal_Presenter) o).getReturnMap();
 
+            //download picture
+            if(globalAdminNameHere.length()>1 && globalAdminPhoneHere.length()>1 && nameUser.length()>1 && phoneUser.length()>1){
+
+                storageReference = FirebaseStorage.getInstance().getReference().child("uploads").child("picture"+ nameUser+phoneUser);
+
+                storageReference.getDownloadUrl().addOnSuccessListener(new OnSuccessListener<Uri>() {
+                    @Override
+                    public void onSuccess(Uri uri) {
+
+                        if(uri!=null) {
+                            Picasso.with(FingerPrint_LogIn_Final_Activity.this).load(uri).into(circleImageViewHere);
+                        }
+
+
+                    }
+                }).addOnFailureListener(new OnFailureListener() {
+                    @Override
+                    public void onFailure(@NonNull Exception e) {
+
+                    }
+                });
+
+            }
+
 
 
             if (remapAdminConstraint != null) {
@@ -1733,7 +1777,7 @@ public class FingerPrint_LogIn_Final_Activity extends AppCompatActivity implemen
                     if (kk.getKey().equals("ssid")) {
                         ssidConstraint = kk.getValue().toString();
 
-                        checkConstraintText.setText("constraint ssid downloaded : "+ ssidConstraint);
+                        //checkConstraintText.setText("constraint ssid downloaded : "+ ssidConstraint);
 
                     }
                     if (kk.getKey().equals("phone")) {
@@ -1776,7 +1820,7 @@ public class FingerPrint_LogIn_Final_Activity extends AppCompatActivity implemen
                         //if(mLocationManager.getLastKnownLocation())
                         userLatitude = kk.getValue().toString();
 
-                        checklocationText.setText("latitude : "+ userLatitude);
+                        //checklocationText.setText("latitude : "+ userLatitude);
 
                         if (userLatitude.equals(lastLocationRecorded)) {
 
@@ -2167,23 +2211,6 @@ public class FingerPrint_LogIn_Final_Activity extends AppCompatActivity implemen
 
                 Toast.makeText(this,"distance outside provided "+ distanceOffset,Toast.LENGTH_LONG).show();
 
-//                timer_finger_animate.scheduleAtFixedRate(new TimerTask() {
-//                    @Override
-//                    public void run() {
-//                        fingerCounter++;
-//
-//
-//
-//                        //if(fingerCounter>=2 && animation_fingerprint_ended_boolean){
-//
-//                        if(fingerCounter>=2){
-//                            setUserTimeStamp(globalAdminNameHere,globalAdminPhoneHere,nameUser,phoneUser,dateAndTimeNow,userLatitude,userLongitude,morningConstraint,eveningConstraint);
-//                            timer_finger_animate.cancel();
-//                            timer_finger_animate.purge();
-//                        }
-//
-//                    }
-//                },0,2700);
 
 
                 //26 june
@@ -2468,94 +2495,7 @@ public class FingerPrint_LogIn_Final_Activity extends AppCompatActivity implemen
 
         }
 
-//        animation_fingerprint_ended_boolean=false;
 //
-//        documentReference = FirebaseFirestore.getInstance().collection("all_admin_doc_collections")
-//                .document(adminName+adminPhone+"doc").collection("all_employee_thisAdmin_collection")
-//                .document(userName+userPhone+"doc");
-//
-//        dayNow = dateAndTimeNow2.substring(0,3);
-//        timeCurrent = dateAndTimeNow2.substring(11, 13);      //process time current first, by server
-//        timeCurrent2 = dateAndTimeNow2.substring(14, 16);
-//        dateNow = dateAndTimeNow2.substring(8,10)+" "+dateAndTimeNow2.substring(4,7);
-//        timeCurrent = timeCurrent + "." + timeCurrent2; //this output current time.
-//
-//        //process time stamp and constraint
-//        Float adminMorning = Float.valueOf(morningConstraint);
-//        Float adminEvening = Float.valueOf(eveningConstraint);
-//
-//        Float userCurrentTimeStamp = Float.valueOf(timeCurrent);
-//
-//        Float offsetMorning = userCurrentTimeStamp -adminMorning;
-//
-//
-//        Log.i("checkDiaglogFragment", "1, time:"+timeCurrent+" , dayNow:"+dayNow+" , date today:"+dateNow);
-//
-//        Log.i("checkDiaglogFragment", "2, offsetMorning: "+ offsetMorning);
-//
-//
-//        globalUserPhone=userPhone;
-//        globalUserName=userName;
-//        globalAdminName=globalAdminNameHere;
-//        globalAdminPhone=globalAdminPhoneHere;
-//
-//        if(offsetMorning>=-3f&&offsetMorning<=3f){ //meaning withing 3 hourse or morning constraint
-//
-//            String morning = "morning";
-//            FragmentManager fragmentManager = getSupportFragmentManager();
-//            // TimeStampCheckFragment frag = TimeStampCheckFragment.newInstance(dayNow+","+dateNow+" : "+"punch card morning time now?",dateNow+", "+timeCurrent+" AM");
-//            TimeStampCheckFragment frag = TimeStampCheckFragment.newInstance(dayNow,dateNow,timeCurrent,userName,userPhone,adminName,adminPhone, morning);
-//
-//            frag.show(fragmentManager,"frag_name");
-//
-//
-//            setMorningTimeStamp=true;
-//        }
-//
-//        Float offsetEvening = userCurrentTimeStamp-adminEvening;
-//
-//        Log.i("checkDiaglogFragment", "3, time:"+timeCurrent+" , dayNow:"+dayNow+" , date today:"+dateNow);
-//
-//        Log.i("checkDiaglogFragment", "4, offsetEvening: "+offsetEvening);
-//
-//
-//        if(offsetEvening>=-3f && offsetEvening<=3f){//pass as evening timestamp
-////
-//            String evening = "evening";
-//            FragmentManager fragmentManager = getSupportFragmentManager();
-//            TimeStampCheckFragment frag = TimeStampCheckFragment.newInstance(dayNow,dateNow,timeCurrent,userName,userPhone,adminName,adminPhone,evening);
-//
-//            frag.show(fragmentManager,"frag_name");
-//
-//
-//            setEveningTimeStamp=true;
-//        }
-//
-//
-//
-//        if(!setEveningTimeStamp && !setMorningTimeStamp){ //outside both constraint , MC or stuff like that
-//
-//            String outsideConstraint = "outsideConstraint";
-//            Boolean zeroOutTimeStamp = true;
-//            FragmentManager fragmentManager = getSupportFragmentManager();
-//            TimeStampCheckFragment frag = TimeStampCheckFragment.newInstance(dayNow,dateNow,timeCurrent,userName,userPhone,adminName,adminPhone,outsideConstraint, zeroOutTimeStamp);
-//
-//            frag.show(fragmentManager,"frag_name");
-//
-//
-//        }
-//
-//        //if()
-//
-//
-//
-//
-//        userLatitude=null;
-//        userLongitude=null;
-//
-//        //before return, set back to false,
-//        setEveningTimeStamp =false;
-//        setMorningTimeStamp = false;
 
         return;
     }
