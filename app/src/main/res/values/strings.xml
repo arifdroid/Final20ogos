@@ -1,5 +1,5 @@
 <resources>
-    <string name="app_name">Final</string>
+    <string name="app_name">Fingerprint PunchCard</string>
     <string name="title_activity_register_">Register_Activity</string>
     <string name="title_home">Home</string>
     <string name="title_dashboard">Dashboard</string>
