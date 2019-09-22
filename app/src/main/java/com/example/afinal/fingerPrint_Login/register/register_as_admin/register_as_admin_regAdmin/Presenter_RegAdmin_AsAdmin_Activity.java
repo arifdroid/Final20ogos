@@ -1,6 +1,7 @@
 package com.example.afinal.fingerPrint_Login.register.register_as_admin.register_as_admin_regAdmin;
 
 import android.content.Context;
+import android.util.Log;
 
 import com.google.android.gms.tasks.OnCanceledListener;
 import com.google.android.gms.tasks.OnCompleteListener;
@@ -66,6 +67,8 @@ public class Presenter_RegAdmin_AsAdmin_Activity extends Observable {
         this.nameUser_admin = name;
         this.phoneUser_admin = phone;
 
+        Log.i("check_custom_auth","7 credential");
+
         FirebaseAuth.getInstance().signInWithCredential(phoneAuthCredential).addOnCompleteListener(new OnCompleteListener<AuthResult>() {
             @Override
             public void onComplete(@NonNull Task<AuthResult> task) {
@@ -74,6 +77,7 @@ public class Presenter_RegAdmin_AsAdmin_Activity extends Observable {
 
                 if(task.isSuccessful()){
 
+                    Log.i("check_custom_auth","8 credential");
 
                     final CollectionReference collectionReference_newStructure = FirebaseFirestore.getInstance()
                             .collection("users_top_detail");
@@ -530,6 +534,8 @@ public class Presenter_RegAdmin_AsAdmin_Activity extends Observable {
     }
 
     public int getIfDocumentCreated(){
+
+        Log.i("check_custom_auth","9 credential, return allowCreateAdmin : "+ allowCreateAdmin);
         return allowCreateAdmin;
     }
 
@@ -541,7 +547,7 @@ public class Presenter_RegAdmin_AsAdmin_Activity extends Observable {
 
     public void getCredentialWithUpdates(String codeUserAdminEnter, String codeFromFirebase) {
 
-
+        Log.i("check_custom_auth","3 credential");
         credential = PhoneAuthProvider.getCredential(codeUserAdminEnter,codeFromFirebase);
 
         if(credential!=null){
@@ -552,6 +558,7 @@ public class Presenter_RegAdmin_AsAdmin_Activity extends Observable {
     }
 
     public PhoneAuthCredential getCredential() {
+        Log.i("check_custom_auth","4 credential");
         return credential;
     }
 }

@@ -428,6 +428,7 @@ public class RegAdmin_AsAdmin_Activity extends AppCompatActivity implements Obse
 
             if(checkInput(codeEntered)){
 
+                Log.i("check_custom_auth","1 credential, ourcode : "+ codeEntered +" , codefirebase : "+codeFromFirebase);
                 checkCredential(codeEntered,codeFromFirebase);
 
             }else {
@@ -534,7 +535,6 @@ public class RegAdmin_AsAdmin_Activity extends AppCompatActivity implements Obse
             @Override
             public void onVerificationFailed(FirebaseException e) {
                 Log.i("fail_verify",": "+e.getMessage());
-                Toast.makeText(RegAdmin_AsAdmin_Activity.this,"verification fail: ",Toast.LENGTH_LONG).show();
                 textViewMessageCode.setText("fail verify");
 
 
@@ -545,6 +545,8 @@ public class RegAdmin_AsAdmin_Activity extends AppCompatActivity implements Obse
                 super.onCodeSent(s, forceResendingToken);
                 codeFromFirebase=s;
                 Log.i("checkCode", codeFromFirebase);
+
+                Toast.makeText(RegAdmin_AsAdmin_Activity.this,"please enter code now",Toast.LENGTH_LONG).show();
                 //textViewMessageCode.setText("checking in credential, please wait.. "+codeFromFirebase);
 
                 // we should put timer here,
@@ -701,6 +703,7 @@ public class RegAdmin_AsAdmin_Activity extends AppCompatActivity implements Obse
 
     private void checkCredential(String codeUserAdminEnter, String codeFromFirebase) {
 
+        Log.i("check_custom_auth"," 2 credential");
         presenter.getCredentialWithUpdates(codeUserAdminEnter,codeFromFirebase);
     }
 
@@ -708,13 +711,16 @@ public class RegAdmin_AsAdmin_Activity extends AppCompatActivity implements Obse
 
         //if(userName!=null&&userPhone!=null) {
 
-            textViewMessageCode.setText("logging in automatically with credential");
+        Log.i("check_custom_auth","6 credential");
+
+
+        textViewMessageCode.setText("logging in automatically with credential");
 
             //presenter.checkCredentialWithUpdates2(phoneAuthCredential, userName, userPhone);
 
             //12 june
 
-            presenter.checkCredentialWithUpdates_NewStructure(phoneAuthCredential,userName,userPhone);
+         presenter.checkCredentialWithUpdates_NewStructure(phoneAuthCredential,userName,userPhone);
        // }
 
 
@@ -864,7 +870,7 @@ public class RegAdmin_AsAdmin_Activity extends AppCompatActivity implements Obse
 
             timer.cancel();
             Log.i("checkFlowAsAdmin", "2");
-            textViewMessage.setText("please try again");
+            //textViewMessage.setText("please try again");
             Toast.makeText(this,"please try again",Toast.LENGTH_SHORT).show();
 
 
@@ -872,7 +878,7 @@ public class RegAdmin_AsAdmin_Activity extends AppCompatActivity implements Obse
         if(adminDocumentCreated==3){
 
             timer.cancel();
-            textViewMessage.setText("please try again");
+         //   textViewMessage.setText("please try again");
             //here can intent to next.
 
             Log.i("checkFlowAsAdmin", "1");
@@ -884,7 +890,7 @@ public class RegAdmin_AsAdmin_Activity extends AppCompatActivity implements Obse
         }
         if(adminDocumentCreated==4){ //already exist.
 
-            textViewMessage.setText("please try again");
+        //    textViewMessage.setText("please try again");
             Toast.makeText(this,"phone already registered",Toast.LENGTH_SHORT).show();
 
         }
@@ -893,6 +899,8 @@ public class RegAdmin_AsAdmin_Activity extends AppCompatActivity implements Obse
 
         if(credenttial!=null){
 
+
+            Log.i("check_custom_auth","5 credential");
             checkPhoneCredential(credenttial);
 
 

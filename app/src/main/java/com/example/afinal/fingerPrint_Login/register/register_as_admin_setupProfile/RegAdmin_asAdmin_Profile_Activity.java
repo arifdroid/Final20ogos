@@ -362,8 +362,11 @@ public class RegAdmin_asAdmin_Profile_Activity extends AppCompatActivity impleme
                                 DocumentReference documentReferenceAdmin_asUser = documentReference.collection("all_employee_thisAdmin_collection")
                                             .document(user_name_asAdmin+user_phone_asAdmin+"doc");
 
+                                final DocumentReference documentReferenceAdmin_asUser_2 = documentReference.collection("all_employee_thisAdmin_collection")
+                                        .document("dummy"+user_phone_asAdmin+"doc");
 
-                                Map<String, Object> mapAdminAsUser = new HashMap<>();
+
+                                final Map<String, Object> mapAdminAsUser = new HashMap<>();
                                 mapAdminAsUser.put("name", user_name_asAdmin);
                                 mapAdminAsUser.put("phone", user_phone_asAdmin);
                                 //mapAdminAsUser.put("rating", wifiSSIDHere);
@@ -403,6 +406,49 @@ public class RegAdmin_asAdmin_Profile_Activity extends AppCompatActivity impleme
 
                                 mapAdminAsUser.put("image_url",image_url);
 
+                                /////////////////
+
+
+                                final Map<String, Object> mapAdminAsUser_2 = new HashMap<>();
+                                mapAdminAsUser_2.put("name", "dummy");
+                                mapAdminAsUser_2.put("phone", user_phone_asAdmin);
+                                //mapAdminAsUser.put("rating", wifiSSIDHere);
+                                mapAdminAsUser_2.put("ts_mon_morning", "");
+                                mapAdminAsUser_2.put("ts_tue_morning", "");
+                                mapAdminAsUser_2.put("ts_wed_morning", "");
+                                mapAdminAsUser_2.put("ts_thu_morning", "");
+                                mapAdminAsUser_2.put("ts_fri_morning", "");
+                                mapAdminAsUser_2.put("ts_mon_evening", "");
+                                mapAdminAsUser_2.put("ts_tue_evening", "");
+                                mapAdminAsUser_2.put("ts_wed_evening", "");
+                                mapAdminAsUser_2.put("ts_thu_evening", "");
+                                mapAdminAsUser_2.put("ts_fri_evening", "");
+
+                                //location
+
+                                mapAdminAsUser_2.put("loc_mon_morning", "");
+                                mapAdminAsUser_2.put("loc_tue_morning", "");
+                                mapAdminAsUser_2.put("loc_wed_morning", "");
+                                mapAdminAsUser_2.put("loc_thu_morning", "");
+                                mapAdminAsUser_2.put("loc_fri_morning", "");
+                                mapAdminAsUser_2.put("loc_mon_evening", "");
+                                mapAdminAsUser_2.put("loc_tue_evening", "");
+                                mapAdminAsUser_2.put("loc_wed_evening", "");
+                                mapAdminAsUser_2.put("loc_thu_evening", "");
+                                mapAdminAsUser_2.put("loc_fri_evening", "");
+
+                                //mapAdminAsUser.put("ts_mon_evening", "");
+
+                                mapAdminAsUser_2.put("status","admin");
+
+                                mapAdminAsUser_2.put("mon_date","");
+                                mapAdminAsUser_2.put("tue_date","");
+                                mapAdminAsUser_2.put("wed_date","");
+                                mapAdminAsUser_2.put("thu_date","");
+                                mapAdminAsUser_2.put("fri_date","");
+
+                                mapAdminAsUser_2.put("image_url",image_url);
+
 
                                 documentReferenceAdmin_asUser.set(mapAdminAsUser).addOnCompleteListener(new OnCompleteListener<Void>() {
                                     @Override
@@ -410,10 +456,36 @@ public class RegAdmin_asAdmin_Profile_Activity extends AppCompatActivity impleme
 
                                         if(task.isSuccessful()){
 
-                                            Intent intent = new Intent(RegAdmin_asAdmin_Profile_Activity.this, Add_User_Activity.class);
-                                            intent.putExtra("adminName_asAdmin",user_name_asAdmin);
-                                            intent.putExtra("adminPhone_asAdmin",user_phone_asAdmin);
-                                            startActivity(intent);
+
+                                            documentReferenceAdmin_asUser_2.set((mapAdminAsUser_2)).addOnCompleteListener(new OnCompleteListener<Void>() {
+                                                @Override
+                                                public void onComplete(@NonNull Task<Void> task) {
+
+                                                    if(task.isSuccessful()){
+
+
+                                                        Intent intent = new Intent(RegAdmin_asAdmin_Profile_Activity.this, Add_User_Activity.class);
+                                                        intent.putExtra("adminName_asAdmin",user_name_asAdmin);
+                                                        intent.putExtra("adminPhone_asAdmin",user_phone_asAdmin);
+                                                        startActivity(intent);
+
+
+
+                                                    }
+
+
+                                                }
+                                            }).addOnCanceledListener(new OnCanceledListener() {
+                                                @Override
+                                                public void onCanceled() {
+
+                                                }
+
+
+
+                                            });
+
+
 
                                         } else {
 

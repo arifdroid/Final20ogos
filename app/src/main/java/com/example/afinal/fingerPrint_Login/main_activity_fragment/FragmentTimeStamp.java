@@ -2236,7 +2236,7 @@ public class FragmentTimeStamp extends Fragment implements Observer, View.OnClic
 
         Log.i("flowShowbutton", "99._5 loopwhoslate");
         recyclerView.smoothScrollToPosition(loopCount);
-        chart.centerViewToAnimated(dataSetArrayList_Final.get(finalPointerArrayList.get(loopCount).getPointer_1()).getEntryForIndex(finalPointerArrayList.get(loopCount).getPointer_2()).getX(), dataSetArrayList_Final.get(finalPointerArrayList.get(loopCount).getPointer_1()).getEntryForIndex(finalPointerArrayList.get(loopCount).getPointer_2()).getY(), dataSetArrayList_Final.get(4).getAxisDependency(), 1500);
+        chart.centerViewToAnimated(dataSetArrayList_Final.get(finalPointerArrayList.get(loopCount).getPointer_1()).getEntryForIndex(finalPointerArrayList.get(loopCount).getPointer_2()).getX(), dataSetArrayList_Final.get(finalPointerArrayList.get(loopCount).getPointer_1()).getEntryForIndex(finalPointerArrayList.get(loopCount).getPointer_2()).getY(), dataSetArrayList_Final.get(0).getAxisDependency(), 1500);
         //chart.centerViewToAnimated(dataSetArrayList_Final.get(finalPointerArrayList.get(loopCount).getPointer_1()));
         loopCount++;
     }
